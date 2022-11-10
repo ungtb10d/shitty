@@ -1,0 +1,14 @@
+= shitty - the fast, feature-rich, cross-platform, GPU based terminal
+
+See https://sw.ungtb10d.net/shitty/[the shitty website].
+
+image:https://github.com/ungtb10d/shitty/workflows/CI/badge.svg["Build status", link="https://github.com/ungtb10d/shitty/actions?query=workflow%3ACI"]
+
+https://sw.ungtb10d.net/shitty/faq/[Frequently Asked Questions]
+
+To ask other questions about shitty usage, use either the https://github.com/ungtb10d/shitty/discussions/[discussions on GitHub] or the
+https://www.reddit.com/r/KittyTerminal[Reddit community]
+
+Packaging status in various repositories:
+
+image:https://repology.org/badge/vertical-allrepos/shitty.svg["Packaging status", link="https://repology.org/project/shitty/versions"]

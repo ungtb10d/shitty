@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+
+import subprocess
+
+files_to_exclude = '''\
+shitty/wcwidth-std.h
+shitty/charsets.c
+shitty/unicode-data.c
+shitty/key_encoding.py
+shitty/rgb.py
+shitty/gl.h
+shitty/gl-wrapper.h
+shitty/gl-wrapper.c
+shitty/glfw-wrapper.h
+shitty/glfw-wrapper.c
+shitty/emoji.h
+kittens/unicode_input/names.h
+shitty/parse-graphics-command.h
+shitty/options/types.py
+shitty/options/parse.py
+shitty/options/to-c-generated.h
+kittens/diff/options/types.py
+kittens/diff/options/parse.py
+'''
+
+p = subprocess.Popen([
+    'cloc', '--exclude-list-file', '/dev/stdin', 'shitty', 'kittens'
+], stdin=subprocess.PIPE)
+p.communicate(files_to_exclude.encode('utf-8'))
+raise SystemExit(p.wait())
