@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# License: GPLv3 Copyright: 2022, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPLv3 Copyright: 2022, ungtb10d <kovid at ungtb10d.net>
 
 # This is present in the python stdlib (version 3.7) in
 # multiprocessing.shared_memory. However, it is crippled in various ways, most

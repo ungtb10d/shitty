@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2022 Kovid Goyal <kovid at ungtb10d.net>
+# Copyright (C) 2022 ungtb10d <kovid at ungtb10d.net>
 # Distributed under terms of the GPLv3 license.
 
 { \unalias command; \unset -f command; } >/dev/null 2>&1

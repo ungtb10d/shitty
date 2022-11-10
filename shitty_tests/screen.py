@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# License: GPL v3 Copyright: 2016, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPL v3 Copyright: 2016, ungtb10d <kovid at ungtb10d.net>
 
 from shitty.fast_data_types import (
     DECAWM, DECCOLM, DECOM, IRM, Cursor, parse_bytes

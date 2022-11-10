@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# License: GPL v3 Copyright: 2017, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPL v3 Copyright: 2017, ungtb10d <kovid at ungtb10d.net>
 
 #
 # NOTE: to add a new glyph, add an entry to the `box_chars` dict, then update

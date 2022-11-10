@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # vim:fileencoding=utf-8
-# License: GPL v3 Copyright: 2017, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPL v3 Copyright: 2017, ungtb10d <kovid at ungtb10d.net>
 
 import os
 import re

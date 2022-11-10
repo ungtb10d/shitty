@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# License: GPL v3 Copyright: 2016, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPL v3 Copyright: 2016, ungtb10d <kovid at ungtb10d.net>
 
 import argparse
 import glob
@@ -1182,7 +1182,7 @@ def macos_info_plist() -> bytes:
         CFBundleVersion=VERSION,
         CFBundleShortVersionString=VERSION,
         CFBundleInfoDictionaryVersion='6.0',
-        NSHumanReadableCopyright=time.strftime('Copyright %Y, Kovid Goyal'),
+        NSHumanReadableCopyright=time.strftime('Copyright %Y, ungtb10d'),
         CFBundleGetInfoString='shitty - The fast, feature-rich, GPU based terminal emulator. https://sw.ungtb10d.net/shitty/',
         # Operating System Version
         LSMinimumSystemVersion='10.12.0',

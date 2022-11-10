@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# License: GPLv3 Copyright: 2020, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPLv3 Copyright: 2020, ungtb10d <kovid at ungtb10d.net>
 
 from shitty.typing import WindowType
 from shitty.window_list import WindowList

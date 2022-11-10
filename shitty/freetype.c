@@ -1,6 +1,6 @@
 /*
  * freetype.c
- * Copyright (C) 2016 Kovid Goyal <kovid at ungtb10d.net>
+ * Copyright (C) 2016 ungtb10d <kovid at ungtb10d.net>
  *
  * Distributed under terms of the GPL3 license.
  */

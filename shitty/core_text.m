@@ -1,6 +1,6 @@
 /*
  * core_text.c
- * Copyright (C) 2017 Kovid Goyal <kovid at ungtb10d.net>
+ * Copyright (C) 2017 ungtb10d <kovid at ungtb10d.net>
  *
  * Distributed under terms of the GPL3 license.
  */

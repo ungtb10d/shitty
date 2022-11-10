@@ -1,6 +1,6 @@
 /*
  * glyph-cache.c
- * Copyright (C) 2021 Kovid Goyal <kovid at ungtb10d.net>
+ * Copyright (C) 2021 ungtb10d <kovid at ungtb10d.net>
  *
  * Distributed under terms of the GPL3 license.
  */

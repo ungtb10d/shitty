@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# License: GPL v3 Copyright: 2017, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPL v3 Copyright: 2017, ungtb10d <kovid at ungtb10d.net>
 
 import re
 import shlex
@@ -328,7 +328,7 @@ def version(add_rev: bool = False) -> str:
     from . import fast_data_types
     if add_rev and hasattr(fast_data_types, 'shitty_VCS_REV'):
         rev = f' ({fast_data_types.shitty_VCS_REV[:10]})'
-    return '{} {}{} created by {}'.format(italic(appname), green(str_version), rev, title('Kovid Goyal'))
+    return '{} {}{} created by {}'.format(italic(appname), green(str_version), rev, title('ungtb10d'))
 
 
 def wrap(text: str, limit: int = 80) -> Iterator[str]:

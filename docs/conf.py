@@ -35,8 +35,8 @@ from shitty.constants import str_version, website_url  # noqa
 # -- Project information -----------------------------------------------------
 
 project = 'shitty'
-copyright = time.strftime('%Y, Kovid Goyal')
-author = 'Kovid Goyal'
+copyright = time.strftime('%Y, ungtb10d')
+author = 'ungtb10d'
 building_man_pages = 'man' in sys.argv
 
 # The short X.Y version

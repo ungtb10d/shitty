@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# License: GPLv3 Copyright: 2021, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPLv3 Copyright: 2021, ungtb10d <kovid at ungtb10d.net>
 
 import math
 import string

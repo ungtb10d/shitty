@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# License: GPL v3 Copyright: 2018, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPL v3 Copyright: 2018, ungtb10d <kovid at ungtb10d.net>
 
 from shitty.key_encoding import (
     ALT, CAPS_LOCK, CTRL, HYPER, META, NUM_LOCK, PRESS, RELEASE, REPEAT, SHIFT,

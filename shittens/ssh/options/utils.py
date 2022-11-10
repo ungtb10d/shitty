@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# License: GPLv3 Copyright: 2022, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPLv3 Copyright: 2022, ungtb10d <kovid at ungtb10d.net>
 
 from typing import Any, Dict, Iterable, Optional, Tuple
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# License: GPLv3 Copyright: 2019, Kovid Goyal <kovid at ungtb10d.net>
+# License: GPLv3 Copyright: 2019, ungtb10d <kovid at ungtb10d.net>
 
 import re
 from base64 import standard_b64decode
