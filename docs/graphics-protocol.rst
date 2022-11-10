@@ -16,7 +16,7 @@ For some discussion regarding the design choices, see :iss:`33`.
 
 To see a quick demo, inside a |shitty| terminal run::
 
-    shitty +kitten icat path/to/some/image.png
+    shitty +shitten icat path/to/some/image.png
 
 You can also see a screenshot with more sophisticated features such as
 alpha-blending and text over graphics.

@@ -169,7 +169,7 @@ def load_config(*paths: str, overrides: Optional[Iterable[str]] = None, accumula
     opts_dict, paths = _load_config(defaults, partial(parse_config, accumulate_bad_lines=accumulate_bad_lines), merge_result_dicts, *paths, overrides=overrides)
     opts = Options(opts_dict)
 
-    opts.alias_map = build_action_aliases(opts.kitten_alias, 'kitten')
+    opts.alias_map = build_action_aliases(opts.kitten_alias, 'shitten')
     opts.alias_map.update(build_action_aliases(opts.action_alias))
     finalize_keys(opts, accumulate_bad_lines)
     finalize_mouse_mappings(opts, accumulate_bad_lines)

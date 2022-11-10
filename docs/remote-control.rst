@@ -212,7 +212,7 @@ decision is remembered for the duration of that shitty instance.
 .. note::
    For password based authentication to work over SSH, you must pass the
    :envvar:`KITTY_PUBLIC_KEY` environment variable to the remote host. The
-   :doc:`ssh kitten <kittens/ssh>` does this for you automatically. When
+   :doc:`ssh shitten <kittens/ssh>` does this for you automatically. When
    using a password, :ref:`rc_crypto` is used to ensure the password
    is kept secure. This does mean that using password based authentication
    is slower as the entire command is encrypted before transmission. This
@@ -294,7 +294,7 @@ As a simple illustration of the power of remote control, lets
 have what we type sent to all open shitty windows. To do that define the
 following mapping in :file:`shitty.conf`::
 
-    map f1 launch --allow-remote-control shitty +kitten broadcast
+    map f1 launch --allow-remote-control shitty +shitten broadcast
 
 Now press :kbd:`F1` and start typing, what you type will be sent to all windows,
 live, as you type it.

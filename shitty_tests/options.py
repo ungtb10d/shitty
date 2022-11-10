@@ -64,7 +64,7 @@ class TestConfParsing(BaseTest):
         })
 
         # test the aliasing options
-        opts = p('env A=1', 'env B=x$A', 'env C=', 'env D', 'clear_all_shortcuts y', 'kitten_alias a b --moo', 'map f1 kitten a arg')
+        opts = p('env A=1', 'env B=x$A', 'env C=', 'env D', 'clear_all_shortcuts y', 'kitten_alias a b --moo', 'map f1 shitten a arg')
         self.ae(opts.env, {'A': '1', 'B': 'x1', 'C': '', 'D': DELETE_ENV_VAR})
 
         def ac(which=0):
@@ -73,12 +73,12 @@ class TestConfParsing(BaseTest):
             return acs[which]
 
         ka = ac()
-        self.ae(ka.func, 'kitten')
+        self.ae(ka.func, 'shitten')
         self.ae(ka.args, ('b', '--moo', 'arg'))
 
-        opts = p('clear_all_shortcuts y', 'kitten_alias hints hints --hi', 'map f1 kitten hints XXX')
+        opts = p('clear_all_shortcuts y', 'kitten_alias hints hints --hi', 'map f1 shitten hints XXX')
         ka = ac()
-        self.ae(ka.func, 'kitten')
+        self.ae(ka.func, 'shitten')
         self.ae(ka.args, ('hints', '--hi', 'XXX'))
 
         opts = p('clear_all_shortcuts y', 'action_alias la launch --moo', 'map f1 la XXX')

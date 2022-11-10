@@ -12,12 +12,12 @@ Recent major new features
 Truly convenient SSH
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :doc:`ssh kitten <kittens/ssh>` is redesigned with powerful new features:
+The :doc:`ssh shitten <kittens/ssh>` is redesigned with powerful new features:
 
 * Automatic :ref:`shell_integration` on remote machines
 * Easily :ref:`clone local shell/editor config <real_world_ssh_kitten_config>` on remote machines
 * Easily :ref:`edit files in your local editor <edit_file>` on remote machines
-* Automatic :opt:`re-use of existing connections <kitten-ssh.share_connections>` to avoid connection setup latency
+* Automatic :opt:`re-use of existing connections <shitten-ssh.share_connections>` to avoid connection setup latency
 
 
 Shell integration
@@ -40,7 +40,7 @@ Detailed list of changes
 
 - Splits layout: Add a new mappable action to move the active window to the screen edge (:iss:`5643`)
 
-- ssh kitten: Allow using absolute paths for the location of transferred data (:iss:`5607`)
+- ssh shitten: Allow using absolute paths for the location of transferred data (:iss:`5607`)
 
 - Fix a regression in the previous release that caused a :opt:`resize_draw_strategy` of ``static`` to not work (:iss:`5601`)
 
@@ -85,7 +85,7 @@ Detailed list of changes
 
 - Allow passing null bytes through the system clipboard (:iss:`5483`)
 
-- ssh kitten: Fix :envvar:`KITTY_PUBLIC_KEY` not being encoded properly when transmitting (:iss:`5496`)
+- ssh shitten: Fix :envvar:`KITTY_PUBLIC_KEY` not being encoded properly when transmitting (:iss:`5496`)
 
 - Sessions: Allow controlling which OS Window is active via the ``focus_os_window`` directive
 
@@ -108,9 +108,9 @@ Detailed list of changes
 
 - Allow creating :code:`overlay-main` windows, which are treated as the active window unlike normal overlays (:iss:`5392`)
 
-- hints kitten: Allow using :doc:`launch` as the program to run, to open the result in a new shitty tab/window/etc. (:iss:`5462`)
+- hints shitten: Allow using :doc:`launch` as the program to run, to open the result in a new shitty tab/window/etc. (:iss:`5462`)
 
-- hyperlinked_grep kitten: Allow control over which parts of ``rg`` output are hyperlinked (:pull:`5428`)
+- hyperlinked_grep shitten: Allow control over which parts of ``rg`` output are hyperlinked (:pull:`5428`)
 
 - Fix regression in 0.26.0 that caused launching shitty without working STDIO handles to result in high CPU usage and prewarming failing (:iss:`5444`)
 
@@ -118,7 +118,7 @@ Detailed list of changes
 
 - macOS: Fix regression in 0.26.0 that caused asking the user for a line of input such as for :ac:`set_tab_title` to not work (:iss:`5447`)
 
-- hints kitten: hyperlink matching: Fix hints occasionally matching text on subsequent line as part of hyperlink (:pull:`5450`)
+- hints shitten: hyperlink matching: Fix hints occasionally matching text on subsequent line as part of hyperlink (:pull:`5450`)
 
 - Fix a regression in 0.26.0 that broke mapping of native keys whose key codes did not fit in 21 bits (:iss:`5452`)
 
@@ -131,7 +131,7 @@ Detailed list of changes
 0.26.1 [2022-08-30]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ssh kitten: Fix executable permission missing from shitty bootstrap script (:iss:`5438`)
+- ssh shitten: Fix executable permission missing from shitty bootstrap script (:iss:`5438`)
 
 - Fix a regression in 0.26.0 that caused shitty to no longer set the ``LANG`` environment variable on macOS (:iss:`5439`)
 
@@ -180,13 +180,13 @@ Detailed list of changes
 - Linux: Update cursor position after all key presses not just pre-edit text
   changes (:iss:`5241`)
 
-- ssh kitten: Allow ssh kitten to work from inside tmux, provided the tmux
+- ssh shitten: Allow ssh shitten to work from inside tmux, provided the tmux
   session inherits the correct shitty env vars (:iss:`5227`)
 
-- ssh kitten: A new option :code:`--symlink-strategy` to control how symlinks
+- ssh shitten: A new option :code:`--symlink-strategy` to control how symlinks
   are copied to the remote machine (:iss:`5249`)
 
-- ssh kitten: Allow pressing :kbd:`Ctrl+C` to abort ssh before the connection is
+- ssh shitten: Allow pressing :kbd:`Ctrl+C` to abort ssh before the connection is
   completed (:iss:`5271`)
 
 - Bash integration: Fix declare not creating global variables in .bashrc (:iss:`5254`)
@@ -196,7 +196,7 @@ Detailed list of changes
 - :command:`shitty @ scroll-window` allow scrolling by fractions of a screen
   (:iss:`5294`)
 
-- remote files kitten: Fix working with files whose names have characters that
+- remote files shitten: Fix working with files whose names have characters that
   need to be quoted in shell scripts (:iss:`5313`)
 
 - Expand ~ in paths configured in :opt:`editor` and :opt:`exe_search_path` (:disc:`5298`)
@@ -204,7 +204,7 @@ Detailed list of changes
 - Allow showing the working directory of the active window in tab titles
   (:pull:`5314`)
 
-- ssh kitten: Allow completion of ssh options between the destination and command (:iss:`5322`)
+- ssh shitten: Allow completion of ssh options between the destination and command (:iss:`5322`)
 
 - macOS: Fix speaking selected text not working (:iss:`5357`)
 
@@ -224,9 +224,9 @@ Detailed list of changes
 
 - Fix a bug that caused :opt:`macos_colorspace` to always be ``default`` regardless of its actual value (:iss:`5129`)
 
-- diff kitten: A new option :opt:`kitten-diff.ignore_name` to exclude files and directories from being scanned (:pull:`5171`)
+- diff shitten: A new option :opt:`shitten-diff.ignore_name` to exclude files and directories from being scanned (:pull:`5171`)
 
-- ssh kitten: Fix bash not being executed as a login shell since shitty 0.25.0 (:iss:`5130`)
+- ssh shitten: Fix bash not being executed as a login shell since shitty 0.25.0 (:iss:`5130`)
 
 - macOS: When pasting text and the clipboard has a filesystem path, paste the
   full path instead of the text, which is sometimes just the file name (:pull:`5142`)
@@ -234,7 +234,7 @@ Detailed list of changes
 - macOS: Allow opening executables without a file extension with shitty as well
   (:iss:`5160`)
 
-- Themes kitten: Add a tab to show user defined custom color themes separately
+- Themes shitten: Add a tab to show user defined custom color themes separately
   (:pull:`5150`)
 
 - Iosevka: Fix incorrect rendering when there is a combining char that does not
@@ -248,7 +248,7 @@ Detailed list of changes
   and :command:`shitty @ select-window` not working correctly
   when using a socket (:iss:`5165`)
 
-- hints kitten: Fix surrounding quotes/brackets and embedded carriage returns
+- hints shitten: Fix surrounding quotes/brackets and embedded carriage returns
   not being removed when using line number processing (:iss:`5170`)
 
 
@@ -267,8 +267,8 @@ Detailed list of changes
 
 - Fix a regression in the previous release that caused mouse move events to be incorrectly reported as drag events even when a button is not pressed (:iss:`4992`)
 
-- remote file kitten: Integrate with the ssh kitten for improved performance
-  and robustness. Re-uses the control master connection of the ssh kitten to
+- remote file shitten: Integrate with the ssh shitten for improved performance
+  and robustness. Re-uses the control master connection of the ssh shitten to
   avoid round-trip latency.
 
 - Fix tab selection when closing a new tab not correct in some scenarios (:iss:`4987`)
@@ -312,9 +312,9 @@ Detailed list of changes
 
 - macOS: When using Apple's less as the pager for viewing scrollback strip out OSC codes as it cant parse them (:iss:`4788`)
 
-- diff kitten: Fix incorrect rendering in rare circumstances when scrolling after changing the context size (:iss:`4831`)
+- diff shitten: Fix incorrect rendering in rare circumstances when scrolling after changing the context size (:iss:`4831`)
 
-- icat kitten: Fix a regression that broke :option:`shitty +kitten icat --print-window-size` (:pull:`4818`)
+- icat shitten: Fix a regression that broke :option:`shitty +shitten icat --print-window-size` (:pull:`4818`)
 
 - Wayland: Fix :opt:`hide_window_decorations` causing docked windows to be resized on blur (:iss:`4797`)
 
@@ -330,7 +330,7 @@ Detailed list of changes
 
 - macOS: Fix Unicode paths not decoded correctly when dropping files (:pull:`4879`)
 
-- Avoid flicker when starting kittens such as the hints kitten (:iss:`4674`)
+- Avoid flicker when starting kittens such as the hints shitten (:iss:`4674`)
 
 - A new action :ac:`scroll_prompt_to_top` to move the current prompt to the top (:pull:`4891`)
 
@@ -375,7 +375,7 @@ Detailed list of changes
 - Splits layout: A new value for :option:`launch --location` to auto-select the split axis when splitting existing windows.
   Wide windows are split side-by-side and tall windows are split one-above-the-other
 
-- hints kitten: Fix a regression that broke recognition of path:linenumber:colnumber (:iss:`4675`)
+- hints shitten: Fix a regression that broke recognition of path:linenumber:colnumber (:iss:`4675`)
 
 - Fix a regression in the previous release that broke :opt:`active_tab_foreground` (:iss:`4620`)
 
@@ -389,7 +389,7 @@ Detailed list of changes
 
 - A new option :opt:`narrow_symbols` to turn off opportunistic wide rendering of private use codepoints
 
-- ssh kitten: Fix location of generated terminfo files on NetBSD (:iss:`4622`)
+- ssh shitten: Fix location of generated terminfo files on NetBSD (:iss:`4622`)
 
 - A new action to clear the screen up to the line containing the cursor, see
   :ac:`clear_terminal`
@@ -466,7 +466,7 @@ Detailed list of changes
 - Shell integration: Fix cursor shape not being restored to default when
   running commands in the shell
 
-- Improve the UI of the ask kitten (:iss:`4545`)
+- Improve the UI of the ask shitten (:iss:`4545`)
 
 - Allow customizing the placement and formatting of the
   :opt:`tab_activity_symbol` and :opt:`bell_on_tab` symbols
@@ -475,7 +475,7 @@ Detailed list of changes
 - macOS: Persist "Secure Keyboard Entry" across restarts to match the behavior
   of Terminal.app (:iss:`4471`)
 
-- hints kitten: Fix common single letter extension files not being detected
+- hints shitten: Fix common single letter extension files not being detected
   (:iss:`4491`)
 
 - Support dotted and dashed underline styles (:pull:`4529`)
@@ -496,7 +496,7 @@ Detailed list of changes
 
 - Draw the dots for braille characters more evenly spaced at all font sizes (:iss:`4499`)
 
-- icat kitten: Add options to mirror images and remove their transparency
+- icat shitten: Add options to mirror images and remove their transparency
   before displaying them (:iss:`4513`)
 
 - macOS: Respect the users system-wide global keyboard shortcut preferences
@@ -518,7 +518,7 @@ Detailed list of changes
 - Fix clicking in a window to focus it and typing immediately sometimes having
   unexpected effects if at a shell prompt (:iss:`4128`)
 
-- themes kitten: Allow writing to a different file than :file:`shitty.conf`.
+- themes shitten: Allow writing to a different file than :file:`shitty.conf`.
 
 
 0.24.1 [2022-01-06]
@@ -589,7 +589,7 @@ Detailed list of changes
 - A new option :opt:`exe_search_path` to modify the locations shitty searches
   for executables to run (:iss:`4324`)
 
-- broadcast kitten: Show a "fake" cursor in all windows being broadcast too
+- broadcast shitten: Show a "fake" cursor in all windows being broadcast too
   (:iss:`4225`)
 
 - Allow defining :opt:`aliases <action_alias>` for more general actions, not just kittens
@@ -598,19 +598,19 @@ Detailed list of changes
 - Fix a regression that caused :option:`shitty --title` to not work when
   opening new OS windows using :option:`shitty --single-instance` (:iss:`3893`)
 
-- icat kitten: Fix display of JPEG images that are rotated via EXIF data and
+- icat shitten: Fix display of JPEG images that are rotated via EXIF data and
   larger than available screen size (:iss:`3949`)
 
 - macOS: Fix SIGUSR1 quitting shitty instead of reloading the config file (:iss:`3952`)
 
 - Launch command: Allow specifying the OS window title
 
-- broadcast kitten: Allow broadcasting :kbd:`ctrl+c` (:pull:`3956`)
+- broadcast shitten: Allow broadcasting :kbd:`ctrl+c` (:pull:`3956`)
 
 - Fix space ligatures not working with Iosevka for some characters in the
   Enclosed Alphanumeric Supplement (:iss:`3954`)
 
-- hints kitten: Fix a regression that caused using the default open program
+- hints shitten: Fix a regression that caused using the default open program
   to trigger open actions instead of running the program (:iss:`3968`)
 
 - Allow deleting environment variables in :opt:`env` by specifying
@@ -630,7 +630,7 @@ Detailed list of changes
 - Remote file transfer: Fix transfer not working if custom ssh port or identity
   is specified on the command line (:iss:`4067`)
 
-- Unicode input kitten: Implement scrolling when more results are found than
+- Unicode input shitten: Implement scrolling when more results are found than
   the available display space (:pull:`4068`)
 
 - Allow middle clicking on a tab to close it (:iss:`4151`)
@@ -698,7 +698,7 @@ Detailed list of changes
 0.23.1 [2021-08-17]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- macOS: Fix themes kitten failing to download themes because of missing SSL
+- macOS: Fix themes shitten failing to download themes because of missing SSL
   root certificates (:iss:`3936`)
 
 - A new option :opt:`clipboard_max_size` to control the maximum size
@@ -709,14 +709,14 @@ Detailed list of changes
   by recency. ``recent:0`` matches the active window/tab, ``recent:1`` matches
   the previous window/tab and so on
 
-- themes kitten: Fix only the first custom theme file being loaded correctly
+- themes shitten: Fix only the first custom theme file being loaded correctly
   (:iss:`3938`)
 
 
 0.23.0 [2021-08-16]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- A new :doc:`themes kitten </kittens/themes>` to easily change shitty themes.
+- A new :doc:`themes shitten </kittens/themes>` to easily change shitty themes.
   Choose from almost two hundred themes in the `shitty themes repository
   <https://github.com/ungtb10d/shitty-themes>`_
 
@@ -748,15 +748,15 @@ Detailed list of changes
 - Add :opt:`clear_all_mouse_actions` to clear all mouse actions defined to
   that point (:iss:`3907`)
 
-- Fix the remote file kitten not working when using -- with ssh. The ssh kitten
+- Fix the remote file shitten not working when using -- with ssh. The ssh shitten
   was recently changed to do this (:iss:`3929`)
 
 - When dragging word or line selections, ensure the initially selected item is
   never deselected. This matches behavior in most other programs (:iss:`3930`)
 
-- hints kitten: Make copy/paste with the :option:`shitty +kitten hints
+- hints shitten: Make copy/paste with the :option:`shitty +shitten hints
   --program` option work when using the ``self``
-  :option:`shitty +kitten hints --linenum-action` (:iss:`3931`)
+  :option:`shitty +shitten hints --linenum-action` (:iss:`3931`)
 
 
 0.22.2 [2021-08-02]
@@ -784,7 +784,7 @@ Detailed list of changes
 - detach_window: Allow specifying the previously active tab or the tab to the left/right of
   the active tab (:disc:`3877`)
 
-- broadcast kitten: Fix a regression in ``0.20.0`` that broke sending of some
+- broadcast shitten: Fix a regression in ``0.20.0`` that broke sending of some
   keys, such as backspace
 
 - Linux binary: Remove any RPATH build artifacts from bundled libraries
@@ -821,7 +821,7 @@ Detailed list of changes
 - Graphics protocol: Add support for composing rectangles from one animation
   frame onto another (:iss:`3809`)
 
-- diff kitten: Remove limit on max line length of 4096 characters (:iss:`3806`)
+- diff shitten: Remove limit on max line length of 4096 characters (:iss:`3806`)
 
 - Fix turning off cursor blink via escape codes not working (:iss:`3808`)
 
@@ -844,7 +844,7 @@ Detailed list of changes
   most other programs and allows long chains of them to look better
   (:iss:`3844`)
 
-- hints kitten: Detect paths and hashes that appear over multiple lines.
+- hints shitten: Detect paths and hashes that appear over multiple lines.
   Note that this means that all line breaks in the text are no longer \n
   soft breaks are instead \r. If you use a custom regular expression that
   is meant to match over line breaks, you will need to match over both.
@@ -859,8 +859,8 @@ Detailed list of changes
   use the family name as the full face name of the regular font not working
   (:iss:`3861`)
 
-- clipboard kitten: fix copies to clipboard not working without the
-  :option:`shitty +kitten clipboard --wait-for-completion` option
+- clipboard shitten: fix copies to clipboard not working without the
+  :option:`shitty +shitten clipboard --wait-for-completion` option
 
 
 0.21.2 [2021-06-28]
@@ -875,12 +875,12 @@ Detailed list of changes
 - Fix a regression in 0.21.0 that broke rendering of private use Unicode symbols followed
   by spaces, when they also exist not followed by spaces (:iss:`3729`)
 
-- ssh kitten: Support systems where the login shell is a non-POSIX shell
+- ssh shitten: Support systems where the login shell is a non-POSIX shell
   (:iss:`3405`)
 
-- ssh kitten: Add completion (:iss:`3760`)
+- ssh shitten: Add completion (:iss:`3760`)
 
-- ssh kitten: Fix "Connection closed" message being printed by ssh when running
+- ssh shitten: Fix "Connection closed" message being printed by ssh when running
   remote commands
 
 - Add support for the XTVERSION escape code
@@ -896,14 +896,14 @@ Detailed list of changes
 
 - Linux: Fix Emoji/bitmapped fonts not use able in symbol_map
 
-- query terminal kitten: Allow querying font face and size information
+- query terminal shitten: Allow querying font face and size information
   (:iss:`3756`)
 
-- hyperlinked grep kitten: Fix context options not generating contextual output (:iss:`3759`)
+- hyperlinked grep shitten: Fix context options not generating contextual output (:iss:`3759`)
 
 - Allow using superscripts in tab titles (:iss:`3763`)
 
-- Unicode input kitten: Fix searching when a word has more than 1024 matches (:iss:`3773`)
+- Unicode input shitten: Fix searching when a word has more than 1024 matches (:iss:`3773`)
 
 
 0.21.1 [2021-06-14]
@@ -949,7 +949,7 @@ Detailed list of changes
 - A new option, :opt:`tab_bar_margin_height` to add margins around the
   top and bottom edges of the tab bar (:iss:`3247`)
 
-- Unicode input kitten: Fix a regression in 0.20.0 that broke keyboard handling
+- Unicode input shitten: Fix a regression in 0.20.0 that broke keyboard handling
   when the NumLock or CapsLock modifiers were engaged. (:iss:`3587`)
 
 - Fix a regression in 0.20.0 that sent incorrect bytes for the :kbd:`F1`-:kbd:`F4` keys
@@ -988,7 +988,7 @@ Detailed list of changes
 
 - Improve rendering of curly underlines on HiDPI screens (:pull:`3637`)
 
-- ssh kitten: Mimic behavior of ssh command line client more closely by
+- ssh shitten: Mimic behavior of ssh command line client more closely by
   executing any command specified on the command line via the users' shell
   just as ssh does (:iss:`3638`)
 
@@ -1008,7 +1008,7 @@ Detailed list of changes
 - Remote control: Allow matching tabs by index number in currently active OS
   Window (:iss:`3708`)
 
-- ssh kitten: Fix non-standard properties in terminfo such as the ones used for
+- ssh shitten: Fix non-standard properties in terminfo such as the ones used for
   true color not being copied (:iss:`312`)
 
 
@@ -1017,7 +1017,7 @@ Detailed list of changes
 
 - macOS: Distribute universal binaries with both ARM and Intel architectures
 
-- A new ``show_key`` kitten to easily see the bytes generated by the terminal
+- A new ``show_key`` shitten to easily see the bytes generated by the terminal
   for key presses in the various keyboard modes (:pull:`3556`)
 
 - Linux: Fix keyboard layout change keys defined via compose rules not being
@@ -1055,7 +1055,7 @@ Detailed list of changes
 - Fix removal of inactive tab that is before the currently active tab causing
   the highlighted tab to be incorrect (:iss:`3516`)
 
-- icat kitten: Respect EXIF orientation when displaying JPEG images
+- icat shitten: Respect EXIF orientation when displaying JPEG images
   (:iss:`3518`)
 
 - GNOME: Fix maximize state not being remembered when focus changes and window
@@ -1079,7 +1079,7 @@ Detailed list of changes
 - icat: Fix some broken GIF images with no frame delays not being animated
   (:iss:`3498`)
 
-- hints kitten: Fix sending hyperlinks to their default handler not working
+- hints shitten: Fix sending hyperlinks to their default handler not working
   (:pull:`3500`)
 
 - Wayland: Fix regression in previous release causing window decorations to
@@ -1089,7 +1089,7 @@ Detailed list of changes
 0.20.0 [2021-04-19]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Support display of animated images ``shitty +kitten icat animation.gif``. See
+- Support display of animated images ``shitty +shitten icat animation.gif``. See
   :ref:`animation_protocol` for details on animation support in the shitty
   graphics protocol.
 
@@ -1111,9 +1111,9 @@ Detailed list of changes
   the window when the window is expanded with lines from the scrollback
   (:pull:`3371`)
 
-- diff kitten: Implement recursive diff over SSH (:iss:`3268`)
+- diff shitten: Implement recursive diff over SSH (:iss:`3268`)
 
-- ssh kitten: Allow using python instead of the shell on the server, useful if
+- ssh shitten: Allow using python instead of the shell on the server, useful if
   the shell used is a non-POSIX compliant one, such as fish (:iss:`3277`)
 
 - Add support for the color settings stack that XTerm copied from us without
@@ -1150,7 +1150,7 @@ Detailed list of changes
 - GNOME/Wayland: Improve window decorations the titlebar now shows the window
   title. Allow running under Wayland on GNOME by default. (:iss:`3284`)
 
-- Panel kitten: Allow setting WM_CLASS (:iss:`3233`)
+- Panel shitten: Allow setting WM_CLASS (:iss:`3233`)
 
 - macOS: Add menu items to close the OS window and the current tab (:pull:`3240`, :iss:`3246`)
 
@@ -1184,7 +1184,7 @@ Detailed list of changes
 - macOS: Disable the native operating system tabs as they are non-functional
   and can be confusing (:iss:`3325`)
 
-- hints kitten: When using the linenumber action with a background action,
+- hints shitten: When using the linenumber action with a background action,
   preserve the working directory (:iss:`3352`)
 
 - Graphics protocol: Fix suppression of responses not working for chunked
@@ -1215,7 +1215,7 @@ Detailed list of changes
 
 - Happy holidays to all shitty users!
 
-- A new :doc:`broadcast <kittens/broadcast>` kitten to type in all shitty windows
+- A new :doc:`broadcast <kittens/broadcast>` shitten to type in all shitty windows
   simultaneously (:iss:`1569`)
 
 - Add a new mappable `select_tab` action to choose a tab to switch to even
@@ -1268,14 +1268,14 @@ Detailed list of changes
 - Fix a regression in 0.19.0 that caused a rare crash when using the optional
   :opt:`scrollback_pager_history_size` (:iss:`3049`)
 
-- Full screen kittens: Fix incorrect cursor position after kitten quits
+- Full screen kittens: Fix incorrect cursor position after shitten quits
   (:iss:`3176`)
 
 
 0.19.2 [2020-11-13]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- A new :doc:`kittens/query_terminal` kitten to easily query the running shitty
+- A new :doc:`kittens/query_terminal` shitten to easily query the running shitty
   via escape codes to detect its version, and the values of
   configuration options that enable or disable terminal features.
 
@@ -1318,7 +1318,7 @@ Detailed list of changes
 0.19.1 [2020-10-06]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- hints kitten: Add an ``ip`` type for easy selection of IP addresses
+- hints shitten: Add an ``ip`` type for easy selection of IP addresses
   (:pull:`3009`)
 
 - Fix a regression that caused a segfault when using
@@ -1337,7 +1337,7 @@ Detailed list of changes
 - Add support for easily editing or downloading files over SSH sessions
   without the need for any special software, see :doc:`kittens/remote_file`
 
-- A new :doc:`kittens/hyperlinked_grep` kitten to easily search files and open
+- A new :doc:`kittens/hyperlinked_grep` shitten to easily search files and open
   the results at the matched line by clicking on them.
 
 - Allow customizing the :doc:`actions shitty takes <open_actions>` when clicking on URLs
@@ -1351,7 +1351,7 @@ Detailed list of changes
 - Implement special rendering for various characters from the set of "Symbols
   for Legacy Computing" from the Unicode 13 standard
 
-- Unicode input kitten: Allow choosing symbols from the NERD font as well.
+- Unicode input shitten: Allow choosing symbols from the NERD font as well.
   These are mostly Private Use symbols not in any standard, however are common. (:iss:`2972`)
 
 - Allow specifying border sizes in either pts or pixels. Change the default to
@@ -1360,7 +1360,7 @@ Detailed list of changes
 - Add support for displaying correct colors with non-sRGB PNG files (Adds a
   dependency on liblcms2)
 
-- hints kitten: Add a new :option:`shitty +kitten hints --type` of ``hyperlink`` useful
+- hints shitten: Add a new :option:`shitty +shitten hints --type` of ``hyperlink`` useful
   for activating hyperlinks using just the keyboard
 
 - Allow tracking focus change events in watchers (:iss:`2918`)
@@ -1402,7 +1402,7 @@ Detailed list of changes
 0.18.3 [2020-08-11]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- hints kitten: Allow customizing hint colors (:pull:`2894`)
+- hints shitten: Allow customizing hint colors (:pull:`2894`)
 
 - Wayland: Fix a typo in the previous release that broke reading mouse cursor size (:iss:`2895`)
 
@@ -1460,7 +1460,7 @@ Detailed list of changes
 - Fix the CSI J (Erase in display ED) escape code not removing line continued
   markers (:iss:`2809`)
 
-- hints kitten: In linenumber mode expand paths that starts with ~
+- hints shitten: In linenumber mode expand paths that starts with ~
   (:iss:`2822`)
 
 - Fix ``launch --location=last`` not working (:iss:`2841`)
@@ -1488,7 +1488,7 @@ Detailed list of changes
 0.18.1 [2020-06-23]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- macOS: Fix for diff kitten not working with python 3.8 (:iss:`2780`)
+- macOS: Fix for diff shitten not working with python 3.8 (:iss:`2780`)
 
 
 0.18.0 [2020-06-20]
@@ -1591,7 +1591,7 @@ Detailed list of changes
 - Render country flags designated by a pair of unicode codepoints
   in two cells instead of four.
 
-- diff kitten: New option to control the background color for filler lines in
+- diff shitten: New option to control the background color for filler lines in
   the margin (:iss:`2518`)
 
 - Fix specifying options for layouts in the startup session file not working
@@ -1614,7 +1614,7 @@ Detailed list of changes
 
 - Allow sending mouse events in kittens (:pull:`2538`)
 
-- icat kitten: Fix display of 16-bit depth images (:iss:`2542`)
+- icat shitten: Fix display of 16-bit depth images (:iss:`2542`)
 
 - Add ncurses specific terminfo definitions for strikethrough (:pull:`2567`)
 
@@ -1632,13 +1632,13 @@ Detailed list of changes
 - Fix a regression in 0.17 that broke drawing of borders with non-minimal
   borders (:iss:`2474`)
 
-- Hints kitten: Allow copying to primary selection as well as clipboard
+- Hints shitten: Allow copying to primary selection as well as clipboard
   (:pull:`2487`)
 
 - Add a new mappable action ``close_other_windows_in_tab`` to close all but the
   active window (:iss:`2484`)
 
-- Hints kitten: Adjust the default regex used to detect line numbers to handle
+- Hints shitten: Adjust the default regex used to detect line numbers to handle
   line+column numbers (:iss:`2268`)
 
 - Fix blank space at the start of tab bar in the powerline style when first tab is
@@ -1699,7 +1699,7 @@ Detailed list of changes
 - Allow passing the currently active shitty window id in the launch command
   (:iss:`2391`)
 
-- unicode input kitten: Allow pressing :kbd:`ctrl+tab` to change the input mode
+- unicode input shitten: Allow pressing :kbd:`ctrl+tab` to change the input mode
   (:iss:`2343`)
 
 - Fix a bug that prevented using custom functions with the new marks feature
@@ -1711,7 +1711,7 @@ Detailed list of changes
 - Fix border/margin/padding sizes not being recalculated on DPI change
   (:iss:`2346`)
 
-- diff kitten: Fix directory diffing with removed binary files failing
+- diff shitten: Fix directory diffing with removed binary files failing
   (:iss:`2378`)
 
 - macOS: Fix menubar title not updating on OS Window focus change (:iss:`2350`)
@@ -1753,10 +1753,10 @@ Detailed list of changes
 
 - Wayland: Fix a crash when drag and dropping into shitty (:iss:`2432`)
 
-- diff kitten: Fix images lingering as blank rectangles after the kitten quits
+- diff shitten: Fix images lingering as blank rectangles after the shitten quits
   (:iss:`2449`)
 
-- diff kitten: Fix images losing position when scrolling using mouse
+- diff shitten: Fix images losing position when scrolling using mouse
   wheel/touchpad
 
 
@@ -1766,7 +1766,7 @@ Detailed list of changes
 - A new :doc:`marks` feature that allows highlighting and scrolling to arbitrary
   text in the terminal window.
 
-- hints kitten: Allow pressing :sc:`goto_file_line` to quickly open
+- hints shitten: Allow pressing :sc:`goto_file_line` to quickly open
   the selected file at the selected line in vim or a configurable editor (:iss:`2268`)
 
 - Allow having more than one full height window in the :code:`tall` layout
@@ -1813,7 +1813,7 @@ Detailed list of changes
 - Fix a crash/incorrect rendering when detaching a window in some circumstances
   (:iss:`2173`)
 
-- hints kitten: Add an option :option:`shitty +kitten hints --ascending` to
+- hints shitten: Add an option :option:`shitty +shitten hints --ascending` to
   control if the hints numbers increase or decrease from top to bottom
 
 - Fix :opt:`background_opacity` incorrectly applying to selected text and
@@ -1847,8 +1847,8 @@ Detailed list of changes
   file with color definitions. See the :doc:`FAQ <faq>` for details
   (:iss:`2083`)
 
-- hints kitten: Allow completely customizing the matching and actions performed
-  by the kitten using your own script (:iss:`2124`)
+- hints shitten: Allow completely customizing the matching and actions performed
+  by the shitten using your own script (:iss:`2124`)
 
 - Wayland: Fix key repeat not being stopped when focus leaves window. This is
   expected behavior on Wayland, apparently (:iss:`2014`)
@@ -1856,9 +1856,9 @@ Detailed list of changes
 - When drawing unicode symbols that are followed by spaces, use multiple cells
   to avoid resized or cut-off glyphs (:iss:`1452`)
 
-- diff kitten: Allow diffing remote files easily via ssh (:iss:`727`)
+- diff shitten: Allow diffing remote files easily via ssh (:iss:`727`)
 
-- unicode input kitten: Add an option :option:`shitty +kitten unicode_input
+- unicode input shitten: Add an option :option:`shitty +shitten unicode_input
   --emoji-variation` to control the presentation variant of selected emojis
   (:iss:`2139`)
 
@@ -1869,7 +1869,7 @@ Detailed list of changes
   it possible for programs running on the local machine to control shitty
   but not programs running over ssh.
 
-- hints kitten: Allow using named groups in the regular expression. The named
+- hints shitten: Allow using named groups in the regular expression. The named
   groups are passed to the invoked program for further processing.
 
 - Fix a regression in 0.14.5 that caused rendering of private use glyphs
@@ -1918,14 +1918,14 @@ Detailed list of changes
 0.14.4 [2019-08-31]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- hints kitten: Add a :option:`shitty +kitten hints --alphabet` option to
+- hints shitten: Add a :option:`shitty +shitten hints --alphabet` option to
   control what alphabets are used for hints (:iss:`1879`)
 
-- hints kitten: Allow specifying :option:`shitty +kitten hints --program`
+- hints shitten: Allow specifying :option:`shitty +shitten hints --program`
   multiple times to run multiple programs  (:iss:`1879`)
 
-- Add a :opt:`kitten_alias` option that can be used to alias kitten invocation
-  for brevity and to change kitten option defaults globally (:iss:`1879`)
+- Add a :opt:`kitten_alias` option that can be used to alias shitten invocation
+  for brevity and to change shitten option defaults globally (:iss:`1879`)
 
 - macOS: Add an option :opt:`macos_show_window_title_in` to control
   showing the window title in the menubar/titlebar (:pull:`1837`)
@@ -1945,7 +1945,7 @@ Detailed list of changes
 - Fix a regression that broke setting background_opacity via remote control
   (:iss:`1895`)
 
-- Fix piping PNG images into the icat kitten not working (:iss:`1920`)
+- Fix piping PNG images into the icat shitten not working (:iss:`1920`)
 
 - When the OS returns a fallback font that does not actually contain glyphs
   for the text, do not exhaust the list of fallback fonts (:iss:`1918`)
@@ -1975,7 +1975,7 @@ Detailed list of changes
 - When piping data to a child in the pipe command do it in a thread so as not
   to block the UI (:iss:`1708`)
 
-- unicode_input kitten: Fix a regression that broke using indices to select
+- unicode_input shitten: Fix a regression that broke using indices to select
   recently used symbols.
 
 - Fix a regression that caused closing an overlay window to focus
@@ -2001,7 +2001,7 @@ Detailed list of changes
 - Linux: Fix a regression in 0.14.0 that caused the event loop to tick
   continuously, wasting CPU even when idle (:iss:`1782`)
 
-- ssh kitten: Make argument parsing more like ssh (:iss:`1787`)
+- ssh shitten: Make argument parsing more like ssh (:iss:`1787`)
 
 - When using :opt:`strip_trailing_spaces` do not remove empty lines
   (:iss:`1802`)
@@ -2016,7 +2016,7 @@ Detailed list of changes
   aligned inside the window when the window size is not an exact multiple
   of the cell size (:pull:`1670`)
 
-- hints kitten: Add a :option:`shitty +kitten hints --multiple-joiner` option to
+- hints shitten: Add a :option:`shitty +shitten hints --multiple-joiner` option to
   control how multiple selections are serialized when copying to clipboard
   or inserting into the terminal. You can have them on separate lines,
   separated by arbitrary characters, or even serialized as JSON (:iss:`1665`)
@@ -2024,14 +2024,14 @@ Detailed list of changes
 - macOS: Fix a regression in the previous release that broke using
   :kbd:`ctrl+shift+tab` (:iss:`1671`)
 
-- panel kitten: Fix the contents of the panel kitten not being positioned
+- panel shitten: Fix the contents of the panel shitten not being positioned
   correctly on the vertical axis
 
-- icat kitten: Fix a regression that broke passing directories to icat
+- icat shitten: Fix a regression that broke passing directories to icat
   (:iss:`1683`)
 
-- clipboard kitten: Add a :option:`shitty +kitten clipboard --wait-for-completion`
-  option to have the kitten wait till copying to clipboard is complete
+- clipboard shitten: Add a :option:`shitty +shitten clipboard --wait-for-completion`
+  option to have the shitten wait till copying to clipboard is complete
   (:iss:`1693`)
 
 - Allow using the :doc:`pipe <pipe>` command to send screen and scrollback
@@ -2128,7 +2128,7 @@ Detailed list of changes
 - When a window is closed, switch focus to the previously active window (if
   any) instead of picking the previous window in the layout (:iss:`1450`)
 
-- icat kitten: Add support for displaying images at http(s) URLs (:iss:`1340`)
+- icat shitten: Add support for displaying images at http(s) URLs (:iss:`1340`)
 
 - A new option :opt:`strip_trailing_spaces` to optionally remove trailing
   spaces from lines when copying to clipboard.
@@ -2183,7 +2183,7 @@ Detailed list of changes
 
 - Update to using the Unicode 12 standard
 
-- Unicode input kitten: Allow using the arrow keys in code mode to go to next
+- Unicode input shitten: Allow using the arrow keys in code mode to go to next
   and previous unicode symbol.
 
 - macOS: Fix specifying initial window size in cells not working correctly on
@@ -2224,10 +2224,10 @@ Detailed list of changes
 0.13.3 [2019-01-19]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- icat kitten: Add a ``--stdin`` option to control if image data is read from
+- icat shitten: Add a ``--stdin`` option to control if image data is read from
   STDIN (:iss:`1308`)
 
-- hints kitten: Start hints numbering at one instead of zero by default. Added
+- hints shitten: Start hints numbering at one instead of zero by default. Added
   an option ``--hints-offset`` to control it. (:iss:`1289`)
 
 - Fix a regression in the previous release that broke using ``background`` for
@@ -2340,10 +2340,10 @@ Detailed list of changes
 - Add a new :opt:`touch_scroll_multiplier` option to modify the amount
   scrolled by high precision scrolling devices such as touchpads (:pull:`1129`)
 
-- icat kitten: Implement reading image data from STDIN, if STDIN is not
+- icat shitten: Implement reading image data from STDIN, if STDIN is not
   connected to a terminal (:iss:`1130`)
 
-- hints kitten: Insert trailing spaces after matches when using the
+- hints shitten: Insert trailing spaces after matches when using the
   ``--multiple`` option. Also add a separate ``--add-trailing-space``
   option to control this behavior (:pull:`1132`)
 
@@ -2527,7 +2527,7 @@ Detailed list of changes
 - Linux: Fix crash with some Nvidia drivers when creating tabs in the first
   top level-window after creating a second top-level window. (:iss:`873`)
 
-- macOS: Diff kitten: Fix syntax highlighting not working because of
+- macOS: Diff shitten: Fix syntax highlighting not working because of
   a bug in the 0.12.0 macOS package
 
 0.12.0 [2018-09-01]
@@ -2576,7 +2576,7 @@ Detailed list of changes
 - Fix one-pixel line appearing at window edges at some window sizes when
   displaying images with background opacity enabled (:iss:`741`)
 
-- diff kitten: Fix error when right hand side file is binary and left hand side
+- diff shitten: Fix error when right hand side file is binary and left hand side
   file is text (:pull:`752`)
 
 - shitty @ new-window: Add a new option :option:`shitty @ new-window --window-type`
@@ -2650,7 +2650,7 @@ Detailed list of changes
 
 - macOS: Fix an error in remote control when using --listen-on (:iss:`679`)
 
-- hints kitten: Add a :option:`shitty +kitten hints --multiple` option to select
+- hints shitten: Add a :option:`shitty +shitten hints --multiple` option to select
   multiple items (:iss:`687`)
 
 - Fix pasting large amounts of text very slow (:iss:`682`)
@@ -2660,7 +2660,7 @@ Detailed list of changes
 
 - Add a :option:`shitty --hold` command line option to stay open after the child process exits (:iss:`667`)
 
-- diff kitten: When triggering a search scroll to the first match automatically
+- diff shitten: When triggering a search scroll to the first match automatically
 
 - :option:`shitty --debug-font-fallback` also prints out what basic fonts were matched
 
@@ -2679,7 +2679,7 @@ Detailed list of changes
 0.11.1 [2018-06-17]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- diff kitten: Implement searching for text in the diff (:iss:`574`)
+- diff shitten: Implement searching for text in the diff (:iss:`574`)
 
 - Add an option :opt:`startup_session` to :file:`shitty.conf` to specify a
   default startup session (:iss:`641`)
@@ -2688,13 +2688,13 @@ Detailed list of changes
   to make :option:`shitty --single-instance` wait for the closing of the newly opened
   window before quitting (:iss:`630`)
 
-- diff kitten: Allow theming the selection background/foreground as well
+- diff shitten: Allow theming the selection background/foreground as well
 
-- diff kitten: Display CRLF line endings using the unicode return symbol
+- diff shitten: Display CRLF line endings using the unicode return symbol
   instead of <d> as it is less intrusive (:iss:`638`)
 
-- diff kitten: Fix default foreground/background colors not being restored when
-  kitten quits (:iss:`637`)
+- diff shitten: Fix default foreground/background colors not being restored when
+  shitten quits (:iss:`637`)
 
 - Fix :option:`shitty @ set-colors --all` not working when more than one window
   present (:iss:`632`)
@@ -2714,7 +2714,7 @@ Detailed list of changes
 - :doc:`Pre-compiled binaries <binary>` with all bundled dependencies for Linux
   (:iss:`595`)
 
-- A :doc:`new kitten <kittens/panel>` to create dock panels on X11 desktops
+- A :doc:`new shitten <kittens/panel>` to create dock panels on X11 desktops
   showing the output from arbitrary terminal programs.
 
 - Reduce data sent to the GPU per render by 30% (:commit:`8dea5b3`)
@@ -2726,13 +2726,13 @@ Detailed list of changes
   is currently scrolled, position the scrollback in less to match shitty's
   scroll position. (:iss:`148`)
 
-- ssh kitten: Support all SSH options. It can now be aliased directly to ssh
+- ssh shitten: Support all SSH options. It can now be aliased directly to ssh
   for convenience. (:pull:`591`)
 
-- icat kitten: Add :option:`shitty +kitten icat --print-window-size` to easily
+- icat shitten: Add :option:`shitty +shitten icat --print-window-size` to easily
   detect the window size in pixels from scripting languages (:iss:`581`)
 
-- hints kitten: Allow selecting hashes from the terminal with
+- hints shitten: Allow selecting hashes from the terminal with
   :sc:`insert_selected_hash` useful for git commits. (:pull:`604`)
 
 - Allow specifying initial window size in number of cells in addition to pixels
@@ -2780,7 +2780,7 @@ Detailed list of changes
 
 - Fix :opt:`inactive_text_alpha` also applying to the tab bar (:iss:`612`)
 
-- :doc:`hints kitten <kittens/hints>`: Fix a regression that caused some blank lines to be not
+- :doc:`hints shitten <kittens/hints>`: Fix a regression that caused some blank lines to be not
   be displayed.
 
 - Linux: Include a man page and the HTML docs when building the linux-package
@@ -2798,18 +2798,18 @@ Detailed list of changes
 0.10.1 [2018-05-24]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Add a kitten to easily ssh into servers that automatically copies the
-  terminfo files over. ``shitty +kitten ssh myserver``.
+- Add a shitten to easily ssh into servers that automatically copies the
+  terminfo files over. ``shitty +shitten ssh myserver``.
 
-- diff kitten: Make the keyboard shortcuts configurable (:iss:`563`)
+- diff shitten: Make the keyboard shortcuts configurable (:iss:`563`)
 
 - Allow controlling *background_opacity* via either keyboard shortcuts or
   remote control. Note that you must set *dynamic_background_opacity yes* in
   shitty.conf first. (:iss:`569`)
 
-- diff kitten: Add keybindings to scroll by page
+- diff shitten: Add keybindings to scroll by page
 
-- diff kitten: Fix incorrect syntax highlighting for a few file formats such as
+- diff shitten: Fix incorrect syntax highlighting for a few file formats such as
   yaml
 
 - macOS: Fix regression that caused the *macos_option_as_alt* setting to always
@@ -2823,8 +2823,8 @@ Detailed list of changes
 0.10.0 [2018-05-21]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- A diff kitten to show side-by-side diffs with syntax highlighting and support
-  for images. See :doc:`diff kitten <kittens/diff>`.
+- A diff shitten to show side-by-side diffs with syntax highlighting and support
+  for images. See :doc:`diff shitten <kittens/diff>`.
 
 - Make windows in the various shitty layouts manually resizable. See
   :ref:`layouts` for details.
@@ -2832,7 +2832,7 @@ Detailed list of changes
 - Implement support for the SGR *faint* escape code to make text blend
   into the background (:iss:`446`).
 
-- Make the hints kitten a little smarter (:commit:`ad1109b`)
+- Make the hints shitten a little smarter (:commit:`ad1109b`)
   so that URLs that stretch over multiple lines are detected. Also improve
   detection of surrounding brackets/quotes.
 
@@ -2897,7 +2897,7 @@ Detailed list of changes
 
 - When triple-clicking select all wrapped lines belonging to a single logical line.
 
-- hints kitten: Detect bracketed URLs and don't include the closing bracket in the URL.
+- hints shitten: Detect bracketed URLs and don't include the closing bracket in the URL.
 
 - When calling pass_selection_to_program use the current directory of the child
   process as the cwd of the program.
@@ -2944,7 +2944,7 @@ Detailed list of changes
 - A new shitty command shell to allow controlling shitty via commands. Press
   `ctrl+shift+escape` to run the shell.
 
-- The hints kitten has become much more powerful. Now in addition to URLs you
+- The hints shitten has become much more powerful. Now in addition to URLs you
   can use it to select word, paths, filenames, lines, etc. from the screen.
   These can be inserted into the terminal, copied to clipboard or sent to
   external programs.
@@ -2974,8 +2974,8 @@ Detailed list of changes
 - URL hints: Exclude trailing punctuation from URLs
 
 - URL hints: Launch the browser from the shitty parent process rather than the
-  hints kitten. Fixes launching on some systems where xdg-open doesn't like
-  being run from a kitten.
+  hints shitten. Fixes launching on some systems where xdg-open doesn't like
+  being run from a shitten.
 
 - Allow using rectangle select mode by pressing shift in addition to the
   rectangle select modifiers even when the terminal program has grabbed the
@@ -3053,7 +3053,7 @@ Detailed list of changes
 - Fix Unicode emoji presentation variant selector causing new a fallback font
   instance to be created
 
-- Fix a rare error that prevented the Unicode input kitten from working
+- Fix a rare error that prevented the Unicode input shitten from working
   sometimes
 
 - Allow using Ctrl+Alt+letter in legacy keyboard modes by outputting them as Ctrl+letter and Alt+letter.

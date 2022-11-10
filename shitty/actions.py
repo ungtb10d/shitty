@@ -108,7 +108,7 @@ def as_rst() -> str:
             if action.name in maps:
                 a('')
                 a('Default shortcuts using this action:')
-                if action.name == 'kitten':
+                if action.name == 'shitten':
                     a('')
                     scs = {(kitten_link(m.parseable_text), m.short_text, f':sc:`shitty.{m.name}`') for m in maps[action.name]}
                     for s in sorted(scs):

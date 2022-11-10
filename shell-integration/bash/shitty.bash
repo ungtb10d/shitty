@@ -178,7 +178,7 @@ _ksi_main() {
         if [[ -z "$KITTY_PID" ]]; then
             if [[ -n "$SSH_TTY" || -n "$SSH2_TTY$KITTY_WINDOW_ID" ]]; then
                 # connected to most SSH servers
-                # or use ssh kitten to connected to some SSH servers that do not set SSH_TTY
+                # or use ssh shitten to connected to some SSH servers that do not set SSH_TTY
                 _ksi_prompt[hostname_prefix]="\h: "
             elif [[ -n "$(builtin command -v who)" && "$(builtin command who -m 2> /dev/null)" =~ "\([a-fA-F.:0-9]+\)$" ]]; then
                 # the shell integration script is installed manually on the remote system

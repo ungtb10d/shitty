@@ -652,7 +652,7 @@ def get_editor(opts: Optional[Options] = None, path_to_edit: str = '', line_numb
         try:
             opts = get_options()
         except RuntimeError:
-            # we are in a kitten
+            # we are in a shitten
             from .cli import create_default_opts
             opts = create_default_opts()
     if opts.editor == '.':

@@ -15,7 +15,7 @@ clicked. Let us illustrate with some examples, first. Create the file
     # Open any image in the full shitty window by clicking on it
     protocol file
     mime image/*
-    action launch --type=overlay shitty +kitten icat --hold ${FILE_PATH}
+    action launch --type=overlay shitty +shitten icat --hold ${FILE_PATH}
 
 Now, run ``ls --hyperlink=auto`` in shitty and click on the filename of an
 image, holding down :kbd:`ctrl+shift`. It will be opened over the current
@@ -121,7 +121,7 @@ Scripting the opening of files with shitty on macOS
 On macOS you can use :guilabel:`Open With` in Finder or drag and drop files and
 URLs onto the shitty dock icon to open them with shitty. The default actions are:
 
-* Open text files in your editor and images using the icat kitten.
+* Open text files in your editor and images using the icat shitten.
 * Run shell scripts in a shell
 * Open SSH urls using the ssh command
 

@@ -94,8 +94,8 @@ Variables that influence shitty behavior
 .. envvar:: SSH_ASKPASS
 
    Specify the program for SSH to ask for passwords. When this is set, :doc:`ssh
-   kitten </kittens/ssh>` will use this environment variable by default. See
-   :opt:`askpass <kitten-ssh.askpass>` for details.
+   shitten </kittens/ssh>` will use this environment variable by default. See
+   :opt:`askpass <shitten-ssh.askpass>` for details.
 
 .. envvar:: KITTY_CLONE_SOURCE_CODE
 

@@ -123,14 +123,14 @@ def shebang(args: List[str]) -> None:
 
 def run_kitten(args: List[str]) -> None:
     try:
-        kitten = args[1]
+        shitten = args[1]
     except IndexError:
         from kittens.runner import list_kittens
         list_kittens()
         raise SystemExit(1)
     sys.argv = args[1:]
     from kittens.runner import run_kitten as rk
-    rk(kitten)
+    rk(shitten)
 
 
 def edit_config_file(args: List[str]) -> None:
@@ -168,7 +168,7 @@ namespaced_entry_points['complete'] = complete
 namespaced_entry_points['runpy'] = runpy
 namespaced_entry_points['launch'] = launch
 namespaced_entry_points['open'] = open_urls
-namespaced_entry_points['kitten'] = run_kitten
+namespaced_entry_points['shitten'] = run_kitten
 namespaced_entry_points['edit-config'] = edit_config_file
 namespaced_entry_points['shebang'] = shebang
 namespaced_entry_points['edit'] = edit

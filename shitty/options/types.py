@@ -848,19 +848,19 @@ defaults.map = [
     # open_url
     KeyDefinition(trigger=SingleKey(mods=256, key=101), definition='open_url_with_hints'),  # noqa
     # insert_selected_path
-    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=102),), definition='kitten hints --type path --program -'),  # noqa
+    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=102),), definition='shitten hints --type path --program -'),  # noqa
     # open_selected_path
-    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(mods=1, key=102),), definition='kitten hints --type path'),  # noqa
+    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(mods=1, key=102),), definition='shitten hints --type path'),  # noqa
     # insert_selected_line
-    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=108),), definition='kitten hints --type line --program -'),  # noqa
+    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=108),), definition='shitten hints --type line --program -'),  # noqa
     # insert_selected_word
-    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=119),), definition='kitten hints --type word --program -'),  # noqa
+    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=119),), definition='shitten hints --type word --program -'),  # noqa
     # insert_selected_hash
-    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=104),), definition='kitten hints --type hash --program -'),  # noqa
+    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=104),), definition='shitten hints --type hash --program -'),  # noqa
     # goto_file_line
-    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=110),), definition='kitten hints --type linenum'),  # noqa
+    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=110),), definition='shitten hints --type linenum'),  # noqa
     # open_selected_hyperlink
-    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=121),), definition='kitten hints --type hyperlink'),  # noqa
+    KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=121),), definition='shitten hints --type hyperlink'),  # noqa
     # show_kitty_doc
     KeyDefinition(trigger=SingleKey(mods=256, key=57364), definition='show_kitty_doc overview'),  # noqa
     # toggle_fullscreen
@@ -868,7 +868,7 @@ defaults.map = [
     # toggle_maximized
     KeyDefinition(trigger=SingleKey(mods=256, key=57373), definition='toggle_maximized'),  # noqa
     # input_unicode_character
-    KeyDefinition(trigger=SingleKey(mods=256, key=117), definition='kitten unicode_input'),  # noqa
+    KeyDefinition(trigger=SingleKey(mods=256, key=117), definition='shitten unicode_input'),  # noqa
     # edit_config_file
     KeyDefinition(trigger=SingleKey(mods=256, key=57365), definition='edit_config_file'),  # noqa
     # kitty_shell
@@ -926,7 +926,7 @@ if is_macos:
     defaults.map.append(KeyDefinition(trigger=SingleKey(mods=8, key=48), definition='change_font_size all 0'))  # noqa
     defaults.map.append(KeyDefinition(trigger=SingleKey(mods=12, key=102), definition='toggle_fullscreen'))  # noqa
     defaults.map.append(KeyDefinition(trigger=SingleKey(mods=10, key=115), definition='toggle_macos_secure_keyboard_entry'))  # noqa
-    defaults.map.append(KeyDefinition(trigger=SingleKey(mods=12, key=32), definition='kitten unicode_input'))  # noqa
+    defaults.map.append(KeyDefinition(trigger=SingleKey(mods=12, key=32), definition='shitten unicode_input'))  # noqa
     defaults.map.append(KeyDefinition(trigger=SingleKey(mods=8, key=44), definition='edit_config_file'))  # noqa
     defaults.map.append(KeyDefinition(trigger=SingleKey(mods=10, key=114), definition='clear_terminal reset active'))  # noqa
     defaults.map.append(KeyDefinition(trigger=SingleKey(mods=8, key=107), definition='clear_terminal to_cursor active'))  # noqa

@@ -60,7 +60,7 @@ def resolve_ref(ref: str, website_url: Callable[[str], str] = website_url) -> st
         pass
     elif ref.startswith('conf-shitty-'):
         href = f'conf#{ref}'
-    elif ref.startswith('conf-kitten-'):
+    elif ref.startswith('conf-shitten-'):
         parts = ref.split('-')
         href = "kittens/" + parts[2] + f'/#{ref}'
     elif ref.startswith('at_'):

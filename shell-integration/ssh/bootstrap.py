@@ -200,7 +200,7 @@ def get_data():
         # have been sent before the script had a chance to run
         sys.stdout.write('\r\033[K')
     data = base64.standard_b64decode(data)
-    with temporary_directory(dir=HOME, prefix='.shitty-ssh-kitten-untar-') as tdir, tarfile.open(fileobj=io.BytesIO(data)) as tf:
+    with temporary_directory(dir=HOME, prefix='.shitty-ssh-shitten-untar-') as tdir, tarfile.open(fileobj=io.BytesIO(data)) as tf:
         tf.extractall(tdir)
         with open(tdir + '/data.sh') as f:
             env_vars = f.read()

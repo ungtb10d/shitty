@@ -246,7 +246,7 @@ _ksi_deferred_init() {
             # shitty running locally
         elif [[ -n "$SSH_TTY" || -n "$SSH2_TTY$KITTY_WINDOW_ID" ]]; then
             # connected to most SSH servers
-            # or use ssh kitten to connected to some SSH servers that do not set SSH_TTY
+            # or use ssh shitten to connected to some SSH servers that do not set SSH_TTY
             is_ssh_session="y"
         elif [[ -n "$(builtin command -v who)" ]]; then
             # the shell integration script is installed manually on the remote system

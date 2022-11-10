@@ -255,19 +255,19 @@ if you specify a program-to-run you can use the special placeholder
             p('.. program::', 'shitty @', func.name)
             p('\n\n' + as_rst(*cli_params_for(func)))
     from kittens.runner import get_kitten_cli_docs
-    for kitten in all_kitten_names:
-        data = get_kitten_cli_docs(kitten)
+    for shitten in all_kitten_names:
+        data = get_kitten_cli_docs(shitten)
         if data:
-            with open(f'generated/cli-kitten-{kitten}.rst', 'w') as f:
+            with open(f'generated/cli-shitten-{shitten}.rst', 'w') as f:
                 p = partial(print, file=f)
-                p('.. program::', 'shitty +kitten', kitten)
-                p('\nSource code for', kitten)
+                p('.. program::', 'shitty +shitten', shitten)
+                p('\nSource code for', shitten)
                 p('-' * 72)
-                p(f'\nThe source code for this kitten is `available on GitHub <https://github.com/ungtb10d/shitty/tree/master/kittens/{kitten}>`_.')
+                p(f'\nThe source code for this shitten is `available on GitHub <https://github.com/ungtb10d/shitty/tree/master/kittens/{shitten}>`_.')
                 p('\nCommand Line Interface')
                 p('-' * 72)
                 p('\n\n' + option_spec_as_rst(
-                    data['options'], message=data['help_text'], usage=data['usage'], appname=f'shitty +kitten {kitten}',
+                    data['options'], message=data['help_text'], usage=data['usage'], appname=f'shitty +shitten {shitten}',
                     heading_char='^'))
 
 # }}}
@@ -500,7 +500,7 @@ def write_conf_docs(app: Any, all_kitten_names: Iterable[str]) -> None:
             print('.. highlight:: conf\n', file=f)
             f.write('\n'.join(definition.as_rst(name, shortcut_slugs)))
 
-        conf_name = re.sub(r'^kitten-', '', name) + '.conf'
+        conf_name = re.sub(r'^shitten-', '', name) + '.conf'
         with open(f'generated/conf/{conf_name}', 'w', encoding='utf-8') as f:
             text = '\n'.join(definition.as_conf())
             print(text, file=f)
@@ -509,10 +509,10 @@ def write_conf_docs(app: Any, all_kitten_names: Iterable[str]) -> None:
     generate_default_config(definition, 'shitty')
 
     from kittens.runner import get_kitten_conf_docs
-    for kitten in all_kitten_names:
-        definition = get_kitten_conf_docs(kitten)
+    for shitten in all_kitten_names:
+        definition = get_kitten_conf_docs(shitten)
         if definition:
-            generate_default_config(definition, f'kitten-{kitten}')
+            generate_default_config(definition, f'shitten-{shitten}')
 
     from shitty.actions import as_rst
     with open('generated/actions.rst', 'w', encoding='utf-8') as f:

@@ -860,7 +860,7 @@ as_text_generic(PyObject *args, void *container, get_line_func get_line, index_t
             // less has a bug where it resets colors when it sees a \r, so work
             // around it by resetting SGR at the start of every line. This is
             // pretty sad performance wise, but I guess it will remain till I
-            // get around to writing a nice pager kitten.
+            // get around to writing a nice pager shitten.
             // see https://github.com/ungtb10d/shitty/issues/2381
             prev_cell = NULL;
             line_as_ansi(line, ansibuf, &prev_cell, 0, line->xnum, 0);

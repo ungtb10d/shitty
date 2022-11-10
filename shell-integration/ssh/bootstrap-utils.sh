@@ -148,7 +148,7 @@ execute_sh_with_posix_env() {
     [ "$shell_name" = "sh" ] || return
     # sh supports -l so use that
     command "$login_shell" -l -c ":" > /dev/null 2> /dev/null && return
-    [ -z "$shell_integration_dir" ] && die "Could not read data over tty ssh kitten cannot function"
+    [ -z "$shell_integration_dir" ] && die "Could not read data over tty ssh shitten cannot function"
     sh_dir="$shell_integration_dir/sh"
     command mkdir -p "$sh_dir" || die "Creating directory $sh_dir failed"
     sh_script="$sh_dir/login_shell_env.sh"

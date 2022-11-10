@@ -84,13 +84,13 @@ def send_text_parse(func: str, rest: str) -> FuncArgsType:
     return func, [mode, data]
 
 
-@func_with_args('run_kitten', 'run_simple_kitten', 'kitten')
+@func_with_args('run_kitten', 'run_simple_kitten', 'shitten')
 def kitten_parse(func: str, rest: str) -> FuncArgsType:
-    if func == 'kitten':
+    if func == 'shitten':
         args = rest.split(maxsplit=1)
     else:
         args = rest.split(maxsplit=2)[1:]
-        func = 'kitten'
+        func = 'shitten'
     return func, [args[0]] + (to_cmdline(args[1]) if len(args) > 1 else [])
 
 

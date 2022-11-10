@@ -802,18 +802,18 @@ def compile_kittens(compilation_database: CompilationDatabase) -> None:
         return sorted(glob.glob(q))
 
     def files(
-            kitten: str,
+            shitten: str,
             output: str,
             extra_headers: Sequence[str] = (),
             extra_sources: Sequence[str] = (),
             filter_sources: Optional[Callable[[str], bool]] = None,
             includes: Sequence[str] = (), libraries: Sequence[str] = (),
     ) -> Tuple[str, List[str], List[str], str, Sequence[str], Sequence[str]]:
-        sources = list(filter(filter_sources, list(extra_sources) + list_files(os.path.join('kittens', kitten, '*.c'))))
-        headers = list_files(os.path.join('kittens', kitten, '*.h')) + list(extra_headers)
-        return kitten, sources, headers, f'kittens/{kitten}/{output}', includes, libraries
+        sources = list(filter(filter_sources, list(extra_sources) + list_files(os.path.join('kittens', shitten, '*.c'))))
+        headers = list_files(os.path.join('kittens', shitten, '*.h')) + list(extra_headers)
+        return shitten, sources, headers, f'kittens/{shitten}/{output}', includes, libraries
 
-    for kitten, sources, all_headers, dest, includes, libraries in (
+    for shitten, sources, all_headers, dest, includes, libraries in (
         files('unicode_input', 'unicode_names'),
         files('diff', 'diff_speedup'),
         files('transfer', 'rsync', libraries=('rsync',)),

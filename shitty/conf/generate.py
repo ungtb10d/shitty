@@ -447,20 +447,20 @@ def write_output(loc: str, defn: Definition) -> None:
 
 def main() -> None:
     # To use run it as:
-    # shitty +runpy 'from shitty.conf.generate import main; main()' /path/to/kitten/file.py
+    # shitty +runpy 'from shitty.conf.generate import main; main()' /path/to/shitten/file.py
     import importlib
     import sys
 
     from kittens.runner import path_to_custom_kitten, resolved_kitten
     from shitty.constants import config_dir
 
-    kitten = sys.argv[-1]
-    if not kitten.endswith('.py'):
-        kitten += '.py'
-    kitten = resolved_kitten(kitten)
-    path = os.path.realpath(path_to_custom_kitten(config_dir, kitten))
+    shitten = sys.argv[-1]
+    if not shitten.endswith('.py'):
+        shitten += '.py'
+    shitten = resolved_kitten(shitten)
+    path = os.path.realpath(path_to_custom_kitten(config_dir, shitten))
     if not os.path.dirname(path):
-        raise SystemExit(f'No custom kitten named {kitten} found')
+        raise SystemExit(f'No custom shitten named {shitten} found')
     sys.path.insert(0, os.path.dirname(path))
     package_name = os.path.basename(os.path.dirname(path))
     m = importlib.import_module('kitten_options_definition')

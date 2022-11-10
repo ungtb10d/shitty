@@ -77,7 +77,7 @@ no-title
 no-cwd
     Turn off reporting the current working directory. This is used to allow
     :ac:`new_window_with_cwd` and similar to open windows logged into remote
-    machines using the :doc:`ssh kitten <kittens/ssh>` automatically with the
+    machines using the :doc:`ssh shitten <kittens/ssh>` automatically with the
     same working directory as the current window.
     Note that for the fish shell this will not disable its built-in current
     working directory reporting.
@@ -212,9 +212,9 @@ Shell integration over SSH
 ----------------------------
 
 The easiest way to have shell integration work when SSHing into remote systems
-is to use the :doc:`ssh kitten <kittens/ssh>`. Simply run::
+is to use the :doc:`ssh shitten <kittens/ssh>`. Simply run::
 
-    shitty +kitten ssh hostname
+    shitty +shitten ssh hostname
 
 And, by magic, you will be logged into the remote system with fully functional
 shell integration. Alternately, you can :ref:`setup shell integration manually
@@ -279,7 +279,7 @@ Edit files in new shitty windows even over SSH
 
 The :command:`edit-in-shitty` command allows you to seamlessly edit files
 in your default :opt:`editor` in new shitty windows. This works even over
-SSH (if you use the :doc:`ssh kitten <kittens/ssh>`), allowing you
+SSH (if you use the :doc:`ssh shitten <kittens/ssh>`), allowing you
 to easily edit remote files in your local editor with all its bells and
 whistles.
 

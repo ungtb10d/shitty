@@ -57,7 +57,7 @@ print(' '.join(map(str, buf)))'''), lines=13, cols=77)
         t('ssh un@ip -iident -p34', host='un@ip', port=34, identity_file='ident')
         t('ssh -p 33 main', port=33)
         t('ssh -p 34 ssh://un@ip:33/', host='un@ip', port=34)
-        t('ssh --kitten=one -p 12 --kitten two -ix main', identity_file='x', port=12, extra_args=(('--kitten', 'one'), ('--kitten', 'two')))
+        t('ssh --shitten=one -p 12 --shitten two -ix main', identity_file='x', port=12, extra_args=(('--shitten', 'one'), ('--shitten', 'two')))
         self.assertTrue(runtime_dir())
 
     def test_ssh_config_parsing(self):
@@ -144,7 +144,7 @@ copy --exclude */w.* d1
                 contents.discard(f'{tname}/78/xterm-shitty')
                 self.ae(contents, {
                     'g.1', 'g.2', f'{tname}/shitty.terminfo', 'simple-file', 'd1/d2/x', 'd1/y', 'a/sfa', 's1', 's2',
-                    '.local/share/shitty-ssh-kitten/shitty/version', '.local/share/shitty-ssh-kitten/shitty/bin/shitty'
+                    '.local/share/shitty-ssh-shitten/shitty/version', '.local/share/shitty-ssh-shitten/shitty/bin/shitty'
                 })
                 self.ae(len(glob.glob(f'{remote_home}/{tname}/*/xterm-shitty')), 2)
 

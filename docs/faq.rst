@@ -45,15 +45,15 @@ This happens because the |shitty| terminfo files are not available on the server
 You can ssh in using the following command which will automatically copy the
 terminfo files to the server::
 
-    shitty +kitten ssh myserver
+    shitty +shitten ssh myserver
 
-This :doc:`ssh kitten <kittens/ssh>` takes all the same command line arguments
+This :doc:`ssh shitten <kittens/ssh>` takes all the same command line arguments
 as :program:`ssh`, you can alias it to something small in your shell's rc files
 to avoid having to type it each time::
 
-    alias s="shitty +kitten ssh"
+    alias s="shitty +shitten ssh"
 
-If the ssh kitten fails, use the following one-liner instead (it is slower as it
+If the ssh shitten fails, use the following one-liner instead (it is slower as it
 needs to ssh into the server twice, but will work with most servers)::
 
     infocmp -a xterm-shitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin
@@ -120,10 +120,10 @@ explicitly set a UTF-8 locale, like::
 How do I change the colors in a running shitty instance?
 ------------------------------------------------------------
 
-The easiest way to do it is to use the :doc:`themes kitten </kittens/themes>`,
+The easiest way to do it is to use the :doc:`themes shitten </kittens/themes>`,
 to choose a new color theme. Simply run::
 
-    shitty +kitten themes
+    shitty +shitten themes
 
 And choose your theme from the list.
 
@@ -136,7 +136,7 @@ Or you can enable :doc:`remote control <remote-control>` for |shitty| and use
 remote control command, for details, see :ref:`at-set-colors`.
 
 To change colors when SSHing into a remote host, use the :opt:`color_scheme
-<kitten-ssh.color_scheme>` setting for the :doc:`ssh kitten <kittens/ssh>`.
+<shitten-ssh.color_scheme>` setting for the :doc:`ssh shitten <kittens/ssh>`.
 
 Additionally, You can use the
 `OSC terminal escape codes <https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands>`__
@@ -330,17 +330,17 @@ For example::
     map alt+s send_text normal,application \x13
 
 This maps :kbd:`alt+s` to :kbd:`ctrl+s`. To figure out what bytes to use for
-the :sc:`send_text <send_text>` you can use the ``show_key`` kitten. Run::
+the :sc:`send_text <send_text>` you can use the ``show_key`` shitten. Run::
 
-    shitty +kitten show_key
+    shitty +shitten show_key
 
-Then press the key you want to emulate. Note that this kitten will only show
+Then press the key you want to emulate. Note that this shitten will only show
 keys that actually reach the terminal program, in particular, keys mapped to
 actions in shitty will not be shown. To check those first map them to
 :ac:`no_op`. You can also start a shitty instance without any shortcuts to
 interfere::
 
-    shitty -o clear_all_shortcuts=yes shitty +kitten show_key
+    shitty -o clear_all_shortcuts=yes shitty +shitten show_key
 
 
 How do I open a new window or tab with the same working directory as the current window?

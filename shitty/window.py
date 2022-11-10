@@ -100,7 +100,7 @@ class CwdRequest:
             return ''
         reported_cwd = path_from_osc7_url(window.screen.last_reported_cwd) if window.screen.last_reported_cwd else ''
         if reported_cwd:
-            # First check if we are running ssh kitten, and trying to open the configured login shell
+            # First check if we are running ssh shitten, and trying to open the configured login shell
             if argv[0] == resolved_shell(get_options())[0]:
                 ssh_kitten_cmdline = window.ssh_kitten_cmdline()
                 if ssh_kitten_cmdline:
@@ -1692,7 +1692,7 @@ class Window:
 
         # show the config docs
         map f1 show_kitty_doc conf
-        # show the ssh kitten docs
+        # show the ssh shitten docs
         map f1 show_kitty_doc kittens/ssh
     ''')
     def show_kitty_doc(self, which: str = '') -> None:

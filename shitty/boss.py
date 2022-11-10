@@ -805,7 +805,7 @@ class Boss:
     def choose(
         self, msg: str,  # can contain newlines and ANSI formatting
         callback: Callable[..., None],  # called with the choice or empty string when aborted
-        *choices: str,   # The choices, see the help for the ask kitten for format of a choice
+        *choices: str,   # The choices, see the help for the ask shitten for format of a choice
         window: Optional[Window] = None,  # the window associated with the confirmation
         default: str = '',  # the default choice when the user presses Enter
         hidden_text: str = '',  # text to hide in the message
@@ -1534,7 +1534,7 @@ class Boss:
 
     def run_kitten_with_metadata(
         self,
-        kitten: str,
+        shitten: str,
         args: Iterable[str] = (),
         input_data: Optional[Union[bytes, str]] = None,
         window: Optional[Window] = None,
@@ -1544,7 +1544,7 @@ class Boss:
     ) -> Any:
         orig_args, args = list(args), list(args)
         from kittens.runner import create_kitten_handler
-        end_kitten = create_kitten_handler(kitten, orig_args)
+        end_kitten = create_kitten_handler(shitten, orig_args)
         if window is None:
             w = self.active_window
             tab = self.active_tab
@@ -1555,7 +1555,7 @@ class Boss:
             return end_kitten(None, getattr(w, 'id', None), self)
 
         if w is not None and tab is not None:
-            args[0:0] = [config_dir, kitten]
+            args[0:0] = [config_dir, shitten]
             if input_data is None:
                 type_of_input = end_kitten.type_of_input
                 q = type_of_input.split('-') if type_of_input else []
@@ -1611,12 +1611,12 @@ class Boss:
             return overlay_window
     _run_kitten = run_kitten_with_metadata
 
-    @ac('misc', 'Run the specified kitten. See :doc:`/kittens/custom` for details')
-    def kitten(self, kitten: str, *kargs: str) -> None:
-        self.run_kitten_with_metadata(kitten, kargs)
+    @ac('misc', 'Run the specified shitten. See :doc:`/kittens/custom` for details')
+    def shitten(self, shitten: str, *kargs: str) -> None:
+        self.run_kitten_with_metadata(shitten, kargs)
 
-    def run_kitten(self, kitten: str, *args: str) -> None:
-        self.run_kitten_with_metadata(kitten, args)
+    def run_kitten(self, shitten: str, *args: str) -> None:
+        self.run_kitten_with_metadata(shitten, args)
 
     def on_kitten_finish(
         self, target_window_id: int, end_kitten: Callable[[Dict[str, Any], int, 'Boss'], None],
@@ -2500,7 +2500,7 @@ class Boss:
     @ac('debug', '''
         Close all shared SSH connections
 
-        See :opt:`share_connections <kitten-ssh.share_connections>` for details.
+        See :opt:`share_connections <shitten-ssh.share_connections>` for details.
         ''')
     def close_shared_ssh_connections(self) -> None:
         cleanup_ssh_control_masters()
@@ -2535,7 +2535,7 @@ class Boss:
             from kittens.tui.operations import styled
             spec = '\n  '.join(styled(u, fg='yellow') for u in failures)
             bdata = json.dumps({'msg': f"Unknown URL type, cannot open:\n  {spec}"}).encode('utf-8')
-            special_window = SpecialWindow([kitty_exe(), '+kitten', 'show_error', '--title', 'Open URL Error'], bdata, 'Open URL Error')
+            special_window = SpecialWindow([kitty_exe(), '+shitten', 'show_error', '--title', 'Open URL Error'], bdata, 'Open URL Error')
             if needs_window_replaced and tab is not None:
                 tab.new_special_window(special_window)
             else:

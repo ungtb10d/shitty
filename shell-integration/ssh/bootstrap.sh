@@ -56,7 +56,7 @@ elif detect_perl; then
     base64_encode() { command "$perl" -MMIME::Base64 -0777 -ne 'print encode_base64($_)'; }
     base64_decode() { command "$perl" -MMIME::Base64 -ne 'print decode_base64($_)'; }
 else
-    die "base64 executable not present on remote host, ssh kitten cannot function."
+    die "base64 executable not present on remote host, ssh shitten cannot function."
 fi
 
 dcs_to_kitty() { printf "\033P@shitty-$1|%s\033\134" "$(printf "%s" "$2" | base64_encode)" > /dev/tty; }
@@ -92,8 +92,8 @@ read_base64_from_tty() {
 untar_and_read_env() {
     # extract the tar file atomically, in the sense that any file from the
     # tarfile is only put into place after it has been fully written to disk
-    command -v tar > /dev/null 2> /dev/null || die "tar is not availiable on this server. The ssh kitten requires tar."
-    tdir=$(command mktemp -d "$HOME/.shitty-ssh-kitten-untar-XXXXXXXXXXXX")
+    command -v tar > /dev/null 2> /dev/null || die "tar is not availiable on this server. The ssh shitten requires tar."
+    tdir=$(command mktemp -d "$HOME/.shitty-ssh-shitten-untar-XXXXXXXXXXXX")
     [ $? = 0 ] || die "Creating temp directory failed"
     # suppress STDERR for tar as tar prints various warnings if for instance, timestamps are in the future
     old_umask=$(umask)

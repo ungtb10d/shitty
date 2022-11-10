@@ -224,9 +224,9 @@ def reload_kitty_config(payload: str) -> None:
 
 def prewarm() -> None:
     from kittens.runner import all_kitten_names
-    for kitten in all_kitten_names():
+    for shitten in all_kitten_names():
         with suppress(Exception):
-            import_module(f'kittens.{kitten}.main')
+            import_module(f'kittens.{shitten}.main')
     import_module('shitty.complete')
 
 

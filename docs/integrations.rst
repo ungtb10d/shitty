@@ -133,7 +133,7 @@ shitty with the following bash snippet:
         set terminal pngcairo enhanced font 'Fira Sans,10'
         set autoscale
         set samples 1000
-        set output '|shitty +kitten icat --stdin yes'
+        set output '|shitty +shitten icat --stdin yes'
         set object 1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb"#fdf6e3" behind
         plot $@
         set output '/dev/null'
@@ -222,7 +222,7 @@ Scrollback manipulation
 
 .. tool_kitty_search:
 
-`shitty-search <https://github.com/trygveaa/shitty-kitten-search>`_
+`shitty-search <https://github.com/trygveaa/shitty-shitten-search>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Live incremental search of the scrollback buffer.
 
@@ -260,7 +260,7 @@ Allow using shitty as a drop-down terminal under the i3 window manager
 
 `weechat-hints <https://github.com/GermainZ/shitty-weechat-hints>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-URL hints kitten for WeeChat that works without having to use WeeChat's
+URL hints shitten for WeeChat that works without having to use WeeChat's
 raw-mode.
 
 .. tool_glkitty:

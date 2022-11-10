@@ -890,7 +890,7 @@ draw_cells(ssize_t vao_idx, ssize_t gvao_idx, const ScreenRenderData *srd, float
     // overlap with the pixels outside the draw area. We cant use the actual pixel window dimensions
     // because of the mapping of opengl's float based co-ord system to pixels.
     // for a test case (scissor is also used to blit framebuffer in draw_cells_interleaved_premult) run:
-    // shitty -o background=cyan -o background_opacity=0.7 -o cursor_blink_interval=0 -o window_margin_width=40 -o remember_initial_window_size=n -o initial_window_width=401 shitty +kitten icat --hold logo/shitty.png
+    // shitty -o background=cyan -o background_opacity=0.7 -o cursor_blink_interval=0 -o window_margin_width=40 -o remember_initial_window_size=n -o initial_window_width=401 shitty +shitten icat --hold logo/shitty.png
     // Repeat incrementing window width by 1px each time over cursor_width number of pixels and see if any lines
     // appear at the borders of the content area
 #define SCALE(w, x) ((GLfloat)(os_window->viewport_##w) * (GLfloat)(x))

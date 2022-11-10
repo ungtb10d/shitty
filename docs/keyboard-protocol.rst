@@ -28,7 +28,7 @@ issues in that proposal, listed at the :ref:`bottom of this document
 
 You can see this protocol with all enhancements in action by running::
 
-    shitty +kitten show_key -m shitty
+    shitty +shitten show_key -m shitty
 
 inside the shitty terminal to report key events.
 

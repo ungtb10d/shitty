@@ -2874,7 +2874,7 @@ is applied. See also :opt:`clipboard_control`.
 
 opt('file_transfer_confirmation_bypass', '',
     long_text='''
-The password that can be supplied to the :doc:`file transfer kitten
+The password that can be supplied to the :doc:`file transfer shitten
 </kittens/transfer>` to skip the transfer confirmation prompt. This should only
 be used when initiating transfers from trusted computers, over trusted networks
 or encrypted transports, as it allows any programs running on the remote machine
@@ -2887,7 +2887,7 @@ opt('allow_hyperlinks', 'yes',
     long_text='''
 Process :term:`hyperlink <hyperlinks>` escape sequences (OSC 8). If disabled OSC
 8 escape sequences are ignored. Otherwise they become clickable links, that you
-can click with the mouse or by using the :doc:`hints kitten </kittens/hints>`.
+can click with the mouse or by using the :doc:`hints shitten </kittens/hints>`.
 The special value of :code:`ask` means that shitty will ask before opening the
 link when clicked.
 '''
@@ -3200,9 +3200,9 @@ the current working directory without duplication::
     map f1 launch_tab vim
     map f2 launch_tab emacs
 
-Similarly, to alias kitten invocation::
+Similarly, to alias shitten invocation::
 
-    action_alias hints kitten hints --hints-offset=0
+    action_alias hints shitten hints --hints-offset=0
 '''
     )
 
@@ -3212,9 +3212,9 @@ opt('+kitten_alias', 'hints hints --hints-offset=0',
     long_text='''
 Like :opt:`action_alias` above, but specifically for kittens. Generally, prefer
 to use :opt:`action_alias`. This option is a legacy version, present for
-backwards compatibility. It causes all invocations of the aliased kitten to be
-substituted. So the example above will cause all invocations of the hints kitten
-to have the :option:`--hints-offset=0 <shitty +kitten hints --hints-offset>`
+backwards compatibility. It causes all invocations of the aliased shitten to be
+substituted. So the example above will cause all invocations of the hints shitten
+to have the :option:`--hints-offset=0 <shitty +shitten hints --hints-offset>`
 option applied.
 '''
     )
@@ -3734,7 +3734,7 @@ To setup shortcuts to change only the current OS window's font size::
 
 # shortcuts.selection {{{
 agr('shortcuts.selection', 'Select and act on visible text', '''
-Use the hints kitten to select text and either pass it to an external program or
+Use the hints shitten to select text and either pass it to an external program or
 insert it into the terminal or copy it to the clipboard.
 ''')
 
@@ -3747,7 +3747,7 @@ URL is specified in :opt:`open_url_with`.
     )
 
 map('Insert selected path',
-    'insert_selected_path kitty_mod+p>f kitten hints --type path --program -',
+    'insert_selected_path kitty_mod+p>f shitten hints --type path --program -',
     long_text='''
 Select a path/filename and insert it into the terminal. Useful, for instance to
 run :program:`git` commands on a filename output from a previous :program:`git`
@@ -3756,12 +3756,12 @@ command.
     )
 
 map('Open selected path',
-    'open_selected_path kitty_mod+p>shift+f kitten hints --type path',
+    'open_selected_path kitty_mod+p>shift+f shitten hints --type path',
     long_text='Select a path/filename and open it with the default open program.'
     )
 
 map('Insert selected line',
-    'insert_selected_line kitty_mod+p>l kitten hints --type line --program -',
+    'insert_selected_line kitty_mod+p>l shitten hints --type line --program -',
     long_text='''
 Select a line of text and insert it into the terminal. Useful for the output of
 things like: ``ls -1``.
@@ -3769,12 +3769,12 @@ things like: ``ls -1``.
     )
 
 map('Insert selected word',
-    'insert_selected_word kitty_mod+p>w kitten hints --type word --program -',
+    'insert_selected_word kitty_mod+p>w shitten hints --type word --program -',
     long_text='Select words and insert into terminal.'
     )
 
 map('Insert selected hash',
-    'insert_selected_hash kitty_mod+p>h kitten hints --type hash --program -',
+    'insert_selected_hash kitty_mod+p>h shitten hints --type hash --program -',
     long_text='''
 Select something that looks like a hash and insert it into the terminal. Useful
 with :program:`git`, which uses SHA1 hashes to identify commits.
@@ -3782,7 +3782,7 @@ with :program:`git`, which uses SHA1 hashes to identify commits.
     )
 
 map('Open the selected file at the selected line',
-    'goto_file_line kitty_mod+p>n kitten hints --type linenum',
+    'goto_file_line kitty_mod+p>n shitten hints --type linenum',
     long_text='''
 Select something that looks like :code:`filename:linenum` and open it in
 :program:`vim` at the specified line number.
@@ -3790,15 +3790,15 @@ Select something that looks like :code:`filename:linenum` and open it in
     )
 
 map('Open the selected hyperlink',
-    'open_selected_hyperlink kitty_mod+p>y kitten hints --type hyperlink',
+    'open_selected_hyperlink kitty_mod+p>y shitten hints --type hyperlink',
     long_text='''
 Select a :term:`hyperlink <hyperlinks>` (i.e. a URL that has been marked as such
 by the terminal program, for example, by ``ls --hyperlink=auto``).
 '''
     )
 egr('''
-The hints kitten has many more modes of operation that you can map to different
-shortcuts. For a full description see :doc:`hints kitten </kittens/hints>`.
+The hints shitten has many more modes of operation that you can map to different
+shortcuts. For a full description see :doc:`hints shitten </kittens/hints>`.
 ''')  # }}}
 
 
@@ -3826,10 +3826,10 @@ map('Toggle macOS secure keyboard entry',
     )
 
 map('Unicode input',
-    'input_unicode_character kitty_mod+u kitten unicode_input',
+    'input_unicode_character kitty_mod+u shitten unicode_input',
     )
 map('Unicode input',
-    'input_unicode_character ctrl+cmd+space kitten unicode_input',
+    'input_unicode_character ctrl+cmd+space shitten unicode_input',
     only='macos',
     )
 
@@ -3958,7 +3958,7 @@ This will send "Special text" when you press the :kbd:`Ctrl+Alt+A` key
 combination. The text to be sent is a python string literal so you can use
 escapes like :code:`\\x1b` to send control codes or :code:`\\u21fb` to send
 Unicode characters (or you can just input the Unicode characters directly as
-UTF-8 text). You can use ``shitty +kitten show_key`` to get the key escape
+UTF-8 text). You can use ``shitty +shitten show_key`` to get the key escape
 codes you want to emulate.
 
 The first argument to :code:`send_text` is the keyboard modes in which to
