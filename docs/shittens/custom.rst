@@ -1,7 +1,7 @@
-Custom kittens
+Custom shittens
 =================
 
-You can easily create your own kittens to extend shitty. They are just terminal
+You can easily create your own shittens to extend shitty. They are just terminal
 programs written in Python. When launching a shitten, shitty will open an overlay
 window over the current window and optionally pass the contents of the current
 window/scrollback to the shitten over its :file:`STDIN`. The shitten can then
@@ -12,7 +12,7 @@ so it can perform arbitrary actions such as closing windows, pasting text, etc.
 Let's see a simple example of creating a shitten. It will ask the user for some
 input and paste it into the terminal window.
 
-Create a file in the shitty config directory, :file:`~/.config/shitty/mykitten.py`
+Create a file in the shitty config directory, :file:`~/.config/shitty/myshitten.py`
 (you might need to adjust the path to wherever the :ref:`shitty config directory
 <confloc>` is on your machine).
 
@@ -39,20 +39,20 @@ Create a file in the shitty config directory, :file:`~/.config/shitty/mykitten.p
 
 Now in :file:`shitty.conf` add the lines::
 
-    map ctrl+k shitten mykitten.py
+    map ctrl+k shitten myshitten.py
 
 
 Start shitty and press :kbd:`Ctrl+K` and you should see the shitten running.
-The best way to develop your own kittens is to modify one of the built-in
-kittens. Look in the `kittens sub-directory
-<https://github.com/ungtb10d/shitty/tree/master/kittens>`__ of the shitty source
-code for those. Or see below for a list of :ref:`third-party kittens
-<external_kittens>`, that other shitty users have created.
+The best way to develop your own shittens is to modify one of the built-in
+shittens. Look in the `shittens sub-directory
+<https://github.com/ungtb10d/shitty/tree/master/shittens>`__ of the shitty source
+code for those. Or see below for a list of :ref:`third-party shittens
+<external_shittens>`, that other shitty users have created.
 
-shitty API to use with kittens
+shitty API to use with shittens
 -------------------------------
 
-Kittens have full access to internal shitty APIs. However these are neither
+shittens have full access to internal shitty APIs. However these are neither
 entirely stable nor documented. You can instead use the shitty
 :doc:`Remote control API </remote-control>`. Simply call
 :code:`boss.call_remote_control()`, with the same arguments you
@@ -68,13 +68,13 @@ would pass to ``shitty @``. For example:
 
 
 
-Passing arguments to kittens
+Passing arguments to shittens
 ------------------------------
 
-You can pass arguments to kittens by defining them in the map directive in
+You can pass arguments to shittens by defining them in the map directive in
 :file:`shitty.conf`. For example::
 
-    map ctrl+k shitten mykitten.py arg1 arg2
+    map ctrl+k shitten myshitten.py arg1 arg2
 
 These will be available as the ``args`` parameter in the ``main()`` and
 ``handle_result()`` functions. Note also that the current working directory
@@ -103,7 +103,7 @@ like. For example:
 
     # in handle_result, STDIN is for the shitty process itself, rather
     # than the shitten process and should not be read from.
-    from kittens.tui.handler import result_handler
+    from shittens.tui.handler import result_handler
     @result_handler(type_of_input='text')
     def handle_result(args: List[str], stdin_data: str, target_window_id: int, boss: Boss) -> None:
         pass
@@ -113,7 +113,7 @@ This will send the plain text of the active window to the shitten's
 :file:`STDIN`. There are many other types of input you can ask for, described in
 the table below:
 
-.. table:: Types of input to kittens
+.. table:: Types of input to shittens
     :align: left
 
     =========================== =======================================================================================================
@@ -147,11 +147,11 @@ These can also be combined with ``screen`` and ``ansi`` for formatting.
    required.
 
 
-Using kittens to script shitty, without any terminal UI
+Using shittens to script shitty, without any terminal UI
 -----------------------------------------------------------
 
 If you would like your shitten to script shitty, without bothering to write a
-terminal program, you can tell the kittens system to run the ``handle_result()``
+terminal program, you can tell the shittens system to run the ``handle_result()``
 function without first running the ``main()`` function.
 
 For example, here is a shitten that "zooms in/zooms out" the current terminal
@@ -169,7 +169,7 @@ Create a Python file in the :ref:`shitty config directory <confloc>`,
     def main(args: List[str]) -> str:
         pass
 
-    from kittens.tui.handler import result_handler
+    from shittens.tui.handler import result_handler
     @result_handler(no_ui=True)
     def handle_result(args: List[str], answer: str, target_window_id: int, boss: Boss) -> None:
         tab = boss.active_tab
@@ -223,14 +223,14 @@ The function will only send the event if the program is receiving events of
 that type, and will return ``True`` if it sent the event, and ``False`` if not.
 
 
-Debugging kittens
+Debugging shittens
 --------------------
 
 The part of the shitten that runs in ``main()`` is just a normal program and the
 output of print statements will be visible in the shitten window. Or alternately,
 you can use::
 
-    from kittens.tui.loop import debug
+    from shittens.tui.loop import debug
     debug('whatever')
 
 The ``debug()`` function is just like ``print()`` except that the output will
@@ -243,24 +243,24 @@ So if you run shitty from another shitty instance, the output will be visible
 in the first shitty instance.
 
 
-Adding options to kittens
+Adding options to shittens
 ----------------------------
 
-If you would like to use shitty's config framework to make your kittens
+If you would like to use shitty's config framework to make your shittens
 configurable, you will need some boilerplate. Put the following files in the
 directory of your shitten.
 
-:file:`kitten_options_definition.py`
+:file:`shitten_options_definition.py`
 
 .. code-block:: python
 
     from shitty.conf.types import Action, Definition
 
     definition = Definition(
-        '!kitten_options_utils',
+        '!shitten_options_utils',
         Action(
             'map', 'parse_map',
-            {'key_definitions': 'shitty.conf.utils.KittensKeyMap'},
+            {'key_definitions': 'shitty.conf.utils.shittensKeyMap'},
             ['shitty.types.ParsedShortcut', 'shitty.conf.utils.KeyAction']
         ),
     )
@@ -288,11 +288,11 @@ directory of your shitten.
     egr()  # }}}
 
 
-:file:`kitten_options_utils.py`
+:file:`shitten_options_utils.py`
 
 .. code-block:: python
 
-    from shitty.conf.utils import KittensKeyDefinition, key_func, parse_kittens_key
+    from shitty.conf.utils import shittensKeyDefinition, key_func, parse_shittens_key
 
     func_with_args, args_funcs = key_func()
     FuncArgsType = Tuple[str, Sequence[Any]]
@@ -300,25 +300,25 @@ directory of your shitten.
     def some_option_parser(val: str) -> int:
         return int(val) + 3000
 
-    def parse_map(val: str) -> Iterable[KittensKeyDefinition]:
-        x = parse_kittens_key(val, args_funcs)
+    def parse_map(val: str) -> Iterable[shittensKeyDefinition]:
+        x = parse_shittens_key(val, args_funcs)
         if x is not None:
             yield x
 
 Then run::
 
-    shitty +runpy 'from shitty.conf.generate import main; main()' /path/to/kitten_options_definition.py
+    shitty +runpy 'from shitty.conf.generate import main; main()' /path/to/shitten_options_definition.py
 
 You can parse and read the options in your shitten using the following code:
 
 .. code-block:: python
 
-    from .kitten_options_types import Options, defaults
+    from .shitten_options_types import Options, defaults
     from shitty.conf.utils import load_config as _load_config, parse_config_base
     from typing import Optional, Iterable, Dict, Any
 
     def load_config(*paths: str, overrides: Optional[Iterable[str]] = None) -> Options:
-        from .kitten_options_parse import  (
+        from .shitten_options_parse import  (
             create_result_dict, merge_result_dicts, parse_conf_item
         )
 
@@ -338,13 +338,13 @@ You can parse and read the options in your shitten using the following code:
         opts.config_overrides = overrides
         return opts
 
-See `the code <https://github.com/ungtb10d/shitty/tree/master/kittens/diff>`__
-for the builtin :doc:`diff shitten </kittens/diff>` for examples of creating more
+See `the code <https://github.com/ungtb10d/shitty/tree/master/shittens/diff>`__
+for the builtin :doc:`diff shitten </shittens/diff>` for examples of creating more
 options and keyboard shortcuts.
 
-.. _external_kittens:
+.. _external_shittens:
 
-Kittens created by shitty users
+shittens created by shitty users
 ---------------------------------------------
 
 `vim-shitty-navigator <https://github.com/knubie/vim-shitty-navigator>`_

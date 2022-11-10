@@ -287,7 +287,7 @@ static PyMethodDef module_methods[] = {
 typedef uint64_t keybitfield;
 #define KEY_BITS 51
 #define MOD_BITS 12
-#if 1 << (MOD_BITS-1) < GLFW_MOD_KITTY
+#if 1 << (MOD_BITS-1) < GLFW_MOD_shitty
 #error "Not enough mod bits"
 #endif
 typedef union Key {
@@ -305,7 +305,7 @@ typedef struct {
     PyObject_HEAD
 
     Key key;
-    bool defined_with_kitty_mod;
+    bool defined_with_shitty_mod;
 } SingleKey;
 
 static inline void
@@ -368,8 +368,8 @@ SingleKey_get_is_native(SingleKey *self, void UNUSED *closure) {
 }
 
 static PyObject*
-SingleKey_defined_with_kitty_mod(SingleKey *self, void UNUSED *closure) {
-    if (self->defined_with_kitty_mod || (self->key.mods & GLFW_MOD_KITTY)) Py_RETURN_TRUE;
+SingleKey_defined_with_shitty_mod(SingleKey *self, void UNUSED *closure) {
+    if (self->defined_with_shitty_mod || (self->key.mods & GLFW_MOD_shitty)) Py_RETURN_TRUE;
     Py_RETURN_FALSE;
 }
 
@@ -378,7 +378,7 @@ static PyGetSetDef SingleKey_getsetters[] = {
     {"key", (getter)SingleKey_get_key, NULL, "The key as an integer", NULL},
     {"mods", (getter)SingleKey_get_mods, NULL, "The modifiers as an integer", NULL},
     {"is_native", (getter)SingleKey_get_is_native, NULL, "A bool", NULL},
-    {"defined_with_kitty_mod", (getter)SingleKey_defined_with_kitty_mod, NULL, "A bool", NULL},
+    {"defined_with_shitty_mod", (getter)SingleKey_defined_with_shitty_mod, NULL, "A bool", NULL},
     {NULL}  /* Sentinel */
 };
 
@@ -422,15 +422,15 @@ static PySequenceMethods SingleKey_sequence_methods = {
 };
 
 static PyObject*
-SingleKey_resolve_kitty_mod(SingleKey *self, PyObject *km) {
-    if (!(self->key.mods & GLFW_MOD_KITTY)) { Py_INCREF(self); return (PyObject*)self; }
-    unsigned long kitty_mod = PyLong_AsUnsignedLong(km);
+SingleKey_resolve_shitty_mod(SingleKey *self, PyObject *km) {
+    if (!(self->key.mods & GLFW_MOD_shitty)) { Py_INCREF(self); return (PyObject*)self; }
+    unsigned long shitty_mod = PyLong_AsUnsignedLong(km);
     if (PyErr_Occurred()) return NULL;
     SingleKey *ans = (SingleKey*)SingleKey_Type.tp_alloc(&SingleKey_Type, 0);
     if (!ans) return NULL;
     ans->key.val = self->key.val;
-    ans->key.mods = (ans->key.mods & ~GLFW_MOD_KITTY) | kitty_mod;
-    ans->defined_with_kitty_mod = true;
+    ans->key.mods = (ans->key.mods & ~GLFW_MOD_shitty) | shitty_mod;
+    ans->defined_with_shitty_mod = true;
     return (PyObject*)ans;
 }
 
@@ -449,7 +449,7 @@ SingleKey_replace(SingleKey *self, PyObject *args, PyObject *kw) {
 
 static PyMethodDef SingleKey_methods[] = {
     {"_replace", (PyCFunction)(void (*) (void))SingleKey_replace, METH_VARARGS | METH_KEYWORDS, ""},
-    {"resolve_kitty_mod", (PyCFunction)SingleKey_resolve_kitty_mod, METH_O, ""},
+    {"resolve_shitty_mod", (PyCFunction)SingleKey_resolve_shitty_mod, METH_O, ""},
     {NULL}  /* Sentinel */
 };
 

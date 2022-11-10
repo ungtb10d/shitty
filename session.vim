@@ -1,5 +1,5 @@
 " Scan the following dirs recursively for tags
-let g:project_tags_dirs = ['shitty', 'kittens']
+let g:project_tags_dirs = ['shitty', 'shittens']
 if exists('g:ale_linters')
     let g:ale_linters['python'] = ['mypy', 'flake8']
 else

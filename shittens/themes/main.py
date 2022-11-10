@@ -14,7 +14,7 @@ from typing import (
 from shitty.cli import create_default_opts, parse_args
 from shitty.cli_stub import ThemesCLIOptions
 from shitty.config import cached_values_for
-from shitty.options.types import Options as KittyOptions
+from shitty.options.types import Options as shittyOptions
 from shitty.constants import config_dir
 from shitty.fast_data_types import truncate_point_for_length, wcswidth
 from shitty.rgb import color_as_sharp, color_from_int
@@ -137,7 +137,7 @@ class ThemesList:
         return self.themes[self.current_idx]
 
 
-def colors_as_escape_codes(o: KittyOptions) -> str:
+def colors_as_escape_codes(o: shittyOptions) -> str:
     ans = set_default_colors(
         fg=o.foreground, bg=o.background, cursor=o.cursor, select_bg=o.selection_background, select_fg=o.selection_foreground
     )
@@ -209,7 +209,7 @@ class ThemesHandler(Handler):
             return False
         self.colors_set_once = True
         if self.themes_list:
-            o = self.themes_list.current_theme.kitty_opts
+            o = self.themes_list.current_theme.shitty_opts
         else:
             o = create_default_opts()
         self.current_opts = o

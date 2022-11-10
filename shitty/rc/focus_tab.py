@@ -32,10 +32,10 @@ using this option means that you will not be notified of failures.
 '''
     argspec = ''
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         return {'match': opts.match, 'no_response': opts.no_response}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         for tab in self.tabs_for_match_payload(boss, window, payload_get):
             if tab:
                 boss.set_active_tab(tab)

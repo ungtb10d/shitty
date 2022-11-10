@@ -77,7 +77,7 @@ the id of the new window will not be printed out.
 '''
     argspec = '[CMD ...]'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         ans = {'args': args or [], 'type': 'window'}
         for attr, val in opts.__dict__.items():
             if attr == 'new_tab':
@@ -90,9 +90,9 @@ the id of the new window will not be printed out.
                 ans[attr] = val
         return ans
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         from .launch import launch
-        return launch.response_from_kitty(boss, window, payload_get)
+        return launch.response_from_shitty(boss, window, payload_get)
 
 
 new_window = NewWindow()

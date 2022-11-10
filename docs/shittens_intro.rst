@@ -1,81 +1,81 @@
-.. _kittens:
+.. _shittens:
 
-Extend with kittens
+Extend with shittens
 -----------------------
 
 .. toctree::
    :hidden:
    :glob:
 
-   kittens/icat
-   kittens/diff
-   kittens/unicode_input
-   kittens/themes
-   kittens/hints
-   kittens/remote_file
-   kittens/hyperlinked_grep
-   kittens/transfer
-   kittens/ssh
-   kittens/custom
-   kittens/*
+   shittens/icat
+   shittens/diff
+   shittens/unicode_input
+   shittens/themes
+   shittens/hints
+   shittens/remote_file
+   shittens/hyperlinked_grep
+   shittens/transfer
+   shittens/ssh
+   shittens/custom
+   shittens/*
 
 |shitty| has a framework for easily creating terminal programs that make use of
-its advanced features. These programs are called kittens. They are used both to
+its advanced features. These programs are called shittens. They are used both to
 add features to |shitty| itself and to create useful standalone programs.
-Some prominent kittens:
+Some prominent shittens:
 
-:doc:`icat <kittens/icat>`
+:doc:`icat <shittens/icat>`
     Display images in the terminal
 
 
-:doc:`diff <kittens/diff>`
+:doc:`diff <shittens/diff>`
     A fast, side-by-side diff for the terminal with syntax highlighting and
     images
 
 
-:doc:`Unicode input <kittens/unicode_input>`
+:doc:`Unicode input <shittens/unicode_input>`
     Easily input arbitrary Unicode characters in |shitty| by name or hex code.
 
 
-:doc:`Hints <kittens/hints>`
+:doc:`Hints <shittens/hints>`
     Select and open/paste/insert arbitrary text snippets such as URLs,
     filenames, words, lines, etc. from the terminal screen.
 
 
-:doc:`Remote file <kittens/remote_file>`
+:doc:`Remote file <shittens/remote_file>`
     Edit, open, or download remote files over SSH easily, by simply clicking on
     the filename.
 
 
-:doc:`Transfer files <kittens/transfer>`
+:doc:`Transfer files <shittens/transfer>`
     Transfer files and directories seamlessly and easily from remote machines
     over your existing SSH sessions with a simple command.
 
 
-:doc:`Hyperlinked grep <kittens/hyperlinked_grep>`
+:doc:`Hyperlinked grep <shittens/hyperlinked_grep>`
     Search your files using `ripgrep <https://github.com/BurntSushi/ripgrep>`__
     and open the results directly in your favorite editor in the terminal,
     at the line containing the search result, simply by clicking on the result
     you want.
 
 
-:doc:`Broadcast <kittens/broadcast>`
+:doc:`Broadcast <shittens/broadcast>`
     Type in one :term:`shitty window <window>` and have it broadcast to all (or a
     subset) of other :term:`shitty windows <window>`.
 
 
-:doc:`SSH <kittens/ssh>`
+:doc:`SSH <shittens/ssh>`
     SSH with automatic :ref:`shell integration <shell_integration>`, connection
     re-use for low latency and easy cloning of local shell and editor
     configuration to the remote host.
 
 
-:doc:`Panel <kittens/panel>`
+:doc:`Panel <shittens/panel>`
     Draw a GPU accelerated dock panel on your desktop showing the output from an
     arbitrary terminal program.
 
 
-:doc:`Clipboard <kittens/clipboard>`
+:doc:`Clipboard <shittens/clipboard>`
     Copy/paste to the clipboard from shell scripts, even over SSH.
 
-You can also :doc:`Learn to create your own kittens <kittens/custom>`.
+You can also :doc:`Learn to create your own shittens <shittens/custom>`.

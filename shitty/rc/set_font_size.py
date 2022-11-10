@@ -38,14 +38,14 @@ this option will cause it to be changed in all OS windows. It also changes
 the font size for any newly created OS Windows in the future.
 '''
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         if not args:
             self.fatal('No font size specified')
         fs = args[0]
         inc = fs[0] if fs and fs[0] in '+-' else None
         return {'size': abs(float(fs)), 'all': opts.all, 'increment_op': inc}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         boss.change_font_size(
             payload_get('all'),
             payload_get('increment_op'), payload_get('size'))

@@ -17,7 +17,7 @@ from typing import (
 from .borders import Border, Borders
 from .child import Child
 from .cli_stub import CLIOptions
-from .constants import appname, kitty_exe
+from .constants import appname, shitty_exe
 from .fast_data_types import (
     GLFW_MOUSE_BUTTON_LEFT, GLFW_MOUSE_BUTTON_MIDDLE, GLFW_PRESS, GLFW_RELEASE, add_tab,
     attach_window, current_focused_os_window_id, detach_window, get_boss,
@@ -409,11 +409,11 @@ class Tab:  # {{{
                                     cmd[:0] = shlex.split(line)
                                 else:
                                     cmd[:0] = [resolved_shell(get_options())[0]]
-                                cmd[:0] = [kitty_exe(), '+hold']
+                                cmd[:0] = [shitty_exe(), '+hold']
         fenv: Dict[str, str] = {}
         if env:
             fenv.update(env)
-        fenv['KITTY_WINDOW_ID'] = str(next_window_id())
+        fenv['shitty_WINDOW_ID'] = str(next_window_id())
         pwid = platform_window_id(self.os_window_id)
         if pwid is not None:
             fenv['WINDOWID'] = str(pwid)

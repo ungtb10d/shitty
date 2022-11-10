@@ -111,14 +111,14 @@ Remote control via a socket
 --------------------------------
 First, start |shitty| as::
 
-    shitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
+    shitty -o allow_remote_control=yes --listen-on unix:/tmp/myshitty
 
 The :option:`shitty --listen-on` option tells |shitty| to listen for control
 messages at the specified UNIX-domain socket. See ``shitty --help`` for details.
 Now you can control this instance of |shitty| using the :option:`shitty @ --to`
 command line argument to ``shitty @``. For example::
 
-    shitty @ --to unix:/tmp/mykitty ls
+    shitty @ --to unix:/tmp/myshitty ls
 
 
 The builtin shitty shell
@@ -129,7 +129,7 @@ You can explore the |shitty| command language more easily using the builtin
 the |shitty| shell with completion for |shitty| command names and options.
 
 You can even open the |shitty| shell inside a running |shitty| using a simple
-keyboard shortcut (:sc:`kitty_shell` by default).
+keyboard shortcut (:sc:`shitty_shell` by default).
 
 .. note:: This has the added advantage that you don't need to use
    :opt:`allow_remote_control` to make it work.
@@ -185,7 +185,7 @@ Now, using this password, you can, in scripts run the command::
 
 Any script with access to the password can now change colors in shitty using
 remote control, but only that and nothing else. You can even supply the
-password via the :envvar:`KITTY_RC_PASSWORD` environment variable, or the
+password via the :envvar:`shitty_RC_PASSWORD` environment variable, or the
 file :file:`~/.config/shitty/rc-password` to avoid having to type it repeatedly.
 See :option:`shitty @ --password-file` and :option:`shitty @ --password-env`.
 
@@ -211,8 +211,8 @@ decision is remembered for the duration of that shitty instance.
 
 .. note::
    For password based authentication to work over SSH, you must pass the
-   :envvar:`KITTY_PUBLIC_KEY` environment variable to the remote host. The
-   :doc:`ssh shitten <kittens/ssh>` does this for you automatically. When
+   :envvar:`shitty_PUBLIC_KEY` environment variable to the remote host. The
+   :doc:`ssh shitten <shittens/ssh>` does this for you automatically. When
    using a password, :ref:`rc_crypto` is used to ensure the password
    is kept secure. This does mean that using password based authentication
    is slower as the entire command is encrypted before transmission. This

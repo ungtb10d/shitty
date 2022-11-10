@@ -175,7 +175,7 @@ def highlight_collection(collection: Collection, aliases: Optional[Dict[str, str
 
 
 def main() -> None:
-    # shitty +runpy "from kittens.diff.highlight import main; main()" file
+    # shitty +runpy "from shittens.diff.highlight import main; main()" file
     import sys
 
     from .options.types import defaults

@@ -162,7 +162,7 @@ class Password(Handler):
         self.cli_opts = cli_opts
         self.prompt = prompt
         self.initial_text = initial_text
-        from kittens.tui.line_edit import LineEdit
+        from shittens.tui.line_edit import LineEdit
         self.line_edit = LineEdit(is_password=is_password)
 
     def initialize(self) -> None:

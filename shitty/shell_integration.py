@@ -15,7 +15,7 @@ from .utils import log_error, which
 
 def setup_fish_env(env: Dict[str, str], argv: List[str]) -> None:
     val = env.get('XDG_DATA_DIRS')
-    env['KITTY_FISH_XDG_DATA_DIR'] = shell_integration_dir
+    env['shitty_FISH_XDG_DATA_DIR'] = shell_integration_dir
     if not val:
         env['XDG_DATA_DIRS'] = shell_integration_dir
     else:
@@ -59,11 +59,11 @@ def setup_zsh_env(env: Dict[str, str], argv: List[str]) -> None:
             # zsh-newuser-install never runs as root but we assume that it does
             return
     if zdotdir is not None:
-        env['KITTY_ORIG_ZDOTDIR'] = zdotdir
+        env['shitty_ORIG_ZDOTDIR'] = zdotdir
     else:
-        # KITTY_ORIG_ZDOTDIR can be set at this point if, for example, the global
+        # shitty_ORIG_ZDOTDIR can be set at this point if, for example, the global
         # zshenv overrides ZDOTDIR; we try to limit the damage in this case
-        env.pop('KITTY_ORIG_ZDOTDIR', None)
+        env.pop('shitty_ORIG_ZDOTDIR', None)
     env['ZDOTDIR'] = os.path.join(shell_integration_dir, 'zsh')
 
 
@@ -132,17 +132,17 @@ def setup_bash_env(env: Dict[str, str], argv: List[str]) -> None:
         # non-interactive shell
         return
     env['ENV'] = os.path.join(shell_integration_dir, 'bash', 'shitty.bash')
-    env['KITTY_BASH_INJECT'] = ' '.join(inject)
+    env['shitty_BASH_INJECT'] = ' '.join(inject)
     if posix_env:
-        env['KITTY_BASH_POSIX_ENV'] = posix_env
+        env['shitty_BASH_POSIX_ENV'] = posix_env
     if rcfile:
-        env['KITTY_BASH_RCFILE'] = rcfile
+        env['shitty_BASH_RCFILE'] = rcfile
     for i in sorted(remove_args, reverse=True):
         del argv[i]
     if 'HISTFILE' not in env and 'posix' not in inject:
         # In POSIX mode the default history file is ~/.sh_history instead of ~/.bash_history
         env['HISTFILE'] = os.path.expanduser('~/.bash_history')
-        env['KITTY_BASH_UNEXPORT_HISTFILE'] = '1'
+        env['shitty_BASH_UNEXPORT_HISTFILE'] = '1'
     argv.insert(1, '--posix')
 
 
@@ -220,7 +220,7 @@ def modify_shell_environ(opts: Options, env: Dict[str, str], argv: List[str]) ->
     ksi = get_effective_ksi_env_var(opts)
     if shell is None or not ksi:
         return
-    env['KITTY_SHELL_INTEGRATION'] = ksi
+    env['shitty_SHELL_INTEGRATION'] = ksi
     if not shell_integration_allows_rc_modification(opts):
         return
     f = ENV_MODIFIERS.get(shell)

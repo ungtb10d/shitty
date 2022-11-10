@@ -49,10 +49,10 @@ Resize the window this command is run in, rather than the active window.
     argspec = ''
     string_return_is_error = True
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         return {'match': opts.match, 'increment': opts.increment, 'axis': opts.axis, 'self': opts.self}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         windows = self.windows_for_match_payload(boss, window, payload_get)
         resized: Union[bool, None, str] = False
         if windows and windows[0]:

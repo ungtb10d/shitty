@@ -1,6 +1,6 @@
 #!/bin/zsh
 #
-# Enables integration between zsh and shitty based on KITTY_SHELL_INTEGRATION.
+# Enables integration between zsh and shitty based on shitty_SHELL_INTEGRATION.
 # The latter is set by shitty based on shitty.conf.
 #
 # This is an autoloadable function. It's invoked automatically in shells
@@ -9,9 +9,9 @@
 # shitty-integration won't automatically run. Zsh users who want integration with
 # shitty in all shells should add the following lines to their .zshrc:
 #
-#   if [[ -n $KITTY_INSTALLATION_DIR ]]; then
-#     export KITTY_SHELL_INTEGRATION="enabled"
-#     autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/shitty-integration
+#   if [[ -n $shitty_INSTALLATION_DIR ]]; then
+#     export shitty_SHELL_INTEGRATION="enabled"
+#     autoload -Uz -- "$shitty_INSTALLATION_DIR"/shell-integration/zsh/shitty-integration
 #     shitty-integration
 #     unfunction shitty-integration
 #   fi
@@ -24,7 +24,7 @@
 builtin emulate -L zsh -o no_warn_create_global -o no_aliases
 
 [[ -o interactive ]]              || builtin return 0  # non-interactive shell
-[[ -n $KITTY_SHELL_INTEGRATION ]] || builtin return 0  # integration disabled
+[[ -n $shitty_SHELL_INTEGRATION ]] || builtin return 0  # integration disabled
 (( ! $+_ksi_state ))              || builtin return 0  # already initialized
 
 # 0: no OSC 133 [AC] marks have been written yet.
@@ -76,7 +76,7 @@ _ksi_debug_print() {
 #   zle-line-finish hooks when they initialize.
 # - By deferring initialization we allow user rc files to opt out from some
 #   parts of integration. For example, if a zshrc theme prints OSC 133
-#   marks, it can append " no-prompt-mark" to KITTY_SHELL_INTEGRATION during
+#   marks, it can append " no-prompt-mark" to shitty_SHELL_INTEGRATION during
 #   initialization to avoid redundant marks from our code.
 builtin typeset -ag precmd_functions
 precmd_functions+=(_ksi_deferred_init)
@@ -86,32 +86,32 @@ _ksi_deferred_init() {
 
     # Recognized options: no-cursor, no-title, no-prompt-mark, no-complete, no-cwd.
     builtin local -a opt
-    opt=(${(s: :)KITTY_SHELL_INTEGRATION})
-    builtin unset KITTY_SHELL_INTEGRATION
+    opt=(${(s: :)shitty_SHELL_INTEGRATION})
+    builtin unset shitty_SHELL_INTEGRATION
 
     # The directory where shitty-integration is located: /.../shell-integration/zsh.
     builtin local self_dir="${functions_source[_ksi_deferred_init]:A:h}"
-    # The directory with _kitty. We store it in a directory of its own rather than
+    # The directory with _shitty. We store it in a directory of its own rather than
     # in $self_dir because we are adding it to fpath and we don't want any other
     # files to be accidentally autoloadable.
     builtin local comp_dir="$self_dir/completions"
 
     # Enable completions for `shitty` command.
-    if (( ! opt[(Ie)no-complete] )) && [[ -r $comp_dir/_kitty ]]; then
+    if (( ! opt[(Ie)no-complete] )) && [[ -r $comp_dir/_shitty ]]; then
         if (( $+functions[compdef] )); then
             # If compdef is defined, then either compinit has already run or it's
             # a shim that records all calls for the purpose of replaying them after
             # compinit. Either way we clobber the existing completion for shitty and
             # install our own.
-            builtin unset "functions[_kitty]"
-            builtin autoload -Uz -- $comp_dir/_kitty
-            compdef _kitty shitty
-            compdef _kitty edit-in-shitty
-            compdef _kitty clone-in-shitty
+            builtin unset "functions[_shitty]"
+            builtin autoload -Uz -- $comp_dir/_shitty
+            compdef _shitty shitty
+            compdef _shitty edit-in-shitty
+            compdef _shitty clone-in-shitty
         fi
 
         # If compdef is not set, compinit has not run yet. In this case we must
-        # add our completions directory to fpath so that _kitty gets picked up by
+        # add our completions directory to fpath so that _shitty gets picked up by
         # compinit.
         #
         # We extend fpath even if compinit has run because it might run again.
@@ -242,9 +242,9 @@ _ksi_deferred_init() {
         # (LF becomes \n, etc.). This isn't necessary in precmd because (%) does it
         # for us.
         builtin local is_ssh_session="n"
-        if [[ -n "$KITTY_PID" ]]; then
+        if [[ -n "$shitty_PID" ]]; then
             # shitty running locally
-        elif [[ -n "$SSH_TTY" || -n "$SSH2_TTY$KITTY_WINDOW_ID" ]]; then
+        elif [[ -n "$SSH_TTY" || -n "$SSH2_TTY$shitty_WINDOW_ID" ]]; then
             # connected to most SSH servers
             # or use ssh shitten to connected to some SSH servers that do not set SSH_TTY
             is_ssh_session="y"
@@ -351,14 +351,14 @@ _ksi_deferred_init() {
         precmd_functions=(${precmd_functions:#_ksi_deferred_init})
     fi
 
-    if [ -n "${KITTY_IS_CLONE_LAUNCH}" ]; then
+    if [ -n "${shitty_IS_CLONE_LAUNCH}" ]; then
         builtin local orig_conda_env="$CONDA_DEFAULT_ENV"
-        builtin eval "${KITTY_IS_CLONE_LAUNCH}"
+        builtin eval "${shitty_IS_CLONE_LAUNCH}"
         builtin hash -r 2> /dev/null 1> /dev/null
         builtin local venv="${VIRTUAL_ENV}/bin/activate"
         builtin local sourced=""
         _ksi_s_is_ok() {
-            [[ -z "$sourced" && "$KITTY_CLONE_SOURCE_STRATEGIES" == *",$1,"* ]] && return 0
+            [[ -z "$sourced" && "$shitty_CLONE_SOURCE_STRATEGIES" == *",$1,"* ]] && return 0
             return 1
         }
 
@@ -369,18 +369,18 @@ _ksi_deferred_init() {
         fi; if _ksi_s_is_ok "conda" && [[ -n "${CONDA_DEFAULT_ENV}" && (( $+commands[conda] )) && "${CONDA_DEFAULT_ENV}" != "$orig_conda_env" ]]; then
             sourced="y"
             conda activate "${CONDA_DEFAULT_ENV}"
-        fi; if _ksi_s_is_ok "env_var" && [[ -n "${KITTY_CLONE_SOURCE_CODE}" ]]; then
+        fi; if _ksi_s_is_ok "env_var" && [[ -n "${shitty_CLONE_SOURCE_CODE}" ]]; then
             sourced="y"
-            builtin eval "${KITTY_CLONE_SOURCE_CODE}"
-        fi; if _ksi_s_is_ok "path" && [[ -r "${KITTY_CLONE_SOURCE_PATH}" ]]; then
+            builtin eval "${shitty_CLONE_SOURCE_CODE}"
+        fi; if _ksi_s_is_ok "path" && [[ -r "${shitty_CLONE_SOURCE_PATH}" ]]; then
             sourced="y"
-            builtin source "${KITTY_CLONE_SOURCE_PATH}"
+            builtin source "${shitty_CLONE_SOURCE_PATH}"
         fi
         builtin unfunction _ksi_s_is_ok
         # Ensure PATH has no duplicate entries
         builtin typeset -gxU PATH="$PATH"
     fi
-    builtin unset KITTY_IS_CLONE_LAUNCH KITTY_CLONE_SOURCE_STRATEGIES
+    builtin unset shitty_IS_CLONE_LAUNCH shitty_CLONE_SOURCE_STRATEGIES
 
     # Unfunction _ksi_deferred_init to save memory. Don't unfunction
     # shitty-integration though because decent public functions aren't supposed to
@@ -481,13 +481,13 @@ edit-in-shitty() {
                 builtin printf "%s\n" "$line" > /dev/stderr
                 return 1
             else
-                [ "$line" = "KITTY_DATA_START" ] && started="y"
+                [ "$line" = "shitty_DATA_START" ] && started="y"
             fi
         done
         [ "$started" = "n" ] && continue
         data=""
         while IFS= builtin read -r line; do
-            [ "$line" = "KITTY_DATA_END" ] && break
+            [ "$line" = "shitty_DATA_END" ] && break
             data="$data$line"
         done
         [ -n "$data" -a "$started" != "done" ] && {

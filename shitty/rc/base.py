@@ -9,7 +9,7 @@ from typing import (
 
 from shitty.cli import get_defaults_from_seq, parse_args, parse_option_spec
 from shitty.cli_stub import RCOptions as R
-from shitty.constants import appname, list_kitty_resources, running_in_kitty
+from shitty.constants import appname, list_shitty_resources, running_in_shitty
 from shitty.types import AsyncResponse
 
 if TYPE_CHECKING:
@@ -89,7 +89,7 @@ a number, not a regular expression.
 The field :code:`num` refers to the window position in the current tab, starting from zero and counting clockwise (this
 is the same as the order in which the windows are reported by the :ref:`shitty @ ls <at-ls>` command).
 
-The window id of the current window is available as the :envvar:`KITTY_WINDOW_ID` environment variable.
+The window id of the current window is available as the :envvar:`shitty_WINDOW_ID` environment variable.
 
 The field :code:`recent` refers to recently active windows in the currently active tab, with zero being the currently
 active window, one being the previously active window and so on.
@@ -182,7 +182,7 @@ class RemoteCommand:
         self.args_count = 0 if not self.argspec else self.args_count
 
     def fatal(self, msg: str) -> NoReturn:
-        if running_in_kitty():
+        if running_in_shitty():
             raise RemoteControlError(msg)
         raise SystemExit(msg)
 
@@ -247,10 +247,10 @@ class RemoteCommand:
     def create_async_responder(self, payload_get: PayloadGetType, window: Optional[Window]) -> AsyncResponder:
         return AsyncResponder(payload_get, window)
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: Any, args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: Any, args: ArgsType) -> PayloadType:
         raise NotImplementedError()
 
-    def response_from_kitty(self, boss: 'Boss', window: Optional['Window'], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: 'Boss', window: Optional['Window'], payload_get: PayloadGetType) -> ResponseType:
         raise NotImplementedError()
 
     def cancel_async_request(self, boss: 'Boss', window: Optional['Window'], payload_get: PayloadGetType) -> None:
@@ -291,4 +291,4 @@ def all_command_names() -> FrozenSet[str]:
         root, _, ext = name.rpartition('.')
         return bool(ext in ('py', 'pyc', 'pyo') and root and root not in ('base', '__init__'))
 
-    return frozenset({x.rpartition('.')[0] for x in filter(ok, list_kitty_resources('shitty.rc'))})
+    return frozenset({x.rpartition('.')[0] for x in filter(ok, list_shitty_resources('shitty.rc'))})

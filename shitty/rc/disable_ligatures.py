@@ -36,7 +36,7 @@ cause ligatures to be changed in all windows.
 ''' + '\n\n' + MATCH_WINDOW_OPTION + '\n\n' + MATCH_TAB_OPTION.replace('--match -m', '--match-tab -t')
     argspec = 'STRATEGY'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         if not args:
             self.fatal(
                 'You must specify the STRATEGY for disabling ligatures, must be one of'
@@ -49,7 +49,7 @@ cause ligatures to be changed in all windows.
             'all': opts.all,
         }
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         windows = self.windows_for_payload(boss, window, payload_get)
         boss.disable_ligatures_in(windows, payload_get('strategy'))
         return None

@@ -17,7 +17,7 @@ following dependencies are installed first.
 .. note::
    If you are making small changes only to the Python parts of shitty, there is
    no need to build shitty at all, instead, assuming you have installed the
-   official shitty binaries, you can simply set the :envvar:`KITTY_DEVELOP_FROM`
+   official shitty binaries, you can simply set the :envvar:`shitty_DEVELOP_FROM`
    enviroment variable to point to the directory into which you have checked out
    the shitty source code. shitty will then load its Python code from there. You
    should use a version of the source that matches the binary version as closely

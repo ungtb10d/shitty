@@ -273,7 +273,7 @@ void destroy_os_window(OSWindow *w);
 void focus_os_window(OSWindow *w, bool also_raise, const char *activation_token);
 void run_with_activation_token_in_os_window(OSWindow *w, PyObject *callback);
 void set_os_window_title(OSWindow *w, const char *title);
-OSWindow* os_window_for_kitty_window(id_type);
+OSWindow* os_window_for_shitty_window(id_type);
 OSWindow* add_os_window(void);
 OSWindow* current_os_window(void);
 void os_window_regions(OSWindow*, Region *main, Region *tab_bar);
@@ -316,7 +316,7 @@ typedef enum {
     RELOAD_CONFIG,
     TOGGLE_MACOS_SECURE_KEYBOARD_ENTRY,
     TOGGLE_FULLSCREEN,
-    OPEN_KITTY_WEBSITE,
+    OPEN_shitty_WEBSITE,
 
     NUM_COCOA_PENDING_ACTIONS
 } CocoaPendingAction;
@@ -335,7 +335,7 @@ void os_window_update_size_increments(OSWindow *window);
 void set_os_window_title_from_window(Window *w, OSWindow *os_window);
 void update_os_window_title(OSWindow *os_window);
 void fake_scroll(Window *w, int amount, bool upwards);
-Window* window_for_window_id(id_type kitty_window_id);
+Window* window_for_window_id(id_type shitty_window_id);
 bool mouse_open_url(Window *w);
 bool mouse_set_last_visited_cmd_output(Window *w);
 bool mouse_select_cmd_output(Window *w);

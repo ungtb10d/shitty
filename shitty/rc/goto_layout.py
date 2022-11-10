@@ -34,12 +34,12 @@ class GotoLayout(RemoteCommand):
     args_count = 1
     args_completion = {'names': ('Layouts', layout_names)}
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         if len(args) != 1:
             self.fatal('Exactly one layout must be specified')
         return {'layout': args[0], 'match': opts.match}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         tabs = self.tabs_for_match_payload(boss, window, payload_get)
         for tab in tabs:
             if tab:

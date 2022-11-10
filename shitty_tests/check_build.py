@@ -14,18 +14,18 @@ from . import BaseTest
 class TestBuild(BaseTest):
 
     def test_exe(self) -> None:
-        from shitty.constants import kitty_exe
-        exe = kitty_exe()
+        from shitty.constants import shitty_exe
+        exe = shitty_exe()
         self.assertTrue(os.access(exe, os.X_OK))
         self.assertTrue(os.path.isfile(exe))
         self.assertIn('shitty', os.path.basename(exe))
 
     def test_loading_extensions(self) -> None:
         import shitty.fast_data_types as fdt
-        from kittens.choose import subseq_matcher
-        from kittens.diff import diff_speedup
-        from kittens.transfer import rsync
-        from kittens.unicode_input import unicode_names
+        from shittens.choose import subseq_matcher
+        from shittens.diff import diff_speedup
+        from shittens.transfer import rsync
+        from shittens.unicode_input import unicode_names
         del fdt, unicode_names, subseq_matcher, diff_speedup, rsync
 
     def test_loading_shaders(self) -> None:
@@ -44,9 +44,9 @@ class TestBuild(BaseTest):
             self.assertTrue(os.path.isfile(path), f'{path} is not a file')
             self.assertTrue(os.access(path, os.X_OK), f'{path} is not executable')
 
-    def test_all_kitten_names(self) -> None:
-        from kittens.runner import all_kitten_names
-        names = all_kitten_names()
+    def test_all_shitten_names(self) -> None:
+        from shittens.runner import all_shitten_names
+        names = all_shitten_names()
         self.assertIn('diff', names)
         self.assertIn('hints', names)
         self.assertGreater(len(names), 8)
@@ -93,10 +93,10 @@ class TestBuild(BaseTest):
                 self.ae(p(x), base + e)
             t('', 'index.html' if suffix == '.html' else '')
             t('conf', f'conf{suffix}')
-            t('kittens/ssh#frag', f'kittens/ssh{suffix}#frag')
+            t('shittens/ssh#frag', f'shittens/ssh{suffix}#frag')
             t('#ref=confloc', f'conf{suffix}#confloc')
             t('#ref=conf-shitty-fonts', f'conf{suffix}#conf-shitty-fonts')
-            t('#ref=conf-shitten-ssh-xxx', f'kittens/ssh{suffix}#conf-shitten-ssh-xxx')
+            t('#ref=conf-shitten-ssh-xxx', f'shittens/ssh{suffix}#conf-shitten-ssh-xxx')
             t('#ref=at_close_tab', f'remote-control{suffix}#at-close-tab')
             t('#ref=at-close-tab', f'remote-control{suffix}#at-close-tab')
             t('#ref=action-copy', f'actions{suffix}#copy')
@@ -108,9 +108,9 @@ class TestBuild(BaseTest):
         self.ae(docs_url('#ref=issues-123'), 'https://github.com/ungtb10d/shitty/issues/123')
 
     def test_launcher_ensures_stdio(self):
-        from shitty.constants import kitty_exe
+        from shitty.constants import shitty_exe
         import subprocess
-        exe = kitty_exe()
+        exe = shitty_exe()
         cp = subprocess.run([exe, '+runpy', f'''\
 import os, sys
 if sys.stdin:

@@ -865,7 +865,7 @@ report_reaped_pids(void) {
 static void*
 thread_write(void *x) {
     ThreadWriteData *data = (ThreadWriteData*)x;
-    set_thread_name("KittyWriteStdin");
+    set_thread_name("shittyWriteStdin");
     int flags = fcntl(data->fd, F_GETFL, 0);
     if (flags == -1) { free_twd(data); return 0; }
     flags &= ~O_NONBLOCK;
@@ -1073,7 +1073,7 @@ process_cocoa_pending_actions(void) {
     if (cocoa_pending_actions[RELOAD_CONFIG]) { call_boss(load_config_file, NULL); }
     if (cocoa_pending_actions[TOGGLE_MACOS_SECURE_KEYBOARD_ENTRY]) { call_boss(toggle_macos_secure_keyboard_entry, NULL); }
     if (cocoa_pending_actions[TOGGLE_FULLSCREEN]) { call_boss(toggle_fullscreen, NULL); }
-    if (cocoa_pending_actions[OPEN_KITTY_WEBSITE]) { call_boss(open_kitty_website, NULL); }
+    if (cocoa_pending_actions[OPEN_shitty_WEBSITE]) { call_boss(open_shitty_website, NULL); }
     if (cocoa_pending_actions_data.wd) {
         if (cocoa_pending_actions[NEW_OS_WINDOW_WITH_WD]) { call_boss(new_os_window_with_wd, "sO", cocoa_pending_actions_data.wd, Py_True); }
         if (cocoa_pending_actions[NEW_TAB_WITH_WD]) { call_boss(new_tab_with_wd, "sO", cocoa_pending_actions_data.wd, Py_True); }
@@ -1386,7 +1386,7 @@ io_loop(void *data) {
     monotonic_t last_main_loop_wakeup_at = -1, now = -1;
     Screen *screen;
     ChildMonitor *self = (ChildMonitor*)data;
-    set_thread_name("KittyChildMon");
+    set_thread_name("shittyChildMon");
 
     while (LIKELY(!self->shutting_down)) {
         children_mutex(lock);
@@ -1539,7 +1539,7 @@ free_peer(Peer *peer) {
     if (peer->fd > -1) { nuke_socket(peer->fd); peer->fd = -1; }
 }
 
-#define KITTY_CMD_PREFIX "\x1bP@shitty-cmd{"
+#define shitty_CMD_PREFIX "\x1bP@shitty-cmd{"
 
 static void
 queue_peer_message(ChildMonitor *self, Peer *peer) {
@@ -1563,8 +1563,8 @@ queue_peer_message(ChildMonitor *self, Peer *peer) {
 static bool
 has_complete_peer_command(Peer *peer) {
     peer->read.command_end = 0;
-    if (peer->read.used > sizeof(KITTY_CMD_PREFIX) && memcmp(peer->read.data, KITTY_CMD_PREFIX, sizeof(KITTY_CMD_PREFIX)-1) == 0) {
-        for (size_t i = sizeof(KITTY_CMD_PREFIX)-1; i < peer->read.used - 1; i++) {
+    if (peer->read.used > sizeof(shitty_CMD_PREFIX) && memcmp(peer->read.data, shitty_CMD_PREFIX, sizeof(shitty_CMD_PREFIX)-1) == 0) {
+        for (size_t i = sizeof(shitty_CMD_PREFIX)-1; i < peer->read.used - 1; i++) {
             if (peer->read.data[i] == 0x1b && peer->read.data[i+1] == '\\') {
                 peer->read.command_end = i + 2;
                 break;
@@ -1651,7 +1651,7 @@ static void*
 talk_loop(void *data) {
     // The talk thread loop
     ChildMonitor *self = (ChildMonitor*)data;
-    set_thread_name("KittyPeerMon");
+    set_thread_name("shittyPeerMon");
     if (!init_loop_data(&talk_data.loop_data, 0)) { log_error("Failed to create wakeup fd for talk thread with error: %s", strerror(errno)); }
     PollFD fds[PEER_LIMIT + 8] = {{0}};
     size_t num_listen_fds = 0, num_peer_fds = 0;

@@ -18,7 +18,7 @@ You can also display the current configuration by pressing :sc:`debug_config`
 
 |shitty| looks for a config file in the OS config directories (usually
 :file:`~/.config/shitty/shitty.conf`) but you can pass a specific path via the
-:option:`shitty --config` option or use the :envvar:`KITTY_CONFIG_DIRECTORY`
+:option:`shitty --config` option or use the :envvar:`shitty_CONFIG_DIRECTORY`
 environment variable. See :option:`shitty --config` for full details.
 
 Comments can be added to the config file as lines starting with the ``#``
@@ -38,8 +38,8 @@ from environment variables. For example::
      include other.conf
      # Include *.conf files from all subdirs of shitty.d inside the shitty config dir
      globinclude shitty.d/**/*.conf
-     # Include the *contents* of all env vars starting with KITTY_CONF_
-     envinclude KITTY_CONF_*
+     # Include the *contents* of all env vars starting with shitty_CONF_
+     envinclude shitty_CONF_*
 
 
 .. note:: Syntax highlighting for :file:`shitty.conf` in vim is available via

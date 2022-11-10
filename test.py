@@ -40,7 +40,7 @@ def main() -> None:
         XDG_CACHE_HOME=os.path.join(tdir, '.cache'),
         PYTHON_FOR_TYPE_CHECK=PYTHON_FOR_TYPE_CHECK,
     ):
-        m = importlib.import_module('kitty_tests.main')
+        m = importlib.import_module('shitty_tests.main')
         getattr(m, 'run_tests')()
 
 

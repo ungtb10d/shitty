@@ -186,7 +186,7 @@ dispatch_mouse_event(Window *w, int button, int count, int modifiers, bool grabb
                 case GLFW_MOUSE_BUTTON_7: bname = "b7"; break;
                 case GLFW_MOUSE_BUTTON_8: bname = "b8"; break;
             }
-            debug("\x1b[33mon_mouse_input\x1b[m: %s button: %s %sgrabbed: %d handled_in_kitty: %d\n", evname, bname, format_mods(modifiers), grabbed, handled);
+            debug("\x1b[33mon_mouse_input\x1b[m: %s button: %s %sgrabbed: %d handled_in_shitty: %d\n", evname, bname, format_mods(modifiers), grabbed, handled);
         }
     }
     return handled;
@@ -326,7 +326,7 @@ set_mouse_cursor_for_screen(Screen *screen) {
 }
 
 static void
-handle_mouse_movement_in_kitty(Window *w, int button, bool mouse_cell_changed) {
+handle_mouse_movement_in_shitty(Window *w, int button, bool mouse_cell_changed) {
     Screen *screen = w->render_data.screen;
     if (screen->selections.in_progress && (button == global_state.active_drag_button)) {
         monotonic_t now = monotonic();
@@ -372,9 +372,9 @@ HANDLER(handle_move_event) {
     bool in_tracking_mode = (
         screen->modes.mouse_tracking_mode == ANY_MODE ||
         (screen->modes.mouse_tracking_mode == MOTION_MODE && button >= 0));
-    bool handle_in_kitty = !in_tracking_mode || global_state.active_drag_in_window == w->id;
-    if (handle_in_kitty) {
-        handle_mouse_movement_in_kitty(w, button, mouse_cell_changed | cell_half_changed);
+    bool handle_in_shitty = !in_tracking_mode || global_state.active_drag_in_window == w->id;
+    if (handle_in_shitty) {
+        handle_mouse_movement_in_shitty(w, button, mouse_cell_changed | cell_half_changed);
     } else {
         if (!mouse_cell_changed && screen->modes.mouse_tracking_protocol != SGR_PIXEL_PROTOCOL) return;
         int sz = encode_mouse_button(w, button, button >=0 ? DRAG : MOVE, modifiers);
@@ -1007,7 +1007,7 @@ send_mock_mouse_event_to_window(PyObject *self UNUSED, PyObject *args) {
     if (button < 0) {
         if (button == -2) do_drag_scroll(w, true);
         else if (button == -3) do_drag_scroll(w, false);
-        else handle_mouse_movement_in_kitty(w, last_button_pressed, mouse_cell_changed);
+        else handle_mouse_movement_in_shitty(w, last_button_pressed, mouse_cell_changed);
     } else {
         if (global_state.active_drag_in_window && is_release && button == global_state.active_drag_button) {
             end_drag(w);

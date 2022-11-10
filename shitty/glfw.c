@@ -1362,8 +1362,8 @@ change_os_window_state(PyObject *self UNUSED, PyObject *args) {
 }
 
 void
-request_window_attention(id_type kitty_window_id, bool audio_bell) {
-    OSWindow *w = os_window_for_kitty_window(kitty_window_id);
+request_window_attention(id_type shitty_window_id, bool audio_bell) {
+    OSWindow *w = os_window_for_shitty_window(shitty_window_id);
     if (w) {
         if (audio_bell) ring_audio_bell();
         if (OPT(window_alert_on_bell)) glfwRequestWindowAttention(w->handle);
@@ -1869,7 +1869,7 @@ init_glfw(PyObject *m) {
     ADDC(GLFW_MOD_SUPER);
     ADDC(GLFW_MOD_HYPER);
     ADDC(GLFW_MOD_META);
-    ADDC(GLFW_MOD_KITTY);
+    ADDC(GLFW_MOD_shitty);
     ADDC(GLFW_MOD_CAPS_LOCK);
     ADDC(GLFW_MOD_NUM_LOCK);
 

@@ -72,13 +72,13 @@ class Options(argparse.Namespace):
     extra_logging: List[str] = []
     extra_include_dirs: List[str] = []
     extra_library_dirs: List[str] = []
-    link_time_optimization: bool = 'KITTY_NO_LTO' not in os.environ
+    link_time_optimization: bool = 'shitty_NO_LTO' not in os.environ
     update_check_interval: float = 24.0
     shell_integration: str = 'enabled'
-    egl_library: Optional[str] = os.getenv('KITTY_EGL_LIBRARY')
-    startup_notification_library: Optional[str] = os.getenv('KITTY_STARTUP_NOTIFICATION_LIBRARY')
-    canberra_library: Optional[str] = os.getenv('KITTY_CANBERRA_LIBRARY')
-    fontconfig_library: Optional[str] = os.getenv('KITTY_FONTCONFIG_LIBRARY')
+    egl_library: Optional[str] = os.getenv('shitty_EGL_LIBRARY')
+    startup_notification_library: Optional[str] = os.getenv('shitty_STARTUP_NOTIFICATION_LIBRARY')
+    canberra_library: Optional[str] = os.getenv('shitty_CANBERRA_LIBRARY')
+    fontconfig_library: Optional[str] = os.getenv('shitty_FONTCONFIG_LIBRARY')
 
 
 def emphasis(text: str) -> str:
@@ -308,7 +308,7 @@ int main(void) {
     rs_sig_args(1024, &magic_number, &block_len, &strong_len);
     return 0;
 }'''):
-        return '-DKITTY_HAS_RS_SIG_ARGS'
+        return '-Dshitty_HAS_RS_SIG_ARGS'
     return ''
 
 
@@ -395,7 +395,7 @@ def init_env(
         ldflags.append('-flto')
 
     if debug:
-        cflags.append('-DKITTY_DEBUG_BUILD')
+        cflags.append('-Dshitty_DEBUG_BUILD')
 
     if profile:
         cppflags.append('-DWITH_PROFILER')
@@ -411,9 +411,9 @@ def init_env(
             library_paths.setdefault(which, []).append(f'{name}="{val}"')
 
     add_lpath('glfw/egl_context.c', '_GLFW_EGL_LIBRARY', egl_library)
-    add_lpath('shitty/desktop.c', '_KITTY_STARTUP_NOTIFICATION_LIBRARY', startup_notification_library)
-    add_lpath('shitty/desktop.c', '_KITTY_CANBERRA_LIBRARY', canberra_library)
-    add_lpath('shitty/fontconfig.c', '_KITTY_FONTCONFIG_LIBRARY', fontconfig_library)
+    add_lpath('shitty/desktop.c', '_shitty_STARTUP_NOTIFICATION_LIBRARY', startup_notification_library)
+    add_lpath('shitty/desktop.c', '_shitty_CANBERRA_LIBRARY', canberra_library)
+    add_lpath('shitty/fontconfig.c', '_shitty_FONTCONFIG_LIBRARY', fontconfig_library)
 
     for path in extra_include_dirs:
         cflags.append(f'-I{path}')
@@ -433,7 +433,7 @@ def init_env(
     return Env(cc, cppflags, cflags, ldflags, library_paths, ccver=ccver, ldpaths=ldpaths)
 
 
-def kitty_env() -> Env:
+def shitty_env() -> Env:
     ans = env.copy()
     cflags = ans.cflags
     cflags.append('-pthread')
@@ -459,7 +459,7 @@ def kitty_env() -> Env:
         if user_notifications_framework:
             platform_libs.extend(shlex.split(user_notifications_framework))
         else:
-            cppflags.append('-DKITTY_USE_DEPRECATED_MACOS_NOTIFICATION_API')
+            cppflags.append('-Dshitty_USE_DEPRECATED_MACOS_NOTIFICATION_API')
         # Apple deprecated OpenGL in Mojave (10.14) silence the endless
         # warnings about it
         cppflags.append('-DGL_SILENCE_DEPRECATION')
@@ -520,7 +520,7 @@ def get_vcs_rev_defines(env: Env, src: str) -> List[str]:
                 with open(os.path.join(gitloc, 'refs/heads/master')) as f:
                     rev = f.read()
 
-        ans.append(f'KITTY_VCS_REV="{rev.strip()}"')
+        ans.append(f'shitty_VCS_REV="{rev.strip()}"')
     return ans
 
 
@@ -785,18 +785,18 @@ def compile_glfw(compilation_database: CompilationDatabase) -> None:
             sources, all_headers, desc_prefix=f'[{module}] ')
 
 
-def kittens_env() -> Env:
+def shittens_env() -> Env:
     kenv = env.copy()
     cflags = kenv.cflags
     cflags.append('-pthread')
-    cflags.append('-Ikitty')
+    cflags.append('-Ishitty')
     pylib = get_python_flags(cflags)
     kenv.ldpaths += pylib
     return kenv
 
 
-def compile_kittens(compilation_database: CompilationDatabase) -> None:
-    kenv = kittens_env()
+def compile_shittens(compilation_database: CompilationDatabase) -> None:
+    kenv = shittens_env()
 
     def list_files(q: str) -> List[str]:
         return sorted(glob.glob(q))
@@ -809,9 +809,9 @@ def compile_kittens(compilation_database: CompilationDatabase) -> None:
             filter_sources: Optional[Callable[[str], bool]] = None,
             includes: Sequence[str] = (), libraries: Sequence[str] = (),
     ) -> Tuple[str, List[str], List[str], str, Sequence[str], Sequence[str]]:
-        sources = list(filter(filter_sources, list(extra_sources) + list_files(os.path.join('kittens', shitten, '*.c'))))
-        headers = list_files(os.path.join('kittens', shitten, '*.h')) + list(extra_headers)
-        return shitten, sources, headers, f'kittens/{shitten}/{output}', includes, libraries
+        sources = list(filter(filter_sources, list(extra_sources) + list_files(os.path.join('shittens', shitten, '*.c'))))
+        headers = list_files(os.path.join('shittens', shitten, '*.h')) + list(extra_headers)
+        return shitten, sources, headers, f'shittens/{shitten}/{output}', includes, libraries
 
     for shitten, sources, all_headers, dest, includes, libraries in (
         files('unicode_input', 'unicode_names'),
@@ -865,10 +865,10 @@ def build(args: Options, native_optimizations: bool = True, call_init: bool = Tr
     sources, headers = find_c_files()
     headers.append(build_ref_map())
     compile_c_extension(
-        kitty_env(), 'shitty/fast_data_types', args.compilation_database, sources, headers
+        shitty_env(), 'shitty/fast_data_types', args.compilation_database, sources, headers
     )
     compile_glfw(args.compilation_database)
-    compile_kittens(args.compilation_database)
+    compile_shittens(args.compilation_database)
 
 
 def safe_makedirs(path: str) -> None:
@@ -897,7 +897,7 @@ def build_launcher(args: Options, launcher_dir: str = '.', bundle_type: str = 's
     if bundle_type.endswith('-freeze'):
         cppflags.append('-DFOR_BUNDLE')
         cppflags.append(f'-DPYVER="{sysconfig.get_python_version()}"')
-        cppflags.append(f'-DKITTY_LIB_DIR_NAME="{args.libdir_name}"')
+        cppflags.append(f'-Dshitty_LIB_DIR_NAME="{args.libdir_name}"')
     elif bundle_type == 'source':
         cppflags.append('-DFROM_SOURCE')
     if bundle_type.startswith('macos-'):
@@ -908,7 +908,7 @@ def build_launcher(args: Options, launcher_dir: str = '.', bundle_type: str = 's
         klp = os.path.relpath('.', launcher_dir)
     else:
         raise SystemExit(f'Unknown bundle type: {bundle_type}')
-    cppflags.append(f'-DKITTY_LIB_PATH="{klp}"')
+    cppflags.append(f'-Dshitty_LIB_PATH="{klp}"')
     pylib = get_python_flags(cflags, for_main_executable=True)
     cppflags += shlex.split(os.environ.get('CPPFLAGS', ''))
     cflags += shlex.split(os.environ.get('CFLAGS', ''))
@@ -1192,7 +1192,7 @@ def macos_info_plist() -> bytes:
         LSApplicationCategoryType='public.app-category.utilities',
         # App Execution
         CFBundleExecutable=appname,
-        LSEnvironment={'KITTY_LAUNCHED_BY_LAUNCH_SERVICES': '1'},
+        LSEnvironment={'shitty_LAUNCHED_BY_LAUNCH_SERVICES': '1'},
         LSRequiresNativeExecution=True,
         NSSupportsSuddenTermination=False,
         # Localization
@@ -1271,10 +1271,10 @@ def create_minimal_macos_bundle(args: Options, launcher_dir: str) -> None:
     with open(os.path.join(kapp, 'Contents/Info.plist'), 'wb') as f:
         f.write(macos_info_plist())
     build_launcher(args, bin_dir)
-    kitty_exe = os.path.join(launcher_dir, appname)
+    shitty_exe = os.path.join(launcher_dir, appname)
     with suppress(FileNotFoundError):
-        os.remove(kitty_exe)
-    os.symlink(os.path.join(os.path.relpath(bin_dir, launcher_dir), appname), kitty_exe)
+        os.remove(shitty_exe)
+    os.symlink(os.path.join(os.path.relpath(bin_dir, launcher_dir), appname), shitty_exe)
     create_macos_app_icon(resources_dir)
 
 
@@ -1339,9 +1339,9 @@ def package(args: Options, bundle_type: str) -> None:
         ]
 
     shutil.copytree('shitty', os.path.join(libdir, 'shitty'), ignore=src_ignore)
-    shutil.copytree('kittens', os.path.join(libdir, 'kittens'), ignore=src_ignore)
+    shutil.copytree('shittens', os.path.join(libdir, 'shittens'), ignore=src_ignore)
     if for_freeze:
-        shutil.copytree('kitty_tests', os.path.join(libdir, 'kitty_tests'))
+        shutil.copytree('shitty_tests', os.path.join(libdir, 'shitty_tests'))
 
     def repl(name: str, raw: str, defval: Union[str, float, FrozenSet[str]], val: Union[str, float, FrozenSet[str]]) -> str:
         if defval == val:

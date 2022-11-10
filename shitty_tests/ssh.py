@@ -9,13 +9,13 @@ import tempfile
 from functools import lru_cache
 from contextlib import suppress
 
-from kittens.ssh.config import load_config
-from kittens.ssh.main import (
+from shittens.ssh.config import load_config
+from shittens.ssh.main import (
     bootstrap_script, get_connection_data, wrap_bootstrap_script
 )
-from kittens.ssh.options.types import Options as SSHOptions
-from kittens.ssh.options.utils import DELETE_ENV_VAR
-from kittens.transfer.utils import set_paths
+from shittens.ssh.options.types import Options as SSHOptions
+from shittens.ssh.options.utils import DELETE_ENV_VAR
+from shittens.transfer.utils import set_paths
 from shitty.constants import is_macos, runtime_dir
 from shitty.fast_data_types import CURSOR_BEAM, shm_unlink
 from shitty.utils import SSHConnectionData
@@ -30,7 +30,7 @@ def files_in(path):
             yield os.path.relpath(os.path.join(record[0], f), path)
 
 
-class SSHKitten(BaseTest):
+class SSHshitten(BaseTest):
 
     def test_basic_pty_operations(self):
         pty = self.create_pty('echo hello')

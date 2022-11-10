@@ -33,52 +33,52 @@ def generate_stub() -> None:
     from .remote_control import global_options_spec
     do(global_options_spec(), 'RCOptions')
 
-    from kittens.ask.main import option_text
+    from shittens.ask.main import option_text
     do(option_text(), 'AskCLIOptions')
 
-    from kittens.remote_file.main import option_text
+    from shittens.remote_file.main import option_text
     do(option_text(), 'RemoteFileCLIOptions')
 
-    from kittens.clipboard.main import OPTIONS
+    from shittens.clipboard.main import OPTIONS
     do(OPTIONS(), 'ClipboardCLIOptions')
 
-    from kittens.show_key.main import OPTIONS
+    from shittens.show_key.main import OPTIONS
     do(OPTIONS(), 'ShowKeyCLIOptions')
 
-    from kittens.diff.main import OPTIONS
+    from shittens.diff.main import OPTIONS
     do(OPTIONS(), 'DiffCLIOptions')
 
-    from kittens.hints.main import OPTIONS
+    from shittens.hints.main import OPTIONS
     do(OPTIONS(), 'HintsCLIOptions')
 
-    from kittens.broadcast.main import OPTIONS
+    from shittens.broadcast.main import OPTIONS
     do(OPTIONS(), 'BroadcastCLIOptions')
 
-    from kittens.icat.main import options_spec
+    from shittens.icat.main import options_spec
     do(options_spec(), 'IcatCLIOptions')
 
-    from kittens.query_terminal.main import options_spec
+    from shittens.query_terminal.main import options_spec
     do(options_spec(), 'QueryTerminalCLIOptions')
 
-    from kittens.panel.main import OPTIONS
+    from shittens.panel.main import OPTIONS
     do(OPTIONS(), 'PanelCLIOptions')
 
-    from kittens.resize_window.main import OPTIONS
+    from shittens.resize_window.main import OPTIONS
     do(OPTIONS(), 'ResizeCLIOptions')
 
-    from kittens.show_error.main import OPTIONS
+    from shittens.show_error.main import OPTIONS
     do(OPTIONS(), 'ErrorCLIOptions')
 
-    from kittens.unicode_input.main import OPTIONS
+    from shittens.unicode_input.main import OPTIONS
     do(OPTIONS(), 'UnicodeCLIOptions')
 
-    from kittens.themes.main import OPTIONS
+    from shittens.themes.main import OPTIONS
     do(OPTIONS(), 'ThemesCLIOptions')
 
-    from kittens.transfer.main import option_text as OPTIONS
+    from shittens.transfer.main import option_text as OPTIONS
     do(OPTIONS(), 'TransferCLIOptions')
 
-    from kittens.ssh.copy import option_text as OPTIONS
+    from shittens.ssh.copy import option_text as OPTIONS
     do(OPTIONS(), 'CopyCLIOptions')
 
     from shitty.rc.base import all_command_names, command_for_name

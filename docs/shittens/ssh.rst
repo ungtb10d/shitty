@@ -3,11 +3,11 @@ Truly convenient SSH
 
 * Automatic :ref:`shell_integration` on remote hosts
 
-* Easily :ref:`clone local shell/editor config <real_world_ssh_kitten_config>` on remote hosts
+* Easily :ref:`clone local shell/editor config <real_world_ssh_shitten_config>` on remote hosts
 
 * Automatic :opt:`re-use of existing connections <shitten-ssh.share_connections>` to avoid connection setup latency
 
-* Make shitty itself available in the remote host :opt:`on demand <shitten-ssh.remote_kitty>`
+* Make shitty itself available in the remote host :opt:`on demand <shitten-ssh.remote_shitty>`
 
 * Easily :opt:`change terminal colors <shitten-ssh.color_scheme>` when connecting to remote hosts
 
@@ -57,7 +57,7 @@ to copy from the local to the remote host. Let's see a quick example:
    # Setup some environment variables
    env SOME_VAR=x
    # COPIED_VAR will have the same value on the remote host as it does locally
-   env COPIED_VAR=_kitty_copy_env_var_
+   env COPIED_VAR=_shitty_copy_env_var_
 
    # Create some per hostname settings
    hostname someserver-*
@@ -89,7 +89,7 @@ ignored.
    the shell prompt. 😇
 
 
-.. _real_world_ssh_kitten_config:
+.. _real_world_ssh_shitten_config:
 
 A real world example
 ----------------------
@@ -148,7 +148,7 @@ transmitted instantly without any roundtrip delay.
 
    This may or may not work when using terminal multiplexers, depending on
    whether they passthrough the escape codes and if the values of the
-   environment variables :envvar:`KITTY_PID` and :envvar:`KITTY_WINDOW_ID` are
+   environment variables :envvar:`shitty_PID` and :envvar:`shitty_WINDOW_ID` are
    correct in the current session (they can be wrong when connecting to a tmux
    session running in a different window) and the ssh shitten is run in the
    currently active multiplexer window.

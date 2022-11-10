@@ -41,10 +41,10 @@ Do not return an error if no windows are matched to be closed.
 '''
     argspec = ''
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         return {'match': opts.match, 'self': opts.self, 'ignore_no_match': opts.ignore_no_match}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         try:
             windows = self.windows_for_match_payload(boss, window, payload_get)
         except MatchError:

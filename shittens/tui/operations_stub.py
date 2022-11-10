@@ -7,7 +7,7 @@ class CMD:
 
 
 def generate_stub() -> None:
-    from kittens.tui.operations import as_type_stub
+    from shittens.tui.operations import as_type_stub
     from shitty.conf.utils import save_type_stub
     text = as_type_stub()
     save_type_stub(text, __file__)

@@ -537,9 +537,9 @@ class TestDataTypes(BaseTest):
 
     def test_single_key(self):
         from shitty.fast_data_types import (
-            GLFW_MOD_KITTY, GLFW_MOD_SHIFT, SingleKey
+            GLFW_MOD_shitty, GLFW_MOD_SHIFT, SingleKey
         )
-        for m in (GLFW_MOD_KITTY, GLFW_MOD_SHIFT):
+        for m in (GLFW_MOD_shitty, GLFW_MOD_SHIFT):
             s = SingleKey(mods=m)
             self.ae(s.mods, m)
         self.ae(tuple(iter(SingleKey())), (0, False, 0))
@@ -550,7 +550,7 @@ class TestDataTypes(BaseTest):
         self.ae(repr(SingleKey(key=23)), 'SingleKey(key=23)')
         self.ae(repr(SingleKey(key=0x1008ff57)), 'SingleKey(key=269025111)')
         self.ae(repr(SingleKey(key=23)._replace(mods=2)), 'SingleKey(mods=2, key=23)')
-        self.ae(repr(SingleKey(key=23)._replace(key=-1, mods=GLFW_MOD_KITTY)), f'SingleKey(mods={GLFW_MOD_KITTY})')
+        self.ae(repr(SingleKey(key=23)._replace(key=-1, mods=GLFW_MOD_shitty)), f'SingleKey(mods={GLFW_MOD_shitty})')
         self.assertEqual(SingleKey(key=1), SingleKey(key=1))
         self.assertEqual(hash(SingleKey(key=1)), hash(SingleKey(key=1)))
         self.assertNotEqual(hash(SingleKey(key=1, mods=2)), hash(SingleKey(key=1)))

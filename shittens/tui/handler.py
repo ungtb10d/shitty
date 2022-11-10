@@ -175,7 +175,7 @@ class Handler:
     def on_writing_finished(self) -> None:
         pass
 
-    def on_kitty_cmd_response(self, response: Dict[str, Any]) -> None:
+    def on_shitty_cmd_response(self, response: Dict[str, Any]) -> None:
         pass
 
     def on_clipboard_response(self, text: str, from_primary: bool = False) -> None:

@@ -64,7 +64,7 @@ class TestConfParsing(BaseTest):
         })
 
         # test the aliasing options
-        opts = p('env A=1', 'env B=x$A', 'env C=', 'env D', 'clear_all_shortcuts y', 'kitten_alias a b --moo', 'map f1 shitten a arg')
+        opts = p('env A=1', 'env B=x$A', 'env C=', 'env D', 'clear_all_shortcuts y', 'shitten_alias a b --moo', 'map f1 shitten a arg')
         self.ae(opts.env, {'A': '1', 'B': 'x1', 'C': '', 'D': DELETE_ENV_VAR})
 
         def ac(which=0):
@@ -76,7 +76,7 @@ class TestConfParsing(BaseTest):
         self.ae(ka.func, 'shitten')
         self.ae(ka.args, ('b', '--moo', 'arg'))
 
-        opts = p('clear_all_shortcuts y', 'kitten_alias hints hints --hi', 'map f1 shitten hints XXX')
+        opts = p('clear_all_shortcuts y', 'shitten_alias hints hints --hi', 'map f1 shitten hints XXX')
         ka = ac()
         self.ae(ka.func, 'shitten')
         self.ae(ka.args, ('hints', '--hi', 'XXX'))
@@ -113,9 +113,9 @@ class TestConfParsing(BaseTest):
         self.ae((ac().func, ac(1).func), ('new_window', 'launch'))
         self.ae(ac(1).args, ('--moo', 'XXX'))
 
-        opts = p('kitty_mod alt')
-        self.ae(opts.kitty_mod, to_modifiers('alt'))
-        self.ae(next(keys_for_func(opts, 'next_layout')).mods, opts.kitty_mod)
+        opts = p('shitty_mod alt')
+        self.ae(opts.shitty_mod, to_modifiers('alt'))
+        self.ae(next(keys_for_func(opts, 'next_layout')).mods, opts.shitty_mod)
 
         # deprecation handling
         opts = p('clear_all_shortcuts y', 'send_text all f1 hello')

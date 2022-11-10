@@ -3,12 +3,12 @@ from socket import AddressFamily as AddressFamily, socket as Socket
 from subprocess import CompletedProcess as CompletedProcess, Popen as PopenType
 from typing import Literal, Protocol as Protocol, TypedDict as TypedDict
 
-from kittens.hints.main import Mark as MarkType
-from kittens.tui.handler import Handler as HandlerType
-from kittens.tui.images import (
+from shittens.hints.main import Mark as MarkType
+from shittens.tui.handler import Handler as HandlerType
+from shittens.tui.images import (
     GraphicsCommand as GraphicsCommandType, ImageManager as ImageManagerType
 )
-from kittens.tui.loop import (
+from shittens.tui.loop import (
     Debug as Debug, Loop as LoopType, MouseButton as MouseButton,
     MouseEvent as MouseEvent, TermManager as TermManagerType
 )
@@ -16,7 +16,7 @@ from kittens.tui.loop import (
 from .boss import Boss as BossType
 from .child import Child as ChildType
 from .conf.utils import BadLine as BadLineType, KeyAction as KeyActionType
-from .config import KittyCommonOpts
+from .config import shittyCommonOpts
 from .fast_data_types import (
     CoreTextFont as CoreTextFont, FontConfigPattern as FontConfigPattern,
     Screen as ScreenType, StartupCtx as StartupCtx
@@ -56,7 +56,7 @@ __all__ = (
     'GraphicsCommandType', 'HandlerType', 'AbstractEventLoop', 'AddressFamily', 'Socket', 'CompletedProcess',
     'PopenType', 'Protocol', 'TypedDict', 'MarkType', 'ImageManagerType', 'Debug', 'LoopType', 'MouseEvent',
     'TermManagerType', 'BossType', 'ChildType', 'BadLineType', 'MouseButton',
-    'KeyActionType', 'KeyMap', 'KittyCommonOpts', 'AliasMap', 'SequenceMap', 'CoreTextFont', 'WindowSystemMouseEvent',
+    'KeyActionType', 'KeyMap', 'shittyCommonOpts', 'AliasMap', 'SequenceMap', 'CoreTextFont', 'WindowSystemMouseEvent',
     'FontConfigPattern', 'ScreenType', 'StartupCtx', 'KeyEventType', 'LayoutType', 'PowerlineStyle',
     'RemoteCommandType', 'SessionType', 'SessionTab', 'SpecialWindowInstance', 'TabType', 'ScreenSize', 'WindowType'
 )

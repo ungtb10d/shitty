@@ -56,7 +56,7 @@ def human_size(
     return format_number(size / 1024**exponent, max_num_of_decimals) + sep + unit_list[exponent]
 
 
-def kitty_opts() -> 'Options':
+def shitty_opts() -> 'Options':
     from shitty.fast_data_types import get_options, set_options
     try:
         ans = cast(Optional['Options'], get_options())
@@ -71,7 +71,7 @@ def kitty_opts() -> 'Options':
     return ans
 
 
-def set_kitty_opts(paths: Sequence[str], overrides: Sequence[str] = ()) -> 'Options':
+def set_shitty_opts(paths: Sequence[str], overrides: Sequence[str] = ()) -> 'Options':
     from shitty.config import load_config
     from shitty.fast_data_types import set_options
     from shitty.utils import suppress_error_logging

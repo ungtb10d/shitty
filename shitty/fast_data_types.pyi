@@ -27,7 +27,7 @@ MOUSE_SELECTION_WORD: int
 MOUSE_SELECTION_RECTANGLE: int
 MOUSE_SELECTION_LINE_FROM_POINT: int
 MOUSE_SELECTION_MOVE_END: int
-KITTY_VCS_REV: str
+shitty_VCS_REV: str
 NO_CLOSE_REQUESTED: int
 IMPERATIVE_CLOSE_REQUESTED: int
 CLOSE_BEING_CONFIRMED: int
@@ -155,7 +155,7 @@ GLFW_MOD_HYPER: int
 GLFW_MOD_META: int
 GLFW_MOD_CAPS_LOCK: int
 GLFW_MOD_NUM_LOCK: int
-GLFW_MOD_KITTY: int
+GLFW_MOD_shitty: int
 GLFW_MOUSE_BUTTON_1: int
 GLFW_MOUSE_BUTTON_2: int
 GLFW_MOUSE_BUTTON_3: int
@@ -1479,10 +1479,10 @@ class SingleKey:
     @property
     def key(self) -> int: ...
     @property
-    def defined_with_kitty_mod(self) -> bool: ...
+    def defined_with_shitty_mod(self) -> bool: ...
     def __iter__(self) -> Iterator[int]: ...
     def _replace(self, mods: int = 0, is_native: object = False, key: int = -1) -> 'SingleKey': ...
-    def resolve_kitty_mod(self, mod: int) -> 'SingleKey': ...
+    def resolve_shitty_mod(self, mod: int) -> 'SingleKey': ...
 
 
 def set_use_os_log(yes: bool) -> None: ...

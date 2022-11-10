@@ -4,7 +4,7 @@
 import sys
 from typing import List, Optional
 
-from ..show_key.kitty_mode import format_mods
+from ..show_key.shitty_mode import format_mods
 from ..tui.handler import Handler
 from ..tui.loop import Loop, MouseEvent
 from ..tui.operations import MouseTracking

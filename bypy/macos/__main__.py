@@ -25,14 +25,14 @@ from bypy.utils import (
 )
 
 iv = globals()['init_env']
-kitty_constants = iv['kitty_constants']
+shitty_constants = iv['shitty_constants']
 self_dir = os.path.dirname(os.path.abspath(__file__))
 join = os.path.join
 basename = os.path.basename
 dirname = os.path.dirname
 abspath = os.path.abspath
-APPNAME = kitty_constants['appname']
-VERSION = kitty_constants['version']
+APPNAME = shitty_constants['appname']
+VERSION = shitty_constants['version']
 py_ver = '.'.join(map(str, python_major_minor_version()))
 
 
@@ -188,7 +188,7 @@ class Freeze(object):
         cdata = None
         for i in range(5):
             try:
-                cdata = urlopen(kitty_constants['cacerts_url']).read()
+                cdata = urlopen(shitty_constants['cacerts_url']).read()
                 break
             except Exception as e:
                 print(f'Downloading CA certs failed with error: {e}, retrying...')
@@ -351,15 +351,15 @@ class Freeze(object):
     @flush
     def freeze_python(self):
         print('\nFreezing python')
-        kitty_dir = join(self.resources_dir, 'shitty')
-        bases = ('shitty', 'kittens', 'kitty_tests')
+        shitty_dir = join(self.resources_dir, 'shitty')
+        bases = ('shitty', 'shittens', 'shitty_tests')
         for x in bases:
             dest = join(self.python_stdlib, x)
-            os.rename(join(kitty_dir, x), dest)
+            os.rename(join(shitty_dir, x), dest)
             if x == 'shitty':
                 shutil.rmtree(join(dest, 'launcher'))
-        os.rename(join(kitty_dir, '__main__.py'), join(self.python_stdlib, 'kitty_main.py'))
-        shutil.rmtree(join(kitty_dir, '__pycache__'))
+        os.rename(join(shitty_dir, '__main__.py'), join(self.python_stdlib, 'shitty_main.py'))
+        shutil.rmtree(join(shitty_dir, '__pycache__'))
         pdir = join(dirname(self.python_stdlib), 'shitty-extensions')
         os.mkdir(pdir)
         print('Extracting extension modules from', self.python_stdlib, 'to', pdir)
@@ -368,7 +368,7 @@ class Freeze(object):
         for x in bases:
             iv['sanitize_source_folder'](join(self.python_stdlib, x))
         self.compile_py_modules()
-        freeze_python(self.python_stdlib, pdir, self.obj_dir, ext_map, develop_mode_env_var='KITTY_DEVELOP_FROM', remove_pyc_files=True)
+        freeze_python(self.python_stdlib, pdir, self.obj_dir, ext_map, develop_mode_env_var='shitty_DEVELOP_FROM', remove_pyc_files=True)
         shutil.rmtree(self.python_stdlib)
         iv['build_frozen_launcher']([path_to_freeze_dir(), self.obj_dir])
         os.rename(join(dirname(self.contents_dir), 'bin', 'shitty'), join(self.contents_dir, 'MacOS', 'shitty'))
@@ -487,7 +487,7 @@ def main():
     args = globals()['args']
     ext_dir = globals()['ext_dir']
     Freeze(
-        join(ext_dir, f'{kitty_constants["appname"]}.app'),
+        join(ext_dir, f'{shitty_constants["appname"]}.app'),
         dont_strip=args.dont_strip,
         sign_installers=args.sign_installers,
         notarize=args.notarize,

@@ -38,7 +38,7 @@ def generate_class(defn: Definition, loc: str) -> Tuple[str, str]:
     choices = {}
     imports: Set[Tuple[str, str]] = set()
     tc_imports: Set[Tuple[str, str]] = set()
-    ki_imports: 're.Pattern[str]' = re.compile(r'\b((?:kittens|shitty).+?)[,\]]')
+    ki_imports: 're.Pattern[str]' = re.compile(r'\b((?:shittens|shitty).+?)[,\]]')
 
     def option_type_as_str(x: Any) -> str:
         needs_import = False
@@ -451,23 +451,23 @@ def main() -> None:
     import importlib
     import sys
 
-    from kittens.runner import path_to_custom_kitten, resolved_kitten
+    from shittens.runner import path_to_custom_shitten, resolved_shitten
     from shitty.constants import config_dir
 
     shitten = sys.argv[-1]
     if not shitten.endswith('.py'):
         shitten += '.py'
-    shitten = resolved_kitten(shitten)
-    path = os.path.realpath(path_to_custom_kitten(config_dir, shitten))
+    shitten = resolved_shitten(shitten)
+    path = os.path.realpath(path_to_custom_shitten(config_dir, shitten))
     if not os.path.dirname(path):
         raise SystemExit(f'No custom shitten named {shitten} found')
     sys.path.insert(0, os.path.dirname(path))
     package_name = os.path.basename(os.path.dirname(path))
-    m = importlib.import_module('kitten_options_definition')
+    m = importlib.import_module('shitten_options_definition')
     defn = getattr(m, 'definition')
     loc = package_name
     cls, tc = generate_class(defn, loc)
-    with open(os.path.join(os.path.dirname(path), 'kitten_options_types.py'), 'w') as f:
+    with open(os.path.join(os.path.dirname(path), 'shitten_options_types.py'), 'w') as f:
         f.write(f'{cls}\n')
-    with open(os.path.join(os.path.dirname(path), 'kitten_options_parse.py'), 'w') as f:
+    with open(os.path.join(os.path.dirname(path), 'shitten_options_parse.py'), 'w') as f:
         f.write(f'{tc}\n')

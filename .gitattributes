@@ -10,11 +10,11 @@ shitty/parse-graphics-command.h linguist-generated=true
 shitty/options/types.py linguist-generated=true
 shitty/options/parse.py linguist-generated=true
 shitty/options/to-c-generated.h linguist-generated=true
-kittens/diff/options/types.py linguist-generated=true
-kittens/diff/options/parse.py linguist-generated=true
+shittens/diff/options/types.py linguist-generated=true
+shittens/diff/options/parse.py linguist-generated=true
 glfw/*.c linguist-vendored=true
 glfw/*.h linguist-vendored=true
-kittens/unicode_input/names.h linguist-generated=true
+shittens/unicode_input/names.h linguist-generated=true
 
 *.py  text diff=python
 *.m  text diff=objc

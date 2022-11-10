@@ -179,7 +179,7 @@ def handle_cmd(boss: BossType, window: Optional[WindowType], cmd: Dict[str, Any]
             oldest = next(iter(active_async_requests))
             del active_async_requests[oldest]
     try:
-        ans = c.response_from_kitty(boss, window, PayloadGetter(c, payload))
+        ans = c.response_from_shitty(boss, window, PayloadGetter(c, payload))
     except Exception:
         if no_response:  # don't report errors if --no-response was used
             return None
@@ -220,10 +220,10 @@ Used if no :option:`shitty @ --password` is supplied. Defaults to checking for t
 
 
 --password-env
-default=KITTY_RC_PASSWORD
+default=shitty_RC_PASSWORD
 The name of an environment variable to read the password from.
 Used if no :option:`shitty @ --password-file` is supplied. Defaults
-to checking the :envvar:`KITTY_RC_PASSWORD`.
+to checking the :envvar:`shitty_RC_PASSWORD`.
 
 
 --use-password
@@ -445,12 +445,12 @@ def get_password(opts: RCOptions) -> str:
 
 
 def get_pubkey() -> Tuple[str, bytes]:
-    raw = os.environ.get('KITTY_PUBLIC_KEY', '')
+    raw = os.environ.get('shitty_PUBLIC_KEY', '')
     if not raw:
-        raise SystemExit('Password usage requested but KITTY_PUBLIC_KEY environment variable is not available')
+        raise SystemExit('Password usage requested but shitty_PUBLIC_KEY environment variable is not available')
     version, pubkey = raw.split(':', 1)
     if version != RC_ENCRYPTION_PROTOCOL_VERSION:
-        raise SystemExit('KITTY_PUBLIC_KEY has unknown version, if you are running on a remote system, update shitty on this system')
+        raise SystemExit('shitty_PUBLIC_KEY has unknown version, if you are running on a remote system, update shitty on this system')
     from base64 import b85decode
     return version, b85decode(pubkey)
 
@@ -476,7 +476,7 @@ def main(args: List[str]) -> None:
             emph(cmd), ', '.join(x.replace('_', '-') for x in all_command_names())))
     opts, items = parse_subcommand_cli(c, items)
     try:
-        payload = c.message_to_kitty(global_opts, opts, items)
+        payload = c.message_to_shitty(global_opts, opts, items)
     except ParsingOfArgsFailed as err:
         exit(str(err))
     no_response = c.no_response
@@ -488,8 +488,8 @@ def main(args: List[str]) -> None:
     response_timeout = encrypter.adjust_response_timeout_for_password(response_timeout)
     send = create_basic_command(cmd, payload=payload, no_response=no_response, is_asynchronous=c.is_asynchronous)
     listen_on_from_env = False
-    if not global_opts.to and 'KITTY_LISTEN_ON' in os.environ:
-        global_opts.to = os.environ['KITTY_LISTEN_ON']
+    if not global_opts.to and 'shitty_LISTEN_ON' in os.environ:
+        global_opts.to = os.environ['shitty_LISTEN_ON']
         listen_on_from_env = False
     if global_opts.to:
         try:
@@ -497,7 +497,7 @@ def main(args: List[str]) -> None:
         except Exception:
             msg = f'Invalid listen on address: {global_opts.to}'
             if listen_on_from_env:
-                msg += '. The KITTY_LISTEN_ON environment variable is set incorrectly'
+                msg += '. The shitty_LISTEN_ON environment variable is set incorrectly'
             exit(msg)
     import socket
     try:

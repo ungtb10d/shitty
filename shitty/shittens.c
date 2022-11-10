@@ -1,5 +1,5 @@
 /*
- * kittens.c
+ * shittens.c
  * Copyright (C) 2018 Kovid Goyal <kovid at ungtb10d.net>
  *
  * Distributed under terms of the GPL3 license.
@@ -203,7 +203,7 @@ static PyMethodDef module_methods[] = {
 };
 
 bool
-init_kittens(PyObject *module) {
+init_shittens(PyObject *module) {
     if (PyModule_AddFunctions(module, module_methods) != 0) return false;
     return true;
 }

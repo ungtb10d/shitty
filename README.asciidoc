@@ -7,7 +7,7 @@ image:https://github.com/ungtb10d/shitty/workflows/CI/badge.svg["Build status", 
 https://sw.ungtb10d.net/shitty/faq/[Frequently Asked Questions]
 
 To ask other questions about shitty usage, use either the https://github.com/ungtb10d/shitty/discussions/[discussions on GitHub] or the
-https://www.reddit.com/r/KittyTerminal[Reddit community]
+https://www.reddit.com/r/shittyTerminal[Reddit community]
 
 Packaging status in various repositories:
 

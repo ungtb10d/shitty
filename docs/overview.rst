@@ -85,22 +85,22 @@ Extending shitty
 ------------------
 
 shitty has a powerful framework for scripting. You can create small terminal
-programs called :doc:`kittens <kittens_intro>`. These can used to add features
-to shitty, for example, :doc:`editing remote files <kittens/remote_file>` or
-:doc:`inputting Unicode characters <kittens/unicode_input>`. They can also be
+programs called :doc:`shittens <shittens_intro>`. These can used to add features
+to shitty, for example, :doc:`editing remote files <shittens/remote_file>` or
+:doc:`inputting Unicode characters <shittens/unicode_input>`. They can also be
 used to create programs that leverage shitty's powerful features, for example,
-:doc:`viewing images <kittens/icat>` or :doc:`diffing files with image support
-<kittens/diff>`.
+:doc:`viewing images <shittens/icat>` or :doc:`diffing files with image support
+<shittens/diff>`.
 
-You can :doc:`create your own kittens to scratch your own itches
-<kittens/custom>`.
+You can :doc:`create your own shittens to scratch your own itches
+<shittens/custom>`.
 
-For a list of all the builtin kittens, :ref:`see here <kittens>`.
+For a list of all the builtin shittens, :ref:`see here <shittens>`.
 
 .. toctree::
    :hidden:
 
-   kittens_intro
+   shittens_intro
 
 
 Remote control

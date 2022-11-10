@@ -339,7 +339,7 @@ class KeyAction(NamedTuple):
         return ans
 
 
-def parse_kittens_func_args(action: str, args_funcs: Dict[str, KeyFunc[Tuple[str, Any]]]) -> KeyAction:
+def parse_shittens_func_args(action: str, args_funcs: Dict[str, KeyFunc[Tuple[str, Any]]]) -> KeyAction:
     parts = action.strip().split(' ', 1)
     func = parts[0]
     if len(parts) == 1:
@@ -364,18 +364,18 @@ def parse_kittens_func_args(action: str, args_funcs: Dict[str, KeyFunc[Tuple[str
     return KeyAction(func, tuple(args))
 
 
-KittensKeyDefinition = Tuple[ParsedShortcut, KeyAction]
-KittensKeyMap = Dict[ParsedShortcut, KeyAction]
+shittensKeyDefinition = Tuple[ParsedShortcut, KeyAction]
+shittensKeyMap = Dict[ParsedShortcut, KeyAction]
 
 
-def parse_kittens_key(
+def parse_shittens_key(
     val: str, funcs_with_args: Dict[str, KeyFunc[Tuple[str, Any]]]
-) -> Optional[KittensKeyDefinition]:
+) -> Optional[shittensKeyDefinition]:
     from ..key_encoding import parse_shortcut
     sc, action = val.partition(' ')[::2]
     if not sc or not action:
         return None
-    ans = parse_kittens_func_args(action, funcs_with_args)
+    ans = parse_shittens_func_args(action, funcs_with_args)
     return parse_shortcut(sc), ans
 
 

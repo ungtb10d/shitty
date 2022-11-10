@@ -28,7 +28,7 @@ from .conf.utils import BadLine, KeyAction, to_cmdline
 from .config import common_opts_as_dict, prepare_config_file_for_editing
 from .constants import (
     RC_ENCRYPTION_PROTOCOL_VERSION, appname, cache_dir, clear_handled_signals,
-    config_dir, handled_signals, is_macos, is_wayland, kitty_exe, logo_png_file,
+    config_dir, handled_signals, is_macos, is_wayland, shitty_exe, logo_png_file,
     supports_primary_selection, website_url,
 )
 from .fast_data_types import (
@@ -511,7 +511,7 @@ class Boss:
         return response
 
     def ask_if_remote_cmd_is_allowed(self, pcmd: Dict[str, Any], window: Optional[Window] = None, peer_id: int = 0) -> bool:
-        from kittens.tui.operations import styled
+        from shittens.tui.operations import styled
         in_flight = 0
         for w in self.window_id_map.values():
             if w.window_custom_type == 'remote_command_permission_dialog':
@@ -604,16 +604,16 @@ class Boss:
             cmd = items[0]
             c = command_for_name(cmd)
             opts, items = parse_subcommand_cli(c, items)
-            payload = c.message_to_kitty(global_opts, opts, items)
+            payload = c.message_to_shitty(global_opts, opts, items)
         except SystemExit as e:
             raise Exception(str(e)) from e
         import types
         try:
             if isinstance(payload, types.GeneratorType):
                 for x in payload:
-                    c.response_from_kitty(self, active_window, PayloadGetter(c, x if isinstance(x, dict) else {}))
+                    c.response_from_shitty(self, active_window, PayloadGetter(c, x if isinstance(x, dict) else {}))
                 return None
-            return c.response_from_kitty(self, active_window, PayloadGetter(c, payload if isinstance(payload, dict) else {}))
+            return c.response_from_shitty(self, active_window, PayloadGetter(c, payload if isinstance(payload, dict) else {}))
         except Exception as e:
             if silent:
                 log_error(f'Failed to run remote_control mapping: {aa} with error: {e}')
@@ -797,7 +797,7 @@ class Boss:
         def on_popup_overlay_removal(wid: int, boss: Boss) -> None:
             callback(result, *args)
 
-        self.run_kitten_with_metadata(
+        self.run_shitten_with_metadata(
             'ask', ['--type=yesno', '--message', msg, '--default', 'y' if confirm_on_accept else 'n'],
             window=window, custom_callback=callback_, action_on_removal=on_popup_overlay_removal,
             default_data={'response': 'y' if confirm_on_cancel else 'n'})
@@ -834,7 +834,7 @@ class Boss:
         def on_popup_overlay_removal(wid: int, boss: Boss) -> None:
             callback(result)
 
-        ans = self.run_kitten_with_metadata(
+        ans = self.run_shitten_with_metadata(
             'ask', cmd, window=window, custom_callback=callback_, input_data=input_data, default_data={'response': ''},
             action_on_removal=on_popup_overlay_removal
         )
@@ -859,7 +859,7 @@ class Boss:
             callback(result)
 
         cmd = ['--type', 'password' if is_password else 'line', '--message', msg, '--prompt', prompt]
-        self.run_kitten_with_metadata(
+        self.run_shitten_with_metadata(
             'ask', cmd, window=window, custom_callback=callback_, default_data={'response': ''}, action_on_removal=on_popup_overlay_removal
         )
 
@@ -918,7 +918,7 @@ class Boss:
             urls: List[str] = getattr(sys, 'cmdline_args_for_open', [])
             if urls:
                 delattr(sys, 'cmdline_args_for_open')
-                sess = create_sessions(get_options(), self.args, special_window=SpecialWindow([kitty_exe(), '+runpy', 'input()']))
+                sess = create_sessions(get_options(), self.args, special_window=SpecialWindow([shitty_exe(), '+runpy', 'input()']))
                 self.startup_first_child(first_os_window_id, startup_sessions=tuple(sess))
                 self.launch_urls(*urls)
             else:
@@ -1262,7 +1262,7 @@ class Boss:
         w = self.active_window
         if w is None:
             return
-        overlay_window = self.run_kitten_with_metadata('resize_window', args=[
+        overlay_window = self.run_shitten_with_metadata('resize_window', args=[
             f'--horizontal-increment={get_options().window_resize_step_cells}',
             f'--vertical-increment={get_options().window_resize_step_lines}'
         ])
@@ -1351,7 +1351,7 @@ class Boss:
 
         For example::
 
-            map kitty_mod+e combine : new_window : next_layout
+            map shitty_mod+e combine : new_window : next_layout
         ''')
     def combine(self, action_definition: str, window_for_dispatch: Optional[Window] = None, dispatch_type: str = 'KeyPress') -> bool:
         consumed = False
@@ -1529,10 +1529,10 @@ class Boss:
     @ac('misc', 'Edit the shitty.conf config file in your favorite text editor')
     def edit_config_file(self, *a: Any) -> None:
         confpath = prepare_config_file_for_editing()
-        cmd = [kitty_exe(), '+edit'] + get_editor(get_options()) + [confpath]
+        cmd = [shitty_exe(), '+edit'] + get_editor(get_options()) + [confpath]
         self.new_os_window(*cmd)
 
-    def run_kitten_with_metadata(
+    def run_shitten_with_metadata(
         self,
         shitten: str,
         args: Iterable[str] = (),
@@ -1543,21 +1543,21 @@ class Boss:
         default_data: Optional[Dict[str, Any]] = None
     ) -> Any:
         orig_args, args = list(args), list(args)
-        from kittens.runner import create_kitten_handler
-        end_kitten = create_kitten_handler(shitten, orig_args)
+        from shittens.runner import create_shitten_handler
+        end_shitten = create_shitten_handler(shitten, orig_args)
         if window is None:
             w = self.active_window
             tab = self.active_tab
         else:
             w = window
             tab = w.tabref() if w else None
-        if end_kitten.no_ui:
-            return end_kitten(None, getattr(w, 'id', None), self)
+        if end_shitten.no_ui:
+            return end_shitten(None, getattr(w, 'id', None), self)
 
         if w is not None and tab is not None:
             args[0:0] = [config_dir, shitten]
             if input_data is None:
-                type_of_input = end_kitten.type_of_input
+                type_of_input = end_shitten.type_of_input
                 q = type_of_input.split('-') if type_of_input else []
                 if not q:
                     data: Optional[bytes] = None
@@ -1585,23 +1585,23 @@ class Boss:
                 final_args.append(x)
             overlay_window = tab.new_special_window(
                 SpecialWindow(
-                    [kitty_exe(), '+runpy', 'from kittens.runner import main; main()'] + final_args,
+                    [shitty_exe(), '+runpy', 'from shittens.runner import main; main()'] + final_args,
                     stdin=data,
                     env={
-                        'KITTY_COMMON_OPTS': json.dumps(copts),
-                        'KITTY_CHILD_PID': str(w.child.pid),
+                        'shitty_COMMON_OPTS': json.dumps(copts),
+                        'shitty_CHILD_PID': str(w.child.pid),
                         'PYTHONWARNINGS': 'ignore',
                         'OVERLAID_WINDOW_LINES': str(w.screen.lines),
                         'OVERLAID_WINDOW_COLS': str(w.screen.columns),
                     },
                     cwd=w.cwd_of_child,
                     overlay_for=w.id,
-                    overlay_behind=end_kitten.has_ready_notification,
+                    overlay_behind=end_shitten.has_ready_notification,
                 ),
                 copy_colors_from=w
             )
             wid = w.id
-            overlay_window.actions_on_close.append(partial(self.on_kitten_finish, wid, custom_callback or end_kitten, default_data=default_data))
+            overlay_window.actions_on_close.append(partial(self.on_shitten_finish, wid, custom_callback or end_shitten, default_data=default_data))
             if action_on_removal is not None:
 
                 def callback_wrapper(*a: Any) -> None:
@@ -1609,29 +1609,29 @@ class Boss:
                         action_on_removal(wid, self)
                 overlay_window.actions_on_removal.append(callback_wrapper)
             return overlay_window
-    _run_kitten = run_kitten_with_metadata
+    _run_shitten = run_shitten_with_metadata
 
-    @ac('misc', 'Run the specified shitten. See :doc:`/kittens/custom` for details')
+    @ac('misc', 'Run the specified shitten. See :doc:`/shittens/custom` for details')
     def shitten(self, shitten: str, *kargs: str) -> None:
-        self.run_kitten_with_metadata(shitten, kargs)
+        self.run_shitten_with_metadata(shitten, kargs)
 
-    def run_kitten(self, shitten: str, *args: str) -> None:
-        self.run_kitten_with_metadata(shitten, args)
+    def run_shitten(self, shitten: str, *args: str) -> None:
+        self.run_shitten_with_metadata(shitten, args)
 
-    def on_kitten_finish(
-        self, target_window_id: int, end_kitten: Callable[[Dict[str, Any], int, 'Boss'], None],
+    def on_shitten_finish(
+        self, target_window_id: int, end_shitten: Callable[[Dict[str, Any], int, 'Boss'], None],
         source_window: Window,
         default_data: Optional[Dict[str, Any]] = None
     ) -> None:
-        data, source_window.kitten_result = source_window.kitten_result, None
+        data, source_window.shitten_result = source_window.shitten_result, None
         if data is None:
             data = default_data
         if data is not None:
-            end_kitten(data, target_window_id, self)
+            end_shitten(data, target_window_id, self)
 
-    @ac('misc', 'Input an arbitrary unicode character. See :doc:`/kittens/unicode_input` for details.')
+    @ac('misc', 'Input an arbitrary unicode character. See :doc:`/shittens/unicode_input` for details.')
     def input_unicode_character(self) -> None:
-        self.run_kitten_with_metadata('unicode_input')
+        self.run_shitten_with_metadata('unicode_input')
 
     @ac(
         'tab', '''
@@ -1658,7 +1658,7 @@ class Boss:
             args = [
                 '--name=tab-title', '--message', _('Enter the new title for this tab below.'),
                 '--default', tab.name or tab.title, 'do_set_tab_title', str(tab.id)]
-            self.run_kitten_with_metadata('ask', args)
+            self.run_shitten_with_metadata('ask', args)
 
     def do_set_tab_title(self, title: str, tab_id: int) -> None:
         tm = self.active_tab_manager
@@ -1675,7 +1675,7 @@ class Boss:
         if ec != (None, None, None):
             import traceback
             tb = traceback.format_exc()
-        self.run_kitten_with_metadata('show_error', args=['--title', title], input_data=json.dumps({'msg': msg, 'tb': tb}))
+        self.run_shitten_with_metadata('show_error', args=['--title', title], input_data=json.dumps({'msg': msg, 'tb': tb}))
 
     @ac('mk', 'Create a new marker')
     def create_marker(self) -> None:
@@ -1695,22 +1695,22 @@ class Boss:
                     except Exception as err:
                         self.show_error(_('Invalid marker specification'), str(err))
 
-            self.run_kitten_with_metadata('ask', [
+            self.run_shitten_with_metadata('ask', [
                 '--name=create-marker', '--message',
                 _('Create marker, for example:\ntext 1 ERROR\nSee {}\n').format(website_url('marks'))
                 ],
                 custom_callback=done, action_on_removal=done2)
 
     @ac('misc', 'Run the shitty shell to control shitty with commands')
-    def kitty_shell(self, window_type: str = 'window') -> None:
+    def shitty_shell(self, window_type: str = 'window') -> None:
         kw: Dict[str, Any] = {}
-        cmd = [kitty_exe(), '@']
+        cmd = [shitty_exe(), '@']
         aw = self.active_window
         if aw is not None:
-            env = {'KITTY_SHELL_ACTIVE_WINDOW_ID': str(aw.id)}
+            env = {'shitty_SHELL_ACTIVE_WINDOW_ID': str(aw.id)}
             at = self.active_tab
             if at is not None:
-                env['KITTY_SHELL_ACTIVE_TAB_ID'] = str(at.id)
+                env['shitty_SHELL_ACTIVE_TAB_ID'] = str(at.id)
             kw['env'] = env
         if window_type == 'tab':
             tab = self._new_tab(SpecialWindow(cmd, **kw))
@@ -1741,7 +1741,7 @@ class Boss:
         if tab:
             tab.set_active_window(window_id)
 
-    def open_kitty_website(self) -> None:
+    def open_shitty_website(self) -> None:
         self.open_url(website_url())
 
     @ac('misc', 'Open the specified URL')
@@ -1762,7 +1762,7 @@ class Boss:
         if not found_action:
             extra_env = {}
             if self.listening_on:
-                extra_env['KITTY_LISTEN_ON'] = self.listening_on
+                extra_env['shitty_LISTEN_ON'] = self.listening_on
 
             def doit(activation_token: str = '') -> None:
                 if activation_token:
@@ -1776,7 +1776,7 @@ class Boss:
 
     @ac('misc', 'Click a URL using the keyboard')
     def open_url_with_hints(self) -> None:
-        self.run_kitten_with_metadata('hints')
+        self.run_shitten_with_metadata('hints')
 
     def drain_actions(self, actions: List[KeyAction], window_for_dispatch: Optional[Window] = None, dispatch_type: str = 'KeyPress') -> None:
 
@@ -1916,7 +1916,7 @@ class Boss:
                     if copy_pipe_data is not None:
                         copy_pipe_data.update(pipe_data)
                     env = {
-                        'KITTY_PIPE_DATA':
+                        'shitty_PIPE_DATA':
                         '{scrolled_by}:{cursor_x},{cursor_y}:{lines},{columns}'.format(**pipe_data)
                     }
                 input_data = stdin.encode('utf-8')
@@ -2201,7 +2201,7 @@ class Boss:
         for w in self.all_windows:
             self.default_bg_changed_for(w.id)
             w.refresh()
-        self.prewarm.reload_kitty_config()
+        self.prewarm.reload_shitty_config()
 
     @ac('misc', '''
         Reload the config file
@@ -2298,11 +2298,11 @@ class Boss:
             self.show_error('Invalid set_colors mapping', str(err))
             return
         try:
-            payload = c.message_to_kitty(parse_rc_args([])[0], opts, items)
+            payload = c.message_to_shitty(parse_rc_args([])[0], opts, items)
         except (Exception, SystemExit) as err:
             self.show_error('Failed to set colors', str(err))
             return
-        c.response_from_kitty(self, self.active_window, PayloadGetter(c, payload if isinstance(payload, dict) else {}))
+        c.response_from_shitty(self, self.active_window, PayloadGetter(c, payload if isinstance(payload, dict) else {}))
 
     def _move_window_to(
         self,
@@ -2384,7 +2384,7 @@ class Boss:
         def done2(target_window_id: int, self: Boss) -> None:
             callback(ans)
 
-        q = self.run_kitten_with_metadata(
+        q = self.run_shitten_with_metadata(
             'hints', args=(
                 '--ascending', '--customize-processing=::import::shitty.choose_entry',
                 '--window-title', title,
@@ -2488,10 +2488,10 @@ class Boss:
             w.report_notification_activated(identifier)
 
     @ac('debug', 'Show the environment variables that the shitty process sees')
-    def show_kitty_env_vars(self) -> None:
+    def show_shitty_env_vars(self) -> None:
         w = self.active_window
         env = os.environ.copy()
-        if is_macos and env.get('LC_CTYPE') == 'UTF-8' and not getattr(sys, 'kitty_run_data').get('lc_ctype_before_python'):
+        if is_macos and env.get('LC_CTYPE') == 'UTF-8' and not getattr(sys, 'shitty_run_data').get('lc_ctype_before_python'):
             del env['LC_CTYPE']
         if w:
             output = '\n'.join(f'{k}={v}' for k, v in env.items())
@@ -2532,10 +2532,10 @@ class Boss:
                 tab.remove_window(w)
 
         if failures:
-            from kittens.tui.operations import styled
+            from shittens.tui.operations import styled
             spec = '\n  '.join(styled(u, fg='yellow') for u in failures)
             bdata = json.dumps({'msg': f"Unknown URL type, cannot open:\n  {spec}"}).encode('utf-8')
-            special_window = SpecialWindow([kitty_exe(), '+shitten', 'show_error', '--title', 'Open URL Error'], bdata, 'Open URL Error')
+            special_window = SpecialWindow([shitty_exe(), '+shitten', 'show_error', '--title', 'Open URL Error'], bdata, 'Open URL Error')
             if needs_window_replaced and tab is not None:
                 tab.new_special_window(special_window)
             else:

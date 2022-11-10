@@ -15,7 +15,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             CC: ${{ matrix.cc }}
-            KITTY_SANITIZE: ${{ matrix.sanitize }}
+            shitty_SANITIZE: ${{ matrix.sanitize }}
 
         strategy:
             matrix:
@@ -71,7 +71,7 @@ jobs:
                 fetch-depth: 0  # needed for :commit: docs role
 
             - name: Test for trailing whitespace
-              run: if grep -Inr '\s$' shitty kitty_tests kittens docs *.py *.asciidoc *.rst .gitattributes .gitignore; then echo Trailing whitespace found, aborting.; exit 1; fi
+              run: if grep -Inr '\s$' shitty shitty_tests shittens docs *.py *.asciidoc *.rst .gitattributes .gitignore; then echo Trailing whitespace found, aborting.; exit 1; fi
 
             - name: Set up Python
               uses: actions/setup-python@v3
@@ -106,7 +106,7 @@ jobs:
             matrix:
                 os: [ubuntu-latest, macos-latest]
         env:
-            KITTY_BUNDLE: 1
+            shitty_BUNDLE: 1
         steps:
             - name: Checkout source code
               uses: actions/checkout@master

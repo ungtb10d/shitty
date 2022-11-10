@@ -9,8 +9,8 @@ from typing import (
     Union
 )
 
-from kittens.runner import (
-    all_kitten_names, get_kitten_cli_docs, get_kitten_completer
+from shittens.runner import (
+    all_shitten_names, get_shitten_cli_docs, get_shitten_completer
 )
 
 from .cli import (
@@ -89,7 +89,7 @@ class MatchGroup:
 
 
 def debug(*a: Any, **kw: Any) -> None:
-    from kittens.tui.loop import debug_write
+    from shittens.tui.loop import debug_write
     debug_write(*a, **kw)
 
 
@@ -148,7 +148,7 @@ def load_fish2_completion() -> str:
 completion_scripts = {
     'zsh': '''#compdef shitty
 
-_kitty() {
+_shitty() {
     local src
     # Send all words up to the word the cursor is currently on
     src=$(printf "%s\n" "${(@)words[1,$CURRENT]}" | shitty +complete zsh)
@@ -156,10 +156,10 @@ _kitty() {
         eval ${src}
     fi
 }
-compdef _kitty shitty
+compdef _shitty shitty
 '''.__str__,
     'bash': '''
-_kitty_completions() {
+_shitty_completions() {
     local src
     local limit
     # Send all words up to the word the cursor is currently on
@@ -170,15 +170,15 @@ _kitty_completions() {
     fi
 }
 
-complete -o nospace -F _kitty_completions shitty
+complete -o nospace -F _shitty_completions shitty
 '''.__str__,
     'fish': '''
-function __kitty_completions
+function __shitty_completions
     # Send all words up to the one before the cursor
     commandline -cop | shitty +complete fish
 end
 
-complete -f -c shitty -a "(__kitty_completions)"
+complete -f -c shitty -a "(__shitty_completions)"
 '''.__str__,
     'fish2': load_fish2_completion,
 }
@@ -363,7 +363,7 @@ def completions_for_first_word(ans: Completions, prefix: str, entry_points: Iter
         ans.delegate = Delegate([prefix], 0)
 
 
-def kitty_cli_opts(ans: Completions, prefix: Optional[str] = None) -> None:
+def shitty_cli_opts(ans: Completions, prefix: Optional[str] = None) -> None:
     if not prefix:
         return
     matches = {}
@@ -376,7 +376,7 @@ def kitty_cli_opts(ans: Completions, prefix: Optional[str] = None) -> None:
     ans.add_match_group('Options', matches)
 
 
-def complete_kitty_cli_arg(ans: Completions, opt: Optional[OptionDict], prefix: str, unknown_args: Delegate) -> None:
+def complete_shitty_cli_arg(ans: Completions, opt: Optional[OptionDict], prefix: str, unknown_args: Delegate) -> None:
     prefix = prefix or ''
     if not opt:
         if unknown_args.num_of_unknown_args > 0:
@@ -475,7 +475,7 @@ def complete_cli(
         if not isinstance(opt, str):
             for alias in opt['aliases']:
                 option_map[alias] = opt
-    complete_alias_map(ans, words, new_word, option_map, complete_kitty_cli_arg)
+    complete_alias_map(ans, words, new_word, option_map, complete_shitty_cli_arg)
 
 
 def global_options_for_remote_cmd() -> Dict[str, OptionDict]:
@@ -687,7 +687,7 @@ def complete_icat_args(ans: Completions, opt: Optional[OptionDict], prefix: str,
 
 def complete_themes_args(ans: Completions, opt: Optional[OptionDict], prefix: str, unknown_args: Delegate) -> None:
     if opt is None:
-        from kittens.themes.collection import load_themes
+        from shittens.themes.collection import load_themes
         themes = load_themes(cache_age=-1, ignore_no_cache=True)
         names = tuple(t.name for t in themes if t.name.startswith(prefix))
         ans.add_match_group('Themes', names)
@@ -751,16 +751,16 @@ def complete_diff_args(ans: Completions, opt: Optional[OptionDict], prefix: str,
         complete_basic_option_args(ans, opt, prefix)
 
 
-def complete_kitten(ans: Completions, shitten: str, words: Sequence[str], new_word: bool) -> None:
+def complete_shitten(ans: Completions, shitten: str, words: Sequence[str], new_word: bool) -> None:
     try:
-        completer = get_kitten_completer(shitten)
+        completer = get_shitten_completer(shitten)
     except SystemExit:
         completer = None
     if completer is not None:
         completer(ans, words, new_word)
         return
     try:
-        cd = get_kitten_cli_docs(shitten)
+        cd = get_shitten_cli_docs(shitten)
     except SystemExit:
         cd = None
     if cd is None:
@@ -796,7 +796,7 @@ def find_completions(words: Sequence[str], new_word: bool, entry_points: Iterabl
             return ans
         prefix = words[0] if words else ''
         completions_for_first_word(ans, prefix, entry_points, namespaced_entry_points)
-        kitty_cli_opts(ans, prefix)
+        shitty_cli_opts(ans, prefix)
         return ans
     if words[0] == '@':
         complete_alias_map(ans, words[1:], new_word, global_options_for_remote_cmd(), remote_command_completer)
@@ -815,9 +815,9 @@ def find_completions(words: Sequence[str], new_word: bool, entry_points: Iterabl
         else:
             if words[1] == 'shitten':
                 if len(words) == 2 or (len(words) == 3 and not new_word):
-                    ans.add_match_group('Kittens', (k for k in all_kitten_names() if k.startswith('' if len(words) == 2 else words[2])))
+                    ans.add_match_group('shittens', (k for k in all_shitten_names() if k.startswith('' if len(words) == 2 else words[2])))
                 else:
-                    complete_kitten(ans, words[2], words[3:], new_word)
+                    complete_shitten(ans, words[2], words[3:], new_word)
             elif words[1] == 'open':
                 complete_cli(ans, words[2:], new_word)
         return ans
@@ -825,7 +825,7 @@ def find_completions(words: Sequence[str], new_word: bool, entry_points: Iterabl
         if len(words) == 1:
             if new_word:
                 if words[0] == '+shitten':
-                    ans.add_match_group('Kittens', all_kitten_names())
+                    ans.add_match_group('shittens', all_shitten_names())
                 elif words[0] == '+open':
                     complete_cli(ans, words[1:], new_word)
             else:
@@ -834,9 +834,9 @@ def find_completions(words: Sequence[str], new_word: bool, entry_points: Iterabl
         else:
             if words[0] == '+shitten':
                 if len(words) == 2 and not new_word:
-                    ans.add_match_group('Kittens', (k for k in all_kitten_names() if k.startswith(words[1])))
+                    ans.add_match_group('shittens', (k for k in all_shitten_names() if k.startswith(words[1])))
                 else:
-                    complete_kitten(ans, words[1], words[2:], new_word)
+                    complete_shitten(ans, words[1], words[2:], new_word)
             elif words[0] == '+open':
                 complete_cli(ans, words[1:], new_word)
     else:

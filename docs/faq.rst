@@ -47,7 +47,7 @@ terminfo files to the server::
 
     shitty +shitten ssh myserver
 
-This :doc:`ssh shitten <kittens/ssh>` takes all the same command line arguments
+This :doc:`ssh shitten <shittens/ssh>` takes all the same command line arguments
 as :program:`ssh`, you can alias it to something small in your shell's rc files
 to avoid having to type it each time::
 
@@ -93,7 +93,7 @@ For macOS, you may also need to put that file under :file:`~/.terminfo/78/`::
 
     mkdir -p ~/.terminfo/{78,x}
     ln -snf ../x/xterm-shitty ~/.terminfo/78/xterm-shitty
-    tic -x -o ~/.terminfo "$KITTY_INSTALLATION_DIR/terminfo/shitty.terminfo"
+    tic -x -o ~/.terminfo "$shitty_INSTALLATION_DIR/terminfo/shitty.terminfo"
 
 Note that :program:`sudo` might remove :envvar:`TERMINFO`. Then setting it at
 the shell prompt can be too late, because command line editing may not be
@@ -120,7 +120,7 @@ explicitly set a UTF-8 locale, like::
 How do I change the colors in a running shitty instance?
 ------------------------------------------------------------
 
-The easiest way to do it is to use the :doc:`themes shitten </kittens/themes>`,
+The easiest way to do it is to use the :doc:`themes shitten </shittens/themes>`,
 to choose a new color theme. Simply run::
 
     shitty +shitten themes
@@ -136,7 +136,7 @@ Or you can enable :doc:`remote control <remote-control>` for |shitty| and use
 remote control command, for details, see :ref:`at-set-colors`.
 
 To change colors when SSHing into a remote host, use the :opt:`color_scheme
-<shitten-ssh.color_scheme>` setting for the :doc:`ssh shitten <kittens/ssh>`.
+<shitten-ssh.color_scheme>` setting for the :doc:`ssh shitten <shittens/ssh>`.
 
 Additionally, You can use the
 `OSC terminal escape codes <https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands>`__
@@ -277,7 +277,7 @@ homepage:
    :target: https://github.com/DinkDonk/shitty-icon
    :width: 256
 
-.. image:: https://github.com/hristost/shitty-alternative-icon/raw/main/kitty_icon.png
+.. image:: https://github.com/hristost/shitty-alternative-icon/raw/main/shitty_icon.png
    :target: https://github.com/hristost/shitty-alternative-icon
    :width: 256
 
@@ -369,12 +369,12 @@ You need to make sure that the environment variables you define in your shell's
 rc files are either also defined system wide or via the :opt:`env` directive in
 :file:`shitty.conf`. Common environment variables that cause issues are those
 related to localization, such as :envvar:`LANG`, ``LC_*`` and loading of
-configuration files such as ``XDG_*``, :envvar:`KITTY_CONFIG_DIRECTORY`.
+configuration files such as ``XDG_*``, :envvar:`shitty_CONFIG_DIRECTORY`.
 
 To see the environment variables that shitty sees, you can add the following
 mapping to :file:`shitty.conf`::
 
-    map f1 show_kitty_env_vars
+    map f1 show_shitty_env_vars
 
 then pressing :kbd:`F1` will show you the environment variables shitty sees.
 

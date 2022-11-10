@@ -17,7 +17,7 @@ from .conf.utils import BadLine
 from .config import cached_values_for
 from .constants import (
     appname, beam_cursor_data_file, clear_handled_signals, config_dir, glfw_path,
-    is_macos, is_wayland, kitty_exe, logo_png_file, running_in_kitty, website_url,
+    is_macos, is_wayland, shitty_exe, logo_png_file, running_in_shitty, website_url,
 )
 from .fast_data_types import (
     GLFW_IBEAM_CURSOR, GLFW_MOD_ALT, GLFW_MOD_SHIFT, SingleKey, create_os_window,
@@ -146,7 +146,7 @@ def set_macos_app_custom_icon() -> None:
         custom_icon_mtime = safe_mtime(icon_path)
         if custom_icon_mtime is not None:
             from .fast_data_types import cocoa_set_app_icon, cocoa_set_dock_icon
-            krd = getattr(sys, 'kitty_run_data')
+            krd = getattr(sys, 'shitty_run_data')
             bundle_path = os.path.dirname(os.path.dirname(krd.get('bundle_exe_dir')))
             icon_sentinel = os.path.join(bundle_path, 'Icon\r')
             sentinel_mtime = safe_mtime(icon_sentinel)
@@ -189,9 +189,9 @@ def _run_app(opts: Options, args: CLIOptions, prewarm: PrewarmProcess, bad_lines
         val = get_macos_shortcut_for(func_map, 'load_config_file', lookup_name='reload_config')
         if val is not None:
             global_shortcuts['reload_config'] = val
-        val = get_macos_shortcut_for(func_map, f'open_url {website_url()}', lookup_name='open_kitty_website')
+        val = get_macos_shortcut_for(func_map, f'open_url {website_url()}', lookup_name='open_shitty_website')
         if val is not None:
-            global_shortcuts['open_kitty_website'] = val
+            global_shortcuts['open_shitty_website'] = val
 
         if opts.macos_custom_beam_cursor:
             set_custom_ibeam_cursor()
@@ -273,7 +273,7 @@ def setup_profiling() -> Generator[None, None, None]:
     if do_profile:
         import subprocess
         stop_profiler()
-        exe = kitty_exe()
+        exe = shitty_exe()
         cg = '/tmp/shitty-profile.callgrind'
         print('Post processing profile data for', exe, '...')
         with open(cg, 'wb') as f:
@@ -301,9 +301,9 @@ def macos_cmdline(argv_args: List[str]) -> List[str]:
 
 def expand_listen_on(listen_on: str, from_config_file: bool) -> str:
     listen_on = expandvars(listen_on)
-    if '{kitty_pid}' not in listen_on and from_config_file:
-        listen_on += '-{kitty_pid}'
-    listen_on = listen_on.replace('{kitty_pid}', str(os.getpid()))
+    if '{shitty_pid}' not in listen_on and from_config_file:
+        listen_on += '-{shitty_pid}'
+    listen_on = listen_on.replace('{shitty_pid}', str(os.getpid()))
     if listen_on.startswith('unix:'):
         path = listen_on[len('unix:'):]
         if not path.startswith('@'):
@@ -331,9 +331,9 @@ def prepend_if_not_present(path: str, paths_serialized: str) -> str:
     return path + os.pathsep + paths_serialized
 
 
-def ensure_kitty_in_path() -> None:
+def ensure_shitty_in_path() -> None:
     # Ensure the correct shitty is in PATH
-    krd = getattr(sys, 'kitty_run_data')
+    krd = getattr(sys, 'shitty_run_data')
     rpath = krd.get('bundle_exe_dir')
     if not rpath:
         return
@@ -342,8 +342,8 @@ def ensure_kitty_in_path() -> None:
         existing = shutil.which('shitty')
         if modify_path or not existing:
             env_path = os.environ.get('PATH', '')
-            correct_kitty = os.path.join(rpath, 'shitty')
-            if not existing or not safe_samefile(existing, correct_kitty):
+            correct_shitty = os.path.join(rpath, 'shitty')
+            if not existing or not safe_samefile(existing, correct_shitty):
                 os.environ['PATH'] = prepend_if_not_present(rpath, env_path)
 
 
@@ -354,13 +354,13 @@ def setup_manpath(env: Dict[str, str]) -> None:
     from .constants import local_docs
     mp = os.environ.get('MANPATH', env.get('MANPATH', ''))
     d = os.path.dirname
-    kitty_man = os.path.join(d(d(d(local_docs()))), 'man')
+    shitty_man = os.path.join(d(d(d(local_docs()))), 'man')
     if not mp:
-        env['MANPATH'] = f'{kitty_man}:'
+        env['MANPATH'] = f'{shitty_man}:'
     elif mp.startswith(':'):
-        env['MANPATH'] = f':{kitty_man}:{mp}'
+        env['MANPATH'] = f':{shitty_man}:{mp}'
     else:
-        env['MANPATH'] = f'{kitty_man}:{mp}'
+        env['MANPATH'] = f'{shitty_man}:{mp}'
 
 
 def setup_environment(opts: Options, cli_opts: CLIOptions) -> None:
@@ -371,14 +371,14 @@ def setup_environment(opts: Options, cli_opts: CLIOptions) -> None:
     if cli_opts.listen_on:
         cli_opts.listen_on = expand_listen_on(cli_opts.listen_on, from_config_file)
     env = opts.env.copy()
-    ensure_kitty_in_path()
-    kitty_path = shutil.which('shitty')
-    if kitty_path:
+    ensure_shitty_in_path()
+    shitty_path = shutil.which('shitty')
+    if shitty_path:
         child_path = env.get('PATH')
         # if child_path is None it will be inherited from os.environ,
         # the other values mean the user doesn't want a PATH
         if child_path not in ('', DELETE_ENV_VAR) and child_path is not None:
-            env['PATH'] = prepend_if_not_present(os.path.dirname(kitty_path), env['PATH'])
+            env['PATH'] = prepend_if_not_present(os.path.dirname(shitty_path), env['PATH'])
     setup_manpath(env)
     set_default_env(env)
 
@@ -401,13 +401,13 @@ def set_locale() -> None:
 
 
 def _main() -> None:
-    running_in_kitty(True)
+    running_in_shitty(True)
 
     args = sys.argv[1:]
-    if is_macos and os.environ.pop('KITTY_LAUNCHED_BY_LAUNCH_SERVICES', None) == '1':
+    if is_macos and os.environ.pop('shitty_LAUNCHED_BY_LAUNCH_SERVICES', None) == '1':
         os.chdir(os.path.expanduser('~'))
         args = macos_cmdline(args)
-        getattr(sys, 'kitty_run_data')['launched_by_launch_services'] = True
+        getattr(sys, 'shitty_run_data')['launched_by_launch_services'] = True
     try:
         cwd_ok = os.path.isdir(os.getcwd())
     except Exception:

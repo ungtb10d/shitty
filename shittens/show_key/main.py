@@ -8,7 +8,7 @@ from typing import List
 
 from shitty.cli import parse_args
 from shitty.cli_stub import ShowKeyCLIOptions
-from kittens.tui.operations import raw_mode, styled
+from shittens.tui.operations import raw_mode, styled
 
 ctrl_keys = '@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_'
 
@@ -68,8 +68,8 @@ usage = ''
 def main(args: List[str]) -> None:
     cli_opts, items = parse_args(args[1:], OPTIONS, '', help_text, 'shitty +shitten show_key', result_class=ShowKeyCLIOptions)
     if cli_opts.key_mode == 'shitty':
-        from .kitty_mode import main as kitty_main
-        return kitty_main()
+        from .shitty_mode import main as shitty_main
+        return shitty_main()
     if cli_opts.key_mode != 'unchanged':
         print(end='\x1b[?1' + ('l' if cli_opts.key_mode == 'normal' else 'h'), flush=True)
     try:

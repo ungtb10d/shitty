@@ -53,7 +53,7 @@ from .terminfo import get_capabilities
 from .types import MouseEvent, OverlayType, WindowGeometry, ac, run_once
 from .typing import BossType, ChildType, EdgeLiteral, TabType, TypedDict
 from .utils import (
-    docs_url, kitty_ansi_sanitizer_pat, load_shaders, log_error, open_cmd, open_url,
+    docs_url, shitty_ansi_sanitizer_pat, load_shaders, log_error, open_cmd, open_url,
     parse_color_set, path_from_osc7_url, resolve_custom_file, resolved_shell,
     sanitize_for_bracketed_paste, sanitize_title,
 )
@@ -102,10 +102,10 @@ class CwdRequest:
         if reported_cwd:
             # First check if we are running ssh shitten, and trying to open the configured login shell
             if argv[0] == resolved_shell(get_options())[0]:
-                ssh_kitten_cmdline = window.ssh_kitten_cmdline()
-                if ssh_kitten_cmdline:
-                    from kittens.ssh.utils import set_cwd_in_cmdline
-                    argv[:] = ssh_kitten_cmdline
+                ssh_shitten_cmdline = window.ssh_shitten_cmdline()
+                if ssh_shitten_cmdline:
+                    from shittens.ssh.utils import set_cwd_in_cmdline
+                    argv[:] = ssh_shitten_cmdline
                     set_cwd_in_cmdline(reported_cwd, argv)
                     return ''
             if not window.child_is_remote and (self.request_type is CwdRequestType.last_reported or window.at_prompt):
@@ -381,7 +381,7 @@ def load_paste_filter() -> Callable[[str], str]:
 
 
 def text_sanitizer(as_ansi: bool, add_wrap_markers: bool) -> Callable[[str], str]:
-    pat = kitty_ansi_sanitizer_pat()
+    pat = shitty_ansi_sanitizer_pat()
     ansi, wrap_markers = not as_ansi, not add_wrap_markers
 
     def remove_wrap_markers(line: str) -> str:
@@ -496,7 +496,7 @@ class Window:
         self.actions_on_focus_change: List[Callable[['Window', bool], None]] = []
         self.actions_on_removal: List[Callable[['Window'], None]] = []
         self.current_marker_spec: Optional[Tuple[str, Union[str, Tuple[Tuple[int, str], ...]]]] = None
-        self.kitten_result_processors: List[Callable[['Window', Any], None]] = []
+        self.shitten_result_processors: List[Callable[['Window', Any], None]] = []
         self.pty_resized_once = False
         self.last_reported_pty_size = (-1, -1, -1, -1)
         self.needs_attention = False
@@ -507,7 +507,7 @@ class Window:
         self.id: int = add_window(tab.os_window_id, tab.id, self.title)
         self.margin = EdgeWidths()
         self.padding = EdgeWidths()
-        self.kitten_result: Optional[Dict[str, Any]] = None
+        self.shitten_result: Optional[Dict[str, Any]] = None
         if not self.id:
             raise Exception(f'No tab with id: {tab.id} in OS Window: {tab.os_window_id} was found, or the window counter wrapped')
         self.tab_id = tab.id
@@ -861,7 +861,7 @@ class Window:
                         return
                     url = urlunparse(purl._replace(netloc=''))
             if opts.allow_hyperlinks & 0b10:
-                from kittens.tui.operations import styled
+                from shittens.tui.operations import styled
                 get_boss().choose(
                     'What would you like to do with this URL:\n' + styled(unquote(url), fg='yellow'),
                     partial(self.hyperlink_open_confirmed, url, cwd),
@@ -878,24 +878,24 @@ class Window:
             set_clipboard_string(url)
 
     def handle_remote_file(self, netloc: str, remote_path: str) -> None:
-        from kittens.remote_file.main import is_ssh_kitten_sentinel
-        from kittens.ssh.main import get_connection_data
+        from shittens.remote_file.main import is_ssh_shitten_sentinel
+        from shittens.ssh.main import get_connection_data
 
         from .utils import SSHConnectionData
-        args = self.ssh_kitten_cmdline()
+        args = self.ssh_shitten_cmdline()
         conn_data: Union[None, List[str], SSHConnectionData] = None
         if args:
             ssh_cmdline = sorted(self.child.foreground_processes, key=lambda p: p['pid'])[-1]['cmdline'] or ['']
             if 'ControlPath=' in ' '.join(ssh_cmdline):
                 idx = ssh_cmdline.index('--')
-                conn_data = [is_ssh_kitten_sentinel] + list(ssh_cmdline[:idx + 2])
+                conn_data = [is_ssh_shitten_sentinel] + list(ssh_cmdline[:idx + 2])
         if conn_data is None:
             args = self.child.foreground_cmdline
             conn_data = get_connection_data(args, self.child.foreground_cwd or self.child.current_cwd or '')
             if conn_data is None:
                 get_boss().show_error('Could not handle remote file', f'No SSH connection data found in: {args}')
                 return
-        get_boss().run_kitten(
+        get_boss().run_shitten(
             'remote_file', '--hostname', netloc.partition(':')[0], '--path', remote_path,
             '--ssh-connection-data', json.dumps(conn_data)
         )
@@ -957,7 +957,7 @@ class Window:
             import shlex
             import subprocess
             env = self.child.foreground_environ
-            env['KITTY_CHILD_CMDLINE'] = ' '.join(map(shlex.quote, self.child.cmdline))
+            env['shitty_CHILD_CMDLINE'] = ' '.join(map(shlex.quote, self.child.cmdline))
             subprocess.Popen(cb, env=env, cwd=self.child.foreground_cwd, preexec_fn=clear_handled_signals)
         if not self.is_active:
             changed = not self.needs_attention
@@ -1073,22 +1073,22 @@ class Window:
         self.write_to_child(data)
 
     def handle_remote_ssh(self, msg: str) -> None:
-        from kittens.ssh.main import get_ssh_data
+        from shittens.ssh.main import get_ssh_data
         for line in get_ssh_data(msg, f'{os.getpid()}-{self.id}'):
             self.write_to_child(line)
 
-    def handle_kitten_result(self, msg: str) -> None:
+    def handle_shitten_result(self, msg: str) -> None:
         import base64
-        self.kitten_result = json.loads(base64.b85decode(msg))
-        for processor in self.kitten_result_processors:
+        self.shitten_result = json.loads(base64.b85decode(msg))
+        for processor in self.shitten_result_processors:
             try:
-                processor(self, self.kitten_result)
+                processor(self, self.shitten_result)
             except Exception:
                 import traceback
                 traceback.print_exc()
 
-    def add_kitten_result_processor(self, callback: Callable[['Window', Any], None]) -> None:
-        self.kitten_result_processors.append(callback)
+    def add_shitten_result_processor(self, callback: Callable[['Window', Any], None]) -> None:
+        self.shitten_result_processors.append(callback)
 
     def handle_overlay_ready(self, msg: str) -> None:
         boss = get_boss()
@@ -1360,7 +1360,7 @@ class Window:
     def destroy(self) -> None:
         self.call_watchers(self.watchers.on_close, {})
         self.destroyed = True
-        del self.kitten_result_processors
+        del self.shitten_result_processors
         if hasattr(self, 'screen'):
             if self.is_active and self.os_window_id == current_focused_os_window_id():
                 # Cancel IME composition when window is destroyed
@@ -1397,11 +1397,11 @@ class Window:
                 return True
         return False
 
-    def ssh_kitten_cmdline(self) -> List[str]:
-        from kittens.ssh.utils import is_kitten_cmdline
+    def ssh_shitten_cmdline(self) -> List[str]:
+        from shittens.ssh.utils import is_shitten_cmdline
         for p in self.child.foreground_processes:
             q = list(p['cmdline'] or ())
-            if is_kitten_cmdline(q):
+            if is_shitten_cmdline(q):
                 return q
         return []
 
@@ -1691,11 +1691,11 @@ class Window:
     For example::
 
         # show the config docs
-        map f1 show_kitty_doc conf
+        map f1 show_shitty_doc conf
         # show the ssh shitten docs
-        map f1 show_kitty_doc kittens/ssh
+        map f1 show_shitty_doc shittens/ssh
     ''')
-    def show_kitty_doc(self, which: str = '') -> None:
+    def show_shitty_doc(self, which: str = '') -> None:
         url = docs_url(which)
         get_boss().open_url(url)
     # }}}

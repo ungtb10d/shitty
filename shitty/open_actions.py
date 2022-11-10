@@ -231,7 +231,7 @@ def default_open_actions() -> Tuple[OpenAction, ...]:
     return tuple(parse('''\
 # Open shitty HTML docs links
 protocol shitty+doc
-action show_kitty_doc $URL_PATH
+action show_shitty_doc $URL_PATH
     '''.splitlines()))
 
 

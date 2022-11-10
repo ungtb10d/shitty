@@ -1013,12 +1013,12 @@ class Parser:
     def italic_font(self, val: str, ans: typing.Dict[str, typing.Any]) -> None:
         ans['italic_font'] = str(val)
 
-    def kitten_alias(self, val: str, ans: typing.Dict[str, typing.Any]) -> None:
+    def shitten_alias(self, val: str, ans: typing.Dict[str, typing.Any]) -> None:
         for k, v in action_alias(val):
-            ans["kitten_alias"][k] = v
+            ans["shitten_alias"][k] = v
 
-    def kitty_mod(self, val: str, ans: typing.Dict[str, typing.Any]) -> None:
-        ans['kitty_mod'] = to_modifiers(val)
+    def shitty_mod(self, val: str, ans: typing.Dict[str, typing.Any]) -> None:
+        ans['shitty_mod'] = to_modifiers(val)
 
     def linux_display_server(self, val: str, ans: typing.Dict[str, typing.Any]) -> None:
         val = val.lower()
@@ -1376,7 +1376,7 @@ def create_result_dict() -> typing.Dict[str, typing.Any]:
         'env': {},
         'exe_search_path': {},
         'font_features': {},
-        'kitten_alias': {},
+        'shitten_alias': {},
         'modify_font': {},
         'narrow_symbols': {},
         'remote_control_password': {},

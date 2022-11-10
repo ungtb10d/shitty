@@ -97,7 +97,7 @@ exec_zsh_with_integration() {
     if [ -z "$zdotdir" ]; then
         zdotdir=~
     else
-        export KITTY_ORIG_ZDOTDIR="$zdotdir"
+        export shitty_ORIG_ZDOTDIR="$zdotdir"
     fi
     # dont prevent zsh-newuser-install from running
     if [ -f "$zdotdir/.zshrc" -o -f "$zdotdir/.zshenv" -o -f "$zdotdir/.zprofile" -o -f "$zdotdir/.zlogin" ]; then
@@ -105,7 +105,7 @@ exec_zsh_with_integration() {
         exec "$login_shell" "-l"
     fi
     # ensure this is not propagated
-    unset KITTY_ORIG_ZDOTDIR
+    unset shitty_ORIG_ZDOTDIR
 }
 
 exec_fish_with_integration() {
@@ -114,16 +114,16 @@ exec_fish_with_integration() {
     else
         export XDG_DATA_DIRS="$shell_integration_dir:$XDG_DATA_DIRS"
     fi
-    export KITTY_FISH_XDG_DATA_DIR="$shell_integration_dir"
+    export shitty_FISH_XDG_DATA_DIR="$shell_integration_dir"
     exec "$login_shell" "-l"
 }
 
 exec_bash_with_integration() {
     export ENV="$shell_integration_dir/bash/shitty.bash"
-    export KITTY_BASH_INJECT="1"
+    export shitty_BASH_INJECT="1"
     if [ -z "$HISTFILE" ]; then
         export HISTFILE="$HOME/.bash_history"
-        export KITTY_BASH_UNEXPORT_HISTFILE="1"
+        export shitty_BASH_UNEXPORT_HISTFILE="1"
     fi
     exec "$login_shell" "--login" "--posix"
 }
@@ -154,35 +154,35 @@ execute_sh_with_posix_env() {
     sh_script="$sh_dir/login_shell_env.sh"
     # Source /etc/profile, ~/.profile, and then check and source ENV
     printf "%s" '
-if [ -n "$KITTY_SH_INJECT" ]; then
-    unset ENV; unset KITTY_SH_INJECT
+if [ -n "$shitty_SH_INJECT" ]; then
+    unset ENV; unset shitty_SH_INJECT
     _ksi_safe_source() { [ -f "$1" -a -r "$1" ] || return 1; . "$1"; return 0; }
-    [ -n "$KITTY_SH_POSIX_ENV" ] && export ENV="$KITTY_SH_POSIX_ENV"
-    unset KITTY_SH_POSIX_ENV
+    [ -n "$shitty_SH_POSIX_ENV" ] && export ENV="$shitty_SH_POSIX_ENV"
+    unset shitty_SH_POSIX_ENV
     _ksi_safe_source "/etc/profile"; _ksi_safe_source "${HOME-}/.profile"
     [ -n "$ENV" ] && _ksi_safe_source "$ENV"
     unset -f _ksi_safe_source
 fi' > "$sh_script"
-    export KITTY_SH_INJECT="1"
-    [ -n "$ENV" ] && export KITTY_SH_POSIX_ENV="$ENV"
+    export shitty_SH_INJECT="1"
+    [ -n "$ENV" ] && export shitty_SH_POSIX_ENV="$ENV"
     export ENV="$sh_script"
     exec "$login_shell"
 }
 
-install_kitty_bootstrap() {
+install_shitty_bootstrap() {
     case "$(command uname)" in
         Linux) ;;
         Darwin) ;;
         *) return ;;
     esac
-    kitty_exists="n"
-    command -v shitty 2> /dev/null > /dev/null && kitty_exists="y"
-    if [ "$kitty_remote" = "yes" -o "$kitty_remote-$kitty_exists" = "if-needed-n" ]; then
-        kitty_dir="$data_dir/shitty/bin"
-        if [ "$kitty_exists" = "y" ]; then
-            export PATH="$kitty_dir:$PATH"
+    shitty_exists="n"
+    command -v shitty 2> /dev/null > /dev/null && shitty_exists="y"
+    if [ "$shitty_remote" = "yes" -o "$shitty_remote-$shitty_exists" = "if-needed-n" ]; then
+        shitty_dir="$data_dir/shitty/bin"
+        if [ "$shitty_exists" = "y" ]; then
+            export PATH="$shitty_dir:$PATH"
         else
-            export PATH="$PATH:$kitty_dir"
+            export PATH="$PATH:$shitty_dir"
         fi
     fi
 }
@@ -195,7 +195,7 @@ prepare_for_exec() {
         printf "\r\033[K" > /dev/tty
     fi
     [ -f "$HOME/.terminfo/shitty.terminfo" ] || die "Incomplete extraction of ssh data"
-    install_kitty_bootstrap
+    install_shitty_bootstrap
 
     [ -n "$login_shell" ] || using_getent || using_id || using_python || using_perl || using_passwd || using_shell_env || login_shell="sh"
     case "$login_shell" in
@@ -217,16 +217,16 @@ prepare_for_exec() {
 }
 
 exec_login_shell() {
-    case "$KITTY_SHELL_INTEGRATION" in
+    case "$shitty_SHELL_INTEGRATION" in
         ("")
             # only blanks or unset
-            unset KITTY_SHELL_INTEGRATION
+            unset shitty_SHELL_INTEGRATION
             ;;
         (*)
             # not blank
-            printf "%s" "$KITTY_SHELL_INTEGRATION" | command grep '\bno-rc\b' || exec_with_shell_integration
+            printf "%s" "$shitty_SHELL_INTEGRATION" | command grep '\bno-rc\b' || exec_with_shell_integration
             # either no-rc or exec failed
-            unset KITTY_SHELL_INTEGRATION
+            unset shitty_SHELL_INTEGRATION
             ;;
     esac
 

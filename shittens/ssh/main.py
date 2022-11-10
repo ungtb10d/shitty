@@ -43,7 +43,7 @@ from ..tui.operations import (
     RESTORE_PRIVATE_MODE_VALUES, SAVE_PRIVATE_MODE_VALUES, Mode,
     restore_colors, save_colors, set_mode
 )
-from ..tui.utils import kitty_opts, running_in_tmux
+from ..tui.utils import shitty_opts, running_in_tmux
 from .config import init_config
 from .copy import CopyInstruction
 from .options.types import Options as SSHOptions
@@ -104,7 +104,7 @@ def serialize_env(literal_env: Dict[str, str], env: Dict[str, str], base_env: Di
         v = env[k]
         if v == DELETE_ENV_VAR:
             a(k, prefix='unset')
-        elif v == '_kitty_copy_env_var_':
+        elif v == '_shitty_copy_env_var_':
             q = base_env.get(k)
             if q is not None:
                 a(k, q)
@@ -148,32 +148,32 @@ def make_tarfile(ssh_opts: SSHOptions, base_env: Dict[str, str], compression: st
 
     from shitty.shell_integration import get_effective_ksi_env_var
     if ssh_opts.shell_integration == 'inherited':
-        ksi = get_effective_ksi_env_var(kitty_opts())
+        ksi = get_effective_ksi_env_var(shitty_opts())
     else:
         from shitty.options.types import Options
         from shitty.options.utils import shell_integration
         ksi = get_effective_ksi_env_var(Options({'shell_integration': shell_integration(ssh_opts.shell_integration)}))
 
     env = {
-        'TERM': os.environ.get('TERM') or kitty_opts().term,
+        'TERM': os.environ.get('TERM') or shitty_opts().term,
         'COLORTERM': 'truecolor',
     }
     env.update(ssh_opts.env)
-    for q in ('KITTY_WINDOW_ID', 'WINDOWID'):
+    for q in ('shitty_WINDOW_ID', 'WINDOWID'):
         val = os.environ.get(q)
         if val is not None:
             env[q] = val
-    env['KITTY_SHELL_INTEGRATION'] = ksi or DELETE_ENV_VAR
-    env['KITTY_SSH_KITTEN_DATA_DIR'] = ssh_opts.remote_dir
+    env['shitty_SHELL_INTEGRATION'] = ksi or DELETE_ENV_VAR
+    env['shitty_SSH_shitten_DATA_DIR'] = ssh_opts.remote_dir
     if ssh_opts.login_shell:
-        env['KITTY_LOGIN_SHELL'] = ssh_opts.login_shell
+        env['shitty_LOGIN_SHELL'] = ssh_opts.login_shell
     if ssh_opts.cwd:
-        env['KITTY_LOGIN_CWD'] = ssh_opts.cwd
-    if ssh_opts.remote_kitty != 'no':
-        env['KITTY_REMOTE'] = ssh_opts.remote_kitty
-    if os.environ.get('KITTY_PUBLIC_KEY'):
-        env.pop('KITTY_PUBLIC_KEY', None)
-        literal_env['KITTY_PUBLIC_KEY'] = os.environ['KITTY_PUBLIC_KEY']
+        env['shitty_LOGIN_CWD'] = ssh_opts.cwd
+    if ssh_opts.remote_shitty != 'no':
+        env['shitty_REMOTE'] = ssh_opts.remote_shitty
+    if os.environ.get('shitty_PUBLIC_KEY'):
+        env.pop('shitty_PUBLIC_KEY', None)
+        literal_env['shitty_PUBLIC_KEY'] = os.environ['shitty_PUBLIC_KEY']
     env_script = serialize_env(literal_env, env, base_env, for_python=compression != 'gz')
     buf = io.BytesIO()
     with tarfile.open(mode=f'w:{compression}', fileobj=buf, encoding='utf-8') as tf:
@@ -189,7 +189,7 @@ def make_tarfile(ssh_opts: SSHOptions, base_env: Dict[str, str], compression: st
                 f'{arcname}/ssh/*',          # bootstrap files are sent as command line args
                 f'{arcname}/zsh/shitty.zsh',  # present for legacy compat not needed by ssh shitten
             ))
-        if ssh_opts.remote_kitty != 'no':
+        if ssh_opts.remote_shitty != 'no':
             arcname = 'home/' + rd + '/shitty'
             add_data_as_file(tf, arcname + '/version', str_version.encode('ascii'))
             tf.add(shell_integration_dir + '/ssh/shitty', arcname=arcname + '/bin/shitty', filter=normalize_tarinfo)
@@ -199,7 +199,7 @@ def make_tarfile(ssh_opts: SSHOptions, base_env: Dict[str, str], compression: st
 
 
 def get_ssh_data(msg: str, request_id: str) -> Iterator[bytes]:
-    yield b'\nKITTY_DATA_START\n'  # to discard leading data
+    yield b'\nshitty_DATA_START\n'  # to discard leading data
     try:
         msg = standard_b64decode(msg).decode('utf-8')
         md = dict(x.split('=', 1) for x in msg.split(':'))
@@ -215,7 +215,7 @@ def get_ssh_data(msg: str, request_id: str) -> Iterator[bytes]:
             if pw != env_data['pw']:
                 raise ValueError('Incorrect password')
             if rq_id != request_id:
-                raise ValueError(f'Incorrect request id: {rq_id!r} expecting the KITTY_PID-KITTY_WINDOW_ID for the current shitty window')
+                raise ValueError(f'Incorrect request id: {rq_id!r} expecting the shitty_PID-shitty_WINDOW_ID for the current shitty window')
         except Exception as e:
             traceback.print_exc()
             yield f'{e}\n'.encode('utf-8')
@@ -232,7 +232,7 @@ def get_ssh_data(msg: str, request_id: str) -> Iterator[bytes]:
                 yield encoded_data[:line_sz]
                 yield b'\n'
                 encoded_data = encoded_data[line_sz:]
-            yield b'KITTY_DATA_END\n'
+            yield b'shitty_DATA_END\n'
 
 
 def safe_remove(x: str) -> None:
@@ -257,12 +257,12 @@ def prepare_exec_cmd(remote_args: Sequence[str], is_python: bool) -> str:
     if is_python:
         return standard_b64encode(' '.join(remote_args).encode('utf-8')).decode('ascii')
     args = ' '.join(c.replace("'", """'"'"'""") for c in remote_args)
-    return f"""unset KITTY_SHELL_INTEGRATION; exec "$login_shell" -c '{args}'"""
+    return f"""unset shitty_SHELL_INTEGRATION; exec "$login_shell" -c '{args}'"""
 
 
 def prepare_export_home_cmd(ssh_opts: SSHOptions, is_python: bool) -> str:
     home = ssh_opts.env.get('HOME')
-    if home == '_kitty_copy_env_var_':
+    if home == '_shitty_copy_env_var_':
         home = os.environ.get('HOME')
     if home:
         if is_python:
@@ -278,7 +278,7 @@ def bootstrap_script(
     request_data: bool = False, echo_on: bool = True, literal_env: Dict[str, str] = {}
 ) -> Tuple[str, Dict[str, str], str]:
     if request_id is None:
-        request_id = os.environ['KITTY_PID'] + '-' + os.environ['KITTY_WINDOW_ID']
+        request_id = os.environ['shitty_PID'] + '-' + os.environ['shitty_WINDOW_ID']
     is_python = script_type == 'py'
     export_home_cmd = prepare_export_home_cmd(ssh_opts, is_python) if 'HOME' in ssh_opts.env else ''
     exec_cmd = prepare_exec_cmd(remote_args, is_python) if remote_args else ''
@@ -516,7 +516,7 @@ def get_remote_command(
     return wrap_bootstrap_script(sh_script, interpreter), replacements, shm_name
 
 
-def connection_sharing_args(kitty_pid: int) -> List[str]:
+def connection_sharing_args(shitty_pid: int) -> List[str]:
     rd = runtime_dir()
     # Bloody OpenSSH generates a 40 char hash and in creating the socket
     # appends a 27 char temp suffix to it. Socket max path length is approx
@@ -539,7 +539,7 @@ def connection_sharing_args(kitty_pid: int) -> List[str]:
                         os.rename(tlink, idiotic_design)
         rd = idiotic_design
 
-    cp = os.path.join(rd, ssh_control_master_template.format(kitty_pid=kitty_pid, ssh_placeholder='%C'))
+    cp = os.path.join(rd, ssh_control_master_template.format(shitty_pid=shitty_pid, ssh_placeholder='%C'))
     ans: List[str] = [
         '-o', 'ControlMaster=auto',
         '-o', f'ControlPath={cp}',
@@ -564,7 +564,7 @@ def restore_terminal_state() -> Iterator[bool]:
             print(end=RESTORE_PRIVATE_MODE_VALUES, flush=True)
 
 
-def dcs_to_kitty(payload: Union[bytes, str], type: str = 'ssh') -> bytes:
+def dcs_to_shitty(payload: Union[bytes, str], type: str = 'ssh') -> bytes:
     if isinstance(payload, str):
         payload = payload.encode('utf-8')
     payload = standard_b64encode(payload)
@@ -594,7 +594,7 @@ def drain_potential_tty_garbage(p: 'subprocess.Popen[bytes]', data_request: str)
     with open(os.open(os.ctermid(), os.O_CLOEXEC | os.O_RDWR | os.O_NOCTTY), 'wb') as tty:
         if data_request:
             turn_off_echo(tty.fileno())
-            tty.write(dcs_to_kitty(data_request))
+            tty.write(dcs_to_shitty(data_request))
             tty.flush()
         try:
             yield
@@ -604,7 +604,7 @@ def drain_potential_tty_garbage(p: 'subprocess.Popen[bytes]', data_request: str)
             from uuid import uuid4
             canary = uuid4().hex.encode('ascii')
             turn_off_echo(tty.fileno())
-            tty.write(dcs_to_kitty(canary + b'\n\r', type='echo'))
+            tty.write(dcs_to_shitty(canary + b'\n\r', type='echo'))
             tty.flush()
             data = b''
             give_up_at = time.monotonic() + 2
@@ -623,10 +623,10 @@ def drain_potential_tty_garbage(p: 'subprocess.Popen[bytes]', data_request: str)
 def change_colors(color_scheme: str) -> bool:
     if not color_scheme:
         return False
-    from kittens.themes.collection import (
+    from shittens.themes.collection import (
         NoCacheFound, load_themes, text_as_opts
     )
-    from kittens.themes.main import colors_as_escape_codes
+    from shittens.themes.main import colors_as_escape_codes
     if color_scheme.endswith('.conf'):
         conf_file = resolve_abs_or_config_path(color_scheme)
         try:
@@ -644,7 +644,7 @@ def change_colors(color_scheme: str) -> bool:
             theme = themes[cs]
         except KeyError:
             raise SystemExit(f'Failed to find the color theme: {cs}')
-        opts = theme.kitty_opts
+        opts = theme.shitty_opts
     raw = colors_as_escape_codes(opts)
     print(save_colors(), sep='', end=raw, flush=True)
     return True
@@ -692,10 +692,10 @@ def run_ssh(ssh_args: List[str], server_args: List[str], found_extra_args: Tuple
         overrides.insert(0, f'hostname {uname}@{hostname_for_match}')
     host_opts = init_config(hostname_for_match, uname, overrides)
     if host_opts.share_connections:
-        cmd[insertion_point:insertion_point] = connection_sharing_args(int(os.environ['KITTY_PID']))
-    use_kitty_askpass = host_opts.askpass == 'native' or (host_opts.askpass == 'unless-set' and 'SSH_ASKPASS' not in os.environ)
+        cmd[insertion_point:insertion_point] = connection_sharing_args(int(os.environ['shitty_PID']))
+    use_shitty_askpass = host_opts.askpass == 'native' or (host_opts.askpass == 'unless-set' and 'SSH_ASKPASS' not in os.environ)
     need_to_request_data = True
-    if use_kitty_askpass:
+    if use_shitty_askpass:
         sentinel = os.path.join(cache_dir(), 'openssh-is-new-enough-for-askpass')
         sentinel_exists = os.path.exists(sentinel)
         if sentinel_exists or ssh_version() >= (8, 4):
@@ -741,7 +741,7 @@ def main(args: List[str]) -> None:
             raise SystemExit(f'The SSH shitten cannot work with the options: {", ".join(passthrough_args)}')
         os.execlp(ssh_exe(), 'ssh', *args)
 
-    if not os.environ.get('KITTY_WINDOW_ID') or not os.environ.get('KITTY_PID'):
+    if not os.environ.get('shitty_WINDOW_ID') or not os.environ.get('shitty_PID'):
         raise SystemExit('The SSH shitten is meant to run inside a shitty window')
     if not sys.stdin.isatty():
         raise SystemExit('The SSH shitten is meant for interactive use only, STDIN must be a terminal')
@@ -756,7 +756,7 @@ if __name__ == '__main__':
     main(sys.argv)
 elif __name__ == '__completer__':
     from .completion import complete
-    setattr(sys, 'kitten_completer', complete)
+    setattr(sys, 'shitten_completer', complete)
 elif __name__ == '__conf__':
     from .options.definition import definition
     sys.options_definition = definition  # type: ignore

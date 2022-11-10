@@ -11,7 +11,7 @@
 #include "monotonic.h"
 #include <Carbon/Carbon.h>
 #include <Cocoa/Cocoa.h>
-#ifndef KITTY_USE_DEPRECATED_MACOS_NOTIFICATION_API
+#ifndef shitty_USE_DEPRECATED_MACOS_NOTIFICATION_API
 #include <UserNotifications/UserNotifications.h>
 #endif
 
@@ -235,7 +235,7 @@ PENDING(clear_terminal_and_scrollback, CLEAR_TERMINAL_AND_SCROLLBACK)
 PENDING(reload_config, RELOAD_CONFIG)
 PENDING(toggle_macos_secure_keyboard_entry, TOGGLE_MACOS_SECURE_KEYBOARD_ENTRY)
 PENDING(toggle_fullscreen, TOGGLE_FULLSCREEN)
-PENDING(open_kitty_website, OPEN_KITTY_WEBSITE)
+PENDING(open_shitty_website, OPEN_shitty_WEBSITE)
 
 - (BOOL)validateMenuItem:(NSMenuItem *)item {
     if (item.action == @selector(toggle_macos_secure_keyboard_entry:)) {
@@ -271,7 +271,7 @@ typedef struct {
 typedef struct {
     GlobalShortcut new_os_window, close_os_window, close_tab, edit_config_file, reload_config;
     GlobalShortcut previous_tab, next_tab, new_tab, new_window, close_window, reset_terminal, clear_terminal_and_scrollback;
-    GlobalShortcut toggle_macos_secure_keyboard_entry, toggle_fullscreen, open_kitty_website;
+    GlobalShortcut toggle_macos_secure_keyboard_entry, toggle_fullscreen, open_shitty_website;
 } GlobalShortcuts;
 static GlobalShortcuts global_shortcuts;
 
@@ -286,7 +286,7 @@ cocoa_set_global_shortcut(PyObject *self UNUSED, PyObject *args) {
     Q(new_os_window); else Q(close_os_window); else Q(close_tab); else Q(edit_config_file);
     else Q(new_tab); else Q(next_tab); else Q(previous_tab);
     else Q(new_window); else Q(close_window); else Q(reset_terminal); else Q(clear_terminal_and_scrollback); else Q(reload_config);
-    else Q(toggle_macos_secure_keyboard_entry); else Q(toggle_fullscreen); else Q(open_kitty_website);
+    else Q(toggle_macos_secure_keyboard_entry); else Q(toggle_fullscreen); else Q(open_shitty_website);
 #undef Q
     if (gs == NULL) { PyErr_SetString(PyExc_KeyError, "Unknown shortcut name"); return NULL; }
     int cocoa_mods;
@@ -323,7 +323,7 @@ set_notification_activated_callback(PyObject *self UNUSED, PyObject *callback) {
     Py_RETURN_NONE;
 }
 
-#ifdef KITTY_USE_DEPRECATED_MACOS_NOTIFICATION_API
+#ifdef shitty_USE_DEPRECATED_MACOS_NOTIFICATION_API
 
 @interface NotificationDelegate : NSObject <NSUserNotificationCenterDelegate>
 @end
@@ -649,7 +649,7 @@ cocoa_create_global_menu(void) {
     NSMenu* helpMenu = [[NSMenu alloc] initWithTitle:@"Help"];
     [helpMenuItem setSubmenu:helpMenu];
 
-    MENU_ITEM(helpMenu, @"Visit shitty Website", open_kitty_website);
+    MENU_ITEM(helpMenu, @"Visit shitty Website", open_shitty_website);
     [NSApp setHelpMenu:helpMenu];
     [helpMenu release];
 
@@ -932,7 +932,7 @@ cleanup() {
     if (beep_sound) [beep_sound release];
     beep_sound = nil;
 
-#ifndef KITTY_USE_DEPRECATED_MACOS_NOTIFICATION_API
+#ifndef shitty_USE_DEPRECATED_MACOS_NOTIFICATION_API
     drain_pending_notifications(NO);
     free(notification_queue.notifications);
     notification_queue.notifications = NULL;

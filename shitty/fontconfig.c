@@ -80,8 +80,8 @@ static struct {
 static void
 load_fontconfig_lib(void) {
         const char* libnames[] = {
-#if defined(_KITTY_FONTCONFIG_LIBRARY)
-            _KITTY_FONTCONFIG_LIBRARY,
+#if defined(_shitty_FONTCONFIG_LIBRARY)
+            _shitty_FONTCONFIG_LIBRARY,
 #else
             "libfontconfig.so",
             // some installs are missing the .so symlink, so try the full name

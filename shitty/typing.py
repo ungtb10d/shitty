@@ -9,9 +9,9 @@ BadLineType = SequenceMap = KeyActionType = AliasMap = None
 AddressFamily = PopenType = Socket = StartupCtx = None
 SessionTab = SessionType = LayoutType = SpecialWindowInstance = None
 MarkType = RemoteCommandType = CoreTextFont = FontConfigPattern = None
-KeyEventType = ImageManagerType = KittyCommonOpts = HandlerType = None
+KeyEventType = ImageManagerType = shittyCommonOpts = HandlerType = None
 GRT_t = GRT_a = GRT_d = GRT_f = GRT_m = GRT_o = GRT_C = None
-ScreenSize = KittensKeyActionType = MouseEvent = MouseButton = AbstractEventLoop = None
+ScreenSize = shittensKeyActionType = MouseEvent = MouseButton = AbstractEventLoop = None
 TermManagerType = LoopType = Debug = GraphicsCommandType = None
 
 CompletedProcess = Tuple

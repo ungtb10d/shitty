@@ -16,7 +16,7 @@ from .constants import (
     appname, clear_handled_signals, defconf, is_macos, str_version, website_url
 )
 from .fast_data_types import wcswidth
-from .options.types import Options as KittyOpts
+from .options.types import Options as shittyOpts
 from .types import run_once
 from .typing import BadLineType, TypedDict
 
@@ -45,7 +45,7 @@ If this option is not specified, config files are searched for in the order:
 :file:`$XDG_CONFIG_DIRS/{appname}/{conf_name}.conf`. The first one that exists
 is used as the config file.
 
-If the environment variable :envvar:`KITTY_CONFIG_DIRECTORY` is specified, that
+If the environment variable :envvar:`shitty_CONFIG_DIRECTORY` is specified, that
 directory is always used and the above searching does not happen.
 
 If :file:`/etc/xdg/{appname}/{conf_name}.conf` exists, it is merged before (i.e.
@@ -326,8 +326,8 @@ def prettify_rst(text: str) -> str:
 def version(add_rev: bool = False) -> str:
     rev = ''
     from . import fast_data_types
-    if add_rev and hasattr(fast_data_types, 'KITTY_VCS_REV'):
-        rev = f' ({fast_data_types.KITTY_VCS_REV[:10]})'
+    if add_rev and hasattr(fast_data_types, 'shitty_VCS_REV'):
+        rev = f' ({fast_data_types.shitty_VCS_REV[:10]})'
     return '{} {}{} created by {}'.format(italic(appname), green(str_version), rev, title('Kovid Goyal'))
 
 
@@ -769,10 +769,10 @@ regardless of this option.
 
 --listen-on
 Listen on the specified socket address for control messages. For example,
-:option:`{appname} --listen-on`=unix:/tmp/mykitty or :option:`{appname}
+:option:`{appname} --listen-on`=unix:/tmp/myshitty or :option:`{appname}
 --listen-on`=tcp:localhost:12345. On Linux systems, you can also use abstract
 UNIX sockets, not associated with a file, like this: :option:`{appname}
---listen-on`=unix:@mykitty. Environment variables are expanded and relative
+--listen-on`=unix:@myshitty. Environment variables are expanded and relative
 paths are resolved with respect to the temporary directory. To control shitty,
 you can send commands to it with :italic:`{appname} @` using the
 :option:`{appname} @ --to` option to specify this address. Note that if you run
@@ -896,7 +896,7 @@ def default_config_paths(conf_paths: Sequence[str]) -> Tuple[str, ...]:
     return tuple(resolve_config(SYSTEM_CONF, defconf, conf_paths))
 
 
-def create_opts(args: CLIOptions, accumulate_bad_lines: Optional[List[BadLineType]] = None) -> KittyOpts:
+def create_opts(args: CLIOptions, accumulate_bad_lines: Optional[List[BadLineType]] = None) -> shittyOpts:
     from .config import load_config
     config = default_config_paths(args.config)
     # Does not cover the case where `name =` when `=` is the value.
@@ -906,7 +906,7 @@ def create_opts(args: CLIOptions, accumulate_bad_lines: Optional[List[BadLineTyp
     return opts
 
 
-def create_default_opts() -> KittyOpts:
+def create_default_opts() -> shittyOpts:
     from .config import load_config
     config = default_config_paths(())
     opts = load_config(*config)

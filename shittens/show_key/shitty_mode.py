@@ -6,8 +6,8 @@ from shitty.key_encoding import (
     SUPER, KeyEvent, encode_key_event
 )
 
-from kittens.tui.handler import Handler
-from kittens.tui.loop import Loop
+from shittens.tui.handler import Handler
+from shittens.tui.loop import Loop
 
 mod_names = {
     SHIFT: 'Shift',

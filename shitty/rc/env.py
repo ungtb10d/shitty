@@ -23,7 +23,7 @@ class Env(RemoteCommand):
     )
     argspec = 'env_var1=val env_var2=val ...'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: Any, args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: Any, args: ArgsType) -> PayloadType:
         if len(args) < 1:
             self.fatal('Must specify at least one env var to set')
         env = {}
@@ -32,7 +32,7 @@ class Env(RemoteCommand):
             env[key] = val
         return {'env': env}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         from shitty.child import default_env, set_default_env
         from shitty.utils import expandvars
         new_env = payload_get('env') or {}

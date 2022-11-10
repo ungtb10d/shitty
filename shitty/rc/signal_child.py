@@ -38,11 +38,11 @@ using this option means that you will not be notified of failures.
     ''' + '\n\n' + MATCH_WINDOW_OPTION
     argspec = '[SIGNAL_NAME ...]'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         # defaults to signal the window this command is run in
         return {'match': opts.match, 'self': True, 'signals': [x.upper() for x in args] or ['SIGINT']}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         import signal
         signals = tuple(getattr(signal, x) for x in payload_get('signals'))
         for window in self.windows_for_match_payload(boss, window, payload_get):

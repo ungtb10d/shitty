@@ -10,7 +10,7 @@ from urllib.request import urlopen
 
 from .config import atomic_save
 from .constants import (
-    Version, cache_dir, clear_handled_signals, kitty_exe, version, website_url
+    Version, cache_dir, clear_handled_signals, shitty_exe, version, website_url
 )
 from .fast_data_types import add_timer, get_boss, monitor_pid
 from .notify import notify
@@ -115,7 +115,7 @@ def run_worker() -> None:
 def update_check() -> bool:
     try:
         p = subprocess.Popen([
-            kitty_exe(), '+runpy',
+            shitty_exe(), '+runpy',
             'from shitty.update_check import run_worker; run_worker()'
         ], stdout=subprocess.PIPE, preexec_fn=clear_handled_signals)
     except OSError as e:

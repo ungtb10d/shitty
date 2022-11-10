@@ -15,7 +15,7 @@ from .child import Child
 from .cli import parse_args
 from .cli_stub import LaunchCLIOptions
 from .clipboard import set_clipboard_string, set_primary_selection
-from .constants import kitty_exe, shell_path
+from .constants import shitty_exe, shell_path
 from .fast_data_types import (
     add_timer, get_boss, get_options, get_os_window_title, patch_color_profiles
 )
@@ -73,7 +73,7 @@ Where to launch the child process:
     An :term:`overlay window <overlay>` covering the current active shitty window.
     Unlike a plain overlay window, this window is considered as a :italic:`main`
     window which means it is used as the active window for getting the current working
-    directory, the input text for kittens, launch commands, etc. Useful if this overlay is
+    directory, the input text for shittens, launch commands, etc. Useful if this overlay is
     intended to run for a long time as a primary window.
 
 :code:`background`
@@ -360,7 +360,7 @@ def load_watch_modules(watchers: Iterable[str]) -> Optional[Watchers]:
         m = watcher_modules.get(path, None)
         if m is None:
             try:
-                m = runpy.run_path(path, run_name='__kitty_watcher__')
+                m = runpy.run_path(path, run_name='__shitty_watcher__')
             except Exception as err:
                 import traceback
                 log_error(traceback.format_exc())
@@ -561,7 +561,7 @@ def launch(
     else:
         if opts.hold:
             cmd = kw['cmd'] or [shell_path]
-            kw['cmd'] = [kitty_exe(), '+hold'] + cmd
+            kw['cmd'] = [shitty_exe(), '+hold'] + cmd
         if force_target_tab:
             tab = target_tab
         else:
@@ -753,7 +753,7 @@ class EditCmd:
             self.schedule_check()
 
     def send_data(self, window: Window, data_type: str, data: bytes = b'') -> None:
-        window.write_to_child(f'KITTY_DATA_START\n{data_type}\n')
+        window.write_to_child(f'shitty_DATA_START\n{data_type}\n')
         if data:
             import base64
             mv = memoryview(base64.standard_b64encode(data))
@@ -761,7 +761,7 @@ class EditCmd:
                 window.write_to_child(bytes(mv[:512]))
                 window.write_to_child('\n')
                 mv = mv[512:]
-        window.write_to_child('KITTY_DATA_END\n')
+        window.write_to_child('shitty_DATA_END\n')
 
 
 class CloneCmd:
@@ -845,20 +845,20 @@ def clone_and_launch(msg: str, window: Window) -> None:
         # only pass VIRTUAL_ENV if it is currently active
         if f"{env_to_serialize['VIRTUAL_ENV']}/bin" not in env_to_serialize['PATH'].split(os.pathsep):
             del env_to_serialize['VIRTUAL_ENV']
-    env_to_serialize['KITTY_CLONE_SOURCE_STRATEGIES'] = ',' + ','.join(get_options().clone_source_strategies) + ','
+    env_to_serialize['shitty_CLONE_SOURCE_STRATEGIES'] = ',' + ','.join(get_options().clone_source_strategies) + ','
     is_clone_launch = serialize_env(c.shell, env_to_serialize)
-    ssh_kitten_cmdline = window.ssh_kitten_cmdline()
-    if ssh_kitten_cmdline:
-        from kittens.ssh.utils import (
+    ssh_shitten_cmdline = window.ssh_shitten_cmdline()
+    if ssh_shitten_cmdline:
+        from shittens.ssh.utils import (
             patch_cmdline, set_cwd_in_cmdline, set_env_in_cmdline
         )
-        cmdline = ssh_kitten_cmdline
+        cmdline = ssh_shitten_cmdline
         if c.opts.cwd:
             set_cwd_in_cmdline(c.opts.cwd, cmdline)
             c.opts.cwd = None
         if c.env:
             set_env_in_cmdline({
-                'KITTY_IS_CLONE_LAUNCH': is_clone_launch,
+                'shitty_IS_CLONE_LAUNCH': is_clone_launch,
             }, cmdline)
             c.env = None
         if c.opts.env:

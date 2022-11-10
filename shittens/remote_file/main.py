@@ -27,7 +27,7 @@ from ..tui.operations import (
 from ..tui.utils import get_key_press
 
 
-is_ssh_kitten_sentinel = '!#*&$#($ssh-shitten)(##$'
+is_ssh_shitten_sentinel = '!#*&$#($ssh-shitten)(##$'
 
 
 def key(x: str) -> str:
@@ -119,8 +119,8 @@ class ControlMaster:
             conn_data.binary, '-o', f'ControlPath=~/.ssh/shitty-master-{os.getpid()}-%r@%h:%p',
             '-o', 'TCPKeepAlive=yes', '-o', 'ControlPersist=yes'
         ]
-        self.is_ssh_kitten = conn_data.binary is is_ssh_kitten_sentinel
-        if self.is_ssh_kitten:
+        self.is_ssh_shitten = conn_data.binary is is_ssh_shitten_sentinel
+        if self.is_ssh_shitten:
             del cmd[:]
             self.batch_cmd_prefix = cmd
             sk_cmdline = json.loads(conn_data.identity_file)
@@ -142,7 +142,7 @@ class ControlMaster:
             raise Exception(f'The ssh command: {shlex.join(cmd)} failed with exit code {p.returncode} and output: {out}')
 
     def __enter__(self) -> 'ControlMaster':
-        if not self.is_ssh_kitten:
+        if not self.is_ssh_shitten:
             self.check_call(
                 self.cmd_prefix + ['-o', 'ControlMaster=auto', '-fN', self.conn_data.hostname])
             self.check_call(
@@ -153,7 +153,7 @@ class ControlMaster:
         return self
 
     def __exit__(self, *a: Any) -> None:
-        if not self.is_ssh_kitten:
+        if not self.is_ssh_shitten:
             subprocess.Popen(
                 self.batch_cmd_prefix + ['-O', 'exit', self.conn_data.hostname],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL
@@ -163,7 +163,7 @@ class ControlMaster:
 
     @property
     def is_alive(self) -> bool:
-        if self.is_ssh_kitten:
+        if self.is_ssh_shitten:
             return True
         return subprocess.Popen(
             self.batch_cmd_prefix + ['-O', 'check', self.conn_data.hostname],
@@ -171,7 +171,7 @@ class ControlMaster:
         ).wait() == 0
 
     def check_hostname_matches(self) -> bool:
-        if self.is_ssh_kitten:
+        if self.is_ssh_shitten:
             return True
         cp = subprocess.run(self.batch_cmd_prefix + [self.conn_data.hostname, 'hostname', '-f'], stdout=subprocess.PIPE,
                             stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
@@ -315,8 +315,8 @@ def save_as(conn_data: SSHConnectionData, remote_path: str, cli_opts: RemoteFile
 
 def handle_action(action: str, cli_opts: RemoteFileCLIOptions) -> Result:
     cli_data = json.loads(cli_opts.ssh_connection_data or '')
-    if cli_data and cli_data[0] == is_ssh_kitten_sentinel:
-        conn_data = SSHConnectionData(is_ssh_kitten_sentinel, cli_data[-1], -1, identity_file=json.dumps(cli_data[1:]))
+    if cli_data and cli_data[0] == is_ssh_shitten_sentinel:
+        conn_data = SSHConnectionData(is_ssh_shitten_sentinel, cli_data[-1], -1, identity_file=json.dumps(cli_data[1:]))
     else:
         conn_data = SSHConnectionData(*cli_data)
     remote_path = cli_opts.path or ''

@@ -484,7 +484,7 @@ def shape_string(
 def display_bitmap(rgb_data: bytes, width: int, height: int) -> None:
     from tempfile import NamedTemporaryFile
 
-    from kittens.icat.main import detect_support, show
+    from shittens.icat.main import detect_support, show
     if not hasattr(display_bitmap, 'detected') and not detect_support():
         raise SystemExit('Your terminal does not support the graphics protocol')
     setattr(display_bitmap, 'detected', True)

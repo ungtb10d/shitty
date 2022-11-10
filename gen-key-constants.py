@@ -345,7 +345,7 @@ def generate_legacy_text_key_maps() -> None:
     for k in shift_map:
         simple(k)
 
-    patch_file('kitty_tests/keys.py', 'legacy letter tests', '\n'.join(tests), start_marker='# ', end_marker='')
+    patch_file('shitty_tests/keys.py', 'legacy letter tests', '\n'.join(tests), start_marker='# ', end_marker='')
 
 
 def chunks(lst: List[Any], n: int) -> Any:

@@ -59,19 +59,19 @@ class SignalInfo(NamedTuple):
     sival_ptr: int
 
 
-def mod_to_names(mods: int, has_kitty_mod: bool = False, kitty_mod: int = 0) -> Iterator[str]:
-    if has_kitty_mod:
-        mods &= ~kitty_mod
-        yield 'kitty_mod'
+def mod_to_names(mods: int, has_shitty_mod: bool = False, shitty_mod: int = 0) -> Iterator[str]:
+    if has_shitty_mod:
+        mods &= ~shitty_mod
+        yield 'shitty_mod'
     for name, val in modmap().items():
         if mods & val:
             yield name
 
 
-def human_repr_of_single_key(self: 'SingleKey', kitty_mod: int) -> str:
+def human_repr_of_single_key(self: 'SingleKey', shitty_mod: int) -> str:
     from .fast_data_types import glfw_get_key_name
     names = []
-    names = list(mod_to_names(self.mods, self.defined_with_kitty_mod, kitty_mod))
+    names = list(mod_to_names(self.mods, self.defined_with_shitty_mod, shitty_mod))
     if self.key > 0:
         kname = (glfw_get_key_name(0, self.key) if self.is_native else glfw_get_key_name(self.key, 0)) or f'{self.key}'
         kname = {' ': 'space'}.get(kname, kname)
@@ -82,8 +82,8 @@ def human_repr_of_single_key(self: 'SingleKey', kitty_mod: int) -> str:
 class Shortcut(NamedTuple):
     keys: Tuple['SingleKey', ...]
 
-    def human_repr(self, kitty_mod: int = 0) -> str:
-        return ' > '.join(human_repr_of_single_key(k, kitty_mod) for k in self.keys)
+    def human_repr(self, shitty_mod: int = 0) -> str:
+        return ' > '.join(human_repr_of_single_key(k, shitty_mod) for k in self.keys)
 
 
 class MouseEvent(NamedTuple):
@@ -92,7 +92,7 @@ class MouseEvent(NamedTuple):
     repeat_count: int = 1
     grabbed: bool = False
 
-    def human_repr(self, kitty_mod: int = 0) -> str:
+    def human_repr(self, shitty_mod: int = 0) -> str:
         from .options.utils import mouse_button_map, mouse_trigger_count_map
 
         def mouse_button_num_to_name(num: int) -> str:

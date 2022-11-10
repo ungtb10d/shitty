@@ -11,7 +11,7 @@ import unittest
 from contextlib import contextmanager
 from functools import lru_cache, partial
 
-from shitty.constants import kitty_base_dir, terminfo_dir, shell_integration_dir
+from shitty.constants import shitty_base_dir, terminfo_dir, shell_integration_dir
 from shitty.fast_data_types import CURSOR_BEAM, CURSOR_BLOCK, CURSOR_UNDERLINE
 from shitty.shell_integration import (
     setup_bash_env, setup_fish_env, setup_zsh_env
@@ -38,8 +38,8 @@ def basic_shell_env(home_dir):
         'HOME': home_dir,
         'TERM': 'xterm-shitty',
         'TERMINFO': terminfo_dir,
-        'KITTY_SHELL_INTEGRATION': 'enabled',
-        'KITTY_INSTALLATION_DIR': kitty_base_dir,
+        'shitty_SHELL_INTEGRATION': 'enabled',
+        'shitty_INSTALLATION_DIR': shitty_base_dir,
         'BASH_SILENCE_DEPRECATION_WARNING': '1',
         'PYTHONDONTWRITEBYTECODE': '1',
     }
@@ -66,9 +66,9 @@ def safe_env_for_running_shell(argv, home_dir, rc='', shell='zsh'):
         setup_fish_env(ans, argv)
     elif shell == 'bash':
         setup_bash_env(ans, argv)
-        ans['KITTY_BASH_INJECT'] += ' posix'
-        ans['KITTY_BASH_POSIX_ENV'] = os.path.join(home_dir, '.bashrc')
-        with open(ans['KITTY_BASH_POSIX_ENV'], 'w') as f:
+        ans['shitty_BASH_INJECT'] += ' posix'
+        ans['shitty_BASH_POSIX_ENV'] = os.path.join(home_dir, '.bashrc')
+        with open(ans['shitty_BASH_POSIX_ENV'], 'w') as f:
             # ensure LINES and COLUMNS are kept up to date
             print('shopt -s checkwinsize', file=f)
             if rc:
@@ -160,7 +160,7 @@ RPS1="{rps1}"
     @unittest.skipUnless(shutil.which('fish'), 'fish not installed')
     def test_fish_integration(self):
         fish_prompt, right_prompt = 'left>', '<right'
-        completions_dir = os.path.join(kitty_base_dir, 'shell-integration', 'fish', 'vendor_completions.d')
+        completions_dir = os.path.join(shitty_base_dir, 'shell-integration', 'fish', 'vendor_completions.d')
         with self.run_shell(
             shell='fish',
             rc=f'''
@@ -335,7 +335,7 @@ PS1="{ps1}"
                         print(rc, file=f)
                     else:
                         print(f'echo [{x}]', file=f)
-            ans['KITTY_BASH_ETC_LOCATION'] = home_dir
+            ans['shitty_BASH_ETC_LOCATION'] = home_dir
             ans['PS1'] = 'PROMPT $ '
             return ans
 

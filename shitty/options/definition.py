@@ -792,7 +792,7 @@ opt('command_on_bell', 'none',
     option_type='to_cmdline',
     long_text='''
 Program to run when a bell occurs. The environment variable
-:envvar:`KITTY_CHILD_CMDLINE` can be used to get the program running in the
+:envvar:`shitty_CHILD_CMDLINE` can be used to get the program running in the
 window in which the bell occurred.
 '''
     )
@@ -2760,9 +2760,9 @@ Listen to the specified UNIX socket for remote control connections. Note that
 this will apply to all shitty instances. It can be overridden by the
 :option:`shitty --listen-on` command line option, which also supports listening
 on a TCP socket. This option accepts only UNIX sockets, such as
-:code:`unix:${TEMP}/mykitty` or :code:`unix:@mykitty` (on Linux). Environment
+:code:`unix:${TEMP}/myshitty` or :code:`unix:@myshitty` (on Linux). Environment
 variables are expanded and relative paths are resolved with respect to the
-temporary directory. If :code:`{kitty_pid}` is present, then it is replaced by
+temporary directory. If :code:`{shitty_pid}` is present, then it is replaced by
 the PID of the shitty process, otherwise the PID of the shitty process is
 appended to the value, with a hyphen. See the help for :option:`shitty
 --listen-on` for more details. Note that this will be ignored unless :opt:`allow_remote_control`
@@ -2875,7 +2875,7 @@ is applied. See also :opt:`clipboard_control`.
 opt('file_transfer_confirmation_bypass', '',
     long_text='''
 The password that can be supplied to the :doc:`file transfer shitten
-</kittens/transfer>` to skip the transfer confirmation prompt. This should only
+</shittens/transfer>` to skip the transfer confirmation prompt. This should only
 be used when initiating transfers from trusted computers, over trusted networks
 or encrypted transports, as it allows any programs running on the remote machine
 to read/write to the local filesystem, without permission.
@@ -2887,7 +2887,7 @@ opt('allow_hyperlinks', 'yes',
     long_text='''
 Process :term:`hyperlink <hyperlinks>` escape sequences (OSC 8). If disabled OSC
 8 escape sequences are ignored. Otherwise they become clickable links, that you
-can click with the mouse or by using the :doc:`hints shitten </kittens/hints>`.
+can click with the mouse or by using the :doc:`hints shitten </shittens/hints>`.
 The special value of :code:`ask` means that shitty will ask before opening the
 link when clicked.
 '''
@@ -2932,10 +2932,10 @@ in the newly cloned window. The supported strategies are:
     environments created by :program:`conda`.
 :code:`env_var`
     Execute the contents of the environment variable
-    :envvar:`KITTY_CLONE_SOURCE_CODE` with :code:`eval`.
+    :envvar:`shitty_CLONE_SOURCE_CODE` with :code:`eval`.
 :code:`path`
     Source the file pointed to by the environment variable
-    :envvar:`KITTY_CLONE_SOURCE_PATH`.
+    :envvar:`shitty_CLONE_SOURCE_PATH`.
 
 This option must be a comma separated list of the above values. This only
 source the first valid one in the above order.
@@ -3142,12 +3142,12 @@ to map :kbd:`Ctrl+A` to something.
 You can use the special action :ac:`no_op` to unmap a keyboard shortcut that is
 assigned in the default configuration::
 
-    map kitty_mod+space no_op
+    map shitty_mod+space no_op
 
 If you would like shitty to completely ignore a key event, not even sending it to
 the program running in the terminal, map it to :ac:`discard_event`::
 
-    map kitty_mod+f1 discard_event
+    map shitty_mod+f1 discard_event
 
 You can combine multiple actions to be triggered by a single shortcut with
 :ac:`combine` action, using the syntax below::
@@ -3156,7 +3156,7 @@ You can combine multiple actions to be triggered by a single shortcut with
 
 For example::
 
-    map kitty_mod+e combine : new_window : next_layout
+    map shitty_mod+e combine : new_window : next_layout
 
 This will create a new window and switch to the next available layout.
 
@@ -3172,11 +3172,11 @@ The full list of actions that can be mapped to key presses is available
 :doc:`here </actions>`.
 ''')
 
-opt('kitty_mod', 'ctrl+shift',
+opt('shitty_mod', 'ctrl+shift',
     option_type='to_modifiers',
     long_text='''
 Special modifier key alias for default shortcuts. You can change the value of
-this option to alter all default shortcuts that use :opt:`kitty_mod`.
+this option to alter all default shortcuts that use :opt:`shitty_mod`.
 '''
     )
 
@@ -3206,11 +3206,11 @@ Similarly, to alias shitten invocation::
 '''
     )
 
-opt('+kitten_alias', 'hints hints --hints-offset=0',
-    option_type='kitten_alias',
+opt('+shitten_alias', 'hints hints --hints-offset=0',
+    option_type='shitten_alias',
     add_to_default=False,
     long_text='''
-Like :opt:`action_alias` above, but specifically for kittens. Generally, prefer
+Like :opt:`action_alias` above, but specifically for shittens. Generally, prefer
 to use :opt:`action_alias`. This option is a legacy version, present for
 backwards compatibility. It causes all invocations of the aliased shitten to be
 substituted. So the example above will cause all invocations of the hints shitten
@@ -3224,7 +3224,7 @@ option applied.
 agr('shortcuts.clipboard', 'Clipboard')
 
 map('Copy to clipboard',
-    'copy_to_clipboard kitty_mod+c copy_to_clipboard',
+    'copy_to_clipboard shitty_mod+c copy_to_clipboard',
     long_text='''
 There is also a :ac:`copy_or_interrupt` action that can be optionally mapped
 to :kbd:`Ctrl+C`. It will copy only if there is a selection and send an
@@ -3238,7 +3238,7 @@ map('Copy to clipboard',
     )
 
 map('Paste from clipboard',
-    'paste_from_clipboard kitty_mod+v paste_from_clipboard',
+    'paste_from_clipboard shitty_mod+v paste_from_clipboard',
     )
 map('Paste from clipboard',
     'paste_from_clipboard cmd+v paste_from_clipboard',
@@ -3246,26 +3246,26 @@ map('Paste from clipboard',
     )
 
 map('Paste from selection',
-    'paste_from_selection kitty_mod+s paste_from_selection',
+    'paste_from_selection shitty_mod+s paste_from_selection',
     )
 map('Paste from selection',
     'paste_from_selection shift+insert paste_from_selection',
     )
 
 map('Pass selection to program',
-    'pass_selection_to_program kitty_mod+o pass_selection_to_program',
+    'pass_selection_to_program shitty_mod+o pass_selection_to_program',
     long_text='''
 You can also pass the contents of the current selection to any program with
 :ac:`pass_selection_to_program`. By default, the system's open program is used,
 but you can specify your own, the selection will be passed as a command line
 argument to the program. For example::
 
-    map kitty_mod+o pass_selection_to_program firefox
+    map shitty_mod+o pass_selection_to_program firefox
 
 You can pass the current selection to a terminal program running in a new shitty
 window, by using the :code:`@selection` placeholder::
 
-    map kitty_mod+y new_window less @selection
+    map shitty_mod+y new_window less @selection
 '''
     )
 egr()  # }}}
@@ -3275,10 +3275,10 @@ egr()  # }}}
 agr('shortcuts.scrolling', 'Scrolling')
 
 map('Scroll line up',
-    'scroll_line_up kitty_mod+up scroll_line_up',
+    'scroll_line_up shitty_mod+up scroll_line_up',
     )
 map('Scroll line up',
-    'scroll_line_up kitty_mod+k scroll_line_up',
+    'scroll_line_up shitty_mod+k scroll_line_up',
     )
 map('Scroll line up',
     'scroll_line_up opt+cmd+page_up scroll_line_up',
@@ -3290,10 +3290,10 @@ map('Scroll line up',
     )
 
 map('Scroll line down',
-    'scroll_line_down kitty_mod+down scroll_line_down',
+    'scroll_line_down shitty_mod+down scroll_line_down',
     )
 map('Scroll line down',
-    'scroll_line_down kitty_mod+j scroll_line_down',
+    'scroll_line_down shitty_mod+j scroll_line_down',
     )
 map('Scroll line down',
     'scroll_line_down opt+cmd+page_down scroll_line_down',
@@ -3305,7 +3305,7 @@ map('Scroll line down',
     )
 
 map('Scroll page up',
-    'scroll_page_up kitty_mod+page_up scroll_page_up',
+    'scroll_page_up shitty_mod+page_up scroll_page_up',
     )
 map('Scroll page up',
     'scroll_page_up cmd+page_up scroll_page_up',
@@ -3313,7 +3313,7 @@ map('Scroll page up',
     )
 
 map('Scroll page down',
-    'scroll_page_down kitty_mod+page_down scroll_page_down',
+    'scroll_page_down shitty_mod+page_down scroll_page_down',
     )
 map('Scroll page down',
     'scroll_page_down cmd+page_down scroll_page_down',
@@ -3321,7 +3321,7 @@ map('Scroll page down',
     )
 
 map('Scroll to top',
-    'scroll_home kitty_mod+home scroll_home',
+    'scroll_home shitty_mod+home scroll_home',
     )
 map('Scroll to top',
     'scroll_home cmd+home scroll_home',
@@ -3329,7 +3329,7 @@ map('Scroll to top',
     )
 
 map('Scroll to bottom',
-    'scroll_end kitty_mod+end scroll_end',
+    'scroll_end shitty_mod+end scroll_end',
     )
 map('Scroll to bottom',
     'scroll_end cmd+end scroll_end',
@@ -3337,7 +3337,7 @@ map('Scroll to bottom',
     )
 
 map('Scroll to previous shell prompt',
-    'scroll_to_previous_prompt kitty_mod+z scroll_to_prompt -1',
+    'scroll_to_previous_prompt shitty_mod+z scroll_to_prompt -1',
     long_text='''
 Use a parameter of :code:`0` for :ac:`scroll_to_prompt` to scroll to the last
 jumped to or the last clicked position. Requires :ref:`shell integration
@@ -3345,10 +3345,10 @@ jumped to or the last clicked position. Requires :ref:`shell integration
 '''
     )
 
-map('Scroll to next shell prompt', 'scroll_to_next_prompt kitty_mod+x scroll_to_prompt 1')
+map('Scroll to next shell prompt', 'scroll_to_next_prompt shitty_mod+x scroll_to_prompt 1')
 
 map('Browse scrollback buffer in pager',
-    'show_scrollback kitty_mod+h show_scrollback',
+    'show_scrollback shitty_mod+h show_scrollback',
     long_text='''
 You can pipe the contents of the current screen and history buffer as
 :file:`STDIN` to an arbitrary program using :option:`launch --stdin-source`.
@@ -3363,7 +3363,7 @@ see :doc:`launch`.
     )
 
 map('Browse output of the last shell command in pager',
-    'show_last_command_output kitty_mod+g show_last_command_output',
+    'show_last_command_output shitty_mod+g show_last_command_output',
     long_text='''
 You can also define additional shortcuts to get the command output.
 For example, to get the first command output on screen::
@@ -3394,12 +3394,12 @@ egr()  # }}}
 agr('shortcuts.window', 'Window management')
 
 map('New window',
-    'new_window kitty_mod+enter new_window',
+    'new_window shitty_mod+enter new_window',
     long_text='''
 You can open a new :term:`shitty window <window>` running an arbitrary program,
 for example::
 
-    map kitty_mod+y launch mutt
+    map shitty_mod+y launch mutt
 
 You can open a new window with the current working directory set to the working
 directory of the current window using::
@@ -3428,7 +3428,7 @@ map('New window',
     )
 
 map('New OS window',
-    'new_os_window kitty_mod+n new_os_window',
+    'new_os_window shitty_mod+n new_os_window',
     long_text='''
 Works like :ac:`new_window` above, except that it opens a top-level :term:`OS
 window <os_window>`. In particular you can use :ac:`new_os_window_with_cwd` to
@@ -3441,7 +3441,7 @@ map('New OS window',
     )
 
 map('Close window',
-    'close_window kitty_mod+w close_window',
+    'close_window shitty_mod+w close_window',
     )
 map('Close window',
     'close_window shift+cmd+d close_window',
@@ -3449,27 +3449,27 @@ map('Close window',
     )
 
 map('Next window',
-    'next_window kitty_mod+] next_window',
+    'next_window shitty_mod+] next_window',
     )
 
 map('Previous window',
-    'previous_window kitty_mod+[ previous_window',
+    'previous_window shitty_mod+[ previous_window',
     )
 
 map('Move window forward',
-    'move_window_forward kitty_mod+f move_window_forward',
+    'move_window_forward shitty_mod+f move_window_forward',
     )
 
 map('Move window backward',
-    'move_window_backward kitty_mod+b move_window_backward',
+    'move_window_backward shitty_mod+b move_window_backward',
     )
 
 map('Move window to top',
-    'move_window_to_top kitty_mod+` move_window_to_top',
+    'move_window_to_top shitty_mod+` move_window_to_top',
     )
 
 map('Start resizing window',
-    'start_resizing_window kitty_mod+r start_resizing_window',
+    'start_resizing_window shitty_mod+r start_resizing_window',
     )
 map('Start resizing window',
     'start_resizing_window cmd+r start_resizing_window',
@@ -3477,7 +3477,7 @@ map('Start resizing window',
     )
 
 map('First window',
-    'first_window kitty_mod+1 first_window',
+    'first_window shitty_mod+1 first_window',
     )
 map('First window',
     'first_window cmd+1 first_window',
@@ -3485,7 +3485,7 @@ map('First window',
     )
 
 map('Second window',
-    'second_window kitty_mod+2 second_window',
+    'second_window shitty_mod+2 second_window',
     )
 map('Second window',
     'second_window cmd+2 second_window',
@@ -3493,7 +3493,7 @@ map('Second window',
     )
 
 map('Third window',
-    'third_window kitty_mod+3 third_window',
+    'third_window shitty_mod+3 third_window',
     )
 map('Third window',
     'third_window cmd+3 third_window',
@@ -3501,7 +3501,7 @@ map('Third window',
     )
 
 map('Fourth window',
-    'fourth_window kitty_mod+4 fourth_window',
+    'fourth_window shitty_mod+4 fourth_window',
     )
 map('Fourth window',
     'fourth_window cmd+4 fourth_window',
@@ -3509,7 +3509,7 @@ map('Fourth window',
     )
 
 map('Fifth window',
-    'fifth_window kitty_mod+5 fifth_window',
+    'fifth_window shitty_mod+5 fifth_window',
     )
 map('Fifth window',
     'fifth_window cmd+5 fifth_window',
@@ -3517,7 +3517,7 @@ map('Fifth window',
     )
 
 map('Sixth window',
-    'sixth_window kitty_mod+6 sixth_window',
+    'sixth_window shitty_mod+6 sixth_window',
     )
 map('Sixth window',
     'sixth_window cmd+6 sixth_window',
@@ -3525,7 +3525,7 @@ map('Sixth window',
     )
 
 map('Seventh window',
-    'seventh_window kitty_mod+7 seventh_window',
+    'seventh_window shitty_mod+7 seventh_window',
     )
 map('Seventh window',
     'seventh_window cmd+7 seventh_window',
@@ -3533,7 +3533,7 @@ map('Seventh window',
     )
 
 map('Eight window',
-    'eighth_window kitty_mod+8 eighth_window',
+    'eighth_window shitty_mod+8 eighth_window',
     )
 map('Eight window',
     'eighth_window cmd+8 eighth_window',
@@ -3541,7 +3541,7 @@ map('Eight window',
     )
 
 map('Ninth window',
-    'ninth_window kitty_mod+9 ninth_window',
+    'ninth_window shitty_mod+9 ninth_window',
     )
 map('Ninth window',
     'ninth_window cmd+9 ninth_window',
@@ -3549,10 +3549,10 @@ map('Ninth window',
     )
 
 map('Tenth window',
-    'tenth_window kitty_mod+0 tenth_window',
+    'tenth_window shitty_mod+0 tenth_window',
     )
 
-map('Visually select and focus window', 'focus_visible_window kitty_mod+f7 focus_visible_window',
+map('Visually select and focus window', 'focus_visible_window shitty_mod+f7 focus_visible_window',
     long_text='''
 Display overlay numbers and alphabets on the window, and switch the focus to the
 window when you press the key. When there are only two windows, the focus will
@@ -3560,7 +3560,7 @@ be switched directly without displaying the overlay. You can change the overlay
 characters and their order with option :opt:`visual_window_select_characters`.
 '''
     )
-map('Visually swap window with another', 'swap_with_window kitty_mod+f8 swap_with_window',
+map('Visually swap window with another', 'swap_with_window shitty_mod+f8 swap_with_window',
     long_text='''
 Works like :ac:`focus_visible_window` above, but swaps the window.
 '''
@@ -3572,7 +3572,7 @@ egr()  # }}}
 agr('shortcuts.tab', 'Tab management')
 
 map('Next tab',
-    'next_tab kitty_mod+right next_tab',
+    'next_tab shitty_mod+right next_tab',
     )
 map('Next tab',
     'next_tab shift+cmd+] next_tab',
@@ -3583,7 +3583,7 @@ map('Next tab',
     )
 
 map('Previous tab',
-    'previous_tab kitty_mod+left previous_tab',
+    'previous_tab shitty_mod+left previous_tab',
     )
 map('Previous tab',
     'previous_tab shift+cmd+[ previous_tab',
@@ -3594,7 +3594,7 @@ map('Previous tab',
     )
 
 map('New tab',
-    'new_tab kitty_mod+t new_tab',
+    'new_tab shitty_mod+t new_tab',
     )
 map('New tab',
     'new_tab cmd+t new_tab',
@@ -3602,7 +3602,7 @@ map('New tab',
     )
 
 map('Close tab',
-    'close_tab kitty_mod+q close_tab',
+    'close_tab shitty_mod+q close_tab',
     )
 map('Close tab',
     'close_tab cmd+w close_tab',
@@ -3615,15 +3615,15 @@ map('Close OS window',
     )
 
 map('Move tab forward',
-    'move_tab_forward kitty_mod+. move_tab_forward',
+    'move_tab_forward shitty_mod+. move_tab_forward',
     )
 
 map('Move tab backward',
-    'move_tab_backward kitty_mod+, move_tab_backward',
+    'move_tab_backward shitty_mod+, move_tab_backward',
     )
 
 map('Set tab title',
-    'set_tab_title kitty_mod+alt+t set_tab_title',
+    'set_tab_title shitty_mod+alt+t set_tab_title',
     )
 map('Set tab title',
     'set_tab_title shift+cmd+i set_tab_title',
@@ -3651,7 +3651,7 @@ end of the tabs list, use::
 agr('shortcuts.layout', 'Layout management')
 
 map('Next layout',
-    'next_layout kitty_mod+l next_layout',
+    'next_layout shitty_mod+l next_layout',
     )
 egr('''
 You can also create shortcuts to switch to specific :term:`layouts <layout>`::
@@ -3678,13 +3678,13 @@ only the current one.
 ''')
 
 map('Increase font size',
-    'increase_font_size kitty_mod+equal change_font_size all +2.0',
+    'increase_font_size shitty_mod+equal change_font_size all +2.0',
     )
 map('Increase font size',
-    'increase_font_size kitty_mod+plus change_font_size all +2.0',
+    'increase_font_size shitty_mod+plus change_font_size all +2.0',
     )
 map('Increase font size',
-    'increase_font_size kitty_mod+kp_add change_font_size all +2.0',
+    'increase_font_size shitty_mod+kp_add change_font_size all +2.0',
     )
 map('Increase font size',
     'increase_font_size cmd+plus change_font_size all +2.0',
@@ -3700,10 +3700,10 @@ map('Increase font size',
     )
 
 map('Decrease font size',
-    'decrease_font_size kitty_mod+minus change_font_size all -2.0',
+    'decrease_font_size shitty_mod+minus change_font_size all -2.0',
     )
 map('Decrease font size',
-    'decrease_font_size kitty_mod+kp_subtract change_font_size all -2.0',
+    'decrease_font_size shitty_mod+kp_subtract change_font_size all -2.0',
     )
 map('Decrease font size',
     'decrease_font_size cmd+minus change_font_size all -2.0',
@@ -3715,7 +3715,7 @@ map('Decrease font size',
     )
 
 map('Reset font size',
-    'reset_font_size kitty_mod+backspace change_font_size all 0',
+    'reset_font_size shitty_mod+backspace change_font_size all 0',
     )
 map('Reset font size',
     'reset_font_size cmd+0 change_font_size all 0',
@@ -3724,11 +3724,11 @@ map('Reset font size',
 egr('''
 To setup shortcuts for specific font sizes::
 
-    map kitty_mod+f6 change_font_size all 10.0
+    map shitty_mod+f6 change_font_size all 10.0
 
 To setup shortcuts to change only the current OS window's font size::
 
-    map kitty_mod+f6 change_font_size current 10.0
+    map shitty_mod+f6 change_font_size current 10.0
 ''')  # }}}
 
 
@@ -3739,7 +3739,7 @@ insert it into the terminal or copy it to the clipboard.
 ''')
 
 map('Open URL',
-    'open_url kitty_mod+e open_url_with_hints',
+    'open_url shitty_mod+e open_url_with_hints',
     long_text='''
 Open a currently visible URL using the keyboard. The program used to open the
 URL is specified in :opt:`open_url_with`.
@@ -3747,7 +3747,7 @@ URL is specified in :opt:`open_url_with`.
     )
 
 map('Insert selected path',
-    'insert_selected_path kitty_mod+p>f shitten hints --type path --program -',
+    'insert_selected_path shitty_mod+p>f shitten hints --type path --program -',
     long_text='''
 Select a path/filename and insert it into the terminal. Useful, for instance to
 run :program:`git` commands on a filename output from a previous :program:`git`
@@ -3756,12 +3756,12 @@ command.
     )
 
 map('Open selected path',
-    'open_selected_path kitty_mod+p>shift+f shitten hints --type path',
+    'open_selected_path shitty_mod+p>shift+f shitten hints --type path',
     long_text='Select a path/filename and open it with the default open program.'
     )
 
 map('Insert selected line',
-    'insert_selected_line kitty_mod+p>l shitten hints --type line --program -',
+    'insert_selected_line shitty_mod+p>l shitten hints --type line --program -',
     long_text='''
 Select a line of text and insert it into the terminal. Useful for the output of
 things like: ``ls -1``.
@@ -3769,12 +3769,12 @@ things like: ``ls -1``.
     )
 
 map('Insert selected word',
-    'insert_selected_word kitty_mod+p>w shitten hints --type word --program -',
+    'insert_selected_word shitty_mod+p>w shitten hints --type word --program -',
     long_text='Select words and insert into terminal.'
     )
 
 map('Insert selected hash',
-    'insert_selected_hash kitty_mod+p>h shitten hints --type hash --program -',
+    'insert_selected_hash shitty_mod+p>h shitten hints --type hash --program -',
     long_text='''
 Select something that looks like a hash and insert it into the terminal. Useful
 with :program:`git`, which uses SHA1 hashes to identify commits.
@@ -3782,7 +3782,7 @@ with :program:`git`, which uses SHA1 hashes to identify commits.
     )
 
 map('Open the selected file at the selected line',
-    'goto_file_line kitty_mod+p>n shitten hints --type linenum',
+    'goto_file_line shitty_mod+p>n shitten hints --type linenum',
     long_text='''
 Select something that looks like :code:`filename:linenum` and open it in
 :program:`vim` at the specified line number.
@@ -3790,7 +3790,7 @@ Select something that looks like :code:`filename:linenum` and open it in
     )
 
 map('Open the selected hyperlink',
-    'open_selected_hyperlink kitty_mod+p>y shitten hints --type hyperlink',
+    'open_selected_hyperlink shitty_mod+p>y shitten hints --type hyperlink',
     long_text='''
 Select a :term:`hyperlink <hyperlinks>` (i.e. a URL that has been marked as such
 by the terminal program, for example, by ``ls --hyperlink=auto``).
@@ -3798,7 +3798,7 @@ by the terminal program, for example, by ``ls --hyperlink=auto``).
     )
 egr('''
 The hints shitten has many more modes of operation that you can map to different
-shortcuts. For a full description see :doc:`hints shitten </kittens/hints>`.
+shortcuts. For a full description see :doc:`hints shitten </shittens/hints>`.
 ''')  # }}}
 
 
@@ -3806,10 +3806,10 @@ shortcuts. For a full description see :doc:`hints shitten </kittens/hints>`.
 agr('shortcuts.misc', 'Miscellaneous')
 
 map('Show documentation',
-    'show_kitty_doc kitty_mod+f1 show_kitty_doc overview')
+    'show_shitty_doc shitty_mod+f1 show_shitty_doc overview')
 
 map('Toggle fullscreen',
-    'toggle_fullscreen kitty_mod+f11 toggle_fullscreen',
+    'toggle_fullscreen shitty_mod+f11 toggle_fullscreen',
     )
 map('Toggle fullscreen',
     'toggle_fullscreen ctrl+cmd+f toggle_fullscreen',
@@ -3817,7 +3817,7 @@ map('Toggle fullscreen',
     )
 
 map('Toggle maximized',
-    'toggle_maximized kitty_mod+f10 toggle_maximized',
+    'toggle_maximized shitty_mod+f10 toggle_maximized',
     )
 
 map('Toggle macOS secure keyboard entry',
@@ -3826,7 +3826,7 @@ map('Toggle macOS secure keyboard entry',
     )
 
 map('Unicode input',
-    'input_unicode_character kitty_mod+u shitten unicode_input',
+    'input_unicode_character shitty_mod+u shitten unicode_input',
     )
 map('Unicode input',
     'input_unicode_character ctrl+cmd+space shitten unicode_input',
@@ -3834,7 +3834,7 @@ map('Unicode input',
     )
 
 map('Edit config file',
-    'edit_config_file kitty_mod+f2 edit_config_file',
+    'edit_config_file shitty_mod+f2 edit_config_file',
     )
 map('Edit config file',
     'edit_config_file cmd+, edit_config_file',
@@ -3842,7 +3842,7 @@ map('Edit config file',
     )
 
 map('Open the shitty command shell',
-    'kitty_shell kitty_mod+escape kitty_shell window',
+    'shitty_shell shitty_mod+escape shitty_shell window',
     long_text='''
 Open the shitty shell in a new :code:`window` / :code:`tab` / :code:`overlay` /
 :code:`os_window` to control shitty using commands.
@@ -3850,23 +3850,23 @@ Open the shitty shell in a new :code:`window` / :code:`tab` / :code:`overlay` /
     )
 
 map('Increase background opacity',
-    'increase_background_opacity kitty_mod+a>m set_background_opacity +0.1',
+    'increase_background_opacity shitty_mod+a>m set_background_opacity +0.1',
     )
 
 map('Decrease background opacity',
-    'decrease_background_opacity kitty_mod+a>l set_background_opacity -0.1',
+    'decrease_background_opacity shitty_mod+a>l set_background_opacity -0.1',
     )
 
 map('Make background fully opaque',
-    'full_background_opacity kitty_mod+a>1 set_background_opacity 1',
+    'full_background_opacity shitty_mod+a>1 set_background_opacity 1',
     )
 
 map('Reset background opacity',
-    'reset_background_opacity kitty_mod+a>d set_background_opacity default',
+    'reset_background_opacity shitty_mod+a>d set_background_opacity default',
     )
 
 map('Reset the terminal',
-    'reset_terminal kitty_mod+delete clear_terminal reset active',
+    'reset_terminal shitty_mod+delete clear_terminal reset active',
     long_text='''
 You can create shortcuts to clear/reset the terminal. For example::
 
@@ -3911,7 +3911,7 @@ map('Clear up to cursor line',
     )
 
 map('Reload shitty.conf',
-    'reload_config_file kitty_mod+f5 load_config_file',
+    'reload_config_file shitty_mod+f5 load_config_file',
     long_text='''
 Reload :file:`shitty.conf`, applying any changes since the last time it was
 loaded. Note that a handful of options cannot be dynamically changed and
@@ -3932,7 +3932,7 @@ map('Reload shitty.conf',
     )
 
 map('Debug shitty configuration',
-    'debug_config kitty_mod+f6 debug_config',
+    'debug_config shitty_mod+f6 debug_config',
     long_text='''
 Show details about exactly what configuration shitty is running with and its host
 environment. Useful for debugging issues.
@@ -3979,7 +3979,7 @@ Some more examples::
     )
 
 map('Open shitty Website',
-    f'open_kitty_website shift+cmd+/ open_url {website_url()}',
+    f'open_shitty_website shift+cmd+/ open_url {website_url()}',
     only='macos',
     )
 egr()  # }}}

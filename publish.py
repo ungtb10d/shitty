@@ -127,7 +127,7 @@ def add_old_redirects(loc: str) -> None:
                     link_name = os.path.join(base, f'{bname}.html') if base else f'{bname}.html'
                     generate_redirect_html(link_name, bname)
 
-    old_unicode_input_path = os.path.join(loc, 'kittens', 'unicode-input')
+    old_unicode_input_path = os.path.join(loc, 'shittens', 'unicode-input')
     os.makedirs(old_unicode_input_path, exist_ok=True)
     generate_redirect_html(os.path.join(old_unicode_input_path, 'index.html'), '../unicode_input')
     generate_redirect_html(f'{old_unicode_input_path}.html', 'unicode_input')

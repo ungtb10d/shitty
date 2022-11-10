@@ -157,7 +157,7 @@ def build_crypto_tools():  # {{{
 def encrypt_cmd(cmd, password, pubkey=None):
     elliptic_curve_keypair, encrypt = build_crypto_tools()
     if pubkey is None:
-        pubkey = os.environ['KITTY_PUBLIC_KEY']
+        pubkey = os.environ['shitty_PUBLIC_KEY']
         v, d = pubkey.split(':', 1)
         if v != '1':
             raise SystemExit(f'Unsupported encryption protocol: {v}')
@@ -188,8 +188,8 @@ def raw_mode(fd):
 
 
 def config_dir():
-    if 'KITTY_CONFIG_DIRECTORY' in os.environ:
-        return os.path.abspath(os.path.expanduser(os.environ['KITTY_CONFIG_DIRECTORY']))
+    if 'shitty_CONFIG_DIRECTORY' in os.environ:
+        return os.path.abspath(os.path.expanduser(os.environ['shitty_CONFIG_DIRECTORY']))
     locations = []
     if 'XDG_CONFIG_HOME' in os.environ:
         locations.append(os.path.abspath(os.path.expanduser(os.environ['XDG_CONFIG_HOME'])))
@@ -267,9 +267,9 @@ A file from which to read the password. Trailing whitespace is ignored. Relative
 paths are resolved from the shitty configuration directory. Use - to read from STDIN.
 Used if no --password is supplied. Defaults to checking for the
 rc-pass file in the shitty configuration directory.''')
-arg_parser.add_argument('--password-env', default='KITTY_RC_PASSWORD', help='''\
+arg_parser.add_argument('--password-env', default='shitty_RC_PASSWORD', help='''\
 The name of an environment variable to read the password from.
-Used if no --password-file is supplied. Defaults to checking the KITTY_RC_PASSWORD.''')
+Used if no --password-file is supplied. Defaults to checking the shitty_RC_PASSWORD.''')
 arg_parser.add_argument('--use-password', default='if-available', choices=('if-available', 'always', 'never'), help='''\
 If no password is available, shitty will usually just send the remote control command
 without a password. This option can be used to force it to always or never use

@@ -31,11 +31,11 @@ Glossary
       An *overlay window* is a :term:`shitty window <window>` that is placed on
       top of an existing shitty window, entirely covering it. Overlays are used
       throughout shitty, for example, to display the :ref:`the scrollback buffer <scrollback>`,
-      to display :doc:`hints </kittens/hints>`, for :doc:`unicode input
-      </kittens/unicode_input>` etc. Normal overlays are meant for short
+      to display :doc:`hints </shittens/hints>`, for :doc:`unicode input
+      </shittens/unicode_input>` etc. Normal overlays are meant for short
       duration popups and so are not considered the :italic:`active window`
       when determining the current working directory or getting input text for
-      kittens, launch commands, etc. To create an overlay considered as a
+      shittens, launch commands, etc. To create an overlay considered as a
       :italic:`main window` use the :code:`overlay-main` argument to
       :doc:`launch`.
 
@@ -53,18 +53,18 @@ Environment variables
 Variables that influence shitty behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. envvar:: KITTY_CONFIG_DIRECTORY
+.. envvar:: shitty_CONFIG_DIRECTORY
 
    Controls where shitty looks for :file:`shitty.conf` and other configuration
    files. Defaults to :file:`~/.config/shitty`. For full details of the config
    directory lookup mechanism see, :option:`shitty --config`.
 
-.. envvar:: KITTY_CACHE_DIRECTORY
+.. envvar:: shitty_CACHE_DIRECTORY
 
    Controls where shitty stores cache files. Defaults to :file:`~/.cache/shitty`
    or :file:`~/Library/Caches/shitty` on macOS.
 
-.. envvar:: KITTY_RUNTIME_DIRECTORY
+.. envvar:: shitty_RUNTIME_DIRECTORY
 
    Controls where shitty stores runtime files like sockets. Defaults to
    the :code:`XDG_RUNTIME_DIR` environment variable if that is defined
@@ -84,7 +84,7 @@ Variables that influence shitty behavior
 
    Set this to ``ibus`` to enable support for IME under X11.
 
-.. envvar:: KITTY_WAYLAND_DETECT_MODIFIERS
+.. envvar:: shitty_WAYLAND_DETECT_MODIFIERS
 
    When set to a non-empty value, shitty attempts to autodiscover XKB modifiers
    under Wayland. This is useful if using non-standard modifers like hyper. It
@@ -94,25 +94,25 @@ Variables that influence shitty behavior
 .. envvar:: SSH_ASKPASS
 
    Specify the program for SSH to ask for passwords. When this is set, :doc:`ssh
-   shitten </kittens/ssh>` will use this environment variable by default. See
+   shitten </shittens/ssh>` will use this environment variable by default. See
    :opt:`askpass <shitten-ssh.askpass>` for details.
 
-.. envvar:: KITTY_CLONE_SOURCE_CODE
+.. envvar:: shitty_CLONE_SOURCE_CODE
 
    Set this to some shell code that will be executed in the cloned window with
    :code:`eval` when :ref:`clone-in-shitty <clone_shell>` is used.
 
-.. envvar:: KITTY_CLONE_SOURCE_PATH
+.. envvar:: shitty_CLONE_SOURCE_PATH
 
    Set this to the path of a file that will be sourced in the cloned window when
    :ref:`clone-in-shitty <clone_shell>` is used.
 
-.. envvar:: KITTY_DEVELOP_FROM
+.. envvar:: shitty_DEVELOP_FROM
 
    Set this to the directory path of the shitty source code and its Python code
    will be loaded from there. Only works with official binary builds.
 
-.. envvar:: KITTY_RC_PASSWORD
+.. envvar:: shitty_RC_PASSWORD
 
    Set this to a pass phrase to use the ``shitty @`` remote control command with
    :opt:`remote_control_password`.
@@ -131,18 +131,18 @@ Variables that shitty sets when running child programs
    shitty prepends itself to the PATH of its own environment to ensure the
    functions calling :program:`shitty` will work properly.
 
-.. envvar:: KITTY_WINDOW_ID
+.. envvar:: shitty_WINDOW_ID
 
    An integer that is the id for the shitty :term:`window` the program is running in.
    Can be used with the :doc:`shitty remote control facility <remote-control>`.
 
-.. envvar:: KITTY_PID
+.. envvar:: shitty_PID
 
    An integer that is the process id for the shitty process in which the program
    is running. Allows programs to tell shitty to reload its config by sending it
    the SIGUSR1 signal.
 
-.. envvar:: KITTY_PUBLIC_KEY
+.. envvar:: shitty_PUBLIC_KEY
 
    A public key that programs can use to communicate securely with shitty using
    the remote control protocol. The format is: :code:`protocol:key data`.
@@ -160,7 +160,7 @@ Variables that shitty sets when running child programs
 
    Path to a directory containing the shitty terminfo database.
 
-.. envvar:: KITTY_INSTALLATION_DIR
+.. envvar:: shitty_INSTALLATION_DIR
 
    Path to the shitty installation directory.
 
@@ -169,31 +169,31 @@ Variables that shitty sets when running child programs
    Set to the value ``truecolor`` to indicate that shitty supports 16 million
    colors.
 
-.. envvar:: KITTY_LISTEN_ON
+.. envvar:: shitty_LISTEN_ON
 
    Set when the :doc:`remote control <remote-control>` facility is enabled and
    the a socket is used for control via :option:`shitty --listen-on` or :opt:`listen_on`.
    Contains the path to the socket. Avoid the need to use :option:`shitty @ --to` when
    issuing remote control commands.
 
-.. envvar:: KITTY_PIPE_DATA
+.. envvar:: shitty_PIPE_DATA
 
    Set to data describing the layout of the screen when running child
    programs using :option:`launch --stdin-source` with the contents of the
    screen/scrollback piped to them.
 
-.. envvar:: KITTY_CHILD_CMDLINE
+.. envvar:: shitty_CHILD_CMDLINE
 
    Set to the command line of the child process running in the shitty
    window when calling the notification callback program on terminal bell, see
    :opt:`command_on_bell`.
 
-.. envvar:: KITTY_COMMON_OPTS
+.. envvar:: shitty_COMMON_OPTS
 
    Set with the values of some common shitty options when running
-   kittens, so kittens can use them without needing to load :file:`shitty.conf`.
+   shittens, so shittens can use them without needing to load :file:`shitty.conf`.
 
-.. envvar:: KITTY_SHELL_INTEGRATION
+.. envvar:: shitty_SHELL_INTEGRATION
 
    Set when enabling :ref:`shell_integration`. It is automatically removed by
    the shell integration scripts.

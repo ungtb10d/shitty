@@ -20,11 +20,11 @@
 #include <Python.h>
 #include <fcntl.h>
 
-#ifndef KITTY_LIB_PATH
-#define KITTY_LIB_PATH "../.."
+#ifndef shitty_LIB_PATH
+#define shitty_LIB_PATH "../.."
 #endif
-#ifndef KITTY_LIB_DIR_NAME
-#define KITTY_LIB_DIR_NAME "lib"
+#ifndef shitty_LIB_DIR_NAME
+#define shitty_LIB_DIR_NAME "lib"
 #endif
 
 static void cleanup_free(void *p) { free(*(void**) p); }
@@ -48,7 +48,7 @@ typedef struct {
 } RunData;
 
 static bool
-set_kitty_run_data(RunData *run_data, bool from_source, wchar_t *extensions_dir) {
+set_shitty_run_data(RunData *run_data, bool from_source, wchar_t *extensions_dir) {
     PyObject *ans = PyDict_New();
     if (!ans) { PyErr_Print(); return false; }
     PyObject *exe_dir = PyUnicode_DecodeFSDefaultAndSize(run_data->exe_dir, strlen(run_data->exe_dir));
@@ -68,7 +68,7 @@ set_kitty_run_data(RunData *run_data, bool from_source, wchar_t *extensions_dir)
         S(extensions_dir, ed);
     }
 #undef S
-    int ret = PySys_SetObject("kitty_run_data", ans);
+    int ret = PySys_SetObject("shitty_run_data", ans);
     Py_CLEAR(ans);
     if (ret != 0) { PyErr_Print(); return false; }
     return true;
@@ -148,7 +148,7 @@ run_embedded(RunData *run_data) {
 #ifdef __APPLE__
     const char *python_relpath = "../Resources/Python/lib";
 #else
-    const char *python_relpath = "../" KITTY_LIB_DIR_NAME;
+    const char *python_relpath = "../" shitty_LIB_DIR_NAME;
 #endif
     int num = snprintf(extensions_dir_full, PATH_MAX, "%s/%s/shitty-extensions", run_data->exe_dir, python_relpath);
     if (num < 0 || num >= PATH_MAX) { fprintf(stderr, "Failed to create path to extensions_dir: %s/%s\n", run_data->exe_dir, python_relpath); return 1; }
@@ -163,8 +163,8 @@ run_embedded(RunData *run_data) {
         fprintf(stderr, "Failed to canonicalize the path: %s\n", python_home_full); return 1; }
 
     bypy_initialize_interpreter(
-            L"shitty", python_home, L"kitty_main", extensions_dir, run_data->argc, run_data->argv);
-    if (!set_kitty_run_data(run_data, false, extensions_dir)) return 1;
+            L"shitty", python_home, L"shitty_main", extensions_dir, run_data->argc, run_data->argv);
+    if (!set_shitty_run_data(run_data, false, extensions_dir)) return 1;
     set_sys_bool("frozen", true);
     return bypy_run_interpreter();
 }
@@ -198,7 +198,7 @@ run_embedded(RunData *run_data) {
     status = Py_InitializeFromConfig(&config);
     if (PyStatus_Exception(status))  goto fail;
     PyConfig_Clear(&config);
-    if (!set_kitty_run_data(run_data, from_source, NULL)) return 1;
+    if (!set_shitty_run_data(run_data, from_source, NULL)) return 1;
     PySys_SetObject("frozen", Py_False);
     return Py_RunMain();
 fail:
@@ -331,7 +331,7 @@ int main(int argc, char *argv[], char* envp[]) {
     char *exe_dir = dirname(exe_dir_buf);
     int num, ret=0;
     char lib[PATH_MAX+1] = {0};
-    num = snprintf(lib, PATH_MAX, "%s/%s", exe_dir, KITTY_LIB_PATH);
+    num = snprintf(lib, PATH_MAX, "%s/%s", exe_dir, shitty_LIB_PATH);
 
     if (num < 0 || num >= PATH_MAX) { fprintf(stderr, "Failed to create path to shitty lib\n"); return 1; }
     RunData run_data = {.exe = exe, .exe_dir = exe_dir, .lib_dir = lib, .argc = argc, .argv = argv, .lc_ctype = lc_ctype};

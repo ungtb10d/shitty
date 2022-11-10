@@ -84,9 +84,9 @@ def as_rst() -> str:
     def key(x: ActionGroup) -> str:
         return group_title(x).lower()
 
-    def kitten_link(text: str) -> str:
+    def shitten_link(text: str) -> str:
         x = text.split()
-        return f':doc:`kittens/{x[2]}`' if len(x) > 2 else ''
+        return f':doc:`shittens/{x[2]}`' if len(x) > 2 else ''
 
     for group in sorted(allg, key=key):
         title = group_title(group)
@@ -110,7 +110,7 @@ def as_rst() -> str:
                 a('Default shortcuts using this action:')
                 if action.name == 'shitten':
                     a('')
-                    scs = {(kitten_link(m.parseable_text), m.short_text, f':sc:`shitty.{m.name}`') for m in maps[action.name]}
+                    scs = {(shitten_link(m.parseable_text), m.short_text, f':sc:`shitty.{m.name}`') for m in maps[action.name]}
                     for s in sorted(scs):
                         a(f'- {s[0]} - {s[2]} {s[1]}')
                 else:

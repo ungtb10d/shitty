@@ -12,14 +12,14 @@ from functools import partial
 from pprint import pformat
 from typing import IO, Callable, Dict, Iterator, Optional, Set, TypeVar
 
-from kittens.tui.operations import colored, styled
+from shittens.tui.operations import colored, styled
 
 from .cli import version
 from .constants import (
-    extensions_dir, is_macos, is_wayland, kitty_base_dir, kitty_exe, shell_path
+    extensions_dir, is_macos, is_wayland, shitty_base_dir, shitty_exe, shell_path
 )
 from .fast_data_types import Color, num_users
-from .options.types import Options as KittyOpts, defaults
+from .options.types import Options as shittyOpts, defaults
 from .options.utils import SequenceMap
 from .rgb import color_as_sharp
 from .types import MouseEvent, Shortcut, mod_to_names
@@ -52,9 +52,9 @@ def print_mapping_changes(defns: Dict[str, str], changes: Set[str], text: str, p
             print_event(k, defns[k], print)
 
 
-def compare_maps(final: Dict[AnyEvent, str], final_kitty_mod: int, initial: Dict[AnyEvent, str], initial_kitty_mod: int, print: Print) -> None:
-    ei = {k.human_repr(initial_kitty_mod): v for k, v in initial.items()}
-    ef = {k.human_repr(final_kitty_mod): v for k, v in final.items()}
+def compare_maps(final: Dict[AnyEvent, str], final_shitty_mod: int, initial: Dict[AnyEvent, str], initial_shitty_mod: int, print: Print) -> None:
+    ei = {k.human_repr(initial_shitty_mod): v for k, v in initial.items()}
+    ef = {k.human_repr(final_shitty_mod): v for k, v in final.items()}
     added = set(ef) - set(ei)
     removed = set(ei) - set(ef)
     changed = {k for k in set(ef) & set(ei) if ef[k] != ei[k]}
@@ -72,7 +72,7 @@ def flatten_sequence_map(m: SequenceMap) -> ShortcutMap:
     return ans
 
 
-def compare_opts(opts: KittyOpts, print: Print) -> None:
+def compare_opts(opts: shittyOpts, print: Print) -> None:
     from .config import load_config
     print()
     print('Config options different from defaults:')
@@ -102,19 +102,19 @@ def compare_opts(opts: KittyOpts, print: Print) -> None:
             if isinstance(val, Color):
                 colors.append(fmt.format(f) + ' ' + color_as_sharp(val) + ' ' + styled('  ', bg=val))
             else:
-                if f == 'kitty_mod':
+                if f == 'shitty_mod':
                     print(fmt.format(f), '+'.join(mod_to_names(getattr(opts, f))))
                 else:
                     print(fmt.format(f), str(getattr(opts, f)))
 
-    compare_maps(opts.mousemap, opts.kitty_mod, default_opts.mousemap, default_opts.kitty_mod, print)
+    compare_maps(opts.mousemap, opts.shitty_mod, default_opts.mousemap, default_opts.shitty_mod, print)
     final_, initial_ = opts.keymap, default_opts.keymap
     final: ShortcutMap = {Shortcut((k,)): v for k, v in final_.items()}
     initial: ShortcutMap = {Shortcut((k,)): v for k, v in initial_.items()}
     final_s, initial_s = map(flatten_sequence_map, (opts.sequence_map, default_opts.sequence_map))
     final.update(final_s)
     initial.update(initial_s)
-    compare_maps(final, opts.kitty_mod, initial, default_opts.kitty_mod, print)
+    compare_maps(final, opts.shitty_mod, initial, default_opts.shitty_mod, print)
     if colors:
         print(f'{title("Colors")}:', end='\n\t')
         print('\n\t'.join(sorted(colors)))
@@ -177,7 +177,7 @@ def format_tty_name(raw: str) -> str:
     return re.sub(r'^/dev/([^/]+)/([^/]+)$', r'\1\2', raw)
 
 
-def debug_config(opts: KittyOpts) -> str:
+def debug_config(opts: shittyOpts) -> str:
     from io import StringIO
     out = StringIO()
     p = partial(print, file=out)
@@ -206,8 +206,8 @@ def debug_config(opts: KittyOpts) -> str:
         p('Running under:', green('Wayland' if is_wayland() else 'X11'))
     p(green('Frozen:'), 'True' if getattr(sys, 'frozen', False) else 'False')
     p(green('Paths:'))
-    p(yellow('  shitty:'), os.path.realpath(kitty_exe()))
-    p(yellow('  base dir:'), kitty_base_dir)
+    p(yellow('  shitty:'), os.path.realpath(shitty_exe()))
+    p(yellow('  base dir:'), shitty_base_dir)
     p(yellow('  extensions dir:'), extensions_dir)
     p(yellow('  system shell:'), shell_path)
     if opts.config_paths:
@@ -226,8 +226,8 @@ def debug_config(opts: KittyOpts) -> str:
             p('\t' + k.ljust(35), styled(v, dim=True))
 
     for k in (
-        'PATH LANG KITTY_CONFIG_DIRECTORY KITTY_CACHE_DIRECTORY VISUAL EDITOR SHELL'
-        ' GLFW_IM_MODULE KITTY_WAYLAND_DETECT_MODIFIERS DISPLAY WAYLAND_DISPLAY USER XCURSOR_SIZE'
+        'PATH LANG shitty_CONFIG_DIRECTORY shitty_CACHE_DIRECTORY VISUAL EDITOR SHELL'
+        ' GLFW_IM_MODULE shitty_WAYLAND_DETECT_MODIFIERS DISPLAY WAYLAND_DISPLAY USER XCURSOR_SIZE'
     ).split():
         penv(k)
     for k in os.environ:

@@ -1,73 +1,73 @@
 #!/bin/bash
 
 if [[ "$-" != *i* ]] ; then builtin return; fi  # check in interactive mode
-if [[ -z "$KITTY_SHELL_INTEGRATION" ]]; then builtin return; fi
+if [[ -z "$shitty_SHELL_INTEGRATION" ]]; then builtin return; fi
 
 # Load the normal bash startup files
-if [[ -n "$KITTY_BASH_INJECT" ]]; then
-    builtin declare kitty_bash_inject="$KITTY_BASH_INJECT"
-    builtin declare ksi_val="$KITTY_SHELL_INTEGRATION"
-    builtin unset KITTY_SHELL_INTEGRATION  # ensure manual sourcing of this file in bashrc does not have any effect
-    builtin unset KITTY_BASH_INJECT ENV
+if [[ -n "$shitty_BASH_INJECT" ]]; then
+    builtin declare shitty_bash_inject="$shitty_BASH_INJECT"
+    builtin declare ksi_val="$shitty_SHELL_INTEGRATION"
+    builtin unset shitty_SHELL_INTEGRATION  # ensure manual sourcing of this file in bashrc does not have any effect
+    builtin unset shitty_BASH_INJECT ENV
     if [[ -z "$HOME" ]]; then HOME=~; fi
-    if [[ -z "$KITTY_BASH_ETC_LOCATION" ]]; then KITTY_BASH_ETC_LOCATION="/etc"; fi
+    if [[ -z "$shitty_BASH_ETC_LOCATION" ]]; then shitty_BASH_ETC_LOCATION="/etc"; fi
 
     _ksi_sourceable() {
         [[ -f "$1" && -r "$1" ]] && return 0; return 1;
     }
 
-    if [[ "$kitty_bash_inject" == *"posix"* ]]; then
-        _ksi_sourceable "$KITTY_BASH_POSIX_ENV" && {
-            builtin source "$KITTY_BASH_POSIX_ENV"
-            builtin export ENV="$KITTY_BASH_POSIX_ENV"
+    if [[ "$shitty_bash_inject" == *"posix"* ]]; then
+        _ksi_sourceable "$shitty_BASH_POSIX_ENV" && {
+            builtin source "$shitty_BASH_POSIX_ENV"
+            builtin export ENV="$shitty_BASH_POSIX_ENV"
         }
     else
         builtin set +o posix
         builtin shopt -u inherit_errexit 2>/dev/null  # resetting posix does not clear this
-        if [[ -n "$KITTY_BASH_UNEXPORT_HISTFILE" ]]; then
+        if [[ -n "$shitty_BASH_UNEXPORT_HISTFILE" ]]; then
             builtin export -n HISTFILE
-            builtin unset KITTY_BASH_UNEXPORT_HISTFILE
+            builtin unset shitty_BASH_UNEXPORT_HISTFILE
         fi
 
         # See run_startup_files() in shell.c in the Bash source code
         if builtin shopt -q login_shell; then
-            if [[ "$kitty_bash_inject" != *"no-profile"* ]]; then
-                _ksi_sourceable "$KITTY_BASH_ETC_LOCATION/profile" && builtin source "$KITTY_BASH_ETC_LOCATION/profile"
+            if [[ "$shitty_bash_inject" != *"no-profile"* ]]; then
+                _ksi_sourceable "$shitty_BASH_ETC_LOCATION/profile" && builtin source "$shitty_BASH_ETC_LOCATION/profile"
                 for _ksi_i in "$HOME/.bash_profile" "$HOME/.bash_login" "$HOME/.profile"; do
                     _ksi_sourceable "$_ksi_i" && { builtin source "$_ksi_i"; break; }
                 done
             fi
         else
-            if [[ "$kitty_bash_inject" != *"no-rc"* ]]; then
+            if [[ "$shitty_bash_inject" != *"no-rc"* ]]; then
                 # Linux distros build bash with -DSYS_BASHRC. Unfortunately, there is
                 # no way to to probe bash for it and different distros use different files
                 # Arch, Debian, Ubuntu use /etc/bash.bashrc
                 # Fedora uses /etc/bashrc sourced from ~/.bashrc instead of SYS_BASHRC
                 # Void Linux uses /etc/bash/bashrc
-                for _ksi_i in "$KITTY_BASH_ETC_LOCATION/bash.bashrc" "$KITTY_BASH_ETC_LOCATION/bash/bashrc" ; do
+                for _ksi_i in "$shitty_BASH_ETC_LOCATION/bash.bashrc" "$shitty_BASH_ETC_LOCATION/bash/bashrc" ; do
                     _ksi_sourceable "$_ksi_i" && { builtin source "$_ksi_i"; break; }
                 done
-                if [[ -z "$KITTY_BASH_RCFILE" ]]; then KITTY_BASH_RCFILE="$HOME/.bashrc"; fi
-                _ksi_sourceable "$KITTY_BASH_RCFILE" && builtin source "$KITTY_BASH_RCFILE"
+                if [[ -z "$shitty_BASH_RCFILE" ]]; then shitty_BASH_RCFILE="$HOME/.bashrc"; fi
+                _ksi_sourceable "$shitty_BASH_RCFILE" && builtin source "$shitty_BASH_RCFILE"
             fi
         fi
     fi
-    builtin unset KITTY_BASH_RCFILE KITTY_BASH_POSIX_ENV KITTY_BASH_ETC_LOCATION
+    builtin unset shitty_BASH_RCFILE shitty_BASH_POSIX_ENV shitty_BASH_ETC_LOCATION
     builtin unset -f _ksi_sourceable
-    builtin export KITTY_SHELL_INTEGRATION="$ksi_val"
-    builtin unset _ksi_i ksi_val kitty_bash_inject
+    builtin export shitty_SHELL_INTEGRATION="$ksi_val"
+    builtin unset _ksi_i ksi_val shitty_bash_inject
 fi
 
 
 if [ "${BASH_VERSINFO:-0}" -lt 4 ]; then
-    builtin unset KITTY_SHELL_INTEGRATION
+    builtin unset shitty_SHELL_INTEGRATION
     builtin printf "%s\n" "Bash version ${BASH_VERSION} too old, shitty shell integration disabled" > /dev/stderr
     builtin return
 fi
 
 if [[ "${_ksi_prompt[sourced]}" == "y" ]]; then
     # we have already run
-    builtin unset KITTY_SHELL_INTEGRATION
+    builtin unset shitty_SHELL_INTEGRATION
     builtin return
 fi
 
@@ -82,7 +82,7 @@ _ksi_prompt=(
 _ksi_main() {
     builtin local ifs="$IFS"
     IFS=" "
-    for i in ${KITTY_SHELL_INTEGRATION[@]}; do
+    for i in ${shitty_SHELL_INTEGRATION[@]}; do
         case "$i" in
             "no-cursor") _ksi_prompt[cursor]='n';;
             "no-title") _ksi_prompt[title]='n';;
@@ -93,7 +93,7 @@ _ksi_main() {
     done
     IFS="$ifs"
 
-    builtin unset KITTY_SHELL_INTEGRATION
+    builtin unset shitty_SHELL_INTEGRATION
 
     _ksi_debug_print() {
         # print a line to STDERR of parent shitty process
@@ -103,7 +103,7 @@ _ksi_main() {
     }
 
     _ksi_set_mark() {
-        _ksi_prompt["${1}_mark"]="\[\e]133;k;${1}_kitty\a\]"
+        _ksi_prompt["${1}_mark"]="\[\e]133;k;${1}_shitty\a\]"
     }
 
     _ksi_set_mark start
@@ -119,20 +119,20 @@ _ksi_main() {
         # we first remove any previously added shitty code from the prompt variables and then add
         # it back, to ensure we have only a single instance
         if [[ -n "${_ksi_prompt[ps0]}" ]]; then
-            PS0=${PS0//\\\[\\e\]133;k;start_kitty\\a\\\]*end_kitty\\a\\\]}
+            PS0=${PS0//\\\[\\e\]133;k;start_shitty\\a\\\]*end_shitty\\a\\\]}
             PS0="${_ksi_prompt[ps0]}$PS0"
         fi
         if [[ -n "${_ksi_prompt[ps0_suffix]}" ]]; then
-            PS0=${PS0//\\\[\\e\]133;k;start_suffix_kitty\\a\\\]*end_suffix_kitty\\a\\\]}
+            PS0=${PS0//\\\[\\e\]133;k;start_suffix_shitty\\a\\\]*end_suffix_shitty\\a\\\]}
             PS0="${PS0}${_ksi_prompt[ps0_suffix]}"
         fi
         # restore PS1 to its pristine state without our additions
         if [[ -n "${_ksi_prompt[ps1]}" ]]; then
-            PS1=${PS1//\\\[\\e\]133;k;start_kitty\\a\\\]*end_kitty\\a\\\]}
-            PS1=${PS1//\\\[\\e\]133;k;start_secondary_kitty\\a\\\]*end_secondary_kitty\\a\\\]}
+            PS1=${PS1//\\\[\\e\]133;k;start_shitty\\a\\\]*end_shitty\\a\\\]}
+            PS1=${PS1//\\\[\\e\]133;k;start_secondary_shitty\\a\\\]*end_secondary_shitty\\a\\\]}
         fi
         if [[ -n "${_ksi_prompt[ps1_suffix]}" ]]; then
-            PS1=${PS1//\\\[\\e\]133;k;start_suffix_kitty\\a\\\]*end_suffix_kitty\\a\\\]}
+            PS1=${PS1//\\\[\\e\]133;k;start_suffix_shitty\\a\\\]*end_suffix_shitty\\a\\\]}
         fi
         if [[ -n "${_ksi_prompt[ps1]}" ]]; then
             if [[ "${_ksi_prompt[mark]}" == "y" && ( "${PS1}" == *"\n"* || "${PS1}" == *$'\n'* ) ]]; then
@@ -154,7 +154,7 @@ _ksi_main() {
             PS1="${PS1}${_ksi_prompt[ps1_suffix]}"
         fi
         if [[ -n "${_ksi_prompt[ps2]}" ]]; then
-            PS2=${PS2//\\\[\\e\]133;k;start_kitty\\a\\\]*end_kitty\\a\\\]}
+            PS2=${PS2//\\\[\\e\]133;k;start_shitty\\a\\\]*end_shitty\\a\\\]}
             PS2="${_ksi_prompt[ps2]}$PS2"
         fi
 
@@ -175,8 +175,8 @@ _ksi_main() {
     fi
 
     if [[ "${_ksi_prompt[title]}" == "y" ]]; then
-        if [[ -z "$KITTY_PID" ]]; then
-            if [[ -n "$SSH_TTY" || -n "$SSH2_TTY$KITTY_WINDOW_ID" ]]; then
+        if [[ -z "$shitty_PID" ]]; then
+            if [[ -n "$SSH_TTY" || -n "$SSH2_TTY$shitty_WINDOW_ID" ]]; then
                 # connected to most SSH servers
                 # or use ssh shitten to connected to some SSH servers that do not set SSH_TTY
                 _ksi_prompt[hostname_prefix]="\h: "
@@ -263,14 +263,14 @@ _ksi_main() {
         builtin eval "$oldval"
         PROMPT_COMMAND+="; $pc"
     fi
-    if [ -n "${KITTY_IS_CLONE_LAUNCH}" ]; then
+    if [ -n "${shitty_IS_CLONE_LAUNCH}" ]; then
         builtin local orig_conda_env="$CONDA_DEFAULT_ENV"
-        builtin eval "${KITTY_IS_CLONE_LAUNCH}"
+        builtin eval "${shitty_IS_CLONE_LAUNCH}"
         builtin hash -r 2> /dev/null 1> /dev/null
         builtin local venv="${VIRTUAL_ENV}/bin/activate"
         builtin local sourced=""
         _ksi_s_is_ok() {
-            [[ -z "$sourced" && "$KITTY_CLONE_SOURCE_STRATEGIES" == *",$1,"* ]] && return 0
+            [[ -z "$sourced" && "$shitty_CLONE_SOURCE_STRATEGIES" == *",$1,"* ]] && return 0
             return 1
         }
 
@@ -281,12 +281,12 @@ _ksi_main() {
         fi; if _ksi_s_is_ok "conda" && [ -n "${CONDA_DEFAULT_ENV}" ] && builtin command -v conda >/dev/null 2>/dev/null && [ "${CONDA_DEFAULT_ENV}" != "$orig_conda_env" ]; then
             sourced="y"
             conda activate "${CONDA_DEFAULT_ENV}"
-        fi; if _ksi_s_is_ok "env_var" && [[ -n "${KITTY_CLONE_SOURCE_CODE}" ]]; then
+        fi; if _ksi_s_is_ok "env_var" && [[ -n "${shitty_CLONE_SOURCE_CODE}" ]]; then
             sourced="y"
-            builtin eval "${KITTY_CLONE_SOURCE_CODE}"
-        fi; if _ksi_s_is_ok "path" && [[ -r "${KITTY_CLONE_SOURCE_PATH}" ]]; then
+            builtin eval "${shitty_CLONE_SOURCE_CODE}"
+        fi; if _ksi_s_is_ok "path" && [[ -r "${shitty_CLONE_SOURCE_PATH}" ]]; then
             sourced="y"
-            builtin source "${KITTY_CLONE_SOURCE_PATH}"
+            builtin source "${shitty_CLONE_SOURCE_PATH}"
         fi
         builtin unset -f _ksi_s_is_ok
         # Ensure PATH has no duplicate entries
@@ -304,7 +304,7 @@ _ksi_main() {
             PATH=${PATH#:}
         fi
     fi
-    builtin unset KITTY_IS_CLONE_LAUNCH KITTY_CLONE_SOURCE_STRATEGIES
+    builtin unset shitty_IS_CLONE_LAUNCH shitty_CLONE_SOURCE_STRATEGIES
 }
 _ksi_main
 builtin unset -f _ksi_main
@@ -400,13 +400,13 @@ edit-in-shitty() {
                     builtin printf "%s\n" "$line" > /dev/stderr
                     return 1
                 else
-                    [ "$line" = "KITTY_DATA_START" ] && started="y"
+                    [ "$line" = "shitty_DATA_START" ] && started="y"
                 fi
             done
             [ "$started" = "n" ] && continue
             data=""
             while IFS= builtin read -r line; do
-                [ "$line" = "KITTY_DATA_END" ] && break
+                [ "$line" = "shitty_DATA_END" ] && break
                 data="$data$line"
             done
             [ -n "$data" -a "$started" != "done" ] && {

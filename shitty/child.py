@@ -13,7 +13,7 @@ from typing import (
 import shitty.fast_data_types as fast_data_types
 
 from .constants import (
-    handled_signals, is_freebsd, is_macos, kitty_base_dir, shell_path,
+    handled_signals, is_freebsd, is_macos, shitty_base_dir, shell_path,
     terminfo_dir
 )
 from .types import run_once
@@ -145,7 +145,7 @@ def environ_of_process(pid: int) -> Dict[str, str]:
 
 def process_env() -> Dict[str, str]:
     ans = dict(os.environ)
-    ssl_env_var = getattr(sys, 'kitty_ssl_env_var', None)
+    ssl_env_var = getattr(sys, 'shitty_ssl_env_var', None)
     if ssl_env_var is not None:
         ans.pop(ssl_env_var, None)
     ans.pop('XDG_ACTIVATION_TOKEN', None)
@@ -248,18 +248,18 @@ class Child:
         from shitty.options.utils import DELETE_ENV_VAR
         env = default_env().copy()
         boss = fast_data_types.get_boss()
-        if is_macos and env.get('LC_CTYPE') == 'UTF-8' and not getattr(sys, 'kitty_run_data').get(
+        if is_macos and env.get('LC_CTYPE') == 'UTF-8' and not getattr(sys, 'shitty_run_data').get(
                 'lc_ctype_before_python') and not getattr(default_env, 'lc_ctype_set_by_user', False):
             del env['LC_CTYPE']
         env.update(self.env)
         env['TERM'] = fast_data_types.get_options().term
         env['COLORTERM'] = 'truecolor'
-        env['KITTY_PID'] = getpid()
-        env['KITTY_PUBLIC_KEY'] = boss.encryption_public_key
+        env['shitty_PID'] = getpid()
+        env['shitty_PUBLIC_KEY'] = boss.encryption_public_key
         if self.add_listen_on_env_var and boss.listening_on:
-            env['KITTY_LISTEN_ON'] = boss.listening_on
+            env['shitty_LISTEN_ON'] = boss.listening_on
         else:
-            env.pop('KITTY_LISTEN_ON', None)
+            env.pop('shitty_LISTEN_ON', None)
         if self.cwd:
             # needed in case cwd is a symlink, in which case shells
             # can use it to display the current directory name rather
@@ -268,7 +268,7 @@ class Child:
         tdir = checked_terminfo_dir()
         if tdir:
             env['TERMINFO'] = tdir
-        env['KITTY_INSTALLATION_DIR'] = kitty_base_dir
+        env['shitty_INSTALLATION_DIR'] = shitty_base_dir
         opts = fast_data_types.get_options()
         self.unmodified_argv = list(self.argv)
         if 'disabled' not in opts.shell_integration:
@@ -276,10 +276,10 @@ class Child:
             modify_shell_environ(opts, env, self.argv)
         env = {k: v for k, v in env.items() if v is not DELETE_ENV_VAR}
         if self.is_clone_launch:
-            env['KITTY_IS_CLONE_LAUNCH'] = self.is_clone_launch
+            env['shitty_IS_CLONE_LAUNCH'] = self.is_clone_launch
             self.is_clone_launch = '1'  # free memory
         else:
-            env.pop('KITTY_IS_CLONE_LAUNCH', None)
+            env.pop('shitty_IS_CLONE_LAUNCH', None)
         return env
 
     def fork(self) -> Optional[int]:

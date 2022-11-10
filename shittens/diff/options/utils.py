@@ -6,7 +6,7 @@
 from typing import Any, Container, Dict, Iterable, Tuple, Union
 
 from shitty.conf.utils import (
-    KeyFuncWrapper, KittensKeyDefinition, parse_kittens_key
+    KeyFuncWrapper, shittensKeyDefinition, parse_shittens_key
 )
 
 ReturnType = Tuple[str, Any]
@@ -64,7 +64,7 @@ def store_multiple(val: str, current_val: Container[str]) -> Iterable[Tuple[str,
         yield val, val
 
 
-def parse_map(val: str) -> Iterable[KittensKeyDefinition]:
-    x = parse_kittens_key(val, func_with_args.args_funcs)
+def parse_map(val: str) -> Iterable[shittensKeyDefinition]:
+    x = parse_shittens_key(val, func_with_args.args_funcs)
     if x is not None:
         yield x

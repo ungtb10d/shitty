@@ -19,7 +19,7 @@ beforehand to discuss it, so that you don't waste your time making a pull
 request that gets rejected.
 
 If the code you are submitting is reasonably easily testable, please contribute
-tests as well (see the `kitty_tests/` sub-directory for existing tests, which
+tests as well (see the `shitty_tests/` sub-directory for existing tests, which
 can be run with `./test.py`).
 
 That's it.

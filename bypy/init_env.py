@@ -12,26 +12,26 @@ import tempfile
 from contextlib import suppress
 
 from bypy.constants import (
-    LIBDIR, PREFIX, PYTHON, SRC as KITTY_DIR, ismacos, worker_env
+    LIBDIR, PREFIX, PYTHON, SRC as shitty_DIR, ismacos, worker_env
 )
 from bypy.utils import run_shell, walk
 
 
 def read_src_file(name):
-    with open(os.path.join(KITTY_DIR, 'shitty', name), 'rb') as f:
+    with open(os.path.join(shitty_DIR, 'shitty', name), 'rb') as f:
         return f.read().decode('utf-8')
 
 
 def initialize_constants():
-    kitty_constants = {}
+    shitty_constants = {}
     src = read_src_file('constants.py')
     nv = re.search(r'Version\((\d+), (\d+), (\d+)\)', src)
-    kitty_constants['version'] = f'{nv.group(1)}.{nv.group(2)}.{nv.group(3)}'
-    kitty_constants['appname'] = re.search(
+    shitty_constants['version'] = f'{nv.group(1)}.{nv.group(2)}.{nv.group(3)}'
+    shitty_constants['appname'] = re.search(
             r'appname: str\s+=\s+(u{0,1})[\'"]([^\'"]+)[\'"]', src
     ).group(2)
-    kitty_constants['cacerts_url'] = 'https://curl.haxx.se/ca/cacert.pem'
-    return kitty_constants
+    shitty_constants['cacerts_url'] = 'https://curl.haxx.se/ca/cacert.pem'
+    return shitty_constants
 
 
 def run(*args, **extra_env):
@@ -42,7 +42,7 @@ def run(*args, **extra_env):
     env['LD_LIBRARY_PATH'] = LIBDIR
     if ismacos:
         env['PKGCONFIG_EXE'] = os.path.join(PREFIX, 'bin', 'pkg-config')
-    cwd = env.pop('cwd', KITTY_DIR)
+    cwd = env.pop('cwd', shitty_DIR)
     print(' '.join(map(shlex.quote, args)), flush=True)
     return subprocess.call(list(args), env=env, cwd=cwd)
 
@@ -55,24 +55,24 @@ def build_frozen_launcher(extra_include_dirs):
     cmd = SETUP_CMD + ['--prefix', build_frozen_launcher.prefix] + inc_dirs + ['build-frozen-launcher']
     if run(*cmd, cwd=build_frozen_launcher.writeable_src_dir) != 0:
         print('Building of frozen shitty launcher failed', file=sys.stderr)
-        os.chdir(KITTY_DIR)
+        os.chdir(shitty_DIR)
         run_shell()
         raise SystemExit('Building of shitty launcher failed')
     return build_frozen_launcher.writeable_src_dir
 
 
-def run_tests(kitty_exe):
+def run_tests(shitty_exe):
     with tempfile.TemporaryDirectory() as tdir:
         env = {
-            'KITTY_CONFIG_DIRECTORY': os.path.join(tdir, 'conf'),
-            'KITTY_CACHE_DIRECTORY': os.path.join(tdir, 'cache')
+            'shitty_CONFIG_DIRECTORY': os.path.join(tdir, 'conf'),
+            'shitty_CACHE_DIRECTORY': os.path.join(tdir, 'cache')
         }
         [os.mkdir(x) for x in env.values()]
-        cmd = [kitty_exe, '+runpy', 'from kitty_tests.main import run_tests; run_tests()']
+        cmd = [shitty_exe, '+runpy', 'from shitty_tests.main import run_tests; run_tests()']
         print(*map(shlex.quote, cmd), flush=True)
         if subprocess.call(cmd, env=env) != 0:
             print('Checking of shitty build failed', file=sys.stderr)
-            os.chdir(os.path.dirname(kitty_exe))
+            os.chdir(os.path.dirname(shitty_exe))
             run_shell()
             raise SystemExit('Checking of shitty build failed')
 
@@ -87,7 +87,7 @@ def build_c_extensions(ext_dir, args):
     writeable_src_dir = os.path.join(ext_dir, 'src')
     build_frozen_launcher.writeable_src_dir = writeable_src_dir
     shutil.copytree(
-        KITTY_DIR, writeable_src_dir, symlinks=True,
+        shitty_DIR, writeable_src_dir, symlinks=True,
         ignore=shutil.ignore_patterns('b', 'build', 'dist', '*_commands.json', '*.o', '*.so', '*.dylib', '*.pyd'))
 
     with suppress(FileNotFoundError):
@@ -96,7 +96,7 @@ def build_c_extensions(ext_dir, args):
     cmd = SETUP_CMD + ['macos-freeze' if ismacos else 'linux-freeze']
     if args.dont_strip:
         cmd.append('--debug')
-    dest = kitty_constants['appname'] + ('.app' if ismacos else '')
+    dest = shitty_constants['appname'] + ('.app' if ismacos else '')
     dest = build_frozen_launcher.prefix = os.path.join(ext_dir, dest)
     cmd += ['--prefix', dest, '--full']
     if run(*cmd, cwd=writeable_src_dir) != 0:
@@ -108,4 +108,4 @@ def build_c_extensions(ext_dir, args):
 
 
 if __name__ == 'program':
-    kitty_constants = initialize_constants()
+    shitty_constants = initialize_constants()

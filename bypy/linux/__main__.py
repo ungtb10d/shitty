@@ -27,7 +27,7 @@ else:
 self_dir = os.path.dirname(os.path.abspath(__file__))
 py_ver = '.'.join(map(str, python_major_minor_version()))
 iv = globals()['init_env']
-kitty_constants = iv['kitty_constants']
+shitty_constants = iv['shitty_constants']
 
 
 def binary_includes():
@@ -103,7 +103,7 @@ def copy_libs(env):
 def add_ca_certs(env):
     print('Downloading CA certs...')
     from urllib.request import urlopen
-    cdata = urlopen(kitty_constants['cacerts_url']).read()
+    cdata = urlopen(shitty_constants['cacerts_url']).read()
     dest = os.path.join(env.lib_dir, 'cacert.pem')
     with open(dest, 'wb') as f:
         f.write(cdata)
@@ -127,22 +127,22 @@ def copy_python(env):
 
     pdir = os.path.join(env.lib_dir, 'shitty-extensions')
     os.makedirs(pdir, exist_ok=True)
-    kitty_dir = os.path.join(env.lib_dir, 'shitty')
-    bases = ('shitty', 'kittens', 'kitty_tests')
+    shitty_dir = os.path.join(env.lib_dir, 'shitty')
+    bases = ('shitty', 'shittens', 'shitty_tests')
     for x in bases:
         dest = os.path.join(env.py_dir, x)
-        os.rename(os.path.join(kitty_dir, x), dest)
+        os.rename(os.path.join(shitty_dir, x), dest)
         if x == 'shitty':
             shutil.rmtree(os.path.join(dest, 'launcher'))
-    os.rename(os.path.join(kitty_dir, '__main__.py'), os.path.join(env.py_dir, 'kitty_main.py'))
-    shutil.rmtree(os.path.join(kitty_dir, '__pycache__'))
+    os.rename(os.path.join(shitty_dir, '__main__.py'), os.path.join(env.py_dir, 'shitty_main.py'))
+    shutil.rmtree(os.path.join(shitty_dir, '__pycache__'))
     print('Extracting extension modules from', env.py_dir, 'to', pdir)
     ext_map = extract_extension_modules(env.py_dir, pdir)
     shutil.copy(os.path.join(os.path.dirname(self_dir), 'site.py'), os.path.join(env.py_dir, 'site.py'))
     for x in bases:
         iv['sanitize_source_folder'](os.path.join(env.py_dir, x))
     py_compile(env.py_dir)
-    freeze_python(env.py_dir, pdir, env.obj_dir, ext_map, develop_mode_env_var='KITTY_DEVELOP_FROM', remove_pyc_files=True)
+    freeze_python(env.py_dir, pdir, env.obj_dir, ext_map, develop_mode_env_var='shitty_DEVELOP_FROM', remove_pyc_files=True)
     shutil.rmtree(env.py_dir)
 
 
@@ -208,7 +208,7 @@ def create_tarfile(env, compression_level='9'):
         if err.errno != errno.ENOENT:
             raise
     os.mkdir(base)
-    dist = os.path.join(base, f'{kitty_constants["appname"]}-{kitty_constants["version"]}-{arch}.tar')
+    dist = os.path.join(base, f'{shitty_constants["appname"]}-{shitty_constants["version"]}-{arch}.tar')
     with tarfile.open(dist, mode='w', format=tarfile.PAX_FORMAT) as tf:
         cwd = os.getcwd()
         os.chdir(env.base)
@@ -231,7 +231,7 @@ def create_tarfile(env, compression_level='9'):
 def main():
     args = globals()['args']
     ext_dir = globals()['ext_dir']
-    env = Env(os.path.join(ext_dir, kitty_constants['appname']))
+    env = Env(os.path.join(ext_dir, shitty_constants['appname']))
     copy_libs(env)
     copy_python(env)
     build_launcher(env)

@@ -36,7 +36,7 @@ def itertests(suite: unittest.TestSuite) -> Generator[unittest.TestCase, None, N
 def find_all_tests(package: str = '', excludes: Sequence[str] = ('main', 'gr')) -> unittest.TestSuite:
     suits = []
     if not package:
-        package = __name__.rpartition('.')[0] if '.' in __name__ else 'kitty_tests'
+        package = __name__.rpartition('.')[0] if '.' in __name__ else 'shitty_tests'
     for x in contents(package):
         name, ext = os.path.splitext(x)
         if ext in ('.py', '.pyc') and name not in excludes:
@@ -75,7 +75,7 @@ def filter_tests_by_module(suite: unittest.TestSuite, *names: str) -> unittest.T
 def type_check() -> NoReturn:
     from shitty.cli_stub import generate_stub  # type:ignore
     generate_stub()
-    from kittens.tui.operations_stub import generate_stub  # type: ignore
+    from shittens.tui.operations_stub import generate_stub  # type: ignore
     generate_stub()
     py = os.environ.get('PYTHON_FOR_TYPE_CHECK') or shutil.which('python') or shutil.which('python3')
     os.execlp(py, py, '-m', 'mypy', '--pretty')

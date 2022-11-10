@@ -8,10 +8,10 @@
 #include "cleanup.h"
 
 
-kitty_cleanup_at_exit_func exit_funcs[NUM_CLEANUP_FUNCS] = {0};
+shitty_cleanup_at_exit_func exit_funcs[NUM_CLEANUP_FUNCS] = {0};
 
 void
-register_at_exit_cleanup_func(AtExitCleanupFunc which, kitty_cleanup_at_exit_func func) {
+register_at_exit_cleanup_func(AtExitCleanupFunc which, shitty_cleanup_at_exit_func func) {
     if (which < NUM_CLEANUP_FUNCS) exit_funcs[which] = func;
 }
 

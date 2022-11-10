@@ -97,7 +97,7 @@ windows).
 ''' + '\n\n' + MATCH_WINDOW_OPTION + '\n\n' + MATCH_TAB_OPTION.replace('--match -m', '--match-tab -t')
     argspec = 'MARGIN_OR_PADDING ...'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         if not args:
             self.fatal('At least one setting must be specified')
         try:
@@ -111,7 +111,7 @@ windows).
         }
         return ans
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         windows = self.windows_for_payload(boss, window, payload_get)
         settings: Dict[str, Optional[float]] = payload_get('settings')
         dirtied_tabs = {}

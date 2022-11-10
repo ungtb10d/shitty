@@ -11,7 +11,7 @@ from multiprocessing import util
 from multiprocessing import context, get_all_start_methods, get_context, spawn
 from typing import Any, Callable, Sequence, Optional, Tuple, Union,  TYPE_CHECKING
 
-from .constants import kitty_exe
+from .constants import shitty_exe
 
 orig_spawn_passfds = util.spawnv_passfds
 orig_executable = spawn.get_executable()
@@ -42,12 +42,12 @@ def spawnv_passfds(path: bytes, args: ArgsType, passfds: Sequence[int]) -> int:
         prog = 'from multiprocessing.spawn import spawn_main; spawn_main(%s)'
         prog %= ', '.join(str(item) for item in args[idx+1:])
         patched_args = [spawn.get_executable(), '+runpy', prog]
-    return orig_spawn_passfds(os.fsencode(kitty_exe()), patched_args, passfds)
+    return orig_spawn_passfds(os.fsencode(shitty_exe()), patched_args, passfds)
 
 
 def monkey_patch_multiprocessing() -> None:
     # Use shitty to run the worker process used by multiprocessing
-    spawn.set_executable(kitty_exe())
+    spawn.set_executable(shitty_exe())
     util.spawnv_passfds = spawnv_passfds
 
 

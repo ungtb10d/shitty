@@ -128,13 +128,13 @@ current_focused_os_window_id(void) {
 
 
 OSWindow*
-os_window_for_kitty_window(id_type kitty_window_id) {
+os_window_for_shitty_window(id_type shitty_window_id) {
     for (size_t i = 0; i < global_state.num_os_windows; i++) {
         OSWindow *w = global_state.os_windows + i;
         for (size_t t = 0; t < w->num_tabs; t++) {
             Tab *tab = w->tabs + t;
             for (size_t c = 0; c < tab->num_windows; c++) {
-                if (tab->windows[c].id == kitty_window_id) return w;
+                if (tab->windows[c].id == shitty_window_id) return w;
             }
         }
     }
@@ -142,13 +142,13 @@ os_window_for_kitty_window(id_type kitty_window_id) {
 }
 
 Window*
-window_for_window_id(id_type kitty_window_id) {
+window_for_window_id(id_type shitty_window_id) {
     for (size_t i = 0; i < global_state.num_os_windows; i++) {
         OSWindow *w = global_state.os_windows + i;
         for (size_t t = 0; t < w->num_tabs; t++) {
             Tab *tab = w->tabs + t;
             for (size_t c = 0; c < tab->num_windows; c++) {
-                if (tab->windows[c].id == kitty_window_id) return tab->windows + c;
+                if (tab->windows[c].id == shitty_window_id) return tab->windows + c;
             }
         }
     }

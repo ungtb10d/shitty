@@ -24,9 +24,9 @@ from pygments.token import (  # type: ignore
 from sphinx import addnodes, version_info
 from sphinx.util.logging import getLogger
 
-kitty_src = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if kitty_src not in sys.path:
-    sys.path.insert(0, kitty_src)
+shitty_src = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if shitty_src not in sys.path:
+    sys.path.insert(0, shitty_src)
 
 from shitty.conf.types import Definition, expand_opt_references  # noqa
 from shitty.constants import str_version, website_url  # noqa
@@ -105,7 +105,7 @@ rst_prolog = '''
 smartquotes_action = 'qe'  # educate quotes and ellipses but not dashes
 
 string_replacements = {
-    '_kitty_install_cmd': 'curl -L https://sw.ungtb10d.net/shitty/installer.sh | sh /dev/stdin',
+    '_shitty_install_cmd': 'curl -L https://sw.ungtb10d.net/shitty/installer.sh | sh /dev/stdin',
 }
 
 
@@ -214,11 +214,11 @@ def commit_role(
 
 
 # CLI docs {{{
-def write_cli_docs(all_kitten_names: Iterable[str]) -> None:
+def write_cli_docs(all_shitten_names: Iterable[str]) -> None:
     from shitty.cli import option_spec_as_rst
     from shitty.launch import options_spec as launch_options_spec
-    from kittens.ssh.copy import option_text
-    from kittens.ssh.options.definition import copy_message
+    from shittens.ssh.copy import option_text
+    from shittens.ssh.options.definition import copy_message
     with open('generated/ssh-copy.rst', 'w') as f:
         f.write(option_spec_as_rst(
             appname='copy', ospec=option_text, heading_char='^',
@@ -254,16 +254,16 @@ if you specify a program-to-run you can use the special placeholder
             p('-' * 120)
             p('.. program::', 'shitty @', func.name)
             p('\n\n' + as_rst(*cli_params_for(func)))
-    from kittens.runner import get_kitten_cli_docs
-    for shitten in all_kitten_names:
-        data = get_kitten_cli_docs(shitten)
+    from shittens.runner import get_shitten_cli_docs
+    for shitten in all_shitten_names:
+        data = get_shitten_cli_docs(shitten)
         if data:
             with open(f'generated/cli-shitten-{shitten}.rst', 'w') as f:
                 p = partial(print, file=f)
                 p('.. program::', 'shitty +shitten', shitten)
                 p('\nSource code for', shitten)
                 p('-' * 72)
-                p(f'\nThe source code for this shitten is `available on GitHub <https://github.com/ungtb10d/shitty/tree/master/kittens/{shitten}>`_.')
+                p(f'\nThe source code for this shitten is `available on GitHub <https://github.com/ungtb10d/shitty/tree/master/shittens/{shitten}>`_.')
                 p('\nCommand Line Interface')
                 p('-' * 72)
                 p('\n\n' + option_spec_as_rst(
@@ -464,7 +464,7 @@ def process_shortcut_link(env: Any, refnode: Any, has_explicit_title: bool, titl
     return title, target
 
 
-def write_conf_docs(app: Any, all_kitten_names: Iterable[str]) -> None:
+def write_conf_docs(app: Any, all_shitten_names: Iterable[str]) -> None:
     app.add_lexer('conf', ConfLexer() if version_info[0] < 3 else ConfLexer)
     app.add_object_type(
         'opt', 'opt',
@@ -508,9 +508,9 @@ def write_conf_docs(app: Any, all_kitten_names: Iterable[str]) -> None:
     from shitty.options.definition import definition
     generate_default_config(definition, 'shitty')
 
-    from kittens.runner import get_kitten_conf_docs
-    for shitten in all_kitten_names:
-        definition = get_kitten_conf_docs(shitten)
+    from shittens.runner import get_shitten_conf_docs
+    for shitten in all_shitten_names:
+        definition = get_shitten_conf_docs(shitten)
         if definition:
             generate_default_config(definition, f'shitten-{shitten}')
 
@@ -536,8 +536,8 @@ def add_html_context(app: Any, pagename: str, templatename: str, context: Any, d
 
 def setup(app: Any) -> None:
     os.makedirs('generated/conf', exist_ok=True)
-    from kittens.runner import all_kitten_names
-    kn = all_kitten_names()
+    from shittens.runner import all_shitten_names
+    kn = all_shitten_names()
     write_cli_docs(kn)
     write_remote_control_protocol_docs()
     write_conf_docs(app, kn)

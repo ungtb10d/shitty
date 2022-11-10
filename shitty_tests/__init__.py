@@ -114,7 +114,7 @@ class Callbacks:
         self.current_clone_data += rest
 
     def handle_remote_ssh(self, msg):
-        from kittens.ssh.main import get_ssh_data
+        from shittens.ssh.main import get_ssh_data
         if self.pty:
             for line in get_ssh_data(msg, "testing"):
                 self.pty.write_to_child(line)
@@ -172,8 +172,8 @@ class BaseTest(TestCase):
         return options
 
     def cmd_to_run_python_code(self, code):
-        from shitty.constants import kitty_exe
-        return [kitty_exe(), '+runpy', code]
+        from shitty.constants import shitty_exe
+        return [shitty_exe(), '+runpy', code]
 
     def create_screen(self, cols=5, lines=5, scrollback=5, cell_width=10, cell_height=20, options=None):
         self.set_options(options)

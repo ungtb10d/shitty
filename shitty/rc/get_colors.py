@@ -36,10 +36,10 @@ configured colors.
 
 ''' + '\n\n' + MATCH_WINDOW_OPTION
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         return {'configured': opts.configured, 'match': opts.match}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         from shitty.fast_data_types import get_options
         opts = get_options()
         ans = {k: getattr(opts, k) for k in opts if isinstance(getattr(opts, k), Color)}

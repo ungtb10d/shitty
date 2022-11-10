@@ -35,7 +35,7 @@ again. If you want to allow other programs to change it afterwards, use this opt
     ''' + '\n\n' + MATCH_WINDOW_OPTION
     argspec = '[TITLE ...]'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         ans = {'match': opts.match, 'temporary': opts.temporary}
         title = ' '.join(args)
         if title:
@@ -44,7 +44,7 @@ again. If you want to allow other programs to change it afterwards, use this opt
         ans['self'] = True
         return ans
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         for window in self.windows_for_match_payload(boss, window, payload_get):
             if window:
                 if payload_get('temporary'):

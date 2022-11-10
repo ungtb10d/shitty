@@ -146,7 +146,7 @@ prepare_install_dest() {
     command mkdir -p "$dest" || die "Failed to create the directory: $dest"
 }
 
-exec_kitty() {
+exec_shitty() {
     if [ "$OS" = "macos" ]; then
         exec "open" "$dest"
     else
@@ -166,7 +166,7 @@ main() {
     else
         linux_install
     fi
-    [ "$launch" = "y" ] && exec_kitty
+    [ "$launch" = "y" ] && exec_shitty
     exit 0
 }
 

@@ -49,9 +49,9 @@ Encrypted communication
 
 When using the :opt:`remote_control_password` option communication to the
 terminal is encrypted to keep the password secure. A public key is used from
-the :envvar:`KITTY_PUBLIC_KEY` environment variable. Currently, only one
+the :envvar:`shitty_PUBLIC_KEY` environment variable. Currently, only one
 encryption protocol is supported. The protocol number is present in
-:envvar:`KITTY_PUBLIC_KEY` as ``1``. The key data in this environment variable
+:envvar:`shitty_PUBLIC_KEY` as ``1``. The key data in this environment variable
 is :rfc:`Base-85 <1924>` encoded.  The algorithm used is `Elliptic Curve Diffie
 Helman <https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman>`__ with
 the `X25519 curve <https://en.wikipedia.org/wiki/Curve25519>`__. A time based

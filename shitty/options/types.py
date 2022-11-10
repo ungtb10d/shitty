@@ -370,8 +370,8 @@ option_names = (  # {{{
  'initial_window_width',
  'input_delay',
  'italic_font',
- 'kitten_alias',
- 'kitty_mod',
+ 'shitten_alias',
+ 'shitty_mod',
  'linux_display_server',
  'listen_on',
  'macos_colorspace',
@@ -524,7 +524,7 @@ class Options:
     initial_window_width: typing.Tuple[int, str] = (640, 'px')
     input_delay: int = 3
     italic_font: str = 'auto'
-    kitty_mod: int = 5
+    shitty_mod: int = 5
     linux_display_server: choices_for_linux_display_server = 'auto'
     listen_on: str = 'none'
     macos_colorspace: choices_for_macos_colorspace = 'srgb'
@@ -609,7 +609,7 @@ class Options:
     env: typing.Dict[str, str] = {}
     exe_search_path: typing.Dict[str, str] = {}
     font_features: typing.Dict[str, typing.Tuple[shitty.fonts.FontFeature, ...]] = {}
-    kitten_alias: typing.Dict[str, str] = {}
+    shitten_alias: typing.Dict[str, str] = {}
     modify_font: typing.Dict[str, shitty.fonts.FontModification] = {}
     narrow_symbols: typing.Dict[typing.Tuple[int, int], int] = {}
     remote_control_password: typing.Dict[str, typing.Sequence[str]] = {}
@@ -730,7 +730,7 @@ defaults.action_alias = {}
 defaults.env = {}
 defaults.exe_search_path = {}
 defaults.font_features = {}
-defaults.kitten_alias = {}
+defaults.shitten_alias = {}
 defaults.modify_font = {}
 defaults.narrow_symbols = {}
 defaults.remote_control_password = {}
@@ -861,8 +861,8 @@ defaults.map = [
     KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=110),), definition='shitten hints --type linenum'),  # noqa
     # open_selected_hyperlink
     KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=112), rest=(SingleKey(key=121),), definition='shitten hints --type hyperlink'),  # noqa
-    # show_kitty_doc
-    KeyDefinition(trigger=SingleKey(mods=256, key=57364), definition='show_kitty_doc overview'),  # noqa
+    # show_shitty_doc
+    KeyDefinition(trigger=SingleKey(mods=256, key=57364), definition='show_shitty_doc overview'),  # noqa
     # toggle_fullscreen
     KeyDefinition(trigger=SingleKey(mods=256, key=57374), definition='toggle_fullscreen'),  # noqa
     # toggle_maximized
@@ -871,8 +871,8 @@ defaults.map = [
     KeyDefinition(trigger=SingleKey(mods=256, key=117), definition='shitten unicode_input'),  # noqa
     # edit_config_file
     KeyDefinition(trigger=SingleKey(mods=256, key=57365), definition='edit_config_file'),  # noqa
-    # kitty_shell
-    KeyDefinition(trigger=SingleKey(mods=256, key=57344), definition='kitty_shell window'),  # noqa
+    # shitty_shell
+    KeyDefinition(trigger=SingleKey(mods=256, key=57344), definition='shitty_shell window'),  # noqa
     # increase_background_opacity
     KeyDefinition(is_sequence=True, trigger=SingleKey(mods=256, key=97), rest=(SingleKey(key=109),), definition='set_background_opacity +0.1'),  # noqa
     # decrease_background_opacity

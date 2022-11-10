@@ -2124,7 +2124,7 @@ screen_report_color_stack(Screen *self) {
     write_escape_code_to_child(self, CSI, buf);
 }
 
-void screen_handle_kitty_dcs(Screen *self, const char *callback_name, PyObject *cmd) {
+void screen_handle_shitty_dcs(Screen *self, const char *callback_name, PyObject *cmd) {
     CALLBACK(callback_name, "O", cmd);
 }
 

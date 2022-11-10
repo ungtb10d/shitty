@@ -54,7 +54,7 @@ takes a space separated list of keywords:
 
 disabled
     Turn off all shell integration. The shell's launch environment is not
-    modified and :envvar:`KITTY_SHELL_INTEGRATION` is not set. Useful for
+    modified and :envvar:`shitty_SHELL_INTEGRATION` is not set. Useful for
     :ref:`manual integration <manual_shell_integration>`.
 
 no-rc
@@ -62,7 +62,7 @@ no-rc
     if you prefer to load the shitty shell integration code yourself, either as
     part of :ref:`manually integration <manual_shell_integration>` or because
     you have some other software that sets up shell integration.
-    This will still set the :envvar:`KITTY_SHELL_INTEGRATION` environment
+    This will still set the :envvar:`shitty_SHELL_INTEGRATION` environment
     variable when shitty runs the shell.
 
 no-cursor
@@ -77,7 +77,7 @@ no-title
 no-cwd
     Turn off reporting the current working directory. This is used to allow
     :ac:`new_window_with_cwd` and similar to open windows logged into remote
-    machines using the :doc:`ssh shitten <kittens/ssh>` automatically with the
+    machines using the :doc:`ssh shitten <shittens/ssh>` automatically with the
     same working directory as the current window.
     Note that for the fish shell this will not disable its built-in current
     working directory reporting.
@@ -172,7 +172,7 @@ integration. How it does so varies for different shells.
 
 
 Then, when launching the shell, shitty sets the environment variable
-:envvar:`KITTY_SHELL_INTEGRATION` to the value of the :opt:`shell_integration`
+:envvar:`shitty_SHELL_INTEGRATION` to the value of the :opt:`shell_integration`
 option. The shell integration code reads the environment variable, turns on the
 specified integration functionality and then unsets the variable so as to not
 pollute the system.
@@ -212,7 +212,7 @@ Shell integration over SSH
 ----------------------------
 
 The easiest way to have shell integration work when SSHing into remote systems
-is to use the :doc:`ssh shitten <kittens/ssh>`. Simply run::
+is to use the :doc:`ssh shitten <shittens/ssh>`. Simply run::
 
     shitty +shitten ssh hostname
 
@@ -238,7 +238,7 @@ You can clone the current shell into a new shitty window by simply running the
 
 This will open a new window running a new shell instance but with all
 environment variables and the current working directory copied. This even works
-over SSH when using :doc:`kittens/ssh`.
+over SSH when using :doc:`shittens/ssh`.
 
 The :command:`clone-in-shitty` command takes almost all the same arguments as the
 :doc:`launch <launch>` command, so you can open a new tab instead or a new OS
@@ -254,9 +254,9 @@ cloned window using environment variables. It will automatically clone virtual
 environments created by the :link:`Python venv module
 <https://docs.python.org/3/library/venv.html>` or :link:`Conda
 <https://conda.io/>`. In addition, setting the
-env var :envvar:`KITTY_CLONE_SOURCE_CODE` to some shell code will cause that
+env var :envvar:`shitty_CLONE_SOURCE_CODE` to some shell code will cause that
 code to be run in the cloned window with :code:`eval`. Similarly, setting
-:envvar:`KITTY_CLONE_SOURCE_PATH` to the path of a file will cause that file to
+:envvar:`shitty_CLONE_SOURCE_PATH` to the path of a file will cause that file to
 be sourced in the cloned window. This can be controlled by
 :opt:`clone_source_strategies`.
 
@@ -279,7 +279,7 @@ Edit files in new shitty windows even over SSH
 
 The :command:`edit-in-shitty` command allows you to seamlessly edit files
 in your default :opt:`editor` in new shitty windows. This works even over
-SSH (if you use the :doc:`ssh shitten <kittens/ssh>`), allowing you
+SSH (if you use the :doc:`ssh shitten <shittens/ssh>`), allowing you
 to easily edit remote files in your local editor with all its bells and
 whistles.
 
@@ -314,9 +314,9 @@ Then in your shell's rc file, add the lines:
 
     .. code-block:: sh
 
-        if test -n "$KITTY_INSTALLATION_DIR"; then
-            export KITTY_SHELL_INTEGRATION="enabled"
-            autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/shitty-integration
+        if test -n "$shitty_INSTALLATION_DIR"; then
+            export shitty_SHELL_INTEGRATION="enabled"
+            autoload -Uz -- "$shitty_INSTALLATION_DIR"/shell-integration/zsh/shitty-integration
             shitty-integration
             unfunction shitty-integration
         fi
@@ -325,10 +325,10 @@ Then in your shell's rc file, add the lines:
 
     .. code-block:: fish
 
-        if set -q KITTY_INSTALLATION_DIR
-            set --global KITTY_SHELL_INTEGRATION enabled
-            source "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_conf.d/shitty-shell-integration.fish"
-            set --prepend fish_complete_path "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_completions.d"
+        if set -q shitty_INSTALLATION_DIR
+            set --global shitty_SHELL_INTEGRATION enabled
+            source "$shitty_INSTALLATION_DIR/shell-integration/fish/vendor_conf.d/shitty-shell-integration.fish"
+            set --prepend fish_complete_path "$shitty_INSTALLATION_DIR/shell-integration/fish/vendor_completions.d"
         end
 
 
@@ -336,18 +336,18 @@ Then in your shell's rc file, add the lines:
 
     .. code-block:: sh
 
-        if test -n "$KITTY_INSTALLATION_DIR"; then
-            export KITTY_SHELL_INTEGRATION="enabled"
-            source "$KITTY_INSTALLATION_DIR/shell-integration/bash/shitty.bash"
+        if test -n "$shitty_INSTALLATION_DIR"; then
+            export shitty_SHELL_INTEGRATION="enabled"
+            source "$shitty_INSTALLATION_DIR/shell-integration/bash/shitty.bash"
         fi
 
-The value of :envvar:`KITTY_SHELL_INTEGRATION` is the same as that for
+The value of :envvar:`shitty_SHELL_INTEGRATION` is the same as that for
 :opt:`shell_integration`, except if you want to disable shell integration
 completely, in which case simply do not set the
-:envvar:`KITTY_SHELL_INTEGRATION` variable at all.
+:envvar:`shitty_SHELL_INTEGRATION` variable at all.
 
 In a container, you will need to install the shitty shell integration scripts
-and make sure the :envvar:`KITTY_INSTALLATION_DIR` environment variable is set
+and make sure the :envvar:`shitty_INSTALLATION_DIR` environment variable is set
 to point to the location of the scripts.
 
 Integration with other shells

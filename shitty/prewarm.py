@@ -21,7 +21,7 @@ from typing import (
     Tuple, TypeVar, Union, cast
 )
 
-from shitty.constants import kitty_exe, running_in_kitty
+from shitty.constants import shitty_exe, running_in_shitty
 from shitty.entry_points import main as main_entry_point
 from shitty.fast_data_types import (
     CLD_EXITED, CLD_KILLED, CLD_STOPPED, clearenv, get_options,
@@ -131,12 +131,12 @@ class PrewarmProcess:
         else:
             self.poll.unregister(self.write_to_process_fd)
 
-    def reload_kitty_config(self, opts: Optional[Options] = None) -> None:
+    def reload_shitty_config(self, opts: Optional[Options] = None) -> None:
         if opts is None:
             opts = get_options()
         data = json.dumps({'paths': opts.config_paths, 'overrides': opts.config_overrides})
         if self.write_to_process_fd > -1:
-            self.send_to_prewarm_process(f'reload_kitty_config:{data}\n')
+            self.send_to_prewarm_process(f'reload_shitty_config:{data}\n')
 
     def __call__(
         self,
@@ -216,17 +216,17 @@ class PrewarmProcess:
         return True
 
 
-def reload_kitty_config(payload: str) -> None:
+def reload_shitty_config(payload: str) -> None:
     d = json.loads(payload)
-    from kittens.tui.utils import set_kitty_opts
-    set_kitty_opts(paths=d['paths'], overrides=d['overrides'])
+    from shittens.tui.utils import set_shitty_opts
+    set_shitty_opts(paths=d['paths'], overrides=d['overrides'])
 
 
 def prewarm() -> None:
-    from kittens.runner import all_kitten_names
-    for shitten in all_kitten_names():
+    from shittens.runner import all_shitten_names
+    for shitten in all_shitten_names():
         with suppress(Exception):
-            import_module(f'kittens.{shitten}.main')
+            import_module(f'shittens.{shitten}.main')
     import_module('shitty.complete')
 
 
@@ -285,7 +285,7 @@ def debug(*a: Any) -> None:
 
 
 def child_main(cmd: Dict[str, Any], ready_fd: int = -1, prewarm_type: str = 'direct') -> NoReturn:
-    getattr(sys, 'kitty_run_data')['prewarmed'] = prewarm_type
+    getattr(sys, 'shitty_run_data')['prewarmed'] = prewarm_type
     cwd = cmd.get('cwd')
     if cwd:
         with suppress(OSError):
@@ -458,8 +458,8 @@ def main(stdin_fd: int, stdout_fd: int, notify_child_death_fd: int) -> None:
             line = input_buf[:idx].decode()
             input_buf = input_buf[idx+1:]
             cmd, _, payload = line.partition(':')
-            if cmd == 'reload_kitty_config':
-                reload_kitty_config(payload)
+            if cmd == 'reload_shitty_config':
+                reload_shitty_config(payload)
             elif cmd == 'ready':
                 child_id = int(payload)
                 cfd = child_ready_fds.pop(child_id, None)
@@ -573,7 +573,7 @@ def exec_main(stdin_read: int, stdout_write: int, death_notify_write: int) -> No
     os.set_inheritable(stdin_read, False)
     os.set_inheritable(stdout_write, False)
     os.set_inheritable(death_notify_write, False)
-    running_in_kitty(False)
+    running_in_shitty(False)
     for x in (sys.stdout, sys.stdin, sys.stderr):
         if not x.line_buffering:  # happens if the parent shitty instance has stdout not pointing to a terminal
             x.reconfigure(line_buffering=True)  # type: ignore
@@ -590,7 +590,7 @@ def fork_prewarm_process(opts: Options, use_exec: bool = False) -> Optional[Prew
     if use_exec:
         import subprocess
         tp = subprocess.Popen(
-            [kitty_exe(), '+runpy', f'from shitty.prewarm import exec_main; exec_main({stdin_read}, {stdout_write}, {death_notify_write})'],
+            [shitty_exe(), '+runpy', f'from shitty.prewarm import exec_main; exec_main({stdin_read}, {stdout_write}, {death_notify_write})'],
             pass_fds=(stdin_read, stdout_write, death_notify_write))
         child_pid = tp.pid
         tp.returncode = 0  # prevent a warning when the popen object is deleted with the process still running
@@ -605,7 +605,7 @@ def fork_prewarm_process(opts: Options, use_exec: bool = False) -> Optional[Prew
         safe_close(death_notify_write)
         p = PrewarmProcess(child_pid, stdin_write, stdout_read, death_notify_read)
         if use_exec:
-            p.reload_kitty_config()
+            p.reload_shitty_config()
         return p
     # child
     set_use_os_log(False)

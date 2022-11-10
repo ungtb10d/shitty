@@ -34,12 +34,12 @@ def main() -> None:
             elif opt.parser_func.__name__ in ('to_color', 'titlebar_color', 'macos_titlebar_color'):
                 all_colors.append(opt.name)
     patch_color_list('shitty/rc/set_colors.py', nullable_colors, 'NULLABLE')
-    patch_color_list('kittens/themes/collection.py', all_colors, 'ALL', ' ' * 8)
+    patch_color_list('shittens/themes/collection.py', all_colors, 'ALL', ' ' * 8)
 
-    from kittens.diff.options.definition import definition as kd
-    write_output('kittens.diff', kd)
-    from kittens.ssh.options.definition import definition as sd
-    write_output('kittens.ssh', sd)
+    from shittens.diff.options.definition import definition as kd
+    write_output('shittens.diff', kd)
+    from shittens.ssh.options.definition import definition as sd
+    write_output('shittens.ssh', sd)
 
 
 if __name__ == '__main__':

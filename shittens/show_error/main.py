@@ -33,11 +33,11 @@ def real_main(args: List[str]) -> None:
     print(error_message, flush=True)
     if data.get('tb'):
         import select
-        from kittens.tui.operations import init_state, set_cursor_visible
+        from shittens.tui.operations import init_state, set_cursor_visible
         fd, original_termios = open_tty()
         msg = '\n\r\x1b[1;32mPress e to see detailed traceback or any other key to exit\x1b[m'
         write_all(fd, msg)
-        write_all(fd, init_state(alternate_screen=False, kitty_keyboard_mode=False) + set_cursor_visible(False))
+        write_all(fd, init_state(alternate_screen=False, shitty_keyboard_mode=False) + set_cursor_visible(False))
         with no_echo(fd):
             termios.tcdrain(fd)
             while True:

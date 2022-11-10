@@ -123,7 +123,7 @@ The diff shitten makes use of various features that are :doc:`shitty only
 </protocol-extensions>`, such as the :doc:`shitty graphics protocol
 </graphics-protocol>`, the :doc:`extended keyboard protocol
 </keyboard-protocol>`, etc. It also leverages terminal program infrastructure
-I created for all of shitty's other kittens to reduce the amount of code needed
+I created for all of shitty's other shittens to reduce the amount of code needed
 (the entire implementation is under 2000 lines of code).
 
 And fundamentally, it's shitty only because I wrote it for myself, and I am

@@ -25,9 +25,9 @@ The piping environment
 --------------------------
 
 The program to which the data is piped has a special environment variable
-declared, ``KITTY_PIPE_DATA`` whose contents are::
+declared, ``shitty_PIPE_DATA`` whose contents are::
 
-   KITTY_PIPE_DATA={scrolled_by}:{cursor_x},{cursor_y}:{lines},{columns}
+   shitty_PIPE_DATA={scrolled_by}:{cursor_x},{cursor_y}:{lines},{columns}
 
 where ``scrolled_by`` is the number of lines shitty is currently scrolled by,
 ``cursor_(x|y)`` is the position of the cursor on the screen with ``(1,1)``

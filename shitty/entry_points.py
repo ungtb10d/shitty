@@ -8,7 +8,7 @@ from typing import List
 
 
 def icat(args: List[str]) -> None:
-    from kittens.runner import run_kitten as rk
+    from shittens.runner import run_shitten as rk
     sys.argv = args
     rk('icat')
 
@@ -54,8 +54,8 @@ def complete(args: List[str]) -> None:
 def open_urls(args: List[str]) -> None:
     setattr(sys, 'cmdline_args_for_open', True)
     sys.argv = ['shitty'] + args[1:]
-    from shitty.main import main as kitty_main
-    kitty_main()
+    from shitty.main import main as shitty_main
+    shitty_main()
 
 
 def launch(args: List[str]) -> None:
@@ -121,15 +121,15 @@ def shebang(args: List[str]) -> None:
     os.execvp(cmd[0], cmd + [script_path])
 
 
-def run_kitten(args: List[str]) -> None:
+def run_shitten(args: List[str]) -> None:
     try:
         shitten = args[1]
     except IndexError:
-        from kittens.runner import list_kittens
-        list_kittens()
+        from shittens.runner import list_shittens
+        list_shittens()
         raise SystemExit(1)
     sys.argv = args[1:]
-    from kittens.runner import run_kitten as rk
+    from shittens.runner import run_shitten as rk
     rk(shitten)
 
 
@@ -168,7 +168,7 @@ namespaced_entry_points['complete'] = complete
 namespaced_entry_points['runpy'] = runpy
 namespaced_entry_points['launch'] = launch
 namespaced_entry_points['open'] = open_urls
-namespaced_entry_points['shitten'] = run_kitten
+namespaced_entry_points['shitten'] = run_shitten
 namespaced_entry_points['edit-config'] = edit_config_file
 namespaced_entry_points['shebang'] = shebang
 namespaced_entry_points['edit'] = edit
@@ -184,12 +184,12 @@ def setup_openssl_environment(ext_dir: str) -> None:
     else:
         cert_file = os.path.join(d(ext_dir), 'cacert.pem')
     os.environ['SSL_CERT_FILE'] = cert_file
-    setattr(sys, 'kitty_ssl_env_var', 'SSL_CERT_FILE')
+    setattr(sys, 'shitty_ssl_env_var', 'SSL_CERT_FILE')
 
 
 def main() -> None:
     if getattr(sys, 'frozen', False):
-        ext_dir: str = getattr(sys, 'kitty_run_data').get('extensions_dir')
+        ext_dir: str = getattr(sys, 'shitty_run_data').get('extensions_dir')
         if ext_dir:
             setup_openssl_environment(ext_dir)
     first_arg = '' if len(sys.argv) < 2 else sys.argv[1]
@@ -200,7 +200,7 @@ def main() -> None:
         elif first_arg.startswith('+'):
             namespaced(['+', first_arg[1:]] + sys.argv[2:])
         else:
-            from shitty.main import main as kitty_main
-            kitty_main()
+            from shitty.main import main as shitty_main
+            shitty_main()
     else:
         func(sys.argv[1:])

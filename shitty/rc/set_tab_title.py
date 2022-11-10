@@ -30,10 +30,10 @@ class SetTabTitle(RemoteCommand):
     options_spec = MATCH_TAB_OPTION
     argspec = 'TITLE ...'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         return {'title': ' '.join(args), 'match': opts.match}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         for tab in self.tabs_for_match_payload(boss, window, payload_get):
             if tab:
                 tab.set_title(payload_get('title'))

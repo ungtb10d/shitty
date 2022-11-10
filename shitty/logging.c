@@ -75,7 +75,7 @@ bool
 init_logging(PyObject *module) {
     if (PyModule_AddFunctions(module, module_methods) != 0) return false;
 #ifdef __APPLE__
-    if (getenv("KITTY_LAUNCHED_BY_LAUNCH_SERVICES") != NULL) use_os_log = true;
+    if (getenv("shitty_LAUNCHED_BY_LAUNCH_SERVICES") != NULL) use_os_log = true;
 #endif
     return true;
 }

@@ -3,10 +3,10 @@
 # To use fish's autoloading feature, shitty prepends the vendored integration script directory to XDG_DATA_DIRS.
 # The original paths needs to be restored here to not affect other programs.
 # In particular, if the original XDG_DATA_DIRS does not exist, it needs to be removed.
-if set -q KITTY_FISH_XDG_DATA_DIR
+if set -q shitty_FISH_XDG_DATA_DIR
     if set -q XDG_DATA_DIRS
         set --global --export --path XDG_DATA_DIRS "$XDG_DATA_DIRS"
-        if set --local index (contains --index "$KITTY_FISH_XDG_DATA_DIR" $XDG_DATA_DIRS)
+        if set --local index (contains --index "$shitty_FISH_XDG_DATA_DIR" $XDG_DATA_DIRS)
             set --erase --global XDG_DATA_DIRS[$index]
             test -n "$XDG_DATA_DIRS" || set --erase --global XDG_DATA_DIRS
         end
@@ -14,7 +14,7 @@ if set -q KITTY_FISH_XDG_DATA_DIR
             set --global --export --unpath XDG_DATA_DIRS "$XDG_DATA_DIRS"
         end
     end
-    set --erase KITTY_FISH_XDG_DATA_DIR
+    set --erase shitty_FISH_XDG_DATA_DIR
 end
 
 status is-interactive || exit 0
@@ -26,9 +26,9 @@ or echo -en \eP@shitty-print\|V2FybmluZzogVXBkYXRlIGZpc2ggdG8gdmVyc2lvbiAzLjMuMC
 
 function __ksi_schedule --on-event fish_prompt -d "Setup shitty integration after other scripts have run, we hope"
     functions --erase __ksi_schedule
-    test -n "$KITTY_SHELL_INTEGRATION" || return 0
-    set --local _ksi (string split " " -- "$KITTY_SHELL_INTEGRATION")
-    set --erase KITTY_SHELL_INTEGRATION
+    test -n "$shitty_SHELL_INTEGRATION" || return 0
+    set --local _ksi (string split " " -- "$shitty_SHELL_INTEGRATION")
+    set --erase shitty_SHELL_INTEGRATION
 
     # Enable cursor shape changes for default mode and vi mode
     if not contains "no-cursor" $_ksi
@@ -108,14 +108,14 @@ function __ksi_schedule --on-event fish_prompt -d "Setup shitty integration afte
     end
 
     # Handle clone launches
-    if test -n "$KITTY_IS_CLONE_LAUNCH"
+    if test -n "$shitty_IS_CLONE_LAUNCH"
         set --local orig_conda_env "$CONDA_DEFAULT_ENV"
-        eval "$KITTY_IS_CLONE_LAUNCH"
+        eval "$shitty_IS_CLONE_LAUNCH"
         set --local venv "$VIRTUAL_ENV/bin/activate.fish"
         set --global _ksi_sourced
         function _ksi_s_is_ok
             test -z "$_ksi_sourced"
-            and string match -q -- "*,$argv[1],*" "$KITTY_CLONE_SOURCE_STRATEGIES"
+            and string match -q -- "*,$argv[1],*" "$shitty_CLONE_SOURCE_STRATEGIES"
             and return 0
             return 1
         end
@@ -132,16 +132,16 @@ function __ksi_schedule --on-event fish_prompt -d "Setup shitty integration afte
             conda activate "$CONDA_DEFAULT_ENV"
         end
         if _ksi_s_is_ok "env_var"
-            and test -n "$KITTY_CLONE_SOURCE_CODE"
+            and test -n "$shitty_CLONE_SOURCE_CODE"
             set _ksi_sourced "y"
-            eval "$KITTY_CLONE_SOURCE_CODE"
+            eval "$shitty_CLONE_SOURCE_CODE"
         end
         if _ksi_s_is_ok "path"
-            and test -r "$KITTY_CLONE_SOURCE_PATH"
+            and test -r "$shitty_CLONE_SOURCE_PATH"
             set _ksi_sourced "y"
-            source "$KITTY_CLONE_SOURCE_PATH"
+            source "$shitty_CLONE_SOURCE_PATH"
         end
-        set --erase KITTY_IS_CLONE_LAUNCH KITTY_CLONE_SOURCE_STRATEGIES _ksi_sourced
+        set --erase shitty_IS_CLONE_LAUNCH shitty_CLONE_SOURCE_STRATEGIES _ksi_sourced
         functions --erase _ksi_s_is_ok
 
         # Ensure PATH has no duplicate entries
@@ -264,7 +264,7 @@ function edit-in-shitty -d "Edit the specified file in a new shitty overlay usin
                 functions --erase __ksi_react_to_interrupt
                 return 1
             else
-                test "$line" = "KITTY_DATA_START" && set started "y"
+                test "$line" = "shitty_DATA_START" && set started "y"
             end
         end
         test "$started" = "n" && continue
@@ -273,7 +273,7 @@ function edit-in-shitty -d "Edit the specified file in a new shitty overlay usin
             stty "-echo"
             set --local line (head -n1 < /dev/tty)
             test -z "$line" && break
-            test "$line" = "KITTY_DATA_END" && break
+            test "$line" = "shitty_DATA_END" && break
             set data "$data$line"
         end
         if test -n "$data" -a "$started" != "done"

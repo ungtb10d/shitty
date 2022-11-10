@@ -16,9 +16,9 @@ delete_lock_dir() {
     }
 }
 
-exec_kitty() {
+exec_shitty() {
     delete_lock_dir
-    [ -n "$kitty_exe" ] && exec "$kitty_exe" "$@"
+    [ -n "$shitty_exe" ] && exec "$shitty_exe" "$@"
     die "Failed to execute shitty"
 }
 
@@ -27,12 +27,12 @@ script_path="$(command readlink -f "$0" 2> /dev/null)"
 [ $? = 0 ] || script_path="$0"
 script_dir="$(command dirname "$script_path")"
 install_dir="$(command dirname "$script_dir")/install"
-remote_kitty_version_file="$script_dir/../version"
-local_kitty_version_file="$install_dir/installed-shitty-version"
-kitty_exe="$install_dir/bin/shitty"
-local_kitty_version=""
+remote_shitty_version_file="$script_dir/../version"
+local_shitty_version_file="$install_dir/installed-shitty-version"
+shitty_exe="$install_dir/bin/shitty"
+local_shitty_version=""
 
-[ -f "$kitty_exe" -a -x "$kitty_exe" -a "$1" != "+update-shitty" ] && exec_kitty "$@"
+[ -f "$shitty_exe" -a -x "$shitty_exe" -a "$1" != "+update-shitty" ] && exec_shitty "$@"
 
 case "$(command uname)" in
     'Linux') OS="linux";;
@@ -71,7 +71,7 @@ fi
 
 release_version=$(fetch_quiet "https://sw.ungtb10d.net/shitty/current-version.txt")
 [ $? -ne 0 -o -z "$release_version" ] && {
-    [ -n "$local_kitty_version" ] && exec_kitty "$@"
+    [ -n "$local_shitty_version" ] && exec_shitty "$@"
     die "Could not get shitty latest release version"
 }
 
@@ -89,7 +89,7 @@ if ! command mkdir "$lock_dir" 2> /dev/null; then
 fi
 trap 'delete_lock_dir' EXIT INT QUIT TERM
 
-printf "\033[33mkitty needs to be installed\033[m\n\n"
+printf "\033[33mshitty needs to be installed\033[m\n\n"
 command rm -rf "$install_dir"
 command mkdir -p "$install_dir"
 printf "Downloading shitty from: \033[32m%s\033[m\n\n" "$url"
@@ -114,5 +114,5 @@ else
     command mkdir "$install_dir/bin"
     command ln -sf "$install_dir/shitty.app/Contents/MacOS/shitty" "$install_dir/bin/shitty"
 fi
-command "$kitty_exe" +runpy "from shitty.constants import str_version; print(end=str_version)" > "$local_kitty_version_file"
-exec_kitty "$@"
+command "$shitty_exe" +runpy "from shitty.constants import str_version; print(end=str_version)" > "$local_shitty_version_file"
+exec_shitty "$@"

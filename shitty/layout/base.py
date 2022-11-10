@@ -214,7 +214,7 @@ class Layout:
 
     name: str = ''
     needs_window_borders = True
-    must_draw_borders = False  # can be overridden to customize behavior from kittens
+    must_draw_borders = False  # can be overridden to customize behavior from shittens
     layout_opts = LayoutOpts({})
     only_active_window_visible = False
 

@@ -8,8 +8,8 @@ from shitty.conf.types import Action, Definition
 
 
 definition = Definition(
-    'kittens.diff',
-    Action('map', 'parse_map', {'key_definitions': 'shitty.conf.utils.KittensKeyMap'}, ['shitty.types.ParsedShortcut', 'shitty.conf.utils.KeyAction']),
+    'shittens.diff',
+    Action('map', 'parse_map', {'key_definitions': 'shitty.conf.utils.shittensKeyMap'}, ['shitty.types.ParsedShortcut', 'shitty.conf.utils.KeyAction']),
 )
 
 agr = definition.add_group

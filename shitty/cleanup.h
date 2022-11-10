@@ -6,7 +6,7 @@
 
 #pragma once
 
-typedef void (*kitty_cleanup_at_exit_func)(void);
+typedef void (*shitty_cleanup_at_exit_func)(void);
 
 typedef enum {
     STATE_CLEANUP_FUNC,
@@ -21,5 +21,5 @@ typedef enum {
     NUM_CLEANUP_FUNCS
 } AtExitCleanupFunc;
 
-void register_at_exit_cleanup_func(AtExitCleanupFunc which, kitty_cleanup_at_exit_func func);
+void register_at_exit_cleanup_func(AtExitCleanupFunc which, shitty_cleanup_at_exit_func func);
 void run_at_exit_cleanup_functions(void);

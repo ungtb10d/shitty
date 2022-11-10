@@ -8,7 +8,7 @@ from . import BaseTest
 class TestDiff(BaseTest):
 
     def test_changed_center(self):
-        from kittens.diff.diff_speedup import changed_center
+        from shittens.diff.diff_speedup import changed_center
         for left, right, prefix, suffix in [
                 ('abc', 'def', '', ''),
                 ('', 'def', '', ''),
@@ -22,7 +22,7 @@ class TestDiff(BaseTest):
                 self.assertEqual((prefix, suffix), (src[:pc], src[-sc:] if sc else ''))
 
     def test_split_with_highlights(self):
-        from kittens.diff.render import split_with_highlights, Segment, truncate_points
+        from shittens.diff.render import split_with_highlights, Segment, truncate_points
         self.ae(list(truncate_points('1234567890ab', 3)), [3, 6, 9])
         for line, width, prefix_count, suffix_count, expected in [
                 ('abcdefgh', 20, 2, 3, ('abSScdeEEfgh',)),
@@ -47,7 +47,7 @@ class TestDiff(BaseTest):
     def test_walk(self):
         from pathlib import Path
         import tempfile
-        from kittens.diff.collect import walk
+        from shittens.diff.collect import walk
 
         with tempfile.TemporaryDirectory() as tmpdir:
             # /tmp/test/

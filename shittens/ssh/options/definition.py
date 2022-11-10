@@ -14,7 +14,7 @@ remote. Directories are copied recursively. If absolute paths are used, they are
 copied as is.'''
 
 definition = Definition(
-    'kittens.ssh',
+    'shittens.ssh',
 )
 
 agr = definition.add_group
@@ -85,7 +85,7 @@ opt('+env', '', option_type='env', add_to_default=False, long_text='''
 Specify the environment variables to be set on the remote host. Using the
 name with an equal sign (e.g. :code:`env VAR=`) will set it to the empty string.
 Specifying only the name (e.g. :code:`env VAR`) will remove the variable from
-the remote shell environment. The special value :code:`_kitty_copy_env_var_`
+the remote shell environment. The special value :code:`_shitty_copy_env_var_`
 will cause the value of the variable to be copied from the local environment.
 The definitions are processed alphabetically. Note that environment variables
 are expanded recursively, for example::
@@ -106,15 +106,15 @@ opt('color_scheme', '', long_text='''
 Specify a color scheme to use when connecting to the remote host. If this option
 ends with :code:`.conf`, it is assumed to be the name of a config file to load
 from the shitty config directory, otherwise it is assumed to be the name of a
-color theme to load via the :doc:`themes shitten </kittens/themes>`. Note that
+color theme to load via the :doc:`themes shitten </shittens/themes>`. Note that
 only colors applying to the text/background are changed, other config settings
 in the .conf files/themes are ignored.
 ''')
 
-opt('remote_kitty', 'if-needed', choices=('if-needed', 'no', 'yes'), long_text='''
-Make :program:`shitty` available on the remote host. Useful to run kittens such
-as the :doc:`icat shitten </kittens/icat>` to display images or the
-:doc:`transfer file shitten </kittens/transfer>` to transfer files. Only works if
+opt('remote_shitty', 'if-needed', choices=('if-needed', 'no', 'yes'), long_text='''
+Make :program:`shitty` available on the remote host. Useful to run shittens such
+as the :doc:`icat shitten </shittens/icat>` to display images or the
+:doc:`transfer file shitten </shittens/transfer>` to transfer files. Only works if
 the remote host has an architecture for which :link:`pre-compiled shitty binaries
 <https://github.com/ungtb10d/shitty/releases>` are available. Note that shitty
 is not actually copied to the remote host, instead a small bootstrap script is

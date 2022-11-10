@@ -59,7 +59,7 @@ Close the tab this command is run in, rather than the active tab.
 '''
     argspec = 'COLORS'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         try:
             colors = parse_colors(args)
         except Exception as err:
@@ -68,7 +68,7 @@ Close the tab this command is run in, rather than the active tab.
             raise ParsingOfArgsFailed('No colors specified')
         return {'match': opts.match, 'self': opts.self, 'colors': colors}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         colors = payload_get('colors')
         s = {k: None if colors[k] is None else int(colors[k]) for k in valid_color_names if k in colors}
         for tab in self.tabs_for_match_payload(boss, window, payload_get):

@@ -12,10 +12,10 @@ Recent major new features
 Truly convenient SSH
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :doc:`ssh shitten <kittens/ssh>` is redesigned with powerful new features:
+The :doc:`ssh shitten <shittens/ssh>` is redesigned with powerful new features:
 
 * Automatic :ref:`shell_integration` on remote machines
-* Easily :ref:`clone local shell/editor config <real_world_ssh_kitten_config>` on remote machines
+* Easily :ref:`clone local shell/editor config <real_world_ssh_shitten_config>` on remote machines
 * Easily :ref:`edit files in your local editor <edit_file>` on remote machines
 * Automatic :opt:`re-use of existing connections <shitten-ssh.share_connections>` to avoid connection setup latency
 
@@ -85,7 +85,7 @@ Detailed list of changes
 
 - Allow passing null bytes through the system clipboard (:iss:`5483`)
 
-- ssh shitten: Fix :envvar:`KITTY_PUBLIC_KEY` not being encoded properly when transmitting (:iss:`5496`)
+- ssh shitten: Fix :envvar:`shitty_PUBLIC_KEY` not being encoded properly when transmitting (:iss:`5496`)
 
 - Sessions: Allow controlling which OS Window is active via the ``focus_os_window`` directive
 
@@ -142,11 +142,11 @@ Detailed list of changes
 
 - A new option :opt:`remote_control_password` to use fine grained permissions for what can be remote controlled (:disc:`5320`)
 
-- Reduce startup latency by ~30 milliseconds when running kittens via key bindings inside shitty (:iss:`5159`)
+- Reduce startup latency by ~30 milliseconds when running shittens via key bindings inside shitty (:iss:`5159`)
 
 - A new option :opt:`modify_font` to adjust various font metrics like underlines, cell sizes etc. (:pull:`5265`)
 
-- A new shortcut :sc:`show_kitty_doc` to display the shitty docs in a browser
+- A new shortcut :sc:`show_shitty_doc` to display the shitty docs in a browser
 
 - Graphics protocol: Only delete temp files if they have the string
   :code:`tty-graphics-protocol` in their file paths. This prevents deletion of arbitrary files in :file:`/tmp`.
@@ -290,7 +290,7 @@ Detailed list of changes
 - Increase the max number of combining chars per cell from two to three, without increasing memory usage.
 
 - Linux: Load libfontconfig at runtime to allow the binaries to work for
-  running kittens on servers without FontConfig
+  running shittens on servers without FontConfig
 
 - GNOME: Fix for high CPU usage caused by GNOME's text input subsystem going
   into an infinite loop when IME cursor position is updated after a done event
@@ -300,7 +300,7 @@ Detailed list of changes
 0.25.0 [2022-04-11]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- :doc:`kittens/ssh`: automatic shell integration when using SSH. Easily
+- :doc:`shittens/ssh`: automatic shell integration when using SSH. Easily
   clone local shell and editor configuration on remote machines, and automatic
   re-use of existing connections to avoid connection setup latency.
 
@@ -330,7 +330,7 @@ Detailed list of changes
 
 - macOS: Fix Unicode paths not decoded correctly when dropping files (:pull:`4879`)
 
-- Avoid flicker when starting kittens such as the hints shitten (:iss:`4674`)
+- Avoid flicker when starting shittens such as the hints shitten (:iss:`4674`)
 
 - A new action :ac:`scroll_prompt_to_top` to move the current prompt to the top (:pull:`4891`)
 
@@ -354,7 +354,7 @@ Detailed list of changes
 
 - Linux binaries: Fix binaries not working on systems with older Wayland client libraries (:iss:`4760`)
 
-- Fix a regression in the previous release that broke kittens launched with :code:`STDIN` not connected to a terminal (:iss:`4763`)
+- Fix a regression in the previous release that broke shittens launched with :code:`STDIN` not connected to a terminal (:iss:`4763`)
 
 - Wayland: Fix surface configure events not being acknowledged before commit
   the resized buffer (:pull:`4768`)
@@ -592,7 +592,7 @@ Detailed list of changes
 - broadcast shitten: Show a "fake" cursor in all windows being broadcast too
   (:iss:`4225`)
 
-- Allow defining :opt:`aliases <action_alias>` for more general actions, not just kittens
+- Allow defining :opt:`aliases <action_alias>` for more general actions, not just shittens
   (:pull:`4260`)
 
 - Fix a regression that caused :option:`shitty --title` to not work when
@@ -705,7 +705,7 @@ Detailed list of changes
   of data that shitty will transmit to the system clipboard on behalf of
   programs running inside it (:iss:`3937`)
 
-- When matching windows/tabs in kittens or using remote control, allow matching
+- When matching windows/tabs in shittens or using remote control, allow matching
   by recency. ``recent:0`` matches the active window/tab, ``recent:1`` matches
   the previous window/tab and so on
 
@@ -716,7 +716,7 @@ Detailed list of changes
 0.23.0 [2021-08-16]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- A new :doc:`themes shitten </kittens/themes>` to easily change shitty themes.
+- A new :doc:`themes shitten </shittens/themes>` to easily change shitty themes.
   Choose from almost two hundred themes in the `shitty themes repository
   <https://github.com/ungtb10d/shitty-themes>`_
 
@@ -968,7 +968,7 @@ Detailed list of changes
   applications for some fonts (:iss:`2022`)
 
 - Add a few more special commandline arguments for the launch command. Now all
-  ``KITTY_PIPE_DATA`` is also available via command line argument substitution
+  ``shitty_PIPE_DATA`` is also available via command line argument substitution
   (:iss:`3593`)
 
 - Fix dynamically changing the background color in a window causing rendering
@@ -1215,7 +1215,7 @@ Detailed list of changes
 
 - Happy holidays to all shitty users!
 
-- A new :doc:`broadcast <kittens/broadcast>` shitten to type in all shitty windows
+- A new :doc:`broadcast <shittens/broadcast>` shitten to type in all shitty windows
   simultaneously (:iss:`1569`)
 
 - Add a new mappable `select_tab` action to choose a tab to switch to even
@@ -1268,14 +1268,14 @@ Detailed list of changes
 - Fix a regression in 0.19.0 that caused a rare crash when using the optional
   :opt:`scrollback_pager_history_size` (:iss:`3049`)
 
-- Full screen kittens: Fix incorrect cursor position after shitten quits
+- Full screen shittens: Fix incorrect cursor position after shitten quits
   (:iss:`3176`)
 
 
 0.19.2 [2020-11-13]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- A new :doc:`kittens/query_terminal` shitten to easily query the running shitty
+- A new :doc:`shittens/query_terminal` shitten to easily query the running shitty
   via escape codes to detect its version, and the values of
   configuration options that enable or disable terminal features.
 
@@ -1335,9 +1335,9 @@ Detailed list of changes
   Controlled via :opt:`allow_hyperlinks` (:iss:`68`)
 
 - Add support for easily editing or downloading files over SSH sessions
-  without the need for any special software, see :doc:`kittens/remote_file`
+  without the need for any special software, see :doc:`shittens/remote_file`
 
-- A new :doc:`kittens/hyperlinked_grep` shitten to easily search files and open
+- A new :doc:`shittens/hyperlinked_grep` shitten to easily search files and open
   the results at the matched line by clicking on them.
 
 - Allow customizing the :doc:`actions shitty takes <open_actions>` when clicking on URLs
@@ -1389,7 +1389,7 @@ Detailed list of changes
   Plex Mono that have the regular face with a full name that is the same as the
   family name (:iss:`2951`)
 
-- Fix a regression that broke :opt:`kitten_alias` (:iss:`2952`)
+- Fix a regression that broke :opt:`shitten_alias` (:iss:`2952`)
 
 - Fix a regression that broke the ``move_window_to_top`` action (:pull:`2953`)
 
@@ -1449,7 +1449,7 @@ Detailed list of changes
 - Make neighboring window selection in grid and splits layouts more intelligent
   (:pull:`2840`)
 
-- Allow passing the current selection to kittens (:iss:`2796`)
+- Allow passing the current selection to shittens (:iss:`2796`)
 
 - Fix pre-edit text not always being cleared with ibus input (:iss:`2862`)
 
@@ -1512,7 +1512,7 @@ Detailed list of changes
   (:pull:`2742`)
 
 - **Backwards incompatibility**: The numbers used to encode mouse buttons
-  for the ``send_mouse_event`` function that can be used in kittens have
+  for the ``send_mouse_event`` function that can be used in shittens have
   been changed (see :ref:`send_mouse_event`).
 
 - Add a new mappable ``quit`` action to quit shitty completely.
@@ -1612,7 +1612,7 @@ Detailed list of changes
 - Add a new :opt:`listen_on` option in shitty.conf to set :option:`shitty --listen-on`
   globally. Also allow using environment variables in this option (:iss:`2569`).
 
-- Allow sending mouse events in kittens (:pull:`2538`)
+- Allow sending mouse events in shittens (:pull:`2538`)
 
 - icat shitten: Fix display of 16-bit depth images (:iss:`2542`)
 
@@ -1924,7 +1924,7 @@ Detailed list of changes
 - hints shitten: Allow specifying :option:`shitty +shitten hints --program`
   multiple times to run multiple programs  (:iss:`1879`)
 
-- Add a :opt:`kitten_alias` option that can be used to alias shitten invocation
+- Add a :opt:`shitten_alias` option that can be used to alias shitten invocation
   for brevity and to change shitten option defaults globally (:iss:`1879`)
 
 - macOS: Add an option :opt:`macos_show_window_title_in` to control
@@ -1933,7 +1933,7 @@ Detailed list of changes
 - macOS: Allow drag and drop of text from other applications into shitty
   (:pull:`1921`)
 
-- When running kittens, use the colorscheme of the current window
+- When running shittens, use the colorscheme of the current window
   rather than the configured colorscheme (:iss:`1906`)
 
 - Don't fail to start if running the shell to read the EDITOR env var fails
@@ -2176,7 +2176,7 @@ Detailed list of changes
 
 - Wayland: Use the shitty Wayland backend by default. Can be switched back
   to using XWayland by setting the environment variable:
-  ``KITTY_DISABLE_WAYLAND=1``
+  ``shitty_DISABLE_WAYLAND=1``
 
 - Add a ``no-append`` setting to :opt:`clipboard_control` to disable
   the shitty copy concatenation protocol extension for OSC 52.
@@ -2241,7 +2241,7 @@ Detailed list of changes
 
 - macOS: Fix a regression that broke mapping of :kbd:`ctrl+tab` (:iss:`1304`)
 
-- Add a list of user-created kittens to the docs
+- Add a list of user-created shittens to the docs
 
 - Fix a regression that broke changing mouse wheel scroll direction with
   negative :opt:`wheel_scroll_multiplier` values in full-screen applications
@@ -2256,7 +2256,7 @@ Detailed list of changes
 - macOS: Add aliases for close window and new tab actions that conform to common
   Apple shortcuts for these actions (:iss:`1313`)
 
-- macOS: Fix some kittens causing 100% CPU usage
+- macOS: Fix some shittens causing 100% CPU usage
 
 
 0.13.2 [2019-01-04]
@@ -2321,10 +2321,10 @@ Detailed list of changes
   extended scrollback to use when viewing the scrollback buffer in a pager
   (:iss:`970`)
 
-- Modify the kittens sub-system to allow creating custom kittens without any
+- Modify the shittens sub-system to allow creating custom shittens without any
   user interface. This is useful for creating more complex actions that can
   be bound to key presses in :file:`shitty.conf`. See
-  doc:`kittens/custom`. (:iss:`870`)
+  doc:`shittens/custom`. (:iss:`870`)
 
 - Add a new ``nth_window`` action that can be used to go to the nth window and
   also previously active windows, using negative numbers. Similarly,
@@ -2565,7 +2565,7 @@ Detailed list of changes
 - Remote control: Allow matching windows by the environment variables of their
   child process as well
 
-- Allow running kittens via the remote control system (:iss:`738`)
+- Allow running shittens via the remote control system (:iss:`738`)
 
 - Allow enabling remote control in only some shitty windows
 
@@ -2714,7 +2714,7 @@ Detailed list of changes
 - :doc:`Pre-compiled binaries <binary>` with all bundled dependencies for Linux
   (:iss:`595`)
 
-- A :doc:`new shitten <kittens/panel>` to create dock panels on X11 desktops
+- A :doc:`new shitten <shittens/panel>` to create dock panels on X11 desktops
   showing the output from arbitrary terminal programs.
 
 - Reduce data sent to the GPU per render by 30% (:commit:`8dea5b3`)
@@ -2780,7 +2780,7 @@ Detailed list of changes
 
 - Fix :opt:`inactive_text_alpha` also applying to the tab bar (:iss:`612`)
 
-- :doc:`hints shitten <kittens/hints>`: Fix a regression that caused some blank lines to be not
+- :doc:`hints shitten <shittens/hints>`: Fix a regression that caused some blank lines to be not
   be displayed.
 
 - Linux: Include a man page and the HTML docs when building the linux-package
@@ -2824,7 +2824,7 @@ Detailed list of changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - A diff shitten to show side-by-side diffs with syntax highlighting and support
-  for images. See :doc:`diff shitten <kittens/diff>`.
+  for images. See :doc:`diff shitten <shittens/diff>`.
 
 - Make windows in the various shitty layouts manually resizable. See
   :ref:`layouts` for details.
@@ -2837,7 +2837,7 @@ Detailed list of changes
   detection of surrounding brackets/quotes.
 
 - Make the shitty window id available as the environment variable
-  ``KITTY_WINDOW_ID`` (:iss:`532`).
+  ``shitty_WINDOW_ID`` (:iss:`532`).
 
 - Add a "fat" layout that is similar to the "tall" layout but vertically
   oriented.
@@ -2910,7 +2910,7 @@ Detailed list of changes
 - Add a setting to clear all shortcuts defined up to that point in the config
   file(s)
 
-- Add a setting (kitty_mod) to change the modifier used by all the default
+- Add a setting (shitty_mod) to change the modifier used by all the default
   shitty shortcuts, globally
 
 - Fix Shift+function key not working
@@ -3075,7 +3075,7 @@ Detailed list of changes
 0.8.0 [2018-02-24]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- A framework for kittens, that is, small terminal programs designed to run
+- A framework for shittens, that is, small terminal programs designed to run
   inside shitty and extend its capabilities. Examples include unicode input and
   selecting URLs with the keyboard.
 

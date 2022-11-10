@@ -25,4 +25,4 @@ help:
 
 
 develop-docs:
-	sphinx-autobuild --ignore "$(abspath $(SOURCEDIR))/generated/*" --watch ../shitty --watch ../kittens -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	sphinx-autobuild --ignore "$(abspath $(SOURCEDIR))/generated/*" --watch ../shitty --watch ../shittens -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)

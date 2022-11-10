@@ -65,7 +65,7 @@ def write_all(fd, data):
         data = data[n:]
 
 
-def dcs_to_kitty(payload, type='ssh'):
+def dcs_to_shitty(payload, type='ssh'):
     if isinstance(payload, str):
         payload = payload.encode('utf-8')
     payload = base64.standard_b64encode(payload)
@@ -73,11 +73,11 @@ def dcs_to_kitty(payload, type='ssh'):
 
 
 def send_data_request():
-    write_all(tty_file_obj.fileno(), dcs_to_kitty('id=REQUEST_ID:pwfile=PASSWORD_FILENAME:pw=DATA_PASSWORD'))
+    write_all(tty_file_obj.fileno(), dcs_to_shitty('id=REQUEST_ID:pwfile=PASSWORD_FILENAME:pw=DATA_PASSWORD'))
 
 
 def debug(msg):
-    data = dcs_to_kitty('debug: {}'.format(msg), 'print')
+    data = dcs_to_shitty('debug: {}'.format(msg), 'print')
     if tty_file_obj is None:
         with open(os.ctermid(), 'wb') as fl:
             write_all(fl.fileno(), data)
@@ -104,7 +104,7 @@ def apply_env_vars(raw):
             process_defn(val)
         elif line.startswith('unset '):
             os.environ.pop(json.loads(val)[0], None)
-    login_shell = os.environ.pop('KITTY_LOGIN_SHELL', login_shell)
+    login_shell = os.environ.pop('shitty_LOGIN_SHELL', login_shell)
 
 
 def move(src, base_dest):
@@ -165,7 +165,7 @@ def iter_base64_data(f):
     while True:
         line = f.readline().rstrip()
         if started == 0:
-            if line == b'KITTY_DATA_START':
+            if line == b'shitty_DATA_START':
                 started = 1
             else:
                 leading_data += line
@@ -175,7 +175,7 @@ def iter_base64_data(f):
             else:
                 raise SystemExit(line.decode('utf-8', 'replace').rstrip())
         else:
-            if line == b'KITTY_DATA_END':
+            if line == b'shitty_DATA_END':
                 break
             yield line
 
@@ -205,7 +205,7 @@ def get_data():
         with open(tdir + '/data.sh') as f:
             env_vars = f.read()
             apply_env_vars(env_vars)
-            data_dir = os.environ.pop('KITTY_SSH_KITTEN_DATA_DIR')
+            data_dir = os.environ.pop('shitty_SSH_shitten_DATA_DIR')
             if not os.path.isabs(data_dir):
                 data_dir = os.path.join(HOME, data_dir)
             data_dir = os.path.abspath(data_dir)
@@ -220,15 +220,15 @@ def exec_zsh_with_integration():
     zdotdir = os.environ.get('ZDOTDIR') or ''
     if not zdotdir:
         zdotdir = HOME
-        os.environ.pop('KITTY_ORIG_ZDOTDIR', None)  # ensure this is not propagated
+        os.environ.pop('shitty_ORIG_ZDOTDIR', None)  # ensure this is not propagated
     else:
-        os.environ['KITTY_ORIG_ZDOTDIR'] = zdotdir
+        os.environ['shitty_ORIG_ZDOTDIR'] = zdotdir
     # dont prevent zsh-newuser-install from running
     for q in ('.zshrc', '.zshenv', '.zprofile', '.zlogin'):
         if os.path.exists(os.path.join(zdotdir, q)):
             os.environ['ZDOTDIR'] = shell_integration_dir + '/zsh'
             os.execlp(login_shell, os.path.basename(login_shell), '-l')
-    os.environ.pop('KITTY_ORIG_ZDOTDIR', None)  # ensure this is not propagated
+    os.environ.pop('shitty_ORIG_ZDOTDIR', None)  # ensure this is not propagated
 
 
 def exec_fish_with_integration():
@@ -236,16 +236,16 @@ def exec_fish_with_integration():
         os.environ['XDG_DATA_DIRS'] = shell_integration_dir
     else:
         os.environ['XDG_DATA_DIRS'] = shell_integration_dir + ':' + os.environ['XDG_DATA_DIRS']
-    os.environ['KITTY_FISH_XDG_DATA_DIR'] = shell_integration_dir
+    os.environ['shitty_FISH_XDG_DATA_DIR'] = shell_integration_dir
     os.execlp(login_shell, os.path.basename(login_shell), '-l')
 
 
 def exec_bash_with_integration():
     os.environ['ENV'] = os.path.join(shell_integration_dir, 'bash', 'shitty.bash')
-    os.environ['KITTY_BASH_INJECT'] = '1'
+    os.environ['shitty_BASH_INJECT'] = '1'
     if not os.environ.get('HISTFILE'):
         os.environ['HISTFILE'] = os.path.join(HOME, '.bash_history')
-        os.environ['KITTY_BASH_UNEXPORT_HISTFILE'] = '1'
+        os.environ['shitty_BASH_UNEXPORT_HISTFILE'] = '1'
     os.execlp(login_shell, os.path.basename('login_shell'), '--posix')
 
 
@@ -259,17 +259,17 @@ def exec_with_shell_integration():
         exec_bash_with_integration()
 
 
-def install_kitty_bootstrap():
-    kitty_remote = os.environ.pop('KITTY_REMOTE', '')
+def install_shitty_bootstrap():
+    shitty_remote = os.environ.pop('shitty_REMOTE', '')
     if os.uname().sysname not in ('Linux', 'Darwin'):
         return
-    kitty_exists = shutil.which('shitty')
-    if kitty_remote == 'yes' or (kitty_remote == 'if-needed' and not kitty_exists):
-        kitty_dir = os.path.join(data_dir, 'shitty', 'bin')
-        if kitty_exists:
-            os.environ['PATH'] = kitty_dir + os.pathsep + os.environ['PATH']
+    shitty_exists = shutil.which('shitty')
+    if shitty_remote == 'yes' or (shitty_remote == 'if-needed' and not shitty_exists):
+        shitty_dir = os.path.join(data_dir, 'shitty', 'bin')
+        if shitty_exists:
+            os.environ['PATH'] = shitty_dir + os.pathsep + os.environ['PATH']
         else:
-            os.environ['PATH'] = os.environ['PATH'] + os.pathsep + kitty_dir
+            os.environ['PATH'] = os.environ['PATH'] + os.pathsep + shitty_dir
 
 
 def main():
@@ -284,20 +284,20 @@ def main():
         get_data()
     finally:
         cleanup()
-    cwd = os.environ.pop('KITTY_LOGIN_CWD', '')
-    install_kitty_bootstrap()
+    cwd = os.environ.pop('shitty_LOGIN_CWD', '')
+    install_shitty_bootstrap()
     if cwd:
         os.chdir(cwd)
-    ksi = frozenset(filter(None, os.environ.get('KITTY_SHELL_INTEGRATION', '').split()))
+    ksi = frozenset(filter(None, os.environ.get('shitty_SHELL_INTEGRATION', '').split()))
     exec_cmd = b'EXEC_CMD'
     if exec_cmd:
-        os.environ.pop('KITTY_SHELL_INTEGRATION', None)
+        os.environ.pop('shitty_SHELL_INTEGRATION', None)
         cmd = base64.standard_b64decode(exec_cmd).decode('utf-8')
         os.execlp(login_shell, os.path.basename(login_shell), '-c', cmd)
     TEST_SCRIPT  # noqa
     if ksi and 'no-rc' not in ksi:
         exec_with_shell_integration()
-    os.environ.pop('KITTY_SHELL_INTEGRATION', None)
+    os.environ.pop('shitty_SHELL_INTEGRATION', None)
     os.execlp(login_shell, '-' + os.path.basename(login_shell))
 
 

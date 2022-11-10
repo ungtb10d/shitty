@@ -17,7 +17,7 @@ from urllib.request import Request, urlopen
 
 from shitty.config import atomic_save, parse_config
 from shitty.constants import cache_dir, config_dir
-from shitty.options.types import Options as KittyOptions
+from shitty.options.types import Options as shittyOptions
 from shitty.fast_data_types import Color
 from shitty.utils import reload_conf_in_all_kitties
 
@@ -28,8 +28,8 @@ MARK_AFTER = '\033[39m'
 
 
 def patch_conf(raw: str, theme_name: str) -> str:
-    addition = f'# BEGIN_KITTY_THEME\n# {theme_name}\ninclude current-theme.conf\n# END_KITTY_THEME'
-    nraw, num = re.subn(r'^# BEGIN_KITTY_THEME.+?# END_KITTY_THEME', addition, raw, flags=re.MULTILINE | re.DOTALL)
+    addition = f'# BEGIN_shitty_THEME\n# {theme_name}\ninclude current-theme.conf\n# END_shitty_THEME'
+    nraw, num = re.subn(r'^# BEGIN_shitty_THEME.+?# END_shitty_THEME', addition, raw, flags=re.MULTILINE | re.DOTALL)
     if not num:
         if raw:
             raw += '\n\n'
@@ -483,8 +483,8 @@ def update_theme_file(path: str) -> bool:
     return True
 
 
-def text_as_opts(text: str) -> KittyOptions:
-    return KittyOptions(options_dict=parse_config(text.splitlines()))
+def text_as_opts(text: str) -> shittyOptions:
+    return shittyOptions(options_dict=parse_config(text.splitlines()))
 
 
 class Theme:
@@ -510,7 +510,7 @@ class Theme:
     def __init__(self, loader: Callable[[], str]):
         self._loader = loader
         self._raw: Optional[str] = None
-        self._opts: Optional[KittyOptions] = None
+        self._opts: Optional[shittyOptions] = None
 
     @property
     def raw(self) -> str:
@@ -519,7 +519,7 @@ class Theme:
         return self._raw
 
     @property
-    def kitty_opts(self) -> KittyOptions:
+    def shitty_opts(self) -> shittyOptions:
         if self._opts is None:
             self._opts = text_as_opts(self.raw)
         return self._opts
@@ -542,8 +542,8 @@ class Theme:
                 f.write(raw)
         atomic_save(nraw.encode('utf-8'), confpath)
         if reload_in == 'parent':
-            if 'KITTY_PID' in os.environ:
-                os.kill(int(os.environ['KITTY_PID']), signal.SIGUSR1)
+            if 'shitty_PID' in os.environ:
+                os.kill(int(os.environ['shitty_PID']), signal.SIGUSR1)
         elif reload_in == 'all':
             reload_conf_in_all_kitties()
 

@@ -123,7 +123,7 @@ The full list of actions that can be mapped to key presses is available
 ==================================  =======================
 Action                              Shortcut
 ==================================  =======================
-Show this help                      :sc:`show_kitty_doc`
+Show this help                      :sc:`show_shitty_doc`
 Copy to clipboard                   :sc:`copy_to_clipboard` (also :kbd:`⌘+c` on macOS)
 Paste from clipboard                :sc:`paste_from_clipboard` (also :kbd:`⌘+v` on macOS)
 Paste from selection                :sc:`paste_from_selection`
@@ -139,7 +139,7 @@ Reset the terminal                  :sc:`reset_terminal` (also :kbd:`⌥+⌘+r` 
 Edit :file:`shitty.conf`             :sc:`edit_config_file` (also :kbd:`⌘+,` on macOS)
 Reload :file:`shitty.conf`           :sc:`reload_config_file` (also :kbd:`⌃+⌘+,` on macOS)
 Debug :file:`shitty.conf`            :sc:`debug_config` (also :kbd:`⌥+⌘+,` on macOS)
-Open a |shitty| shell                :sc:`kitty_shell`
+Open a |shitty| shell                :sc:`shitty_shell`
 Increase background opacity         :sc:`increase_background_opacity`
 Decrease background opacity         :sc:`decrease_background_opacity`
 Full background opacity             :sc:`full_background_opacity`

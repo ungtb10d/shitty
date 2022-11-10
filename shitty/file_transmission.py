@@ -19,10 +19,10 @@ from typing import (
     Optional, Tuple, Union, cast
 )
 
-from kittens.transfer.librsync import (
+from shittens.transfer.librsync import (
     LoadSignature, PatchFile, delta_for_file, signature_of_file
 )
-from kittens.transfer.utils import (
+from shittens.transfer.utils import (
     IdentityCompressor, ZlibCompressor, abspath, expand_home, home_path
 )
 from shitty.fast_data_types import (
@@ -329,7 +329,7 @@ class FileTransmissionCommand:
     def deserialize(cls, data: Union[str, bytes, memoryview]) -> 'FileTransmissionCommand':
         ans = FileTransmissionCommand()
         fmap = serialized_to_field_map()
-        from kittens.transfer.rsync import decode_utf8_buffer, parse_ftc
+        from shittens.transfer.rsync import decode_utf8_buffer, parse_ftc
 
         def handle_item(key: memoryview, val: memoryview, has_semicolons: bool) -> None:
             field = fmap.get(key)

@@ -11,7 +11,7 @@ import sys
 import tarfile
 from urllib.request import urlopen
 
-is_bundle = os.environ.get('KITTY_BUNDLE') == '1'
+is_bundle = os.environ.get('shitty_BUNDLE') == '1'
 is_macos = 'darwin' in sys.platform.lower()
 SW = None
 
@@ -54,24 +54,24 @@ def install_deps():
         run(cmd)
 
 
-def build_kitty():
+def build_shitty():
     python = shutil.which('python3') if is_bundle else sys.executable
     cmd = f'{python} setup.py build --verbose'
-    if os.environ.get('KITTY_SANITIZE') == '1':
+    if os.environ.get('shitty_SANITIZE') == '1':
         cmd += ' --debug --sanitize'
     run(cmd)
 
 
-def test_kitty():
+def test_shitty():
     run('./test.py')
 
 
-def package_kitty():
+def package_shitty():
     python = 'python3' if is_macos else 'python'
     run(f'{python} setup.py linux-package --update-check-interval=0 --verbose')
     if is_macos:
         run('python3 setup.py shitty.app --update-check-interval=0 --verbose')
-        run('shitty.app/Contents/MacOS/shitty +runpy "from shitty.constants import *; print(kitty_exe())"')
+        run('shitty.app/Contents/MacOS/shitty +runpy "from shitty.constants import *; print(shitty_exe())"')
 
 
 def replace_in_file(path, src, dest):
@@ -124,11 +124,11 @@ def main():
     if action in ('build', 'package'):
         install_deps()
     if action == 'build':
-        build_kitty()
+        build_shitty()
     elif action == 'package':
-        package_kitty()
+        package_shitty()
     elif action == 'test':
-        test_kitty()
+        test_shitty()
     else:
         raise SystemExit(f'Unknown action: {action}')
 

@@ -62,7 +62,7 @@ def resolve_ref(ref: str, website_url: Callable[[str], str] = website_url) -> st
         href = f'conf#{ref}'
     elif ref.startswith('conf-shitten-'):
         parts = ref.split('-')
-        href = "kittens/" + parts[2] + f'/#{ref}'
+        href = "shittens/" + parts[2] + f'/#{ref}'
     elif ref.startswith('at_'):
         base = ref.split('_', 1)[1]
         href = "remote-control/#at-" + base.replace('_', '-')
@@ -175,7 +175,7 @@ class CoalescedIteratorData:
     action_groups: Dict[str, List['Mapping']] = {}
     coalesced: Set[int] = set()
     initialized: bool = False
-    kitty_mod: str = 'kitty_mod'
+    shitty_mod: str = 'shitty_mod'
 
     def initialize(self, root: 'Group') -> None:
         if self.initialized:
@@ -186,11 +186,11 @@ class CoalescedIteratorData:
         action_groups: Dict[str, List[Mapping]] = {}
         self.action_groups = action_groups
         coalesced = self.coalesced = set()
-        self.kitty_mod = 'kitty_mod'
+        self.shitty_mod = 'shitty_mod'
         for item in root.iter_all_non_groups():
             if isinstance(item, Option):
-                if item.name == 'kitty_mod':
-                    self.kitty_mod = item.defval_as_string
+                if item.name == 'shitty_mod':
+                    self.shitty_mod = item.defval_as_string
                 if current_group:
                     if item.needs_coalescing:
                         current_group.append(item)
@@ -260,7 +260,7 @@ class Option:
 
     def as_rst(
         self, conf_name: str, shortcut_slugs: Dict[str, Tuple[str, str]],
-        kitty_mod: str, level: int = 0, option_group: List['Option'] = []
+        shitty_mod: str, level: int = 0, option_group: List['Option'] = []
     ) -> List[str]:
         ans: List[str] = []
         a = ans.append
@@ -326,7 +326,7 @@ class MultiOption:
             a('')
         return ans
 
-    def as_rst(self, conf_name: str, shortcut_slugs: Dict[str, Tuple[str, str]], kitty_mod: str, level: int = 0) -> List[str]:
+    def as_rst(self, conf_name: str, shortcut_slugs: Dict[str, Tuple[str, str]], shitty_mod: str, level: int = 0) -> List[str]:
         ans: List[str] = []
         a = ans.append
         a(f'.. opt:: {conf_name}.{self.name}')
@@ -377,7 +377,7 @@ class Mapping:
 
     def as_rst(
         self, conf_name: str, shortcut_slugs: Dict[str, Tuple[str, str]],
-        kitty_mod: str, level: int = 0, action_group: List['Mapping'] = []
+        shitty_mod: str, level: int = 0, action_group: List['Mapping'] = []
     ) -> List[str]:
         ans: List[str] = []
         a = ans.append
@@ -386,7 +386,7 @@ class Mapping:
         if not self.short_text:
             raise ValueError(f'The shortcut for {self.name} has no short_text')
         sc_text = f'{conf_name}.{self.short_text}'
-        shortcut_slugs[f'{conf_name}.{self.name}'] = (sc_text, self.key_text.replace('kitty_mod', kitty_mod))
+        shortcut_slugs[f'{conf_name}.{self.name}'] = (sc_text, self.key_text.replace('shitty_mod', shitty_mod))
         a(f'.. shortcut:: {sc_text}')
         block_started = False
         for sc in [self] + action_group:
@@ -400,7 +400,7 @@ class Mapping:
                     suffix = ' 🍎'
                 elif sc.only == 'linux':
                     suffix = ' 🐧'
-                a(f'    {sc.setting_name} {sc.parseable_text.replace("kitty_mod", kitty_mod)}{suffix}')
+                a(f'    {sc.setting_name} {sc.parseable_text.replace("shitty_mod", shitty_mod)}{suffix}')
         a('')
         if self.long_text:
             a('')
@@ -505,7 +505,7 @@ class Group:
             else:
                 yield x
 
-    def as_rst(self, conf_name: str, shortcut_slugs: Dict[str, Tuple[str, str]], kitty_mod: str = 'kitty_mod', level: int = 0) -> List[str]:
+    def as_rst(self, conf_name: str, shortcut_slugs: Dict[str, Tuple[str, str]], shitty_mod: str = 'shitty_mod', level: int = 0) -> List[str]:
         ans: List[str] = []
         a = ans.append
         if level:
@@ -522,14 +522,14 @@ class Group:
         else:
             ans.extend(('.. default-domain:: conf', ''))
 
-        kitty_mod = self.coalesced_iterator_data.kitty_mod
+        shitty_mod = self.coalesced_iterator_data.shitty_mod
         for item in self.iter_with_coalesced_options():
             if isinstance(item, Option):
-                lines = item.as_rst(conf_name, shortcut_slugs, kitty_mod, option_group=self.coalesced_iterator_data.option_group_for_option(item))
+                lines = item.as_rst(conf_name, shortcut_slugs, shitty_mod, option_group=self.coalesced_iterator_data.option_group_for_option(item))
             elif isinstance(item, Mapping):
-                lines = item.as_rst(conf_name, shortcut_slugs, kitty_mod, level + 1, action_group=self.coalesced_iterator_data.action_group_for_action(item))
+                lines = item.as_rst(conf_name, shortcut_slugs, shitty_mod, level + 1, action_group=self.coalesced_iterator_data.action_group_for_action(item))
             else:
-                lines = item.as_rst(conf_name, shortcut_slugs, kitty_mod, level + 1)
+                lines = item.as_rst(conf_name, shortcut_slugs, shitty_mod, level + 1)
             ans.extend(lines)
 
         if level:

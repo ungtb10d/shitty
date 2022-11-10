@@ -9,14 +9,14 @@ from contextlib import suppress
 from functools import lru_cache
 from typing import Any, Dict, Generator, Iterable, List, Optional, Tuple
 
-from kittens.tui.operations import set_cursor_shape, set_window_title
+from shittens.tui.operations import set_cursor_shape, set_window_title
 
 from .cli import (
     OptionDict, emph, green, italic, parse_option_spec, print_help_for_seq,
     title
 )
 from .cli_stub import RCOptions
-from .constants import cache_dir, kitty_face
+from .constants import cache_dir, shitty_face
 from .rc.base import (
     ParsingOfArgsFailed, RemoteCommand, all_command_names, command_for_name,
     display_subcommand_help, parse_subcommand_cli
@@ -152,7 +152,7 @@ def run_cmd(
     encrypter: CommandEncrypter = NoEncryption()
 ) -> None:
     print(end=set_window_title(cmd) + output_prefix, flush=True)
-    payload = func.message_to_kitty(global_opts, opts, items)
+    payload = func.message_to_shitty(global_opts, opts, items)
     no_response = func.no_response
     if hasattr(opts, 'no_response'):
         no_response = opts.no_response
@@ -183,9 +183,9 @@ def real_main(global_opts: RCOptions, encrypter: CommandEncrypter = NoEncryption
     print_help_for_seq.allow_pager = False
     print('Welcome to the shitty shell!')
     print('Use {} for assistance or {} to quit'.format(green('help'), green('exit')))
-    awid = os.environ.pop('KITTY_SHELL_ACTIVE_WINDOW_ID', None)
+    awid = os.environ.pop('shitty_SHELL_ACTIVE_WINDOW_ID', None)
     if awid is not None:
-        atid = os.environ.pop('KITTY_SHELL_ACTIVE_TAB_ID', None)
+        atid = os.environ.pop('shitty_SHELL_ACTIVE_TAB_ID', None)
         am = f'Previously active window id: {awid}'
         if atid is not None:
             am += f' and tab id: {atid}'
@@ -197,7 +197,7 @@ def real_main(global_opts: RCOptions, encrypter: CommandEncrypter = NoEncryption
         try:
             print(end=pre_prompt)
             try:
-                scmdline = input(f'{kitty_face} ')
+                scmdline = input(f'{shitty_face} ')
             except UnicodeEncodeError:
                 scmdline = input('shitty> ')
         except EOFError:

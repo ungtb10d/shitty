@@ -103,7 +103,7 @@ are sent as is, not interpreted for escapes.
     no_response = True
     argspec = '[TEXT TO SEND]'
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         limit = 1024
         ret = {'match': opts.match, 'data': '', 'match_tab': opts.match_tab, 'all': opts.all, 'exclude_active': opts.exclude_active}
 
@@ -164,7 +164,7 @@ are sent as is, not interpreted for escapes.
                 yield from src
         return chain()
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         sid = payload_get('session_id', '')
         if payload_get('all'):
             windows: List[Optional[Window]] = list(boss.all_windows)

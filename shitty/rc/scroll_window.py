@@ -41,7 +41,7 @@ Don't wait for a response indicating the success of the action. Note that
 using this option means that you will not be notified of failures.
 '''
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         if len(args) < 1:
             self.fatal('Scroll amount must be specified')
         amt = args[0]
@@ -58,7 +58,7 @@ using this option means that you will not be notified of failures.
         # defaults to scroll the window this command is run in
         return {'match': opts.match, 'amount': amount, 'self': True}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         amt = payload_get('amount')
         for window in self.windows_for_match_payload(boss, window, payload_get):
             if window:

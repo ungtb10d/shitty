@@ -524,7 +524,7 @@ glfw_xkb_update_masks(_GLFWXKBData *xkb) {
     // Should find better solution under Wayland
     // See https://github.com/ungtb10d/shitty/pull/3943 for discussion
 
-    if ( getenv( "KITTY_WAYLAND_DETECT_MODIFIERS" ) == NULL || !local_modifier_mapping( xkb ) ) {
+    if ( getenv( "shitty_WAYLAND_DETECT_MODIFIERS" ) == NULL || !local_modifier_mapping( xkb ) ) {
 #define S( a ) xkb->a##Idx = XKB_MOD_INVALID; xkb->a##Mask = 0
         S(hyper); S(meta);
 #undef S

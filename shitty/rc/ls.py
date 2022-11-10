@@ -38,10 +38,10 @@ Show all environment variables in output, not just differing ones.
 
     argspec = ''
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         return {'all_env_vars': opts.all_env_vars}
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         data = list(boss.list_os_windows(window))
         if not payload_get('all_env_vars'):
             all_env_blocks: List[Dict[str, str]] = []

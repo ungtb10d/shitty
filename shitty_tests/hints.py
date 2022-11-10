@@ -8,7 +8,7 @@ from . import BaseTest
 class TestHints(BaseTest):
 
     def test_url_hints(self):
-        from kittens.hints.main import (
+        from shittens.hints.main import (
             Mark, convert_text, functions_for, linenum_marks,
             linenum_process_result, mark, parse_hints_args, process_escape_codes
         )
@@ -54,7 +54,7 @@ class TestHints(BaseTest):
         m('~/file.c:23:32', os.path.expanduser('~/file.c'), 23)
 
     def test_ip_hints(self):
-        from kittens.hints.main import (
+        from shittens.hints.main import (
             convert_text, functions_for, mark, parse_hints_args
         )
         args = parse_hints_args(['--type', 'ip'])[0]

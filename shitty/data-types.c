@@ -273,7 +273,7 @@ extern bool init_keys(PyObject *module);
 extern bool init_graphics(PyObject *module);
 extern bool init_shaders(PyObject *module);
 extern bool init_mouse(PyObject *module);
-extern bool init_kittens(PyObject *module);
+extern bool init_shittens(PyObject *module);
 extern bool init_logging(PyObject *module);
 extern bool init_png_reader(PyObject *module);
 extern bool init_utmp(PyObject *module);
@@ -331,7 +331,7 @@ PyInit_fast_data_types(void) {
     if (!init_graphics(m)) return NULL;
     if (!init_shaders(m)) return NULL;
     if (!init_mouse(m)) return NULL;
-    if (!init_kittens(m)) return NULL;
+    if (!init_shittens(m)) return NULL;
     if (!init_png_reader(m)) return NULL;
 #ifdef __APPLE__
     if (!init_macos_process_info(m)) return NULL;
@@ -357,8 +357,8 @@ PyInit_fast_data_types(void) {
     PyModule_AddIntConstant(m, "DECORATION_MASK", DECORATION_MASK);
     PyModule_AddIntConstant(m, "NUM_UNDERLINE_STYLES", NUM_UNDERLINE_STYLES);
     PyModule_AddStringMacro(m, ERROR_PREFIX);
-#ifdef KITTY_VCS_REV
-    PyModule_AddStringMacro(m, KITTY_VCS_REV);
+#ifdef shitty_VCS_REV
+    PyModule_AddStringMacro(m, shitty_VCS_REV);
 #endif
     PyModule_AddIntMacro(m, CURSOR_BLOCK);
     PyModule_AddIntMacro(m, CURSOR_BEAM);

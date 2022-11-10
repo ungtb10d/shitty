@@ -10,7 +10,7 @@ import subprocess
 import tempfile
 import time
 
-from shitty.constants import kitty_exe
+from shitty.constants import shitty_exe
 from shitty.fast_data_types import (
     CLD_EXITED, CLD_KILLED, CLD_STOPPED, get_options, has_sigqueue, install_signal_handlers,
     read_signals, sigqueue
@@ -40,7 +40,7 @@ class Prewarm(BaseTest):
         if p is None:
             return
         p.take_from_worker_fd(create_file=True)
-        child = p(pty.slave_fd, [kitty_exe(), '+runpy', """\
+        child = p(pty.slave_fd, [shitty_exe(), '+runpy', """\
 import os, json; from shitty.utils import *; from shitty.fast_data_types import get_options; print(json.dumps({
         'cterm': os.ctermid(),
         'ttyname': os.ttyname(sys.stdout.fileno()),
@@ -109,7 +109,7 @@ import os, json; from shitty.utils import *; from shitty.fast_data_types import 
         poll = select.poll()
 
         def run():
-            return subprocess.Popen([kitty_exe(), '+runpy', 'import sys; sys.stdin.read()'], stderr=subprocess.DEVNULL, stdin=subprocess.PIPE)
+            return subprocess.Popen([shitty_exe(), '+runpy', 'import sys; sys.stdin.read()'], stderr=subprocess.DEVNULL, stdin=subprocess.PIPE)
         p = run()
         orig_mask = signal.pthread_sigmask(signal.SIG_BLOCK, ())
         signal_read_fd = install_signal_handlers(signal.SIGCHLD, signal.SIGUSR1)[0]

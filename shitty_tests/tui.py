@@ -8,7 +8,7 @@ from . import BaseTest
 class TestTUI(BaseTest):
 
     def test_line_edit(self):
-        from kittens.tui.line_edit import LineEdit
+        from shittens.tui.line_edit import LineEdit
         le = LineEdit()
         le.on_text('abcd', False)
         self.ae(le.cursor_pos, 4)

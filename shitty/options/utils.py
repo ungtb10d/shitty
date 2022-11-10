@@ -40,7 +40,7 @@ SequenceMap = Dict[SingleKey, SubSequenceMap]
 MINIMUM_FONT_SIZE = 4
 default_tab_separator = ' ┇'
 mod_map = {'⌃': 'CONTROL', 'CTRL': 'CONTROL', '⇧': 'SHIFT', '⌥': 'ALT', 'OPTION': 'ALT', 'OPT': 'ALT',
-           '⌘': 'SUPER', 'COMMAND': 'SUPER', 'CMD': 'SUPER', 'KITTY_MOD': 'shitty'}
+           '⌘': 'SUPER', 'COMMAND': 'SUPER', 'CMD': 'SUPER', 'shitty_MOD': 'shitty'}
 character_key_name_aliases_with_ascii_lowercase: Dict[str, str] = character_key_name_aliases.copy()
 for x in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ':
     character_key_name_aliases_with_ascii_lowercase[x] = x.lower()
@@ -84,8 +84,8 @@ def send_text_parse(func: str, rest: str) -> FuncArgsType:
     return func, [mode, data]
 
 
-@func_with_args('run_kitten', 'run_simple_kitten', 'shitten')
-def kitten_parse(func: str, rest: str) -> FuncArgsType:
+@func_with_args('run_shitten', 'run_simple_shitten', 'shitten')
+def shitten_parse(func: str, rest: str) -> FuncArgsType:
     if func == 'shitten':
         args = rest.split(maxsplit=1)
     else:
@@ -136,7 +136,7 @@ def detach_tab_parse(func: str, rest: str) -> FuncArgsType:
     return func, (rest,)
 
 
-@func_with_args('set_background_opacity', 'goto_layout', 'toggle_layout', 'kitty_shell', 'show_kitty_doc', 'set_tab_title')
+@func_with_args('set_background_opacity', 'goto_layout', 'toggle_layout', 'shitty_shell', 'show_shitty_doc', 'set_tab_title')
 def simple_parse(func: str, rest: str) -> FuncArgsType:
     return func, [rest]
 
@@ -871,7 +871,7 @@ def action_alias(val: str) -> Iterable[Tuple[str, str]]:
         yield alias_name, rest
 
 
-kitten_alias = action_alias
+shitten_alias = action_alias
 
 
 def symbol_map_parser(val: str, min_size: int = 2) -> Iterable[Tuple[Tuple[int, int], str]]:
@@ -967,7 +967,7 @@ def resolve_aliases_and_parse_actions(
         possible_alias = parts[0]
         rest = parts[1]
     for alias in aliases.get(possible_alias, ()):
-        if alias.replace_second_arg:  # kitten_alias
+        if alias.replace_second_arg:  # shitten_alias
             if not rest:
                 continue
             parts = rest.split(maxsplit=1)
@@ -1020,8 +1020,8 @@ class BaseDefinition:
         return f'{self.__class__.__name__}({", ".join(kwds)})'
 
 
-def resolve_key_mods(kitty_mod: int, mods: int) -> int:
-    return SingleKey(mods=mods).resolve_kitty_mod(kitty_mod).mods
+def resolve_key_mods(shitty_mod: int, mods: int) -> int:
+    return SingleKey(mods=mods).resolve_shitty_mod(shitty_mod).mods
 
 
 class MouseMapping(BaseDefinition):
@@ -1040,9 +1040,9 @@ class MouseMapping(BaseDefinition):
     def __repr__(self) -> str:
         return self.pretty_repr('button', 'mods', 'repeat_count', 'grabbed')
 
-    def resolve_and_copy(self, kitty_mod: int) -> 'MouseMapping':
+    def resolve_and_copy(self, shitty_mod: int) -> 'MouseMapping':
         ans = MouseMapping(
-            self.button, resolve_key_mods(kitty_mod, self.mods), self.repeat_count, self.grabbed,
+            self.button, resolve_key_mods(shitty_mod, self.mods), self.repeat_count, self.grabbed,
             self.definition)
         ans.definition_location = self.definition_location
         return ans
@@ -1066,9 +1066,9 @@ class KeyDefinition(BaseDefinition):
     def __repr__(self) -> str:
         return self.pretty_repr('is_sequence', 'trigger', 'rest')
 
-    def resolve_and_copy(self, kitty_mod: int) -> 'KeyDefinition':
+    def resolve_and_copy(self, shitty_mod: int) -> 'KeyDefinition':
         def r(k: SingleKey) -> SingleKey:
-            return k.resolve_kitty_mod(kitty_mod)
+            return k.resolve_shitty_mod(shitty_mod)
         ans = KeyDefinition(
             self.is_sequence, r(self.trigger), tuple(map(r, self.rest)),
             self.definition

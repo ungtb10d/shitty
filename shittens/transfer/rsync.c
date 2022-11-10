@@ -56,7 +56,7 @@ begin_create_signature(PyObject *self UNUSED, PyObject *args) {
     if (!PyArg_ParseTuple(args, "|Ll", &file_size, &sl)) return NULL;
     rs_magic_number magic_number = 0;
     size_t block_len = 0, strong_len = sl;
-#ifdef KITTY_HAS_RS_SIG_ARGS
+#ifdef shitty_HAS_RS_SIG_ARGS
     rs_result res = rs_sig_args(file_size, &magic_number, &block_len, &strong_len);
     if (res != RS_DONE) {
         PyErr_SetString(PyExc_ValueError, rs_strerror(res));

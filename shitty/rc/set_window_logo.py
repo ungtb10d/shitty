@@ -65,7 +65,7 @@ failed, the command will exit with a success code.
     images_in_flight: Dict[str, IO[bytes]] = {}
     is_asynchronous = True
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         if len(args) != 1:
             self.fatal('Must specify path to exactly one PNG image')
         path = os.path.expanduser(args[0])
@@ -93,7 +93,7 @@ failed, the command will exit with a success code.
             yield ret
         return file_pipe(path)
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         data = payload_get('data')
         img_id = payload_get('async_id')
         if data != '-':

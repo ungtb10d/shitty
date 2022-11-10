@@ -92,7 +92,7 @@ this option, any color arguments are ignored and :option:`shitty @ set-colors --
     argspec = 'COLOR_OR_FILE ...'
     args_completion = {'files': ('CONF files', ('*.conf',))}
 
-    def message_to_kitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
+    def message_to_shitty(self, global_opts: RCOptions, opts: 'CLIOptions', args: ArgsType) -> PayloadType:
         final_colors: Dict[str, Optional[int]] = {}
         if not opts.reset:
             try:
@@ -108,7 +108,7 @@ this option, any color arguments are ignored and :option:`shitty @ set-colors --
         }
         return ans
 
-    def response_from_kitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
+    def response_from_shitty(self, boss: Boss, window: Optional[Window], payload_get: PayloadGetType) -> ResponseType:
         windows = self.windows_for_payload(boss, window, payload_get)
         colors: Dict[str, Optional[int]] = payload_get('colors')
         if payload_get('reset'):

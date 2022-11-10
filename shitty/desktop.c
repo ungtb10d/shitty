@@ -37,8 +37,8 @@ init_x11_startup_notification(PyObject UNUSED *self, PyObject *args) {
         done = true;
 
         const char* libnames[] = {
-#if defined(_KITTY_STARTUP_NOTIFICATION_LIBRARY)
-            _KITTY_STARTUP_NOTIFICATION_LIBRARY,
+#if defined(_shitty_STARTUP_NOTIFICATION_LIBRARY)
+            _shitty_STARTUP_NOTIFICATION_LIBRARY,
 #else
             "libstartup-notification-1.so",
             // some installs are missing the .so symlink, so try the full name
@@ -113,8 +113,8 @@ load_libcanberra(void) {
     if (done) return;
     done = true;
     const char* libnames[] = {
-#if defined(_KITTY_CANBERRA_LIBRARY)
-        _KITTY_CANBERRA_LIBRARY,
+#if defined(_shitty_CANBERRA_LIBRARY)
+        _shitty_CANBERRA_LIBRARY,
 #else
         "libcanberra.so",
         // some installs are missing the .so symlink, so try the full name

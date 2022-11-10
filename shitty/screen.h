@@ -208,7 +208,7 @@ void screen_handle_cmd(Screen *, PyObject *cmd);
 void screen_push_colors(Screen *, unsigned int);
 void screen_pop_colors(Screen *, unsigned int);
 void screen_report_color_stack(Screen *);
-void screen_handle_kitty_dcs(Screen *, const char *callback_name, PyObject *cmd);
+void screen_handle_shitty_dcs(Screen *, const char *callback_name, PyObject *cmd);
 void screen_designate_charset(Screen *, uint32_t which, uint32_t as);
 void screen_use_latin1(Screen *, bool);
 void set_title(Screen *self, PyObject*);

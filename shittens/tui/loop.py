@@ -295,7 +295,7 @@ class Loop:
     def _on_dcs(self, dcs: str) -> None:
         if dcs.startswith('@shitty-cmd'):
             import json
-            self.handler.on_kitty_cmd_response(json.loads(dcs[len('@shitty-cmd'):]))
+            self.handler.on_shitty_cmd_response(json.loads(dcs[len('@shitty-cmd'):]))
         elif dcs.startswith('1+r'):
             from binascii import unhexlify
             vals = dcs[3:].split(';')

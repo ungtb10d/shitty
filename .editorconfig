@@ -14,7 +14,7 @@ indent_style = tab
 [shitty/{unicode-data.c,emoji.h,wcwidth-std.h}]
 indent_style = tab
 
-[kittens/unicode_input/names.h]
+[shittens/unicode_input/names.h]
 indent_style = tab
 
 [glfw/wayland-*-protocol.{c,h}]

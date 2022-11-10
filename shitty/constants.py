@@ -21,7 +21,7 @@ class Version(NamedTuple):
 
 
 appname: str = 'shitty'
-kitty_face = '🐱'
+shitty_face = '🐱'
 version: Version = Version(0, 26, 5)
 str_version: str = '.'.join(map(str, version))
 _plat = sys.platform.lower()
@@ -30,7 +30,7 @@ is_freebsd: bool = 'freebsd' in _plat
 is_running_from_develop: bool = False
 RC_ENCRYPTION_PROTOCOL_VERSION = '1'
 if getattr(sys, 'frozen', False):
-    extensions_dir: str = getattr(sys, 'kitty_run_data')['extensions_dir']
+    extensions_dir: str = getattr(sys, 'shitty_run_data')['extensions_dir']
 
     def get_frozen_base() -> str:
         global is_running_from_develop
@@ -53,18 +53,18 @@ if getattr(sys, 'frozen', False):
             ans = os.path.dirname(os.path.dirname(ans))
         ans = os.path.join(ans, 'shitty')
         return ans
-    kitty_base_dir = get_frozen_base()
+    shitty_base_dir = get_frozen_base()
     del get_frozen_base
 else:
-    kitty_base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    extensions_dir = os.path.join(kitty_base_dir, 'shitty')
+    shitty_base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    extensions_dir = os.path.join(shitty_base_dir, 'shitty')
 
 
 @run_once
-def kitty_exe() -> str:
-    rpath = getattr(sys, 'kitty_run_data').get('bundle_exe_dir')
+def shitty_exe() -> str:
+    rpath = getattr(sys, 'shitty_run_data').get('bundle_exe_dir')
     if not rpath:
-        items = os.environ.get('PATH', '').split(os.pathsep) + [os.path.join(kitty_base_dir, 'shitty', 'launcher')]
+        items = os.environ.get('PATH', '').split(os.pathsep) + [os.path.join(shitty_base_dir, 'shitty', 'launcher')]
         seen: Set[str] = set()
         for candidate in filter(None, items):
             if candidate not in seen:
@@ -78,8 +78,8 @@ def kitty_exe() -> str:
 
 
 def _get_config_dir() -> str:
-    if 'KITTY_CONFIG_DIRECTORY' in os.environ:
-        return os.path.abspath(os.path.expanduser(os.environ['KITTY_CONFIG_DIRECTORY']))
+    if 'shitty_CONFIG_DIRECTORY' in os.environ:
+        return os.path.abspath(os.path.expanduser(os.environ['shitty_CONFIG_DIRECTORY']))
 
     locations = []
     if 'XDG_CONFIG_HOME' in os.environ:
@@ -128,8 +128,8 @@ defconf = os.path.join(config_dir, 'shitty.conf')
 
 @run_once
 def cache_dir() -> str:
-    if 'KITTY_CACHE_DIRECTORY' in os.environ:
-        candidate = os.path.abspath(os.environ['KITTY_CACHE_DIRECTORY'])
+    if 'shitty_CACHE_DIRECTORY' in os.environ:
+        candidate = os.path.abspath(os.environ['shitty_CACHE_DIRECTORY'])
     elif is_macos:
         candidate = os.path.join(os.path.expanduser('~/Library/Caches'), appname)
     else:
@@ -141,8 +141,8 @@ def cache_dir() -> str:
 
 @run_once
 def runtime_dir() -> str:
-    if 'KITTY_RUNTIME_DIRECTORY' in os.environ:
-        candidate = os.path.abspath(os.environ['KITTY_RUNTIME_DIRECTORY'])
+    if 'shitty_RUNTIME_DIRECTORY' in os.environ:
+        candidate = os.path.abspath(os.environ['shitty_RUNTIME_DIRECTORY'])
     elif is_macos:
         from .fast_data_types import user_cache_dir
         candidate = user_cache_dir()
@@ -166,10 +166,10 @@ def wakeup_io_loop() -> None:
         b.child_monitor.wakeup()
 
 
-terminfo_dir = os.path.join(kitty_base_dir, 'terminfo')
-logo_png_file = os.path.join(kitty_base_dir, 'logo', 'shitty.png')
-beam_cursor_data_file = os.path.join(kitty_base_dir, 'logo', 'beam-cursor.png')
-shell_integration_dir = os.path.join(kitty_base_dir, 'shell-integration')
+terminfo_dir = os.path.join(shitty_base_dir, 'terminfo')
+logo_png_file = os.path.join(shitty_base_dir, 'logo', 'shitty.png')
+beam_cursor_data_file = os.path.join(shitty_base_dir, 'logo', 'beam-cursor.png')
+shell_integration_dir = os.path.join(shitty_base_dir, 'shell-integration')
 try:
     shell_path = pwd.getpwuid(os.geteuid()).pw_shell or '/bin/sh'
 except KeyError:
@@ -178,7 +178,7 @@ except KeyError:
     shell_path = '/bin/sh'
 # Keep this short as it is limited to 103 bytes on macOS
 # https://github.com/ansible/ansible/issues/11536#issuecomment-153030743
-ssh_control_master_template = 'kssh-{kitty_pid}-{ssh_placeholder}'
+ssh_control_master_template = 'kssh-{shitty_pid}-{ssh_placeholder}'
 
 
 def glfw_path(module: str) -> str:
@@ -189,7 +189,7 @@ def glfw_path(module: str) -> str:
 def detect_if_wayland_ok() -> bool:
     if 'WAYLAND_DISPLAY' not in os.environ:
         return False
-    if 'KITTY_DISABLE_WAYLAND' in os.environ:
+    if 'shitty_DISABLE_WAYLAND' in os.environ:
         return False
     wayland = glfw_path('wayland')
     if not os.path.exists(wayland):
@@ -213,13 +213,13 @@ def is_wayland(opts: Optional['Options'] = None) -> bool:
 supports_primary_selection = not is_macos
 
 
-def running_in_kitty(set_val: Optional[bool] = None) -> bool:
+def running_in_shitty(set_val: Optional[bool] = None) -> bool:
     if set_val is not None:
-        setattr(running_in_kitty, 'ans', set_val)
-    return bool(getattr(running_in_kitty, 'ans', False))
+        setattr(running_in_shitty, 'ans', set_val)
+    return bool(getattr(running_in_shitty, 'ans', False))
 
 
-def list_kitty_resources(package: str = 'shitty') -> Iterator[str]:
+def list_shitty_resources(package: str = 'shitty') -> Iterator[str]:
     try:
         if sys.version_info[:2] < (3, 10):
             raise ImportError('importlib.resources.files() doesnt work with frozen builds on python 3.9')
@@ -231,7 +231,7 @@ def list_kitty_resources(package: str = 'shitty') -> Iterator[str]:
         return (path.name for path in files(package).iterdir())
 
 
-def read_kitty_resource(name: str, package_name: str = 'shitty') -> bytes:
+def read_shitty_resource(name: str, package_name: str = 'shitty') -> bytes:
     try:
         if sys.version_info[:2] < (3, 10):
             raise ImportError('importlib.resources.files() doesnt work with frozen builds on python 3.9')
@@ -269,9 +269,9 @@ def clear_handled_signals(*a: Any) -> None:
 @run_once
 def local_docs() -> str:
     d = os.path.dirname
-    base = d(d(kitty_exe()))
-    from_source = getattr(sys, 'kitty_run_data').get('from_source')
-    if is_macos and from_source and '/shitty.app/Contents/' in kitty_exe():
+    base = d(d(shitty_exe()))
+    from_source = getattr(sys, 'shitty_run_data').get('from_source')
+    if is_macos and from_source and '/shitty.app/Contents/' in shitty_exe():
         base = d(d(d(base)))
     subdir = os.path.join('doc', 'shitty', 'html')
     linux_ans = os.path.join(base, 'share', subdir)

@@ -3,11 +3,11 @@
 # though.
 
 # Don't use [[ -v ... ]] because it doesn't work in zsh < 5.4.
-if [[ -n "${KITTY_ORIG_ZDOTDIR+X}" ]]; then
+if [[ -n "${shitty_ORIG_ZDOTDIR+X}" ]]; then
     # Normally ZDOTDIR shouldn't be exported but it was in the environment
     # of shitty, so we export it.
-    'builtin' 'export' ZDOTDIR="$KITTY_ORIG_ZDOTDIR"
-    'builtin' 'unset' 'KITTY_ORIG_ZDOTDIR'
+    'builtin' 'export' ZDOTDIR="$shitty_ORIG_ZDOTDIR"
+    'builtin' 'unset' 'shitty_ORIG_ZDOTDIR'
 else
     'builtin' 'unset' 'ZDOTDIR'
 fi
@@ -26,7 +26,7 @@ fi
     # Zsh ignores rc files that are directories, and so does source.
     [[ ! -r "$_ksi_file" ]] || 'builtin' 'source' '--' "$_ksi_file"
 } always {
-    if [[ -o 'interactive' && -n "${KITTY_SHELL_INTEGRATION-}" ]]; then
+    if [[ -o 'interactive' && -n "${shitty_SHELL_INTEGRATION-}" ]]; then
         'builtin' 'autoload' '--' 'is-at-least'
         'is-at-least' "5.1" || {
             builtin echo "ZSH ${ZSH_VERSION} is too old for shitty shell integration" > /dev/stderr

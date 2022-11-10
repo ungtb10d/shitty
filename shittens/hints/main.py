@@ -19,9 +19,9 @@ from shitty.clipboard import set_clipboard_string, set_primary_selection
 from shitty.constants import website_url
 from shitty.fast_data_types import get_options, wcswidth
 from shitty.key_encoding import KeyEvent
-from shitty.typing import BossType, KittyCommonOpts
+from shitty.typing import BossType, shittyCommonOpts
 from shitty.utils import (
-    ScreenSize, kitty_ansi_sanitizer_pat, resolve_custom_file,
+    ScreenSize, shitty_ansi_sanitizer_pat, resolve_custom_file,
     screen_size_function
 )
 
@@ -32,11 +32,11 @@ from ..tui.utils import report_error, report_unhandled_error
 
 
 @lru_cache()
-def kitty_common_opts() -> KittyCommonOpts:
+def shitty_common_opts() -> shittyCommonOpts:
     import json
-    v = os.environ.get('KITTY_COMMON_OPTS')
+    v = os.environ.get('shitty_COMMON_OPTS')
     if v:
-        return cast(KittyCommonOpts, json.loads(v))
+        return cast(shittyCommonOpts, json.loads(v))
     from shitty.config import common_opts_as_dict
     return common_opts_as_dict()
 
@@ -366,7 +366,7 @@ def functions_for(args: HintsCLIOptions) -> Tuple[str, List[PostprocessorFunc]]:
     post_processors = []
     if args.type == 'url':
         if args.url_prefixes == 'default':
-            url_prefixes = kitty_common_opts()['url_prefixes']
+            url_prefixes = shitty_common_opts()['url_prefixes']
         else:
             url_prefixes = tuple(args.url_prefixes.split(','))
         from .url_regex import url_delimiters
@@ -393,7 +393,7 @@ def functions_for(args: HintsCLIOptions) -> Tuple[str, List[PostprocessorFunc]]:
     elif args.type == 'word':
         chars = args.word_characters
         if chars is None:
-            chars = kitty_common_opts()['select_by_word_characters']
+            chars = shitty_common_opts()['select_by_word_characters']
         pattern = fr'(?u)[{escape(chars)}\w]{{{args.minimum_match_length},}}'
         post_processors.extend((brackets, quotes))
     else:
@@ -494,7 +494,7 @@ def process_escape_codes(text: str) -> Tuple[str, Tuple[Mark, ...]]:
 
         return ''
 
-    text = kitty_ansi_sanitizer_pat().sub(process_hyperlink, text)
+    text = shitty_ansi_sanitizer_pat().sub(process_hyperlink, text)
     if active_hyperlink_url is not None:
         add_hyperlink(len(text))
     return text, tuple(hyperlinks)
@@ -695,7 +695,7 @@ hinted.
 '''.format(
     default_regex=DEFAULT_REGEX,
     line='{{line}}', path='{{path}}',
-    hints_url=website_url('kittens/hints'),
+    hints_url=website_url('shittens/hints'),
 ).format
 help_text = 'Select text from the screen using the keyboard. Defaults to searching for URLs.'
 usage = ''

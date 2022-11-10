@@ -6,8 +6,8 @@ end shitty has many foundational features, such as: :doc:`image support
 <graphics-protocol>`, :doc:`superlative performance <performance>`,
 :doc:`various enhancements to the terminal protocol <protocol-extensions>`,
 etc. These features allow the development of rich terminal applications, such
-as :doc:`Side-by-side diff <kittens/diff>` and :doc:`Unicode input
-<kittens/unicode_input>`.
+as :doc:`Side-by-side diff <shittens/diff>` and :doc:`Unicode input
+<shittens/unicode_input>`.
 
 If you wish to support this mission and see the terminal ecosystem evolve,
 consider donating so that I can devote more time to |shitty| development.

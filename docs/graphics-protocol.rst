@@ -30,13 +30,13 @@ Some programs and libraries that use the shitty graphics protocol:
 * `termpdf.py <https://github.com/dsanson/termpdf.py>`_ - a terminal PDF/DJVU/CBR viewer
 * `ranger <https://github.com/ranger/ranger>`_ - a terminal file manager, with
   image previews, see this `PR <https://github.com/ranger/ranger/pull/1077>`_
-* :doc:`shitty-diff <kittens/diff>` - a side-by-side terminal diff program with support for images
+* :doc:`shitty-diff <shittens/diff>` - a side-by-side terminal diff program with support for images
 * `tpix <https://github.com/jesvedberg/tpix>`_ - a statically compiled binary that can be used to display images and easily installed on remote servers without root access
 * `pixcat <https://github.com/mirukana/pixcat>`_ - a third party CLI and python library that wraps the graphics protocol
 * `neofetch <https://github.com/dylanaraps/neofetch>`_ - A command line system
   information tool
 * `viu <https://github.com/atanunq/viu>`_ - a terminal image viewer
-* `glkitty <https://github.com/michaeljclark/glkitty>`_ - C library to draw OpenGL shaders in the terminal with a glgears demo
+* `glshitty <https://github.com/michaeljclark/glshitty>`_ - C library to draw OpenGL shaders in the terminal with a glgears demo
 * `ctx.graphics <https://ctx.graphics/>`_ - Library for drawing graphics
 * `timg <https://github.com/hzeller/timg>`_ - a terminal image and video viewer
 * `notcurses <https://github.com/dankamongmen/notcurses>`_ - C library for terminal graphics with bindings for C++, Rust and Python
@@ -392,7 +392,7 @@ placements around the screen, without flicker.
 
 
 .. versionadded:: 0.19.3
-   Support for specifying placement ids (see :doc:`kittens/query_terminal` to query shitty version)
+   Support for specifying placement ids (see :doc:`shittens/query_terminal` to query shitty version)
 
 
 Controlling displayed image layout
@@ -489,7 +489,7 @@ terminal. For this, you can use the ``q`` key. Set it to ``1`` to suppress
 ``OK`` responses and to ``2`` to suppress failure responses.
 
 .. versionadded:: 0.19.3
-   The ability to suppress responses (see :doc:`kittens/query_terminal` to query shitty version)
+   The ability to suppress responses (see :doc:`shittens/query_terminal` to query shitty version)
 
 
 Requesting image ids from the terminal
@@ -521,7 +521,7 @@ use the ``i`` key with the image id for all future communication.
    terminal must reply with an EINVAL error message, unless silenced.
 
 .. versionadded:: 0.19.3
-   The ability to use image numbers (see :doc:`kittens/query_terminal` to query shitty version)
+   The ability to use image numbers (see :doc:`shittens/query_terminal` to query shitty version)
 
 
 .. _animation_protocol:
@@ -530,7 +530,7 @@ Animation
 -------------------------------------------
 
 .. versionadded:: 0.20.0
-   Animation support (see :doc:`kittens/query_terminal` to query shitty version)
+   Animation support (see :doc:`shittens/query_terminal` to query shitty version)
 
 When designing support for animation, the two main considerations were:
 

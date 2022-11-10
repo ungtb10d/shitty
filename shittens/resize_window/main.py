@@ -44,11 +44,11 @@ class Resize(Handler):
         axis = 'reset' if reset else ('horizontal' if is_horizontal else 'vertical')
         cmdline = [resize_window.name, '--self', f'--increment={increment}', '--axis=' + axis]
         opts, items = parse_subcommand_cli(resize_window, cmdline)
-        payload = resize_window.message_to_kitty(global_opts, opts, items)
+        payload = resize_window.message_to_shitty(global_opts, opts, items)
         send = {'cmd': resize_window.name, 'version': version, 'payload': payload, 'no_response': False}
         self.write(encode_send(send))
 
-    def on_kitty_cmd_response(self, response: Dict[str, Any]) -> None:
+    def on_shitty_cmd_response(self, response: Dict[str, Any]) -> None:
         if not response.get('ok'):
             err = response['error']
             if response.get('tb'):

@@ -4,7 +4,7 @@ Integrations with other tools
 ================================
 
 shitty provides extremely powerful interfaces such as :doc:`remote-control` and
-:doc:`kittens/custom` and :doc:`kittens/icat` that allow it to be integrated
+:doc:`shittens/custom` and :doc:`shittens/icat` that allow it to be integrated
 with other tools seamlessly.
 
 
@@ -105,9 +105,9 @@ protocol
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Show matplotlib plots directly in shitty
 
-.. _tool_KittyTerminalImage:
+.. _tool_shittyTerminalImage:
 
-`KittyTerminalImages.jl <https://github.com/simonschoelly/KittyTerminalImages.jl>`_
+`shittyTerminalImages.jl <https://github.com/simonschoelly/shittyTerminalImages.jl>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Show images from Julia directly in shitty
 
@@ -197,7 +197,7 @@ REPLs.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Uses shitty remote control for a Lisp REPL.
 
-.. tool_vim_kitty_navigator:
+.. tool_vim_shitty_navigator:
 
 `vim-shitty-navigator <https://github.com/knubie/vim-shitty-navigator>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -220,15 +220,15 @@ Terminal image viewer for Neovim
 Scrollback manipulation
 -------------------------
 
-.. tool_kitty_search:
+.. tool_shitty_search:
 
 `shitty-search <https://github.com/trygveaa/shitty-shitten-search>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Live incremental search of the scrollback buffer.
 
-.. tool_kitty_grab:
+.. tool_shitty_grab:
 
-`shitty-grab <https://github.com/yurikhan/kitty_grab>`_
+`shitty-grab <https://github.com/yurikhan/shitty_grab>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Keyboard based text selection for the shitty scrollback buffer.
 
@@ -236,14 +236,14 @@ Keyboard based text selection for the shitty scrollback buffer.
 Miscellaneous
 ------------------
 
-.. tool_kitty_smart_tab:
+.. tool_shitty_smart_tab:
 
 `shitty-smart-tab <https://github.com/yurikhan/shitty-smart-tab>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Use keys to either control tabs or pass them onto running applications if no
 tabs are present
 
-.. tool_kitty_smart_scroll:
+.. tool_shitty_smart_scroll:
 
 `shitty-smart-scroll <https://github.com/yurikhan/shitty-smart-scroll>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -263,8 +263,8 @@ Allow using shitty as a drop-down terminal under the i3 window manager
 URL hints shitten for WeeChat that works without having to use WeeChat's
 raw-mode.
 
-.. tool_glkitty:
+.. tool_glshitty:
 
-`glkitty <https://github.com/michaeljclark/glkitty>`_
+`glshitty <https://github.com/michaeljclark/glshitty>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 C library to draw OpenGL shaders in the terminal with a glgears demo
