@@ -1,0 +1,8 @@
+Document: shitty
+Title: shitty user guide
+Author: Kovid Goyal
+Section: Terminal Emulators
+
+Format: HTML
+Index: /usr/share/doc/shitty/html/index.html
+Files: /usr/share/doc/shitty/html/*.html /usr/share/doc/shitty/html/shittens/*.html

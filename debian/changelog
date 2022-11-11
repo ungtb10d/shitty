@@ -1,0 +1,237 @@
+shitty (0.21.2-2) unstable; urgency=medium
+
+  * Remove docs/_build/ when running clean
+  * Use wrapper script to provide gmake binary during build
+  * Backport security fix
+    + Sanitize notifications ids as they are retransmitted over the TTY
+      (Closes: #1020582, CVE-2022-41322)
+
+ -- James McCoy <jamessan@debian.org>  Wed, 28 Sep 2022 21:54:22 -0400
+
+shitty (0.21.2-1) unstable; urgency=medium
+
+  * New upstream release
+    + BREAKING CHANGES
+      - Session files now use the full "launch" command with all its
+        capabilities. However, the syntax of the command is slightly different
+        from before. In particular watchers are now specified directly on
+        launch and environment variables are set using "--env".
+      - The options to control which modifiers keys to press for various mouse
+        actions have been removed, if you used these options, you will need to
+        replace them with configuration using the new "mouse actions
+        framework" as they will be ignored. The options were:
+        "terminal_select_modifiers", "rectangle_select_modifiers" and
+        "open_url_modifiers".
+  * control: Bump libharfbuzz-dev Build-Depends to >= 2.2.0
+  * Declare compliance with Policy 4.6.0, no changes needed
+  * Document how to use IME with shitty (Closes: #990316)
+
+ -- James McCoy <jamessan@debian.org>  Sun, 21 Nov 2021 11:55:20 -0500
+
+shitty (0.19.3-1) unstable; urgency=medium
+
+  * New upstream release
+    + Fix arbitrary command execution via graphics protocol.  CVE-2020-35605
+
+ -- James McCoy <jamessan@debian.org>  Tue, 22 Dec 2020 15:08:30 -0500
+
+shitty (0.19.2-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add override for repeated-path-segment
+  * Declare compliance with Policy 4.5.1, no changes needed
+  * Bump debhelper-compat to 13
+
+ -- James McCoy <jamessan@debian.org>  Mon, 30 Nov 2020 15:38:53 -0500
+
+shitty (0.19.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * d/copyright: Add information for uthash.h
+  * d/control: Add new Build-Depends on liblcms2-dev
+  * Use system uthash-dev instead of shipped version
+
+ -- James McCoy <jamessan@debian.org>  Wed, 28 Oct 2020 22:43:42 -0400
+
+shitty (0.18.3-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #966107)
+    + Backwards incompatibility: The numbers used to encode mouse buttons for
+      "send_mouse_event" function that can be used in shittens have been
+      changed
+  * rules: Build launcher before running tests
+
+ -- James McCoy <jamessan@debian.org>  Wed, 12 Aug 2020 22:32:41 -0400
+
+shitty (0.17.4-1) unstable; urgency=medium
+
+  * New upstream version
+    + Fix test failures on 64-bit big-endian builds.
+    + Use -fpic to fix build failure on sparc64.
+
+ -- James McCoy <jamessan@debian.org>  Sat, 09 May 2020 09:52:08 -0400
+
+shitty (0.17.3-1) unstable; urgency=medium
+
+  [ James McCoy ]
+  * New upstream release
+    + Fix crash when using drag and drop.  (Closes: #956576)
+    + Update to Unicode 13.0
+    + Add strikethrough capability to terminfo entry
+  * upstream/metadata: Add upstream URLs
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Repository.
+
+ -- James McCoy <jamessan@debian.org>  Fri, 24 Apr 2020 08:58:35 -0400
+
+shitty (0.17.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Bump python3-dev Build-Depends to 3.6
+  * Declare compliance with Policy 4.5.0, no changes needed
+
+ -- James McCoy <jamessan@debian.org>  Sat, 28 Mar 2020 10:02:27 -0400
+
+shitty (0.15.0-1) unstable; urgency=medium
+
+  * New upstream release
+    + Dynamically load canberra (for sounds) rather than linking against it.
+
+ -- James McCoy <jamessan@debian.org>  Sun, 15 Dec 2019 22:28:08 -0500
+
+shitty (0.14.6-1) unstable; urgency=medium
+
+  * New upstream release
+    + Support fonts where fontconfig reports spacing=90.  (Closes: #944558)
+  * Declare compliance with Policy 4.4.1, no changes needed
+
+ -- James McCoy <jamessan@debian.org>  Mon, 11 Nov 2019 20:18:35 -0500
+
+shitty (0.14.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * control:
+    + Restrict Wayland B-D to Linux architectures
+  * Update to debhelper compat 12 and debhelper-compat Build-Depends
+  * Declare compliance with Policy 4.4.0, no changes needed
+
+ -- James McCoy <jamessan@debian.org>  Tue, 03 Sep 2019 20:52:30 -0400
+
+shitty (0.14.3-1) unstable; urgency=medium
+
+  * New upstream release
+    + Update to Unicode 12
+  * control:
+    + Add libcanberra-dev to B-D, used for term bell
+    + Add imagemagick to Suggests for icat shitten
+    + Add wayland-protocols/libwayland-dev to B-D to enable Wayland support
+  * Install a system shitty.conf to disable update checks
+  * rules:
+    + Fix name of upstream changelog file
+    + Disable compression of all the html docs
+
+ -- James McCoy <jamessan@debian.org>  Sun, 04 Aug 2019 21:59:29 -0400
+
+shitty (0.13.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * Declare compliance with Policy 4.3.0, no changes needed
+
+ -- James McCoy <jamessan@debian.org>  Thu, 24 Jan 2019 23:16:31 -0500
+
+shitty (0.13.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add python3-pil to Build-Depends for tests
+  * Update shitty's homepage.
+    Thanks to Chris Lamb for the patch (Closes: #911848)
+
+ -- James McCoy <jamessan@debian.org>  Sun, 16 Dec 2018 20:40:07 -0500
+
+shitty (0.12.3-1) unstable; urgency=medium
+
+  * New upstream release
+    + Add support for IME via IBus, enabled by setting GLFW_IM_MODULE=ibus
+    + New command, shitty + complete, to export shell completion for bash, zsh,
+      and fish
+  * control: Add libdbus-1-dev to Build-Depends for IBus support
+  * rules: Disable verbose builds for DEB_BUILD_OPTIONS=terse
+  * Declare compliance with Policy 4.2.1
+
+ -- James McCoy <jamessan@debian.org>  Sun, 30 Sep 2018 09:36:30 -0400
+
+shitty (0.11.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * Register shitty's HTML docs with doc-base
+  * lintian: Add ${misc:Depends} to shitty-terminfo
+
+ -- James McCoy <jamessan@debian.org>  Sun, 15 Jul 2018 08:55:48 -0400
+
+shitty (0.11.2-3) unstable; urgency=medium
+
+  * Avoid stripping PayPal pixel when not building docs
+  * Declare compliance with Policy 4.1.5, no changes needed
+
+ -- James McCoy <jamessan@debian.org>  Wed, 04 Jul 2018 19:42:34 -0400
+
+shitty (0.11.2-2) unstable; urgency=medium
+
+  * Move python3-sphinx to Build-Depends, since arch builds also build docs.
+
+ -- James McCoy <jamessan@debian.org>  Wed, 04 Jul 2018 18:05:21 -0400
+
+shitty (0.11.2-1) unstable; urgency=medium
+
+  * New upstream release
+    + Lenna image removed
+    + Accepts -T to set the terminal's title
+  * Update copyright for new release
+  * Replace manual doc generation with upstream's docs target
+  * Install example shitty.conf from new location
+  * Enable dh sphinxdoc addon
+  * lintian:
+    + Remove PayPal tracking pixel from support.html
+    + Disable the "Fork me" ribbon
+  * Add shitty as an alternative for x-terminal-emulator. (Closes: #900704)
+
+ -- James McCoy <jamessan@debian.org>  Wed, 04 Jul 2018 14:02:55 -0400
+
+shitty (0.10.1-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- James McCoy <jamessan@debian.org>  Wed, 30 May 2018 22:17:18 -0400
+
+shitty (0.9.1-1) unstable; urgency=medium
+
+  [ upstream ]
+  * Fix build failures related to unsigned char or big-endian platforms.
+    (Closes: #896099)
+  * New shitten for performing/viewing diffs
+  * Output GL version when running with --debug-gl (to help with #897381)
+
+  [ James McCoy ]
+  * rules:
+    + Override upstream's CFLAGS instead of augmenting them
+    + Export CPPFLAGS independently, now that upstream's buildsystem
+      explicitly handles them
+  * Add a watch file
+  * Update d/copyright for 0.9.1
+  * control:
+    + Add libx11-xcb-dev to Build-Depends instead of relying on it implicitly
+      being installed
+    * Recommend shitty-doc from shitty package so documentation is typically
+      available
+  * Convert asciidoc files into html documentation (Closes: #897003)
+    + Add asciidoctor to Build-Depends-Indep
+    + Create new shitty-doc package
+
+ -- James McCoy <jamessan@debian.org>  Mon, 07 May 2018 22:54:49 -0400
+
+shitty (0.9.0-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #886311)
+
+ -- James McCoy <jamessan@debian.org>  Wed, 18 Apr 2018 23:46:22 -0400

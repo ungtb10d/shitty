@@ -1,0 +1,20 @@
+From: Kovid Goyal <kovid@ungtb10d.net>
+Date: Mon, 9 Aug 2021 08:37:53 +0530
+X-Dgit-Generated: 0.21.2-1 a7247265468e1cf12ea045161c2c9c3b759bf90b
+Subject: Fix #3913
+
+Signed-off-by: James McCoy <jamessan@debian.org>
+
+---
+
+--- shitty-0.21.2.orig/shitty/disk-cache.c
++++ shitty-0.21.2/shitty/disk-cache.c
+@@ -84,7 +84,7 @@ new(PyTypeObject *type, PyObject UNUSED
+ static int
+ open_cache_file_without_tmpfile(const char *cache_path) {
+     int fd = -1;
+-    static const char *template = "%s/disk-cache-XXXXXXXXXXXX";
++    static const char template[] = "%s/disk-cache-XXXXXXXXXXXX";
+     const size_t sz = strlen(cache_path) + sizeof(template) + 4;
+     FREE_AFTER_FUNCTION char *buf = calloc(1, sz);
+     if (!buf) { errno = ENOMEM; return -1; }

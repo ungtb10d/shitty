@@ -1,0 +1,4 @@
+version=4
+opts="filenamemangle=s%(?:.*?)?v(\d[\d.]+)\.tar\.gz%shitty-$1.tar.gz%" \
+  https://github.com/ungtb10d/shitty/tags \
+  (?:.*?/)?v(\d[\d.]+)\.tar\.gz

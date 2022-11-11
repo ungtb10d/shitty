@@ -1,0 +1,17 @@
+# Input Method support
+
+You can enable input of non-Latin characters to the shitty terminal as follows:
+
+1. Install an input method program based on ibus or fcitx5
+2. Place the following file named "shitty" in PATH
+   (e.g., ~/.local/bin or /usr/local/bin)
+3. Make "shitty" script an executable. (`chmod 755 shitty`)
+
+---
+#!/bin/sh -e
+GLFW_IM_MODULE=ibus exec /usr/bin/shitty "$@"
+---
+
+fcitx5 uses the same communication protocol as ibus.  So you use "ibus" even for
+"fcitx5".  Other input method infrastructure such as "fcitx" and "uim" are not
+supported.

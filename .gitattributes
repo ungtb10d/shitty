@@ -1,0 +1,20 @@
+shitty/wcwidth-std.h linguist-generated=true
+shitty/emoji.h linguist-generated=true
+shitty/charsets.c linguist-generated=true
+shitty/key_encoding.py linguist-generated=true
+shitty/unicode-data.c linguist-generated=true
+shitty/rgb.py linguist-generated=true
+shitty/gl-wrapper.* linguist-generated=true
+shitty/glfw-wrapper.* linguist-generated=true
+shitty/parse-graphics-command.h linguist-generated=true
+shitty/options/types.py linguist-generated=true
+shitty/options/parse.py linguist-generated=true
+shitty/options/to-c-generated.h linguist-generated=true
+shittens/diff/options/types.py linguist-generated=true
+shittens/diff/options/parse.py linguist-generated=true
+glfw/*.c linguist-vendored=true
+glfw/*.h linguist-vendored=true
+shittens/unicode_input/names.h linguist-generated=true
+
+*.py  text diff=python
+*.m  text diff=objc

@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+# vim:fileencoding=utf-8
+# License: GPL v3 Copyright: 2016, Kovid Goyal <kovid at ungtb10d.net>
+
+import importlib
+import os
+import sys
+import warnings
+
+base = os.path.dirname(os.path.abspath(__file__))
+
+
+def init_env() -> None:
+    sys.path.insert(0, base)
+
+
+def main() -> None:
+    warnings.simplefilter('error')
+    os.environ['PYTHONWARNINGS'] = 'error'
+    init_env()
+    m = importlib.import_module('shitty_tests.main')
+    m.run_tests()  # type: ignore
+
+
+if __name__ == '__main__':
+    main()

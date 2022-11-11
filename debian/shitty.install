@@ -1,0 +1,6 @@
+debian/tmp/usr/bin/shitty
+debian/tmp/usr/lib/
+debian/tmp/usr/share/applications/
+debian/tmp/usr/share/icons/
+debian/tmp/usr/share/man/
+debian/shitty.conf  /etc/xdg/shitty/

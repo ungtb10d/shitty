@@ -1,0 +1,5 @@
+build/
+debian/fakehome/
+docs/_build/
+shitty/uthash.h
+linux-package/
